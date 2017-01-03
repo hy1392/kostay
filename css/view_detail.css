@@ -1,0 +1,118 @@
+.nav-tabs > .tab-right {
+  float: right;
+  margin-bottom: -1px;
+}
+.tab-image-container{
+  padding-bottom: 30px
+}
+.margin-top-90{
+  margin-bottom: 90px;
+}
+.title-separator-primary {
+    margin-top: 0px;
+}
+.margin-bottom-60{
+  margin-bottom: 60px
+}
+.margin-bottom-30{
+  margin-bottom: 30px
+}
+.margin-bottom-15{
+  margin-bottom: 15px
+}
+.user-image{
+  width: 100%;
+  height:auto;
+}
+.to-right{
+  position: absolute;;
+  right:0px;
+}
+.no-padding{
+  padding:0px;
+}
+.no-margin{
+  margin: 0px;
+}
+.room-image{
+  width: 100%;
+  height:auto;
+}
+.tab-header{
+  width:inherit;
+  height:auto;
+  margin-right: -15px;
+  margin-left: auto;
+}
+.btn-full, .btn-wait, .btn-available, .btn-empty{
+  width:100%;
+  height:auto;
+  text-align: center;
+  color: white;
+  font-size: 1em;
+  border-radius: 0px;
+}
+.btn-default{
+  width:100%;
+  height:auto;
+  text-align: center;
+  background-color: rgb(203, 105, 84);
+}
+.condition-available, .condition-full, .condition-empty{
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1.08em;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  color: white;
+  text-align: center;
+}
+.condition-available{
+  background-color: rgb(161, 131, 44);
+}
+.condition-full{
+  background-color: rgb(72, 102, 153);
+}
+.condition-empty{
+  background-color: rgb(126, 193, 90);
+}
+.btn-full{
+  background-color: rgb(50, 87, 130);
+}
+.btn-wait{
+  background-color: rgb(199, 80, 80);
+}
+.btn-available{
+  background-color: rgb(187, 131, 90);
+}
+.btn-empty{
+  background-color: rgb(136, 195, 104);
+}
+.btn-full:hover{
+  color: white;
+}
+.btn-wait:hover{
+  color: white;
+}
+.btn-available:hover{
+  color: white;
+}
+.btn-empty:hover{
+  color: white;
+}
+.padding-bottom-30{
+  padding-bottom: 30px;
+}
+.padding-bottom-90{
+  padding-bottom: 90px;
+}
+.col-shadow{
+  -webkit-box-shadow: 10px 10px 28px -3px rgba(212,212,212,1);
+-moz-box-shadow: 10px 10px 28px -3px rgba(212,212,212,1);
+box-shadow: 10px 10px 28px -3px rgba(212,212,212,1);
+}
