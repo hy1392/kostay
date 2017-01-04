@@ -1,548 +1,448 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Kostay</title>
-    <meta name="keywords" content="Download, Apartment, Premium, Real Estate, HMTL, Site Template, property, mortgage, CSS" />
-    <meta name="description" content="Download Apartment - Premium Real Estate HMTL Site Template" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <title>Kostay</title>
+  <meta name="keywords" content="Download, Apartment, Premium, Real Estate, HMTL, Site Template, property, mortgage, CSS" />
+  <meta name="description" content="Download Apartment - Premium Real Estate HMTL Site Template" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
-    <!-- Font awesome styles -->
-    <link rel="stylesheet" href="apartment-font/css/font-awesome.min.css">
-    <!-- Custom styles -->
-    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,500,500italic,700,700italic&amp;subset=latin,latin-ext'>
-    <link rel="stylesheet" type="text/css" href="css/plugins.css">
-    <link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+  <!-- Font awesome styles -->
+  <link rel="stylesheet" href="apartment-font/css/font-awesome.min.css">
+  <!-- Custom styles -->
+  <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,500,500italic,700,700italic&amp;subset=latin,latin-ext'>
+  <link rel="stylesheet" type="text/css" href="css/plugins.css">
+  <link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
+  <link rel="stylesheet" type="text/css" href="css/search_detail.css">
+  <link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
 
-
-    <!--[if lt IE 9]>
+  <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <style media="screen">
+      .no-margin{
+        margin: 0px !important;
+      }
+      .no-padding{
+        padding: 0px !important;
+      }
+      .margin-15{
+        margin: : 15px;
+      }
+      @media (max-width:480px) {
+        .margin-bottom-30-10{
+          margin-bottom: 10px;
+        }
+        .xs-100{
+          width: 100%;
+        }
+      }
+      @media (min-width:481px) {
+        .margin-bottom-30-10{
+          margin-bottom: 30px;
+        }
+      }
+    </style>
 </head>
-    <body>
-        <header>
-            <nav class="navbar main-menu-cont" style="margin-bottom : 20px">
-    			<div class="container">
-    				<div class="navbar-header">
-    					<a href="index.html" title="" class="navbar-brand">
-    						<img src="images/logo/kostay-f1.png" alt="Go Home"/>
-    					</a>
-    				</div>
 
-            <div id="navbar" class="navbar-collapse collapse">
-  						<ul class="nav navbar-nav navbar-right">
-  							<li class="dropdown">
-  								<a href="index.html">Home</a>
-  							</li>
-  							<li class="dropdown">
-  								<a href="#" data-toggle="dropdown" class="dropdown-toggle">상세검색<b class="caret"></b></a>
-  								<ul class="dropdown-menu">
-              			<li><a href="search_result.html">상세검색 및 검색결과</a></li>
-  									<li><a href="house_info.html">하우스 상세정보</a></li>
-  									<li><a href="request_wait.html">대기신청</a></li>
-  									<li><a href="request_movein.html">입주신청</a></li>
-  								</ul>
-  							</li>
-  							<li class="dropdown">
-  								<a href="register_house.html">하우스등록</a>
-  							</li>
-  							<li>
-  								<a href="my_page.html">마이페이지</a>
-  							</li>
-  							<li>
-  								<a class="" href="#login-modal" data-toggle="modal">로그인</a>
-  							</li>
-  						</ul>
-  					</div>
+<body>
+  <div class="loader-bg"></div>
+  <div id="wrapper">
 
-    			</div>
-    		</nav>
-        </header>
-        <section>
+    <!-- Page header -->
+    <header>
 
-        </section>
-        <div class="row" style="border-bottom: 1px solid #aaa;">
-            <div class="col-xs-2">
-                <h2 style="text-align:center">마이페이지</h2>
+      <div class="top-bar-wrapper">
+        <div class="container top-bar">
+          <div class="row">
+            <div class="col-xs-5 col-sm-8">
+              <div class="top-mail pull-left hidden-xs">
+                <span class="top-icon-circle">
+						<i class="fa fa-envelope fa-sm"></i>
+					</span>
+                <span class="top-bar-text">admin@koreatech.ac.kr</span>
+              </div>
+              <div class="top-phone pull-left hidden-xxs">
+                <span class="top-icon-circle">
+						<i class="fa fa-phone"></i>
+					</span>
+                <span class="top-bar-text">(0)-123-456-789</span>
+              </div>
+              <div class="top-localization pull-left hidden-sm hidden-md hidden-xs">
+                <span class="top-icon-circle pull-left">
+						<i class="fa fa-map-marker"></i>
+					</span>
+                <span class="top-bar-text">KOREA</span>
+              </div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-7 col-sm-4">
+              <div class="top-social-last top-dark pull-right" data-toggle="tooltip" data-placement="bottom" title="Login/Register">
+                <a class="top-icon-circle" href="#login-modal" data-toggle="modal">
+                  <i class="fa fa-lock"></i>
+                </a>
+              </div>
 
+              <div class="top-social pull-right">
+                <a class="top-icon-circle" href="#">
+                  <i class="fa fa-facebook"></i>
+                </a>
+              </div>
+              <div class="top-social pull-right">
+                <a class="top-icon-circle" href="#">
+                  <i class="fa fa-twitter"></i>
+                </a>
+              </div>
+              <div class="top-social pull-right">
+                <a class="top-icon-circle" href="#">
+                  <i class="fa fa-google-plus"></i>
+                </a>
+              </div>
+              <div class="top-social pull-right">
+                <a class="top-icon-circle" href="#">
+                  <i class="fa fa-skype"></i>
+                </a>
+              </div>
             </div>
-            <div class="col-xs-1">
-                <p style="text-align:center">
-                    <a href="search_result.html">검색</a>
-                </p>
-            </div>
-            <div class="col-xs-1">
-                <p style="text-align:center">
-                    <a href="request_movein.html">하우스입주</a>
-                </p>
-            </div>
-            <div class="col-xs-1">
-                <p style="text-align:center">
-                    <a href="my_page_alarm.html">알림설정</a>
-                </p>
-            </div>
-            <div class="col-xs-1">
-                <p style="text-align:center">
-                    <a href="my_page_profile.html">프로필</a>
-                </p>
-            </div>
-            <div class="col-xs-1">
-                <p style="text-align:center">
-                    <a href="my_page_message.html">메시지</a>
-                </p>
-            </div>
-            <div class="col-xs-1">
-                <p style="text-align:center">
-                    <a href="my_page_info.html">가입정보</a>
-                </p>
-            </div>
+          </div>
         </div>
-        <div class="row" style="border-bottom: 1px solid #aaa;">
-            <div class="col-xs-2">
-                <h2 style="text-align:center">입주신청</h2>
+        <!-- /.top-bar -->
+      </div>
+      <!-- /.Page top-bar-wrapper -->
+
+      <?include("config/navbar.html")?>
+      <!-- /.mani-menu-cont -->
+    </header>
+
+    <div class="container margin-top-90">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="margin-top-60 apartment-tabs">
+            <div class="tab-header">
+              <h3 class="title-negative-margin" style="display:inline">입주신청<span class="special-color">.</span></h3>
             </div>
 
-        </div>
-        <div class="container" style="padding-top:15px">
-            <div class="row">
-                <div style="width:35%; height:35%" class="col-xs-4">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                      <!-- Indicators -->
-                      <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                      </ol>
+            <div class="title-separator-primary"></div>
+            <!-- Nav tabs -->
 
-                      <!-- Wrapper for slides -->
-                      <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                          <img src="images/image.png" alt="Chania">
-                        </div>
 
-                        <div class="item">
-                          <img src="images/image.png" alt="Chania">
-                        </div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="t1">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline">성별<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <select name="country1" class="no-margin bootstrap-select" title="성별:">
+    									<option>여자</option>
+    									<option>남자</option>
+								    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline">국적<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <select name="country1" class="no-margin bootstrap-select" title="국적:">
+    									<option>한국</option>
+    									<option>중국</option>
+                      <option>일본</option>
+                      <option>호주</option>
+                      <option>영국</option>
+                      <option>미국</option>
+                      <option>캐나다</option>
+								    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline">나이<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="나이:">
+                  </div>
+                  <div class="col-xs-12">
 
-                        <div class="item">
-                          <img src="images/image.png" alt="Flower">
-                        </div>
-
-                        <div class="item">
-                          <img src="images/image.png" alt="Flower">
-                        </div>
-                      </div>
-
-                      <!-- Left and right controls -->
-                      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-5 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline">전화번호<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="전화번호:">
+                  </div>
+                  <div class="col-xs-12 col-sm-5 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline">이메일<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="이메일:">
+                  </div>
+                  <div class="col-xs-2 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline;">연락처 공개<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <select name="country1" class="no-margin bootstrap-select" title="연락처 공개:">
+                      <option>공개</option>
+                      <option>공개하지 않음</option>
+                    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-5 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline;">방문 희망일<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="방문 희망일:">
+                  </div>
+                  <div class="col-xs-12 col-sm-5 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline;">방문 희망 시간<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="방문 희망 시간:">
+                  </div>
+                  <div class="col-xs-12 col-sm-2 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline;">생략<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <select name="country1" class="no-margin bootstrap-select" title="생략:">
+                      <option>생략</option>
+                      <option>생략하지 않음</option>
+								    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline;">입주 희망일<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="입주 희망일:">
+                  </div>
+                  <div class="col-xs-12 margin-bottom-30-10">
+                    <h4 class="title-negative-margin" style="display:inline">인사말<span class="special-color">.</span></h4>
+                    <div class="title-separator-primary"></div>
+                    <textarea name="name" type="text" rows="3" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="인사말:"></textarea>
+                  </div>
+                  <div class="col-xs-12 margin-bottom-30-10 centered-text">
+                    <a href="#" class="button-primary button-shadow xs-100">
+      								<span>확인</span>
+      								<div class="button-triangle"></div>
+      								<div class="button-triangle2"></div>
+      								<div class="button-icon"><i class="fa fa-search"></i></div>
+      							</a>
+                    <a href="#" class="button-primary button-shadow xs-100">
+      								<span>다시작성</span>
+      								<div class="button-triangle"></div>
+      								<div class="button-triangle2"></div>
+      								<div class="button-icon"><i class="fa fa-search"></i></div>
+      							</a>
+                    <a href="#" class="button-primary button-shadow xs-100">
+      								<span>취소</span>
+      								<div class="button-triangle"></div>
+      								<div class="button-triangle2"></div>
+      								<div class="button-icon"><i class="fa fa-search"></i></div>
+      							</a>
+                  </div>
                 </div>
-                <div class="col-xs-5">
-                    <div class="row">
-                        <div class="col-xs-12" style="padding-bottom : 120px">
-                            <a href="house_info.html"><h3>매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.</h3></a>
-                        </div>
-                        <div class="col-xs-6">
-                            <p style="text-align: center">룸 4개</p>
-                        </div>
-                        <div class="col-xs-6">
-                            <p style="text-align: center">정원 10명</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-2">
-                    <div class="row">
-                        <div class="col-xs-12" style="padding-bottom :90px">
-                            <h3>100 ~ 250$</h3>
-                        </div>
-                        <div class="col-xs-12">
-                            <p style="">2016.7.5~</p>
-                        </div>
-                        <div class="col-xs-12">
-                            <button class="btn btn-warning">입주가능</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container" style="padding-top:15px; opacity:0.2">
-            <div class="row">
-                <div style="width:35%; height:35%" class="col-xs-4">
-                    <div id="myCarousel2" class="carousel slide" data-ride="carousel">
-                      <!-- Indicators -->
-                      <ol class="carousel-indicators">
-                        <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel2" data-slide-to="1"></li>
-                        <li data-target="#myCarousel2" data-slide-to="2"></li>
-                        <li data-target="#myCarousel2" data-slide-to="3"></li>
-                      </ol>
-
-                      <!-- Wrapper for slides -->
-                      <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                          <img src="images/image.png" alt="Chania">
-                        </div>
-
-                        <div class="item">
-                          <img src="images/image.png" alt="Chania">
-                        </div>
-
-                        <div class="item">
-                          <img src="images/image.png" alt="Flower">
-                        </div>
-
-                        <div class="item">
-                          <img src="images/image.png" alt="Flower">
-                        </div>
-                      </div>
-
-                      <!-- Left and right controls -->
-                      <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </div>
-                </div>
-                <div class="col-xs-5">
-                    <div class="row">
-                        <div class="col-xs-12" style="padding-bottom : 120px">
-                            <a href="house_info.html"><h3>매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.</h3></a>
-                        </div>
-                        <div class="col-xs-6">
-                            <p style="text-align: center">룸 4개</p>
-                        </div>
-                        <div class="col-xs-6">
-                            <p style="text-align: center">정원 10명</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-2">
-                    <div class="row">
-                        <div class="col-xs-12" style="padding-bottom :90px">
-                            <h3>100 ~ 250$</h3>
-                        </div>
-                        <div class="col-xs-12">
-                            <p style="">2016.7.5~</p>
-                        </div>
-                        <div class="col-xs-12">
-                            <button class="btn btn-success">만실</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container" style="padding-top:15px">
-            <div class="row">
-                <div style="width:35%; height:35%" class="col-xs-4">
-                    <div id="myCarousel3" class="carousel slide" data-ride="carousel">
-                      <!-- Indicators -->
-                      <ol class="carousel-indicators">
-                        <li data-target="#myCarousel3" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel3" data-slide-to="1"></li>
-                        <li data-target="#myCarousel3" data-slide-to="2"></li>
-                        <li data-target="#myCarousel3" data-slide-to="3"></li>
-                      </ol>
-
-                      <!-- Wrapper for slides -->
-                      <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                          <img src="images/image.png" alt="Chania">
-                        </div>
-
-                        <div class="item">
-                          <img src="images/image.png" alt="Chania">
-                        </div>
-
-                        <div class="item">
-                          <img src="images/image.png" alt="Flower">
-                        </div>
-
-                        <div class="item">
-                          <img src="images/image.png" alt="Flower">
-                        </div>
-                      </div>
-
-                      <!-- Left and right controls -->
-                      <a class="left carousel-control" href="#myCarousel3" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="right carousel-control" href="#myCarousel3" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </div>
-                </div>
-                <div class="col-xs-5">
-                    <div class="row">
-                        <div class="col-xs-12" style="padding-bottom : 120px">
-                            <a href="house_info.html"><h3>매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.</h3></a>
-                        </div>
-                        <div class="col-xs-6">
-                            <p style="text-align: center">룸 4개</p>
-                        </div>
-                        <div class="col-xs-6">
-                            <p style="text-align: center">정원 10명</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-2">
-                    <div class="row">
-                        <div class="col-xs-12" style="padding-bottom :90px">
-                            <h3>100 ~ 250$</h3>
-                        </div>
-                        <div class="col-xs-12">
-                            <p style="">2016.7.5~</p>
-                        </div>
-                        <div class="col-xs-12">
-                            <button class="btn btn-warning">입주가능</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" style="border-bottom: 1px solid #aaa;">
-            <div class="col-xs-2">
-                <h2 style="text-align:center">입주신청</h2>
+              </div>
             </div>
 
+          </div>
         </div>
+      </div>
+    </div>
+
+    <footer class="small-cont">
+      <div class="container">
         <div class="row">
-            <div class="col-xs-1">
-
-            </div>
-            <div class="col-xs-1">
-                <label style="">성별</label>
-            </div>
-            <div class="col-xs-3">
-                <input type="text" name="name" value="">
-            </div>
-            <div class="col-xs-1">
-                <label style="">국적</label>
-            </div>
-            <div class="col-xs-6">
-                <input type="text" name="name" value="">
-            </div>
-
-            <div class="col-xs-1">
-
-            </div>
-            <div class="col-xs-1">
-                <label style="">나이</label>
-            </div>
-            <div class="col-xs-10">
-                <input type="text" name="name" value="">
-            </div>
-
-            <div class="col-xs-1">
-
-            </div>
-            <div class="col-xs-1">
-                <label style="">연락처</label>
-            </div>
-            <div class="col-xs-10">
-                <input type="text" name="name" value="" size="40">
-                <input type="text" name="name" value="" size="40">
-            </div>
-
-            <div class="col-xs-1">
-
-            </div>
-            <div class="col-xs-1">
-                <label style="">방문 희망일</label>
-            </div>
-            <div class="col-xs-10">
-                <input type="text" name="name" value="" size="40">
-                <input type="text" name="name" value="" size="40">
-            </div>
-
-            <div class="col-xs-1">
-
-            </div>
-            <div class="col-xs-1">
-                <label style="">입주 희망일</label>
-            </div>
-            <div class="col-xs-10">
-                <input type="text" name="name" value="" size="40">
-            </div>
-
-            <div class="col-xs-1">
-
-            </div>
-            <div class="col-xs-1">
-                <label style="">인사말</label>
-            </div>
-            <div class="col-xs-10">
-                <textarea rows="3" cols="90"></textarea>
-            </div>
-
-            <div class="col-xs-2">
-
-            </div>
-            <div class="col-xs-10">
-                <button type="button" class="btn btn-danger">확인</button>
-                <button type="button" class="btn">다시 작성</button>
-                <button type="button" class="btn">취소</button>
-            </div>
+          <div class="col-xs-12 col-md-6 small-cont">
+            <img src="images/logo/kostay-f2.png" alt="" class="img-responsive footer-logo" />
+          </div>
+          <div class="col-xs-12 col-md-6 footer-copyrights">
+            &copy; Copyright 2016 <a href="#" target="blank">좋은일컴퍼니 & KOREATECH</a>.
+          </div>
         </div>
+      </div>
+    </footer>
+  </div>
 
-        <h3>입주신청 페이지</h3>
-        <ul>
-            <li>
-                성별
-            </li>
-            <li>
-                국적
-            </li>
-            <li>
-                나이
-            </li>
-            <li>
-                연락처 - 전화번호, 이메일, 공개여부
-            </li>
-            <li>
-                방문 희망일 - 달력에서 선택(생략 가능)
-            </li>
-            <li>
-                입주 희망일 - 달력에서 선택
-            </li>
-            <li>
-                인사말
-            </li>
-        </ul>
+  <!-- Move to top button -->
 
-        <!-- Login modal -->
-          <div class="modal fade apartment-modal" id="login-modal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <div class="modal-title">
-                    <h1>로그인<span class="special-color">.</span></h1>
-                    <div class="short-title-separator"></div>
-                  </div>
-                  <input name="login" type="email" class="input-full main-input" placeholder="이메일" />
-                  <input name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
-                  <a href="my-profile.html" class="button-primary button-shadow button-full">
-                    <span>로그인</span>
-                    <div class="button-triangle"></div>
-                    <div class="button-triangle2"></div>
-                    <div class="button-icon"><i class="fa fa-user"></i></div>
-                  </a>
-                  <a href="#" class="forgot-link pull-right">비밀번호를 잊으셨나요?</a>
-                  <div class="clearfix"></div>
-                  <p class="login-or">OR</p>
-                  <a href="#" class="facebook-button">
-                    <i class="fa fa-facebook"></i>
-                    <span>Login with Facebook</span>
-                  </a>
-                  <a href="#" class="google-button margin-top-15">
-                    <i class="fa fa-google-plus"></i>
-                    <span>Login with Google</span>
-                  </a>
-                  <p class="modal-bottom">아직 Kostay 계정이 없으신가요? <a href="#" class="register-link">회원가입</a></p>
-                </div>
-              </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-          </div><!-- /.modal -->
+  <div class="move-top">
+    <div class="big-triangle-second-color"></div>
+    <div class="big-icon-second-color"><i class="jfont fa-lg">&#xe803;</i></div>
+  </div>
+  <!-- Move to top button -->
 
-        <!-- Register modal -->
-          <div class="modal fade apartment-modal" id="register-modal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <div class="modal-title">
-                    <h1>회원가입<span class="special-color">.</span></h1>
-                    <div class="short-title-separator"></div>
-                  </div>
-                  <input name="last-name" type="text" class="input-full main-input" placeholder="이름" />
-                  <input name="email" type="email" class="input-full main-input" placeholder="이메일" />
-                  <input name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
-                  <input name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
-                  <a href="my-profile.html" class="button-primary button-shadow button-full">
-                    <span>가입하기</span>
-                    <div class="button-triangle"></div>
-                    <div class="button-triangle2"></div>
-                    <div class="button-icon"><i class="fa fa-user"></i></div>
-                  </a>
-                  <div class="clearfix"></div>
-                  <p class="login-or">OR</p>
-                  <a href="#" class="facebook-button">
-                    <i class="fa fa-facebook"></i>
-                    <span>Sing Up with Facebook</span>
-                  </a>
-                  <a href="#" class="google-button margin-top-15">
-                    <i class="fa fa-google-plus"></i>
-                    <span>Sing Up with Google</span>
-                  </a>
-                  <p class="modal-bottom">이미 Kostay 회원이신가요? <a href="#" class="login-link">로그인</a></p>
-                </div>
-              </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-          </div><!-- /.modal -->
+  <!-- Login modal -->
+  <div class="modal fade apartment-modal" id="login-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="modal-title">
+            <span class="special-color"><h1>로그인</h1></span>
+            <div class="short-title-separator"></div>
+          </div>
+          <input id="id" name="login" type="email" class="input-full main-input" placeholder="이메일" />
+          <input id="pwd" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
 
-        <!-- Forgotten password modal -->
-          <div class="modal fade apartment-modal" id="forgot-modal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <div class="modal-title">
-                    <h1>Forgot your password<span class="special-color">?</span></h1>
-                    <div class="short-title-separator"></div>
-                  </div>
-                  <p class="negative-margin forgot-info">Instert your account email address.<br/>We will send you a link to reset your password.</p>
-                  <input name="login" type="email" class="input-full main-input" placeholder="Your email" />
-                  <a href="my-profile.html" class="button-primary button-shadow button-full">
-                    <span>Reset password</span>
-                    <div class="button-triangle"></div>
-                    <div class="button-triangle2"></div>
-                    <div class="button-icon"><i class="fa fa-user"></i></div>
-                  </a>
-                </div>
-              </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-          </div><!-- /.modal -->
-          
-    </body>
-    <!-- jQuery  -->
-        <script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
-    	<script type="text/javascript" src="js/jQuery/jquery-ui.min.js"></script>
+          <script>
+            function loginchk() {
+              var id = document.getElementById("id").value;
+              var pwd = document.getElementById("pwd").value;
 
-    <!-- Bootstrap-->
-        <script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+              location.href = "server/login.php?id=" + id + "&pwd=" + pwd;
+              return true;
+            }
+          </script>
 
+          <a href="#" onclick="javascript:loginchk();" class="button-primary button-shadow button-full">
+            <span>로그인</span>
+            <div class="button-triangle"></div>
+            <div class="button-triangle2"></div>
+            <div class="button-icon"><i class="fa fa-user"></i></div>
+          </a>
+          <a href="#" class="forgot-link pull-right">비밀번호를 잊으셨나요?</a>
+          <div class="clearfix"></div>
+          <p class="login-or">OR</p>
+          <a href="#" class="facebook-button">
+            <i class="fa fa-facebook"></i>
+            <span>Login with Facebook</span>
+          </a>
+          <a href="#" class="google-button margin-top-15">
+            <i class="fa fa-google-plus"></i>
+            <span>Login with Google</span>
+          </a>
+          <p class="modal-bottom">아직 Kostay 계정이 없으신가요? <a href="#" class="register-link">회원가입</a></p>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
-    <!-- plugins script -->
-    	<script type="text/javascript" src="js/plugins.js"></script>
+  <!-- Register modal -->
+  <div class="modal fade apartment-modal" id="register-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="modal-title">
+            <span class="special-color"><h1>회원가입</h1></span>
+            <div class="short-title-separator"></div>
+          </div>
+          <input id="last-name" name="last-name" type="text" class="input-full main-input" placeholder="이름" />
+          <input id="email" name="email" type="email" class="input-full main-input" placeholder="이메일" />
+          <input id="password" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
+          <input name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
 
-    <!-- template scripts -->
-    	<script type="text/javascript" src="mail/validate.js"></script>
-        <script type="text/javascript" src="js/apartment.js"></script>
+          <script>
+            function registerUser() {
+              var name = document.getElementById("last-name").value;
+              var email = document.getElementById("email").value;
+              var pwd = document.getElementById("password").value;
+
+              location.href = "server/registerUser.php?name=" + name + "&email=" + email + "&pwd=" + pwd;
+              return true;
+            }
+          </script>
+
+          <a href="#" onclick="javascript:registerUser();" class="button-primary button-shadow button-full">
+            <span>가입하기</span>
+            <div class="button-triangle"></div>
+            <div class="button-triangle2"></div>
+            <div class="button-icon"><i class="fa fa-user"></i></div>
+          </a>
+          <div class="clearfix"></div>
+          <p class="login-or">OR</p>
+          <a href="#" class="facebook-button">
+            <i class="fa fa-facebook"></i>
+            <span>Sing Up with Facebook</span>
+          </a>
+          <a href="#" class="google-button margin-top-15">
+            <i class="fa fa-google-plus"></i>
+            <span>Sing Up with Google</span>
+          </a>
+          <p class="modal-bottom">이미 Kostay 회원이신가요? <a href="#" class="login-link">로그인</a></p>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+  <!-- Forgotten password modal -->
+  <div class="modal fade apartment-modal" id="forgot-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="modal-title">
+            <h1>Forgot your password<span class="special-color">?</span></h1>
+            <div class="short-title-separator"></div>
+          </div>
+          <p class="negative-margin forgot-info">Instert your account email address.<br/>We will send you a link to reset your password.</p>
+          <input name="login" type="email" class="input-full main-input" placeholder="Your email" />
+          <a href="my-profile.html" class="button-primary button-shadow button-full">
+            <span>Reset password</span>
+            <div class="button-triangle"></div>
+            <div class="button-triangle2"></div>
+            <div class="button-icon"><i class="fa fa-user"></i></div>
+          </a>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+  <!-- jQuery  -->
+  <script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jQuery/jquery-ui.min.js"></script>
+
+  <!-- Bootstrap-->
+  <script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+
+  <!-- Google Maps -->
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&amp;sensor=false&amp;libraries=places"></script>
+
+  <!-- plugins script -->
+  <script type="text/javascript" src="js/plugins.js"></script>
+
+  <!-- template scripts -->
+  <script type="text/javascript" src="mail/validate.js"></script>
+  <script type="text/javascript" src="js/apartment.js"></script>
+
+  <!-- google maps initialization -->
+  <script type="text/javascript">
+    google.maps.event.addDomListener(window, 'load', init);
+
+    function init() {
+      var locations = [
+        [40.6128, -73.9976, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "Fort Collins, Colorado 80523, USA", "$320 000"],
+        [40.7222, -73.7903, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+        [41.0306, -73.7669, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer3.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
+        [41.3006, -72.9440, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer4.jpg", "Fort Collins, Colorado 80523, USA", "$410 000"],
+        [42.2418, -74.3626, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "West Fourth Street, New York 10003, USA", "$295 000"],
+        [38.8974, -77.0365, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
+        [38.7860, -77.0129, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer7.jpg", "Fort Collins, Colorado 80523, USA", "$299 000"],
+        [41.2693, -70.0874, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer8.jpg", "Fort Collins, Colorado 80523, USA", "$600 000"],
+        [33.7544, -84.3857, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer9.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+        [33.7337, -84.4443, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer10.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$550 000"],
+        [33.8588, -84.4858, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$670 000"],
+        [34.0254, -84.3560, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
+        [39.6282, -86.1320, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
+        [40.5521, -84.5658, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+        [41.6926, -87.6021, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"]
+      ];
+      offersMapInit("offers-map", locations);
+
+      mapInit(41.2693, -70.0874, "list-map1", "images/pin-house.png", false);
+      mapInit(33.7544, -84.3857, "list-map2", "images/pin-apartment.png", false);
+      mapInit(33.7337, -84.4443, "list-map3", "images/pin-land.png", false);
+      mapInit(33.8588, -84.4858, "list-map4", "images/pin-commercial.png", false);
+      mapInit(34.0254, -84.3560, "list-map5", "images/pin-apartment.png", false);
+      mapInit(40.6128, -73.9976, "list-map6", "images/pin-house.png", false);
+      mapInit(40.6128, -73.7903, "list-map7", "images/pin-house.png", false);
+    }
+    $(".list-offer-right-large").on("click",function(){
+      location.href="view_detail.html";
+    });
+  </script>
+
+</body>
+
 </html>
