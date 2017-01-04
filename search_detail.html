@@ -93,115 +93,21 @@
       </div>
       <!-- /.Page top-bar-wrapper -->
 
-      <nav class="navbar main-menu-cont">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar icon-bar1"></span>
-				<span class="icon-bar icon-bar2"></span>
-				<span class="icon-bar icon-bar3"></span>
-			</button>
-            <a href="index.html" title="" class="navbar-brand">
-              <img src="images/logo/kostay-f1.png" alt="Go Home" />
-            </a>
-          </div>
-
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="index.html">Home</a>
-              </li>
-
-              <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">검색<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="search_result.html">상세검색 및 검색결과</a></li>
-                  <li><a href="house_info.html">하우스 상세정보</a></li>
-                  <li><a href="request_wait.html">대기신청</a></li>
-                  <li><a href="request_movein.html">입주신청</a></li>
-                </ul>
-              </li>
-
-              <?php
-					if(!isset($_SESSION['id'])){
-				?>
-
-              <li>
-                <a class="" href="#login-modal" data-toggle="modal">로그인</a>
-              </li>
-
-              <?php
-					}
-					else{
-						if($_SESSION['flag'] == 1){
-
-				?>
-
-              <li class="dropdown">
-                <a href="management_user.html">사용자관리</a>
-              </li>
-              <li>
-                <a href="my-profile.html">마이페이지</a>
-              </li>
-              <li>
-                <a class="" href="server/logout.php" data-toggle="modal">
-                  <?php echo $_SESSION['name'] ?>님 로그아웃</a>
-              </li>
-
-              <?php
-					}
-
-					else if($_SESSION['flag'] == 2){
-
-				?>
-
-              <li class="dropdown">
-                <a href="register_house.html">하우스등록</a>
-              </li>
-              <li>
-                <a href="my-profile.html">고객관리</a>
-              </li>
-              <li>
-                <a href="my-profile.html">결제</a>
-              </li>
-              <li>
-                <a href="my-profile.html">마이페이지</a>
-              </li>
-              <li>
-                <a class="" href="server/logout.php" data-toggle="modal">
-                  <?php echo $_SESSION['name'] ?>님 로그아웃</a>
-              </li>
-
-              <?php
-					}
-					else if($_SESSION['flag'] == 3){
-
-				?>
-
-              <li class="dropdown">
-                <a href="register_house.html">하우스입주</a>
-              </li>
-              <li>
-                <a href="my-profile.html">마이페이지</a>
-              </li>
-              <li>
-                <a class="" href="server/logout.php" data-toggle="modal">
-                  <?php echo $_SESSION['name'] ?>님 로그아웃</a>
-              </li>
-
-              <?
-					}
-				}
-				?>
-            </ul>
-          </div>
-
-        </div>
-      </nav>
+      <?include("config/navbar.html");?>
       <!-- /.mani-menu-cont -->
     </header>
 
+    <section class="short-image no-padding blog-short-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-lg-12 short-image-title">
+            <h5 class="subtitle-margin second-color"></h5>
+            <h1 class="second-color">상세검색</h1>
+            <div class="short-title-separator"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="adv-search-section no-padding">
       <div id="offers-map"></div>
