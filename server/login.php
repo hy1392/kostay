@@ -5,7 +5,8 @@
   $pwd  = $_GET['pwd'];
 
   $query = "select * from users where email = '".$id."'"."and pwd = '".$pwd."'";
-  if(!$result = mysqli_query($conn, $query)){
+  $result = mysqli_query($conn, $query);
+  if(mysqli_num_rows($result) === 0){
     ?>
     <script>
       alert("사용자 정보를 찾을 수 없습니다. 메인페이지로 이동합니다.");
