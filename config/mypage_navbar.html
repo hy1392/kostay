@@ -28,25 +28,31 @@
         </li>
 
         <li>
-          <a href="index.html">알림설정</a>
+          <a href="alarm.html">알림설정</a>
         </li>
 
         <li>
-          <a href="index.html">프로필</a>
+          <a href="my-profile.html">프로필</a>
         </li>
 
         <li class="dropdown">
           <a href="#" data-toggle="dropdown" class="dropdown-toggle">메시지<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="inbox.html">받은 메시지</a></li>
-            <li><a href="request_movein_list.html">보낸 메시지</a></li>
-            <li><a href="request_hope_list.html">휴지통</a></li>
+            <li><a href="sent_items.html">보낸 메시지</a></li>
+            <li><a href="deleted_items.html">휴지통</a></li>
           </ul>
         </li>
 
         <li>
           <a href="pre_my_info.html">가입정보</a>
         </li>
+
+        <?if($_SESSION['flag']==1){?>
+          <li>
+            <a href="management_user.html">사용자관리</a>
+          </li>
+        <?}?>
 
       </ul>
     </div>

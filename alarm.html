@@ -23,14 +23,26 @@
 		<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,500,500italic,700,700italic&amp;subset=latin,latin-ext'>
 		<link rel="stylesheet" type="text/css" href="css/plugins.css">
 		<link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
-		<link rel="stylesheet" type="text/css" href="css/search_detail.css">
 		<link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
 
 		<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <style media="screen">
+      .margin-top-30{
+        margin-top: 30px;
+      }
+      .margin-top-60{
+        margin-top: 60px;
+      }
+      .no-padding{
+        padding: 0px;
+      }
+      .no-margin{
+        margin: 0px;
+      }
+    </style>
 	</head>
 
 	<body>
@@ -118,242 +130,55 @@
 						<div class="col-xs-12 col-md-9 col-md-push-3">
 							<div class="row">
 								<div class="col-xs-12">
-									<h5 class="subtitle-margin">하우스입주</h5>
-									<h1>찜리스트<span class="special-color">.</span></h1>
+									<h1>알림설정<span class="special-color">.</span></h1>
 									<div class="title-separator-primary"></div>
 								</div>
 							</div>
-							<div class="col-xs-12">
-								<div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <p>룸 5개</p>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <p>정원 10명</p>
-                        </div>
-                        <div class="col-md-1">
 
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
+              <div class="row margin-top-60">
+                <div class="col-xs-12 col-sm-6 col-lg-2 no-padding col-lg-offset-1">
+                  <input name="name" id="name" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="지역:">
                 </div>
+                <div class="col-xs-12 col-sm-6 col-lg-2 no-padding">
+                  <select name="country1" class="bootstrap-select" title="성별:">
 
-								<div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <p>룸 5개</p>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <p>정원 10명</p>
-                        </div>
-                        <div class="col-md-1">
-
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
+              <option>남성</option>
+              <option>여성</option>
+              <option>혼성</option>
+            </select>
                 </div>
-
-								<div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <p>룸 5개</p>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <p>정원 10명</p>
-                        </div>
-                        <div class="col-md-1">
-
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
+                <div class="col-xs-12 col-sm-6 col-lg-2 no-padding">
+                  <select name="city1" class="bootstrap-select" title="룸타입:">
+              <option>무관</option>
+              <option>1인실</option>
+              <option>2인실</option>
+              <option>3인실 이상</option>
+            </select>
                 </div>
-
-								<div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
+                  <div class="col-xs-12 col-sm-6 col-lg-2 no-padding">
+                    <a onclick="return false;" class="button-primary button-shadow btn-fit color-white" style="width:100%">
+                      <span>조건등록</span>
+                      <div class="button-triangle"></div>
+                      <div class="button-triangle2"></div>
+                    </a>
                   </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <p>룸 5개</p>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <p>정원 10명</p>
-                        </div>
-                        <div class="col-md-1">
-
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
+                  <div class="col-xs-12 col-sm-6 col-lg-2 col-lg-offset-1 no-padding">
+                    <a onclick="location.href='alarm_detail.html'" class="button-primary button-shadow btn-fit color-white" style="width:100%">
+                      <span>상세입력</span>
+                      <div class="button-triangle"></div>
+                      <div class="button-triangle2"></div>
+                    </a>
                   </div>
-                  <div class="clearfix"></div>
-                </div>
 
-								<div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <p>룸 5개</p>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <p>정원 10명</p>
-                        </div>
-                        <div class="col-md-1">
+              </div>
 
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
+              <div class="row">
+								<div class="col-xs-12 margin-top-60">
+									<h1>조건설정 결과보기<span class="special-color">.</span></h1>
+									<div class="title-separator-primary"></div>
+								</div>
 							</div>
+
 							<div class="row margin-top-60"></div>
 						</div>
 						<div class="col-xs-12 col-md-3 col-md-pull-9">
