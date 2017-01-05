@@ -150,78 +150,83 @@
 							</div>
 
               <div class="row margin-top-60">
-                <div class="col-xs-12 col-sm-6 col-lg-2 no-padding col-lg-offset-1">
-                  <input name="name" id="name" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="지역:">
-                </div>
-                <div class="col-xs-12 col-sm-6 col-lg-2 no-padding">
-                  <select name="country1" class="bootstrap-select" title="성별:">
 
-              <option>남성</option>
-              <option>여성</option>
-              <option>혼성</option>
-            </select>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-lg-2 no-padding">
-                  <select name="city1" class="bootstrap-select" title="룸타입:">
-              <option>무관</option>
-              <option>1인실</option>
-              <option>2인실</option>
-              <option>3인실 이상</option>
-            </select>
-                </div>
-                  <div class="col-xs-12 col-sm-6 col-lg-2 no-padding">
-                    <a onclick="return false;" class="button-primary button-shadow btn-fit color-white" style="width:100%">
-                      <span>조건등록</span>
-                      <div class="button-triangle"></div>
-                      <div class="button-triangle2"></div>
-                    </a>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <select name="country1" class="bootstrap-select" title="위치기준:">
+
+								<option>지역기준</option>
+								<option>시티레일기준</option>
+								<option>출퇴근기준</option>
+							</select>
                   </div>
-                  <div class="col-xs-12 col-sm-6 col-lg-2 col-lg-offset-1 no-padding">
-                    <a onclick="location.href='alarm_detail.html'" class="button-primary button-shadow btn-fit color-white" style="width:100%">
-                      <span>상세입력</span>
-                      <div class="button-triangle"></div>
-                      <div class="button-triangle2"></div>
-                    </a>
+                  <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <input name="name" id="name" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="(직접입력)">
                   </div>
+                  <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <select name="country1" class="bootstrap-select" title="성별:">
+
+								<option>남성</option>
+								<option>여성</option>
+								<option>혼성</option>
+							</select>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <select name="city1" class="bootstrap-select" title="주택유형:">
+								<option>무관</option>
+								<option>단독주택</option>
+								<option>공동주택(유닛, 아파트, 타운하우스)</option>
+							</select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <select name="city1" class="bootstrap-select" title="룸타입:">
+								<option>무관</option>
+								<option>1인실</option>
+								<option>2인실</option>
+								<option>3인실 이상</option>
+							</select>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <div class="adv-search-range-cont no-padding">
+                      <label for="slider-range-price1-value" class="adv-search-label">렌트비:</label>
+                      <span>$</span>
+                      <input type="text" id="slider-range-price1-value" readonly class="adv-search-amount">
+                      <div class="clearfix"></div>
+                      <div id="slider-range-price1" data-min="0" data-max="300000" class="slider-range"></div>
+                    </div>
+
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <select name="city1" class="bootstrap-select" title="주차:">
+								<option>무관</option>
+								<option>가능</option>
+							</select>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <input name="name" id="datepicker" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="입주일">
+                  </div>
+                </div>
 
               </div>
 
-              <div class="row">
-								<div class="col-xs-12 margin-top-60">
-									<h1>조건설정 결과보기<span class="special-color">.</span></h1>
-									<div class="title-separator-primary"></div>
-								</div>
-							</div>
-              <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                  <table style="width:100%;">
-                    <tr>
-                      <th colspan="2">조건1 제목</th>
-                      <th >15개</th>
-                    </tr>
-                  </table>
-                </div>
-                <div class="col-xs-12 col-sm-2">
-                  <select name="country1" class="bootstrap-select" title="알림설정:">
-                    <option>알림계속</option>
-                    <option>알림중단</option>
-                  </select>
-                </div>
-                <div class="col-xs-12 col-sm-2 no-padding">
-                  <a onclick="return false;" class="button-primary button-shadow btn-fit color-white" style="width:100%">
-                    <span>수정</span>
-                    <div class="button-triangle"></div>
-                    <div class="button-triangle2"></div>
-                  </a>
-                </div>
-                <div class="col-xs-12 col-sm-2 no-padding">
-                  <a onclick="return false;" class="button-primary button-shadow btn-fit color-white" style="width:100%">
-                    <span>삭제</span>
-                    <div class="button-triangle"></div>
-                    <div class="button-triangle2"></div>
-                  </a>
-                </div>
+              <div class="col-xs-12 col-sm-6 col-lg-3 pull-right">
+                <a onclick="return false;" class="button-primary button-shadow btn-fit color-white width-100">
+                  <span>조건등록</span>
+                  <div class="button-triangle"></div>
+                  <div class="button-triangle2"></div>
+                </a>
               </div>
+              <div class="col-xs-12 col-sm-6 col-lg-3 pull-right">
+                <input name="name" id="hp" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="전화번호">
+              </div>
+              <div class="col-xs-12 col-sm-6 col-lg-3 pull-right">
+                <input name="name" id="email" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="이메일">
+              </div>
+
+
+
 
 							<div class="row margin-top-60"></div>
 						</div>
