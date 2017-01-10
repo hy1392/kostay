@@ -43,6 +43,9 @@
         font-size: 1em;
         vertical-align: middle !important;
       }
+      .margin-bottom-30{
+        margin-bottom: 30px
+      }
       .no-padding{
         padding: 0px !important;
       }
@@ -135,200 +138,95 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-md-9 col-md-push-3">
-							<div class="row">
-								<div class="col-xs-12">
-									<h1>객실설정<span class="special-color">.</span></h1>
-									<div class="title-separator-primary"></div>
-								</div>
-							</div>
-              <div class="list-offer">
-                <div class="list-offer-left">
-                  <div class="list-offer-front">
-                    <div class="list-offer-photo height-100">
-                      <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                    </div>
+              <div class="row margin-bottom-30">
+                <div class="col-xs-12 col-lg-6">
+                  <h1>대기자 리스트<span class="special-color">.</span></h1>
+                </div>
+                <div class="col-xs-12 col-lg-6">
+                  <div class="order-by-container">
+                    <select name="sort" class="bootstrap-select" title="정렬 :">
+  										<option>대기순서</option>
+  										<option>입주희망일</option>
+  										<option>신청일</option>
+  										<option>연령별</option>
+  									</select>
                   </div>
                 </div>
-                <div class="list-offer-right-large" >
-                  <div class="list-offer-text">
-                    <div class="clearfix"></div>
-                    <div class="row">
-                      <div class="list-offer-h4 col-sm-12 col-md-9">
-                        <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                        <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                      </h4></div>
-                      <div class="col-sm-12 col-md-3">
-                        <h4><b>$200~$500</b></h4>
-                      </div>
-                    </div>
-                    <div class="row padding-top-30">
-                      <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                        <p>룸 5개</p>
-                      </div>
-                      <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                        <p>정원 10명</p>
-                      </div>
-                      <div class="col-md-1">
-
-                      </div>
-                      <div class="col-xs-12 col-sm-12 col-md-3">
-                        <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                        <div class="title-separator-primary"></div>
-                        <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                          <span>공실등록</span>
-                          <div class="button-triangle"></div>
-                          <div class="button-triangle2"></div>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
+                <div class="col-xs-12">
+                  <div class="title-separator-primary"></div>
                 </div>
-                <div class="clearfix"></div>
               </div>
               <div class="table-responsive">
                 <table class="table">
                   <tr class="">
-                    <th class="">구분</th>
-                    <th class="">침대번호</th>
+                    <th class="">순서</th>
+                    <th class="">이름</th>
                     <th class="">성별</th>
-                    <th class="">입주상황</th>
-                    <th class="">공실예정일</th>
+                    <th class="">나이</th>
+                    <th class="">국적</th>
+                    <th class="">방문희망일</th>
+                    <th class="">입주희망일</th>
+                    <th class="">신청일</th>
                   </tr>
                   <tr class="">
-                    <td class="">1인실</td>
                     <td class="">1</td>
-                    <td class="">혼합</td>
-                    <td class="">
-                      <select name="country1" class="bootstrap-select" title="입주상황:">
-                      <option>만실</option>
-                      <option>공실 예정</option>
-                      <option>공실</option>
-                      </select>
-                    </td>
-                    <td class="">2016.7.3</td>
-                  </tr>
-                  <tr class="">
-                    <td class="" rowspan="2">2인실</td>
-                    <td class="">1</td>
-                    <td class="">남자</td>
-                    <td class="">
-                      <select name="country1" class="bootstrap-select" title="입주상황:">
-                      <option>만실</option>
-                      <option>공실 예정</option>
-                      <option>공실</option>
-                      </select>
-                    </td>
-                    <td class="">2016.7.3</td>
+                    <td class="">김정미</td>
+                    <td class="">여자</td>
+                    <td class="">21</td>
+                    <td class="">한국</td>
+                    <td class="">2016.7.5</td>
+                    <td class="">2016.7.5</td>
+                    <td class="">2016.5.2</td>
                   </tr>
                   <tr class="">
                     <td class="">2</td>
-                    <td class="">남자</td>
-                    <td class="">
-                      <select name="country1" class="bootstrap-select" title="입주상황:">
-                      <option>만실</option>
-                      <option>공실 예정</option>
-                      <option>공실</option>
-                      </select>
-                    </td>
-                    <td class="">2016.7.3</td>
-                  </tr>
-                  <tr class="">
-                    <td class="" rowspan="4">4인실</td>
-                    <td class="">1</td>
+                    <td class="">김정미</td>
                     <td class="">여자</td>
-                    <td class="">
-                      <select name="country1" class="bootstrap-select" title="입주상황:">
-                      <option>만실</option>
-                      <option>공실 예정</option>
-                      <option>공실</option>
-                      </select>
-                    </td>
-                    <td class="">2016.7.3</td>
-                  </tr>
-                  <tr class="">
-                    <td class="">2</td>
-                    <td class="">여자</td>
-                    <td class="">
-                      <select name="country1" class="bootstrap-select" title="입주상황:">
-                      <option>만실</option>
-                      <option>공실 예정</option>
-                      <option>공실</option>
-                      </select>
-                    </td>
-                    <td class="">2016.7.3</td>
+                    <td class="">21</td>
+                    <td class="">한국</td>
+                    <td class="">2016.7.5</td>
+                    <td class="">2016.7.5</td>
+                    <td class="">2016.5.1</td>
                   </tr>
                   <tr class="">
                     <td class="">3</td>
+                    <td class="">김정미</td>
                     <td class="">여자</td>
-                    <td class="">
-                      <select name="country1" class="bootstrap-select" title="입주상황:">
-                      <option>만실</option>
-                      <option>공실 예정</option>
-                      <option>공실</option>
-                      </select>
-                    </td>
-                    <td class="">2016.7.3</td>
+                    <td class="">21</td>
+                    <td class="">한국</td>
+                    <td class="">2016.7.5</td>
+                    <td class="">2016.7.5</td>
+                    <td class="">2016.2.1</td>
                   </tr>
                   <tr class="">
                     <td class="">4</td>
+                    <td class="">김정미</td>
                     <td class="">여자</td>
-                    <td class="">
-                      <select name="country1" class="bootstrap-select" title="입주상황:">
-                      <option>만실</option>
-                      <option>공실 예정</option>
-                      <option>공실</option>
-                      </select>
-                    </td>
-                    <td class="">2016.7.3</td>
+                    <td class="">21</td>
+                    <td class="">한국</td>
+                    <td class="">2016.7.5</td>
+                    <td class="">2016.7.5</td>
+                    <td class="">2016.1.1</td>
                   </tr>
                 </table>
               </div>
-              <div class="list-offer">
-                <div class="list-offer-left">
-                  <div class="list-offer-front">
-                    <div class="list-offer-photo height-100">
-                      <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                    </div>
-                  </div>
+              <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-3 col-sm-offset-6">
+                  <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
+                    <span>선택</span>
+                    <div class="button-triangle"></div>
+                    <div class="button-triangle2"></div>
+                  </a>
                 </div>
-                <div class="list-offer-right-large" >
-                  <div class="list-offer-text">
-                    <div class="clearfix"></div>
-                    <div class="row">
-                      <div class="list-offer-h4 col-sm-12 col-md-9">
-                        <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                        <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                      </h4></div>
-                      <div class="col-sm-12 col-md-3">
-                        <h4><b>$200~$500</b></h4>
-                      </div>
-                    </div>
-                    <div class="row padding-top-30">
-                      <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                        <p>룸 5개</p>
-                      </div>
-                      <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                        <p>정원 10명</p>
-                      </div>
-                      <div class="col-md-1">
-
-                      </div>
-                      <div class="col-xs-12 col-sm-12 col-md-3">
-                        <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                        <div class="title-separator-primary"></div>
-                        <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                          <span>공실등록</span>
-                          <div class="button-triangle"></div>
-                          <div class="button-triangle2"></div>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
+                <div class="col-xs-12 col-sm-3">
+                  <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
+                    <span>삭제</span>
+                    <div class="button-triangle"></div>
+                    <div class="button-triangle2"></div>
+                  </a>
                 </div>
-                <div class="clearfix"></div>
               </div>
+
 						</div>
 						<div class="col-xs-12 col-md-3 col-md-pull-9">
 							<div class="sidebar-left">
