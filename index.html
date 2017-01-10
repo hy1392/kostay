@@ -1003,6 +1003,10 @@
 			</div>
 		</section>
 
+
+
+
+
 		<section class="section-light bottom-padding-45 section-top-shadow">
 			<div class="container">
 				<div class="row">
@@ -1632,14 +1636,18 @@
 					<input id="email" name="email" type="email" class="input-full main-input" placeholder="이메일" />
 					<input id="password" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
 					<input name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
-
+					<select id="flag" name="country1" class="bootstrap-select" title="가입유형:">
+						<option value="2">운영자</option>
+						<option value="3">입주자</option>
+					</select>
 					<script>
 						function registerUser() {
 							var name = document.getElementById("last-name").value;
 							var email = document.getElementById("email").value;
 							var pwd = document.getElementById("password").value;
+							var flag = document.getElementById("flag").value;
 
-							location.href = "server/registerUser.php?name=" + name + "&email=" + email + "&pwd=" + pwd;
+							location.href = "server/registerUser.php?name=" + name + "&email=" + email + "&pwd=" + pwd + "&flag=" + flag;
 							return true;
 						}
 					</script>

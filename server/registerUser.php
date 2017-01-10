@@ -4,9 +4,10 @@
   $name   = $_GET['name'];
   $email  = $_GET['email'];
   $pwd    = $_GET['pwd'];
+  $flag    = $_GET['flag'];
 
-  $data_stream = "'".$name."','".$email."','".$pwd."'";
-  $query = "insert into users(username, email, pwd) values(".$data_stream.")";
+  $data_stream = "'".$name."','".$email."','".$pwd."','".$flag."'";
+  $query = "insert into users(username, email, pwd, flag) values(".$data_stream.")";
   $result = mysqli_query($conn, $query);
 
   if($result){
