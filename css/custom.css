@@ -8,7 +8,7 @@
 }
 
 .search-price-div{
-  margin-bottom: 10px !important; 
+  margin-bottom: 10px !important;
 }
 
 .search-price{
@@ -29,5 +29,10 @@
   font-size: 20px;
   font-weight: bold;
   color: #fb0f5a;
+}
+
+.custom-btn-danger{
+  width: 100% !important;
+  border-radius: 0px;
 }
 /* .검색 페이지 */
