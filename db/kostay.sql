@@ -34,6 +34,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='사용자정보' AUTO_INCREMENT=4 ;
 
+INSERT INTO `users` (`idx`, `username`, `email`, `pwd`, `flag`) VALUES
+(1, '관리자', 'admin@admin.ac.kr', 'admin', 1),
+(2, '박진태(입주)', 'user1@user.ac.kr', 'user', 3),
+(3, '박진태(운영)', 'user2@user.ac.kr', 'user', 2);
+
+
+--
+-- 테이블 구조 `message`
+--
+
 CREATE TABLE IF NOT EXISTS `message` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
   `sent_id` varchar(500) NOT NULL COMMENT '보낸사람',
@@ -44,10 +54,6 @@ CREATE TABLE IF NOT EXISTS `message` (
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='메시지' AUTO_INCREMENT=4 ;
 
---
--- 테이블의 덤프 데이터 `users`
---
-
 INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
 (1, 'admin@admin.ac.kr','제목입니다1', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1', now());
 INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
@@ -55,7 +61,33 @@ INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_t
 INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
 (3, 'admin@admin.ac.kr','제목입니다3', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3', now());
 
-INSERT INTO `users` (`idx`, `username`, `email`, `pwd`, `flag`) VALUES
-(1, '관리자', 'admin@admin.ac.kr', 'admin', 1),
-(2, '박진태(입주)', 'user1@user.ac.kr', 'user', 3),
-(3, '박진태(운영)', 'user2@user.ac.kr', 'user', 2);
+--
+-- 테이블 구조 `message`
+--
+
+CREATE TABLE IF NOT EXISTS `house_main` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(500) NOT NULL COMMENT '운영자 아이디',
+  `house_id` varchar(500) NOT NULL COMMENT '방 아이다(운영자아이디_숫자)',
+  `house_title` varchar(500) NOT NULL COMMENT '하우스 제목',
+  `resident_gender` int(11) NOT NULL COMMENT '거주자 성별 남:1 여:2 혼성:3',
+  `house_type` int(11) NOT NULL COMMENT '주택유형 공동:1 단독:2',
+  `number_of_rooms` int(11) NOT NULL COMMENT '방 개수',
+  `number_of_toilet` int(11) NOT NULL COMMENT '화장실 개수',
+  `live_master` int(11) NOT NULL COMMENT '운영자거주여부 거주:1 미거주:2',
+  `parking` int(11) NOT NULL COMMENT '주차 가능:1 불가능:2',
+  `pet` int(11) NOT NULL COMMENT '애완동물 가눙:1 불가능:2',
+  `address` varchar(500) NOT NULL COMMENT '주소',
+  `traffic` varchar(500) NOT NULL COMMENT '교통환경',
+  `facilities` varchar(500) NOT NULL COMMENT '주변시설',
+  `condition` varchar(500) NOT NULL COMMENT '계약조건',
+  `register_time` date NOT NULL COMMENT '등록일',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='하우스 기본정보' AUTO_INCREMENT=4 ;
+
+INSERT INTO `house_main` (`idx`, `user_id`, `house_id`, `house_title`, `resident_gender`, `house_type`, `number_of_rooms`, `number_of_toilet`, `live_master`, `parking`, `pet`, `address`, `traffic`, `facilities`, `condition`, `register_time`) VALUES
+(1, 'user2@user.ac.kr', 'user2@user.ac.kr_1', '매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.111', 1, 1, 5, 2, 1, 1, 1, '31253) 충청남도 천안시 동남구 병천면 충절로 1600 (가전리, 한국기술교육대학교)', '달링하버에서 3분거리, 시티에서 10분거리, 달링하버역에서 5분', '수영장 있는 아파트. 인근에 대형슈퍼(cols)가 있음. 달링하버 근처로 식당가 많아 살기 편함', '흡연불가, 애완동물 불가, 친구초대 불가, 2주 노티스, 쌀제공, 모든 공과금 포함', now());
+INSERT INTO `house_main` (`idx`, `user_id`, `house_id`, `house_title`, `resident_gender`, `house_type`, `number_of_rooms`, `number_of_toilet`, `live_master`, `parking`, `pet`, `address`, `traffic`, `facilities`, `condition`, `register_time`) VALUES
+(2, 'user2@user.ac.kr', 'user2@user.ac.kr_1', '매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.222', 2, 2, 2, 1, 1, 2, 1, '31253) 충청남도 천안시 동남구 병천면 충절로 1600 (가전리, 한국기술교육대학교)', '달링하버에서 3분거리, 시티에서 10분거리, 달링하버역에서 5분', '수영장 있는 아파트. 인근에 대형슈퍼(cols)가 있음. 달링하버 근처로 식당가 많아 살기 편함', '흡연불가, 애완동물 불가, 친구초대 불가, 2주 노티스, 쌀제공, 모든 공과금 포함', now());
+INSERT INTO `house_main` (`idx`, `user_id`, `house_id`, `house_title`, `resident_gender`, `house_type`, `number_of_rooms`, `number_of_toilet`, `live_master`, `parking`, `pet`, `address`, `traffic`, `facilities`, `condition`, `register_time`) VALUES
+(3, 'user2@user.ac.kr', 'user2@user.ac.kr_1', '매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.333', 3, 2, 3, 3, 1, 1, 2, '31253) 충청남도 천안시 동남구 병천면 충절로 1600 (가전리, 한국기술교육대학교)', '달링하버에서 3분거리, 시티에서 10분거리, 달링하버역에서 5분', '수영장 있는 아파트. 인근에 대형슈퍼(cols)가 있음. 달링하버 근처로 식당가 많아 살기 편함', '흡연불가, 애완동물 불가, 친구초대 불가, 2주 노티스, 쌀제공, 모든 공과금 포함', now());

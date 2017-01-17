@@ -219,6 +219,12 @@
 							<div class="row list-offer-row">
 								<div class="col-xs-12">
 									<!-- Item -->
+									<?
+									 include 'server/dbconnect.php';
+									 $query = "select * from house_main";
+								   $result = mysqli_query($conn, $query);
+									 while($row = mysqli_fetch_array($result)){
+									?>
 									<div class="list-offer">
 										<!-- Item 사진 -->
 										<div class="list-offer-left">
@@ -237,7 +243,7 @@
 												<div class="row">
 													<div class="list-offer-h4 col-sm-12 col-md-12">
 														<i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-														<h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
+														<h4 class="list-offer-title"><?=$row['house_title']?>
                         		</h4>
 													</div>
 												</div>
@@ -254,13 +260,13 @@
 
 												<div class="row">
 													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
-														<p>등록일 : </p>
+														<p>등록일 : <?=$row['register_time']?></p>
 													</div>
 													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
 														<p>입실일 : </p>
 													</div>
 													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
-														<p>룸 : </p>
+														<p>룸 : <?=$row['number_of_rooms']?>개</p>
 													</div>
 													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
 														<h5 class="title-negative-margin" style="display:inline">
@@ -294,14 +300,28 @@
 										<div class="clearfix"></div>
 									</div>
 									<!-- .Item -->
+									<?}?>
 
 							<div class="offer-pagination margin-top-30">
-								<a href="#" class="prev"><i class="jfont">&#xe800;</i></a><a class="active">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#" class="next"><i class="jfont">&#xe802;</i></a>
+								<?
+								$query = "select * from house_main";
+								$result = mysqli_query($conn, $query);
+								$count = mysqli_num_rows($result);
+								if($count>0){
+								?>
+								<a href="#" class="prev"><i class="jfont">&#xe800;</i></a>
+								<?for($i=1;$i<($count/8)+1;++$i){?>
+								<a><?=$i?></a>
+								<?}?>
+								<a href="#" class="next"><i class="jfont">&#xe802;</i></a>
+								<?}?>
 								<div class="clearfix"></div>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 			</section>
 
 			<footer class="small-cont">
