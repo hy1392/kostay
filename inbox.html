@@ -15,6 +15,8 @@
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 
+		<!-- jQeury -->
+		<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
 		<!-- Font awesome styles -->
@@ -116,9 +118,11 @@
 								 include 'server/dbconnect.php';
 								 $query = "select sent_id,title,content,sent_time from message where receiver = '".$_SESSION['id']."'";
 							   $result = mysqli_query($conn, $query);
+								 $i=0;
 								 while($row = mysqli_fetch_row($result)){
+									 $tmp = $row[0]."".$i;
 								?>
-								<div class="list-offer">
+								<div class="list-offer" id="<?=$tmp?>">
                   <div class="list-offer-left">
                     <div class="list-offer-front">
                       <div class="list-offer-photo height-100">
@@ -135,11 +139,46 @@
                       </div>
                       <p><?=$row[2]?></p>
                       <div class="clearfix"></div>
+											<div class="row">
+												<input type="button" class="pull-right" name="" value="삭제">
+												<input type="button" class="pull-right reply" name="" value="답장">
+											</div>
                     </div>
                   </div>
-                  <div class="clearfix"></div>
+
                 </div>
-								<?}?>
+								<div class="clearfix"></div>
+								<?$i++;}?>
+								<script>
+								$(".reply").on("click",function(){
+									var st = $(this).parent().parent().parent().parent().attr('id');
+									var target = st.substring(0,st.length-1);
+									st = $(this).parent().parent().parent().parent();
+									var reply = '<div class="col-xs-12" style="border:1px solid rgb(224, 224, 224); padding:10px;x">\
+										<input name="title" id="title" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="제목:">\
+										<textarea id="content" name="content" class="input-full main-input" placeholder="내용:"></textarea>\
+										<input type="button" class="pull-right send" name="" value="보내기" id="'+target+'">\
+									</div>';
+									$(st).append(reply);
+								});
+
+								</script>
+
+								<div class="col-xs-12 offer-pagination" style="margin-top:30px">
+									<?
+									$query = "select * from message where receiver = '".$_SESSION['id']."'";
+									$result = mysqli_query($conn, $query);
+									$count = mysqli_num_rows($result);
+									if($count>0){
+									?>
+									<a href="#" class="prev"><i class="jfont">&#xe800;</i></a>
+									<?for($i=1;$i<($count/8)+1;++$i){?>
+									<a href="#"><?=$i?></a>
+									<?}?>
+									<a href="#" class="next"><i class="jfont">&#xe802;</i></a>
+									<?}?>
+									<div class="clearfix"></div>
+								</div>
 							</div>
 							<div class="row margin-top-60"></div>
 						</div>
@@ -396,6 +435,8 @@
 		<!-- template scripts -->
 		<script type="text/javascript" src="mail/validate.js"></script>
 		<script type="text/javascript" src="js/apartment.js"></script>
+
+
 
 	</body>
 
