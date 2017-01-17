@@ -111,6 +111,12 @@
 								</div>
 							</div>
 							<div class="col-xs-12">
+								<?
+								 include 'server/dbconnect.php';
+								 $query = "select sent_id,title,content,sent_time from message where sent_id = '".$_SESSION['id']."'";
+							   $result = mysqli_query($conn, $query);
+								 while($row = mysqli_fetch_row($result)){
+								?>
 								<div class="list-offer">
                   <div class="list-offer-left">
                     <div class="list-offer-front">
@@ -124,36 +130,15 @@
                       <div class="clearfix"></div>
                       <div class="row">
                         <div class="list-offer-h4 col-sm-12">
-                          <h4 class="list-offer-title">공지사항(2016.6.9)</h4></div>
+                          <h4 class="list-offer-title"><?=$row[1]?> (<?=$row[3]?>)</h4></div>
                       </div>
-                      <p>안녕하세요? 제시입니다. 요즘 새로 오픈한 셰어하우스를 소개합니다. 시드니에 계신 분들이라면 대박 기회가 될 것입니다..~</p>
+                      <p><?=$row[2]?></p>
                       <div class="clearfix"></div>
                     </div>
                   </div>
                   <div class="clearfix"></div>
                 </div>
-
-								<div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpagent2.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12">
-                          <h4 class="list-offer-title">호호하우스님(2016.5.22)</h4></div>
-                      </div>
-                      <p>우리 셰어하우스에 대기신청을 해주셔서 감사합니다. 입주 희망일 즈음해서 방일 빌 것 같습니다. 원하신 4인실은 아니고 1인실인데 입주하실 의향이 있으신가요????</p>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
+								<?}?>
 
 
 							</div>

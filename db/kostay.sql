@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 호스트: localhost
--- 처리한 시간: 16-12-14 20:16 
+-- 처리한 시간: 16-12-14 20:16
 -- 서버 버전: 5.1.41
 -- PHP 버전: 5.2.12
 
@@ -34,9 +34,26 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='사용자정보' AUTO_INCREMENT=4 ;
 
+CREATE TABLE IF NOT EXISTS `message` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `sent_id` varchar(500) NOT NULL COMMENT '보낸사람',
+  `title` varchar(500) NOT NULL COMMENT '제목',
+  `receiver` varchar(500) NOT NULL COMMENT '받는사람',
+  `content` varchar(500) NOT NULL COMMENT '내용',
+  `sent_time` datetime NOT NULL COMMENT '발신시간',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='메시지' AUTO_INCREMENT=4 ;
+
 --
 -- 테이블의 덤프 데이터 `users`
 --
+
+INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
+(1, 'admin@admin.ac.kr','제목입니다1', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1', now());
+INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
+(2, 'admin@admin.ac.kr','제목입니다2', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2', now());
+INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
+(3, 'admin@admin.ac.kr','제목입니다3', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3', now());
 
 INSERT INTO `users` (`idx`, `username`, `email`, `pwd`, `flag`) VALUES
 (1, '관리자', 'admin@admin.ac.kr', 'admin', 1),
