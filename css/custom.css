@@ -1,0 +1,33 @@
+/* 검색 페이지 */
+.list-offer-title{
+  font-family: "NanumGothic";
+  font-weight: bold;
+  font-size: 16px !important;
+  color: #5d5d5d;
+  margin-bottom: 10px !important;
+}
+
+.search-price-div{
+  margin-bottom: 10px !important; 
+}
+
+.search-price{
+  font-family: "NanumGothic";
+  font-size: 14px;
+  color: #5d5d5d;
+}
+
+.mini-price{
+  font-family: "NanumGothic";
+  font-size: 20px;
+  font-weight: bold;
+  color: #03c1a8;
+}
+
+.max-price{
+  font-family: "NanumGothic";
+  font-size: 20px;
+  font-weight: bold;
+  color: #fb0f5a;
+}
+/* .검색 페이지 */
