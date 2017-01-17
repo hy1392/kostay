@@ -1,720 +1,511 @@
 <?php
 	session_start();
 ?>
-<!DOCTYPE html>
-<html lang="en">
+	<!DOCTYPE html>
+	<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Kostay</title>
-  <meta name="keywords" content="Download, Apartment, Premium, Real Estate, HMTL, Site Template, property, mortgage, CSS" />
-  <meta name="description" content="Download Apartment - Premium Real Estate HMTL Site Template" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+		<title>Kostay</title>
+		<meta name="keywords" content="Download, Apartment, Premium, Real Estate, HMTL, Site Template, property, mortgage, CSS" />
+		<meta name="description" content="Download Apartment - Premium Real Estate HMTL Site Template" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
-  <!-- Font awesome styles -->
-  <link rel="stylesheet" href="apartment-font/css/font-awesome.min.css">
-  <!-- Custom styles -->
-  <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,500,500italic,700,700italic&amp;subset=latin,latin-ext'>
-  <link rel="stylesheet" type="text/css" href="css/plugins.css">
-  <link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
-  <link rel="stylesheet" type="text/css" href="css/search_detail.css">
-  <link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+		<!-- Font awesome styles -->
+		<link rel="stylesheet" href="apartment-font/css/font-awesome.min.css">
+		<!-- Custom styles -->
+		<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,500,500italic,700,700italic&amp;subset=latin,latin-ext'>
+		<link rel="stylesheet" type="text/css" href="css/plugins.css">
+		<link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
+		<link rel="stylesheet" type="text/css" href="css/search_detail.css">
+		<link rel="stylesheet" type="text/css" href="css/custom.css">
+		<link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
 
-  <!--[if lt IE 9]>
+		<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 		<style media="screen">
-			.adv-search-section{
-				height:40vh;
+			.adv-search-section {
+				height: 40vh;
 			}
 		</style>
-</head>
+	</head>
 
-<body>
-  <div class="loader-bg"></div>
-  <div id="wrapper">
+	<body>
+		<div class="loader-bg"></div>
+		<div id="wrapper">
+			<!-- Page header -->
 
-    <!-- Page header -->
-    <header>
-
-      <div class="top-bar-wrapper">
-        <div class="container top-bar">
-          <div class="row">
-            <div class="col-xs-5 col-sm-8">
-              <div class="top-mail pull-left hidden-xs">
-                <span class="top-icon-circle">
+			<header>
+				<div class="top-bar-wrapper">
+					<div class="container top-bar">
+						<div class="row">
+							<div class="col-xs-5 col-sm-8">
+								<div class="top-mail pull-left hidden-xs">
+									<span class="top-icon-circle">
 						<i class="fa fa-envelope fa-sm"></i>
 					</span>
-                <span class="top-bar-text">admin@koreatech.ac.kr</span>
-              </div>
-              <div class="top-phone pull-left hidden-xxs">
-                <span class="top-icon-circle">
+									<span class="top-bar-text">admin@koreatech.ac.kr</span>
+								</div>
+								<div class="top-phone pull-left hidden-xxs">
+									<span class="top-icon-circle">
 						<i class="fa fa-phone"></i>
 					</span>
-                <span class="top-bar-text">(0)-123-456-789</span>
-              </div>
-              <div class="top-localization pull-left hidden-sm hidden-md hidden-xs">
-                <span class="top-icon-circle pull-left">
+									<span class="top-bar-text">(0)-123-456-789</span>
+								</div>
+								<div class="top-localization pull-left hidden-sm hidden-md hidden-xs">
+									<span class="top-icon-circle pull-left">
 						<i class="fa fa-map-marker"></i>
 					</span>
-                <span class="top-bar-text">KOREA</span>
-              </div>
-            </div>
-            <div class="col-xs-7 col-sm-4">
-              <div class="top-social-last top-dark pull-right" data-toggle="tooltip" data-placement="bottom" title="Login/Register">
-                <a class="top-icon-circle" href="#login-modal" data-toggle="modal">
-                  <i class="fa fa-lock"></i>
-                </a>
-              </div>
+									<span class="top-bar-text">KOREA</span>
+								</div>
+							</div>
+							<div class="col-xs-7 col-sm-4">
+								<div class="top-social-last top-dark pull-right" data-toggle="tooltip" data-placement="bottom" title="Login/Register">
+									<a class="top-icon-circle" href="#login-modal" data-toggle="modal">
+										<i class="fa fa-lock"></i>
+									</a>
+								</div>
 
-              <div class="top-social pull-right">
-                <a class="top-icon-circle" href="#">
-                  <i class="fa fa-facebook"></i>
-                </a>
-              </div>
-              <div class="top-social pull-right">
-                <a class="top-icon-circle" href="#">
-                  <i class="fa fa-twitter"></i>
-                </a>
-              </div>
-              <div class="top-social pull-right">
-                <a class="top-icon-circle" href="#">
-                  <i class="fa fa-google-plus"></i>
-                </a>
-              </div>
-              <div class="top-social pull-right">
-                <a class="top-icon-circle" href="#">
-                  <i class="fa fa-skype"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.top-bar -->
-      </div>
-      <!-- /.Page top-bar-wrapper -->
+								<div class="top-social pull-right">
+									<a class="top-icon-circle" href="#">
+										<i class="fa fa-facebook"></i>
+									</a>
+								</div>
+								<div class="top-social pull-right">
+									<a class="top-icon-circle" href="#">
+										<i class="fa fa-twitter"></i>
+									</a>
+								</div>
+								<div class="top-social pull-right">
+									<a class="top-icon-circle" href="#">
+										<i class="fa fa-google-plus"></i>
+									</a>
+								</div>
+								<div class="top-social pull-right">
+									<a class="top-icon-circle" href="#">
+										<i class="fa fa-skype"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.top-bar -->
+				</div>
+				<!-- /.Page top-bar-wrapper -->
 
-      <?include("config/navbar.html");?>
-      <!-- /.mani-menu-cont -->
-    </header>
+				<?include("config/navbar.html");?>
+					<!-- /.mani-menu-cont -->
+			</header>
 
 
-    <section class="adv-search-section no-padding">
-      <div id="offers-map"></div>
-      <form class="adv-search-form" action="#">
-        <div class="adv-search-cont">
-          <div class="container">
-            <div class="row tab-content">
-              <div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
-                <div class="row">
-                  <div class="col-xs-12 col-sm-6 col-lg-3">
-                    <select name="country1" class="bootstrap-select" title="위치기준:">
+			<section class="adv-search-section no-padding">
+				<div id="offers-map"></div>
+				<form class="adv-search-form" action="#">
+					<div class="adv-search-cont">
+						<div class="container">
+							<div class="row tab-content">
+								<div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
+									<div class="row">
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<select name="country1" class="bootstrap-select" title="위치기준:">
 
 								<option>지역기준</option>
 								<option>시티레일기준</option>
 								<option>출퇴근기준</option>
 							</select>
-                  </div>
-                  <div class="col-xs-12 col-sm-6 col-lg-3">
-                    <input name="name" id="name" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="(직접입력)">
-                  </div>
-                  <div class="col-xs-12 col-sm-6 col-lg-3">
-                    <select name="country1" class="bootstrap-select" title="성별:">
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<input name="name" id="name" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="(직접입력)">
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<select name="country1" class="bootstrap-select" title="성별:">
 
 								<option>남성</option>
 								<option>여성</option>
-								<option>혼성</option>
-								<option>커플용</option>
+								<option>혼합</option>
+								<option>커플</option>
 							</select>
-                  </div>
-                  <div class="col-xs-12 col-sm-6 col-lg-3">
-                    <select name="city1" class="bootstrap-select" title="주택유형:">
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<select name="city1" class="bootstrap-select" title="주택유형:">
 								<option>무관</option>
 								<option>단독주택</option>
 								<option>공동주택(유닛, 아파트, 타운하우스)</option>
 							</select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12 col-sm-6 col-lg-3">
-                    <select name="city1" class="bootstrap-select" title="룸타입:">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<select name="city1" class="bootstrap-select" title="룸타입:">
 								<option>무관</option>
 								<option>1인실</option>
 								<option>2인실</option>
 								<option>3인실 이상</option>
 							</select>
-                  </div>
-                  <div class="col-xs-12 col-sm-6 col-lg-3">
-                    <div class="adv-search-range-cont">
-                      <label for="slider-range-price1-value" class="adv-search-label">렌트비:</label>
-                      <span>$</span>
-                      <input type="text" id="slider-range-price1-value" readonly class="adv-search-amount">
-                      <div class="clearfix"></div>
-                      <div id="slider-range-price1" data-min="0" data-max="300000" class="slider-range"></div>
-                    </div>
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<div class="adv-search-range-cont">
+												<label for="slider-range-price1-value" class="adv-search-label">렌트비:</label>
+												<span>$</span>
+												<input type="text" id="slider-range-price1-value" readonly class="adv-search-amount">
+												<div class="clearfix"></div>
+												<div id="slider-range-price1" data-min="0" data-max="300000" class="slider-range"></div>
+											</div>
 
-                  </div>
-                  <div class="col-xs-12 col-sm-6 col-lg-3">
-                    <select name="city1" class="bootstrap-select" title="주차:">
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<select name="city1" class="bootstrap-select" title="주차:">
 								<option>무관</option>
 								<option>가능</option>
 							</select>
-                  </div>
-                  <div class="col-xs-12 col-sm-6 col-lg-3">
-                    <input name="name" id="datepicker" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="입주일">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-12 col-md-6 col-lg-3 col-md-offset-6 col-lg-offset-9 adv-search-button-cont">
-                <a href="#" class="button-primary pull-right">
-                  <span>search</span>
-                  <div class="button-triangle"></div>
-                  <div class="button-triangle2"></div>
-                  <div class="button-icon"><i class="fa fa-search"></i></div>
-                </a>
-              </div>
-            </div>
-          </div>
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<input name="name" id="datepicker" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="입주일">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-12 col-md-6 col-lg-3 col-md-offset-6 col-lg-offset-9 adv-search-button-cont">
+									<a href="#" class="button-primary pull-right">
+										<span>search</span>
+										<div class="button-triangle"></div>
+										<div class="button-triangle2"></div>
+										<div class="button-icon"><i class="fa fa-search"></i></div>
+									</a>
+								</div>
+							</div>
+						</div>
 
-        </div>
-      </form>
-    </section>
+					</div>
+				</form>
+			</section>
 
-    <section class="section-light section-top-shadow">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="row">
-              <div class="col-xs-12 col-lg-6">
-                <h5 class="subtitle-margin">현재 판매중인 셰어하우스</h5>
-                <h1>총 42개의 결과가 검색되었습니다</h1>
-              </div>
-              <div class="col-xs-12 col-lg-6">
-                <div class="order-by-container">
-                  <select name="sort" class="bootstrap-select" title="정렬 :">
+			<section class="section-light section-top-shadow">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="row">
+								<div class="col-xs-12 col-lg-6">
+									<h5 class="subtitle-margin">현재 판매중인 셰어하우스</h5>
+									<h1>총 42개의 결과가 검색되었습니다.</h1>
+								</div>
+								<div class="col-xs-12 col-lg-6">
+									<div class="order-by-container">
+										<select name="sort" class="bootstrap-select" title="정렬 :">
 										<option>최신순</option>
 										<option>거리순</option>
 										<option>렌트비</option>
 										<option>입실일</option>
                     <option>거주인원</option>
 									</select>
-                </div>
-              </div>
-              <div class="col-xs-12">
-                <div class="title-separator-primary"></div>
-              </div>
-            </div>
-            <div class="row list-offer-row">
-              <div class="col-xs-12">
-                <div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>룸 5개</h4>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>정원 10명</h4>
-                        </div>
-                        <div class="col-md-1">
+									</div>
+								</div>
+								<div class="col-xs-12">
+									<div class="title-separator-primary"></div>
+								</div>
+							</div>
 
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                            <div class="button-icon"><i class="jfont">&#xe802;</i></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
+							<div class="row list-offer-row">
+								<div class="col-xs-12">
+									<!-- Item -->
+									<div class="list-offer">
+										<!-- Item 사진 -->
+										<div class="list-offer-left">
+											<div class="list-offer-front">
+												<div class="list-offer-photo height-100">
+													<img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
+												</div>
+											</div>
+										</div>
+										<!-- .Item 사진 -->
+										<!-- Item 정보 -->
+										<div class="list-offer-right-large">
+											<div class="list-offer-text">
+												<div class="clearfix"></div>
 
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>룸 5개</h4>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>정원 10명</h4>
-                        </div>
-                        <div class="col-md-1">
+												<div class="row">
+													<div class="list-offer-h4 col-sm-12 col-md-12">
+														<i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
+														<h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
+                        		</h4>
+													</div>
+												</div>
 
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                            <div class="button-icon"><i class="jfont">&#xe802;</i></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
+												<div class="row text-right search-price-div">
+													<div class="col-sm-12 col-md-12">
+														<span class="search-price">최소 : </span>
+														<span class="mini-price">200,000</span>
+														&nbsp;&nbsp;~&nbsp;&nbsp;
+														<span class="search-price">최대 : </span>
+														<span class="max-price">1,000,000</span>
+													</div>
+												</div>
 
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>룸 5개</h4>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>정원 10명</h4>
-                        </div>
-                        <div class="col-md-1">
+												<div class="row">
+													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
+														<p>등록일 : </p>
+													</div>
+													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
+														<p>입실일 : </p>
+													</div>
+													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
+														<p>룸 : </p>
+													</div>
+													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
+														<h5 class="title-negative-margin" style="display:inline">
+															2016.7.5 ~ 입주가능
+														</h5>
+														<div class="title-separator-primary"></div>
+													</div>
+												</div>
 
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                            <div class="button-icon"><i class="jfont">&#xe802;</i></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
+												<div class="row">
+													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
+														<p>거리 : </p>
+														<p>렌트비 : </p>
+													</div>
+													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
+														<p>거주인원 : </p>
+													</div>
+													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
+														<p>정원 : </p>
+													</div>
+													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
+														<a class="btn btn-danger btn-lg" href="#">
+															<i class="fa fa-heart-o fa-lg"></i> 찜하기</a>
+													</div>
+												</div>
 
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>룸 5개</h4>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>정원 10명</h4>
-                        </div>
-                        <div class="col-md-1">
+												<div class="clearfix"></div>
+											</div>
+										</div>
+										<!-- .Item 정보 -->
+										<div class="clearfix"></div>
+									</div>
+									<!-- .Item -->
 
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                            <div class="button-icon"><i class="jfont">&#xe802;</i></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
+							<div class="offer-pagination margin-top-30">
+								<a href="#" class="prev"><i class="jfont">&#xe800;</i></a><a class="active">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#" class="next"><i class="jfont">&#xe802;</i></a>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>룸 5개</h4>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>정원 10명</h4>
-                        </div>
-                        <div class="col-md-1">
+			<footer class="small-cont">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-md-6 small-cont">
+							<img src="images/logo/kostay-f2.png" alt="" class="img-responsive footer-logo" />
+						</div>
+						<div class="col-xs-12 col-md-6 footer-copyrights">
+							&copy; Copyright 2016 <a href="#" target="blank">좋은일컴퍼니 & KOREATECH</a>.
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
 
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                            <div class="button-icon"><i class="jfont">&#xe802;</i></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
+		<!-- Move to top button -->
 
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                          <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.
-                        </h4></div>
-                        <div class="col-sm-12 col-md-3">
-                          <h4><b>$200~$500</b></h4>
-                        </div>
-                      </div>
-                      <div class="row padding-top-30">
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>룸 5개</h4>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 text-center fixed-middle">
-                          <h4>정원 10명</h4>
-                        </div>
-                        <div class="col-md-1">
+		<div class="move-top">
+			<div class="big-triangle-second-color"></div>
+			<div class="big-icon-second-color"><i class="jfont fa-lg">&#xe803;</i></div>
+		</div>
+		<!-- Move to top button -->
 
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3">
-                          <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
-                          <div class="title-separator-primary"></div>
-                          <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
-                            <span>입주가능</span>
-                            <div class="button-triangle"></div>
-                            <div class="button-triangle2"></div>
-                            <div class="button-icon"><i class="jfont">&#xe802;</i></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
+		<!-- Login modal -->
+		<div class="modal fade apartment-modal" id="login-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div class="modal-title">
+							<span class="special-color"><h1>로그인</h1></span>
+							<div class="short-title-separator"></div>
+						</div>
+						<input id="id" name="login" type="email" class="input-full main-input" placeholder="이메일" />
+						<input id="pwd" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
 
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
+						<script>
+							function loginchk() {
+								var id = document.getElementById("id").value;
+								var pwd = document.getElementById("pwd").value;
 
+								location.href = "server/login.php?id=" + id + "&pwd=" + pwd;
+								return true;
+							}
+						</script>
 
-              </div>
-            </div>
+						<a href="#" onclick="javascript:loginchk();" class="button-primary button-shadow button-full">
+							<span>로그인</span>
+							<div class="button-triangle"></div>
+							<div class="button-triangle2"></div>
+							<div class="button-icon"><i class="fa fa-user"></i></div>
+						</a>
+						<a href="#" class="forgot-link pull-right">비밀번호를 잊으셨나요?</a>
+						<div class="clearfix"></div>
+						<p class="login-or">OR</p>
+						<a href="#" class="facebook-button">
+							<i class="fa fa-facebook"></i>
+							<span>Login with Facebook</span>
+						</a>
+						<a href="#" class="google-button margin-top-15">
+							<i class="fa fa-google-plus"></i>
+							<span>Login with Google</span>
+						</a>
+						<p class="modal-bottom">아직 Kostay 계정이 없으신가요? <a href="#" class="register-link">회원가입</a></p>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
 
-            <div class="offer-pagination margin-top-30">
-              <a href="#" class="prev"><i class="jfont">&#xe800;</i></a><a class="active">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#" class="next"><i class="jfont">&#xe802;</i></a>
-              <div class="clearfix"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+		<!-- Register modal -->
+		<div class="modal fade apartment-modal" id="register-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div class="modal-title">
+							<span class="special-color"><h1>회원가입</h1></span>
+							<div class="short-title-separator"></div>
+						</div>
+						<input id="last-name" name="last-name" type="text" class="input-full main-input" placeholder="이름" />
+						<input id="email" name="email" type="email" class="input-full main-input" placeholder="이메일" />
+						<input id="password" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
+						<input name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
 
-    <footer class="small-cont">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-md-6 small-cont">
-            <img src="images/logo/kostay-f2.png" alt="" class="img-responsive footer-logo" />
-          </div>
-          <div class="col-xs-12 col-md-6 footer-copyrights">
-            &copy; Copyright 2016 <a href="#" target="blank">좋은일컴퍼니 & KOREATECH</a>.
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
+						<script>
+							function registerUser() {
+								var name = document.getElementById("last-name").value;
+								var email = document.getElementById("email").value;
+								var pwd = document.getElementById("password").value;
 
-  <!-- Move to top button -->
+								location.href = "server/registerUser.php?name=" + name + "&email=" + email + "&pwd=" + pwd;
+								return true;
+							}
+						</script>
 
-  <div class="move-top">
-    <div class="big-triangle-second-color"></div>
-    <div class="big-icon-second-color"><i class="jfont fa-lg">&#xe803;</i></div>
-  </div>
-  <!-- Move to top button -->
+						<a href="#" onclick="javascript:registerUser();" class="button-primary button-shadow button-full">
+							<span>가입하기</span>
+							<div class="button-triangle"></div>
+							<div class="button-triangle2"></div>
+							<div class="button-icon"><i class="fa fa-user"></i></div>
+						</a>
+						<div class="clearfix"></div>
+						<p class="login-or">OR</p>
+						<a href="#" class="facebook-button">
+							<i class="fa fa-facebook"></i>
+							<span>Sing Up with Facebook</span>
+						</a>
+						<a href="#" class="google-button margin-top-15">
+							<i class="fa fa-google-plus"></i>
+							<span>Sing Up with Google</span>
+						</a>
+						<p class="modal-bottom">이미 Kostay 회원이신가요? <a href="#" class="login-link">로그인</a></p>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
 
-  <!-- Login modal -->
-  <div class="modal fade apartment-modal" id="login-modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <div class="modal-title">
-            <span class="special-color"><h1>로그인</h1></span>
-            <div class="short-title-separator"></div>
-          </div>
-          <input id="id" name="login" type="email" class="input-full main-input" placeholder="이메일" />
-          <input id="pwd" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
+		<!-- Forgotten password modal -->
+		<div class="modal fade apartment-modal" id="forgot-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div class="modal-title">
+							<h1>Forgot your password<span class="special-color">?</span></h1>
+							<div class="short-title-separator"></div>
+						</div>
+						<p class="negative-margin forgot-info">Instert your account email address.<br/>We will send you a link to reset your password.</p>
+						<input name="login" type="email" class="input-full main-input" placeholder="Your email" />
+						<a href="my-profile.html" class="button-primary button-shadow button-full">
+							<span>Reset password</span>
+							<div class="button-triangle"></div>
+							<div class="button-triangle2"></div>
+							<div class="button-icon"><i class="fa fa-user"></i></div>
+						</a>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
 
-          <script>
-            function loginchk() {
-              var id = document.getElementById("id").value;
-              var pwd = document.getElementById("pwd").value;
+		<!-- jQuery  -->
+		<script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jQuery/jquery-ui.min.js"></script>
 
-              location.href = "server/login.php?id=" + id + "&pwd=" + pwd;
-              return true;
-            }
-          </script>
+		<!-- Bootstrap-->
+		<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
 
-          <a href="#" onclick="javascript:loginchk();" class="button-primary button-shadow button-full">
-            <span>로그인</span>
-            <div class="button-triangle"></div>
-            <div class="button-triangle2"></div>
-            <div class="button-icon"><i class="fa fa-user"></i></div>
-          </a>
-          <a href="#" class="forgot-link pull-right">비밀번호를 잊으셨나요?</a>
-          <div class="clearfix"></div>
-          <p class="login-or">OR</p>
-          <a href="#" class="facebook-button">
-            <i class="fa fa-facebook"></i>
-            <span>Login with Facebook</span>
-          </a>
-          <a href="#" class="google-button margin-top-15">
-            <i class="fa fa-google-plus"></i>
-            <span>Login with Google</span>
-          </a>
-          <p class="modal-bottom">아직 Kostay 계정이 없으신가요? <a href="#" class="register-link">회원가입</a></p>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
+		<!-- Google Maps -->
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&amp;sensor=false&amp;libraries=places"></script>
 
-  <!-- Register modal -->
-  <div class="modal fade apartment-modal" id="register-modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <div class="modal-title">
-            <span class="special-color"><h1>회원가입</h1></span>
-            <div class="short-title-separator"></div>
-          </div>
-          <input id="last-name" name="last-name" type="text" class="input-full main-input" placeholder="이름" />
-          <input id="email" name="email" type="email" class="input-full main-input" placeholder="이메일" />
-          <input id="password" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
-          <input name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
+		<!-- plugins script -->
+		<script type="text/javascript" src="js/plugins.js"></script>
 
-          <script>
-            function registerUser() {
-              var name = document.getElementById("last-name").value;
-              var email = document.getElementById("email").value;
-              var pwd = document.getElementById("password").value;
+		<!-- template scripts -->
+		<script type="text/javascript" src="mail/validate.js"></script>
+		<script type="text/javascript" src="js/apartment.js"></script>
 
-              location.href = "server/registerUser.php?name=" + name + "&email=" + email + "&pwd=" + pwd;
-              return true;
-            }
-          </script>
+		<!-- google maps initialization -->
+		<script type="text/javascript">
+			google.maps.event.addDomListener(window, 'load', init);
 
-          <a href="#" onclick="javascript:registerUser();" class="button-primary button-shadow button-full">
-            <span>가입하기</span>
-            <div class="button-triangle"></div>
-            <div class="button-triangle2"></div>
-            <div class="button-icon"><i class="fa fa-user"></i></div>
-          </a>
-          <div class="clearfix"></div>
-          <p class="login-or">OR</p>
-          <a href="#" class="facebook-button">
-            <i class="fa fa-facebook"></i>
-            <span>Sing Up with Facebook</span>
-          </a>
-          <a href="#" class="google-button margin-top-15">
-            <i class="fa fa-google-plus"></i>
-            <span>Sing Up with Google</span>
-          </a>
-          <p class="modal-bottom">이미 Kostay 회원이신가요? <a href="#" class="login-link">로그인</a></p>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
+			function init() {
+				var locations = [
+					[40.6128, -73.9976, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "Fort Collins, Colorado 80523, USA", "$320 000"],
+					[40.7222, -73.7903, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+					[41.0306, -73.7669, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer3.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
+					[41.3006, -72.9440, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer4.jpg", "Fort Collins, Colorado 80523, USA", "$410 000"],
+					[42.2418, -74.3626, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "West Fourth Street, New York 10003, USA", "$295 000"],
+					[38.8974, -77.0365, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
+					[38.7860, -77.0129, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer7.jpg", "Fort Collins, Colorado 80523, USA", "$299 000"],
+					[41.2693, -70.0874, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer8.jpg", "Fort Collins, Colorado 80523, USA", "$600 000"],
+					[33.7544, -84.3857, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer9.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+					[33.7337, -84.4443, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer10.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$550 000"],
+					[33.8588, -84.4858, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$670 000"],
+					[34.0254, -84.3560, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
+					[39.6282, -86.1320, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
+					[40.5521, -84.5658, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+					[41.6926, -87.6021, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"]
+				];
+				offersMapInit("offers-map", locations);
 
-  <!-- Forgotten password modal -->
-  <div class="modal fade apartment-modal" id="forgot-modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <div class="modal-title">
-            <h1>Forgot your password<span class="special-color">?</span></h1>
-            <div class="short-title-separator"></div>
-          </div>
-          <p class="negative-margin forgot-info">Instert your account email address.<br/>We will send you a link to reset your password.</p>
-          <input name="login" type="email" class="input-full main-input" placeholder="Your email" />
-          <a href="my-profile.html" class="button-primary button-shadow button-full">
-            <span>Reset password</span>
-            <div class="button-triangle"></div>
-            <div class="button-triangle2"></div>
-            <div class="button-icon"><i class="fa fa-user"></i></div>
-          </a>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
+				mapInit(41.2693, -70.0874, "list-map1", "images/pin-house.png", false);
+				mapInit(33.7544, -84.3857, "list-map2", "images/pin-apartment.png", false);
+				mapInit(33.7337, -84.4443, "list-map3", "images/pin-land.png", false);
+				mapInit(33.8588, -84.4858, "list-map4", "images/pin-commercial.png", false);
+				mapInit(34.0254, -84.3560, "list-map5", "images/pin-apartment.png", false);
+				mapInit(40.6128, -73.9976, "list-map6", "images/pin-house.png", false);
+				mapInit(40.6128, -73.7903, "list-map7", "images/pin-house.png", false);
+			}
+			$(".list-offer-right-large").on("click", function() {
+				location.href = "view_detail.html";
+			});
+		</script>
 
-  <!-- jQuery  -->
-  <script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
-  <script type="text/javascript" src="js/jQuery/jquery-ui.min.js"></script>
+	</body>
 
-  <!-- Bootstrap-->
-  <script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
-
-  <!-- Google Maps -->
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&amp;sensor=false&amp;libraries=places"></script>
-
-  <!-- plugins script -->
-  <script type="text/javascript" src="js/plugins.js"></script>
-
-  <!-- template scripts -->
-  <script type="text/javascript" src="mail/validate.js"></script>
-  <script type="text/javascript" src="js/apartment.js"></script>
-
-  <!-- google maps initialization -->
-  <script type="text/javascript">
-    google.maps.event.addDomListener(window, 'load', init);
-
-    function init() {
-      var locations = [
-        [40.6128, -73.9976, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "Fort Collins, Colorado 80523, USA", "$320 000"],
-        [40.7222, -73.7903, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
-        [41.0306, -73.7669, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer3.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
-        [41.3006, -72.9440, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer4.jpg", "Fort Collins, Colorado 80523, USA", "$410 000"],
-        [42.2418, -74.3626, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "West Fourth Street, New York 10003, USA", "$295 000"],
-        [38.8974, -77.0365, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
-        [38.7860, -77.0129, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer7.jpg", "Fort Collins, Colorado 80523, USA", "$299 000"],
-        [41.2693, -70.0874, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer8.jpg", "Fort Collins, Colorado 80523, USA", "$600 000"],
-        [33.7544, -84.3857, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer9.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
-        [33.7337, -84.4443, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer10.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$550 000"],
-        [33.8588, -84.4858, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$670 000"],
-        [34.0254, -84.3560, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
-        [39.6282, -86.1320, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
-        [40.5521, -84.5658, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
-        [41.6926, -87.6021, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"]
-      ];
-      offersMapInit("offers-map", locations);
-
-      mapInit(41.2693, -70.0874, "list-map1", "images/pin-house.png", false);
-      mapInit(33.7544, -84.3857, "list-map2", "images/pin-apartment.png", false);
-      mapInit(33.7337, -84.4443, "list-map3", "images/pin-land.png", false);
-      mapInit(33.8588, -84.4858, "list-map4", "images/pin-commercial.png", false);
-      mapInit(34.0254, -84.3560, "list-map5", "images/pin-apartment.png", false);
-      mapInit(40.6128, -73.9976, "list-map6", "images/pin-house.png", false);
-      mapInit(40.6128, -73.7903, "list-map7", "images/pin-house.png", false);
-    }
-    $(".list-offer-right-large").on("click",function(){
-      location.href="view_detail.html";
-    });
-  </script>
-
-</body>
-
-</html>
+	</html>
