@@ -1343,11 +1343,10 @@
 					<input name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
 					<div class="row">
 						<div class="col-xs-6 no-padding-right">
-							<input id="r" name="email2" type="radio" style="width:100%;height:50px;" value="3" />
-							<label for="r">saddsadas</label>
+							<input id="r" name="button" type="radio" class="input-full main-input"  value="3" />입주자
 						</div>
 						<div class="col-xs-6 no-padding-left">
-							<input id="r2" name="email" type="radio" class="input-full main-input" value="2" style="dispaly:inline"/><em style="display:inline">운영자</em>
+							<input id="r2" name="button" type="radio" class="input-full main-input" value="2"/>운영자
 						</div>
 					</div>
 					<style>
@@ -1363,8 +1362,8 @@
 							var name = document.getElementById("last-name").value;
 							var email = document.getElementById("email").value;
 							var pwd = document.getElementById("password").value;
-							var flag = document.getElementById("flag").value;
-
+							var flag = document.getElementById("input[type=radio].checked").value;
+							alert(flag);
 							location.href = "server/registerUser.php?name=" + name + "&email=" + email + "&pwd=" + pwd + "&flag=" + flag;
 							return true;
 						}
