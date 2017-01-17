@@ -239,7 +239,7 @@
 									<div class="slide-desc center-block">
 										<div class="slide-desc-text">
 
-											<div class="estate-type">아파트</div>
+											<div class="estate-type">단독주택</div>
 											<div class="transaction-type">세일</div>
 											<h4>KOREA</h4>
 											<div class="clearfix"></div>
@@ -338,58 +338,45 @@
 			</form>
 		</section>
 
+		<!-- 바로가기 메뉴 -->
 		<section class="section-light bottom-padding-45 section-both-shadow">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-6 col-lg-6">
+
+					<div class="col-sm-6 col-lg-4">
 						<div class="feature wow fadeInLeft" id="feature1">
 							<div class="feature-icon center-block"><i class="fa fa-building"></i></div>
 							<div class="feature-text">
-								<h5 class="subtitle-margin">쉐어하우스 주거유형</h5>
-								<h3>아파트</h3>
+								<h3>쉐어하우스 등록</h3>
 								<div class="title-separator center-block feature-separator"></div>
-								<p>콘텐츠 준비 중입니다.</p>
+								<p>메뉴 바로가기</p>
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6 col-lg-6">
+					<div class="col-sm-6 col-lg-4">
 						<div class="feature wow fadeInUp" id="feature2">
+							<div class="feature-icon center-block"><i class="fa fa-bell"></i></div>
+							<div class="feature-text">
+								<h3>미리 알림설정</h3>
+								<div class="title-separator center-block feature-separator"></div>
+								<p>메뉴 바로가기</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-lg-4">
+						<div class="feature wow fadeInRight" id="feature4">
 							<div class="feature-icon center-block"><i class="fa fa-home"></i></div>
 							<div class="feature-text">
-								<h5 class="subtitle-margin">쉐어하우스 주거유형</h5>
-								<h3>일반 주택</h3>
+								<h3>좋은집은 대기필수</h3>
 								<div class="title-separator center-block feature-separator"></div>
-								<p>콘텐츠 준비 중입니다.</p>
+								<p>메뉴 바로가기</p>
 							</div>
 						</div>
 					</div>
-					<!--
-						<div class="col-sm-6 col-lg-3">
-							<div class="feature wow fadeInUp" id="feature3">
-								<div class="feature-icon center-block"><i class="fa fa-industry"></i></div>
-								<div class="feature-text">
-									<h5 class="subtitle-margin">MASONRY, LIST &amp; GRID</h5>
-									<h3>LAYOUTS</h3>
-									<div class="title-separator center-block feature-separator"></div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-lg-3">
-							<div class="feature wow fadeInRight" id="feature4">
-								<div class="feature-icon center-block"><i class="fa fa-tree"></i></div>
-								<div class="feature-text">
-									<h5 class="subtitle-margin">MODERN &amp; CLEAN</h5>
-									<h3>PROJECT</h3>
-									<div class="title-separator center-block feature-separator"></div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
-								</div>
-							</div>
-						</div>
-					-->
 				</div>
 			</div>
 		</section>
+		<!-- .바로가기 메뉴 -->
 
 
 		<section class="featured-offers parallax">
@@ -398,7 +385,19 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-9">
 						<h5 class="subtitle-margin second-color">Kostay 추천</h5>
-						<h1 class="second-color"><?php echo $_SESSION['name'] ?>님께 Kostay가 추천합니다 </h1>
+						<?php
+							$name = $_SESSION['name'];
+							if($name == null){
+						?>
+							<h1 class="second-color">Kostay가 추천합니다 <span class="special-color">.</span></h1>
+						<?
+							}
+							else{
+						?>
+							<h1 class="second-color"><? echo $_SESSION['name']; ?> 님께 Kostay가 추천합니다 <span class="special-color">.</span></h1>
+						<?
+							}
+						?>
 					</div>
 					<div class="col-xs-12 col-sm-3">
 						<a href="#" class="navigation-box navigation-box-next" id="featured-offers-owl-next">
@@ -422,7 +421,7 @@
 							<div class="featured-offer-photo">
 								<img src="images/tmpfeatured-offer1.jpg" alt="" />
 								<div class="type-container">
-									<div class="estate-type">아파트</div>
+									<div class="estate-type">단독주택</div>
 									<div class="transaction-type">세일</div>
 								</div>
 							</div>
@@ -463,7 +462,7 @@
 							<div class="featured-offer-photo">
 								<img src="images/tmpfeatured-offer2.jpg" alt="" />
 								<div class="type-container">
-									<div class="estate-type">아파트</div>
+									<div class="estate-type">단독주택</div>
 									<div class="transaction-type">세일</div>
 								</div>
 							</div>
@@ -504,7 +503,7 @@
 							<div class="featured-offer-photo">
 								<img src="images/tmpfeatured-offer3.jpg" alt="" />
 								<div class="type-container">
-									<div class="estate-type">일반주택</div>
+									<div class="estate-type">공동주택</div>
 									<div class="transaction-type">세일</div>
 								</div>
 							</div>
@@ -545,7 +544,7 @@
 							<div class="featured-offer-photo">
 								<img src="images/featured-offer4.jpg" alt="" />
 								<div class="type-container">
-									<div class="estate-type">아파트</div>
+									<div class="estate-type">단독주택</div>
 									<div class="transaction-type">세일</div>
 								</div>
 							</div>
@@ -586,7 +585,7 @@
 							<div class="featured-offer-photo">
 								<img src="images/featured-offer5.jpg" alt="" />
 								<div class="type-container">
-									<div class="estate-type">아파트</div>
+									<div class="estate-type">공동주택</div>
 									<div class="transaction-type">세일</div>
 								</div>
 							</div>
@@ -627,7 +626,7 @@
 							<div class="featured-offer-photo">
 								<img src="images/featured-offer6.jpg" alt="" />
 								<div class="type-container">
-									<div class="estate-type">아파트</div>
+									<div class="estate-type">공동주택</div>
 									<div class="transaction-type">세일</div>
 								</div>
 							</div>
@@ -668,7 +667,7 @@
 							<div class="featured-offer-photo">
 								<img src="images/featured-offer7.jpg" alt="" />
 								<div class="type-container">
-									<div class="estate-type">일반주택</div>
+									<div class="estate-type">공동주택</div>
 									<div class="transaction-type">세일</div>
 								</div>
 							</div>
@@ -717,7 +716,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-9">
 						<h5 class="subtitle-margin">hot</h5>
-						<h1>새로 등록된 하우스</h1>
+						<h1>새로 등록된 하우스<span class="special-color">.</span></h1>
 					</div>
 					<div class="col-xs-12 col-sm-3">
 						<a href="#" class="navigation-box navigation-box-next" id="grid-offers-owl-next">
@@ -742,7 +741,7 @@
 								<div class="grid-offer-photo">
 									<img src="images/tmpgrid-offer1.jpg" alt="" />
 									<div class="type-container">
-										<div class="estate-type">아파트</div>
+										<div class="estate-type">공동주택</div>
 										<div class="transaction-type">세일</div>
 									</div>
 								</div>
@@ -793,7 +792,7 @@
 								<div class="grid-offer-photo">
 									<img src="images/tmpgrid-offer2.jpg" alt="" />
 									<div class="type-container">
-										<div class="estate-type">아파트</div>
+										<div class="estate-type">공동주택</div>
 										<div class="transaction-type">세일</div>
 									</div>
 								</div>
@@ -843,7 +842,7 @@
 								<div class="grid-offer-photo">
 									<img src="images/tmpgrid-offer3.jpg" alt="" />
 									<div class="type-container">
-										<div class="estate-type">아파트</div>
+										<div class="estate-type">공동주택</div>
 										<div class="transaction-type">세일</div>
 									</div>
 								</div>
@@ -893,7 +892,7 @@
 								<div class="grid-offer-photo">
 									<img src="images/tmpgrid-offer4.jpg" alt="" />
 									<div class="type-container">
-										<div class="estate-type">일반주택</div>
+										<div class="estate-type">공동주택</div>
 										<div class="transaction-type">세일</div>
 									</div>
 								</div>
@@ -943,7 +942,7 @@
 								<div class="grid-offer-photo">
 									<img src="images/grid-offer5.jpg" alt="" />
 									<div class="type-container">
-										<div class="estate-type">아파트</div>
+										<div class="estate-type">단독주택</div>
 										<div class="transaction-type">세일</div>
 									</div>
 								</div>
@@ -1048,7 +1047,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-lg-12">
 						<h5 class="subtitle-margin">Kostay 광고</h5>
-						<h1 class="">Kostay 광고</h1>
+						<h1 class="">Kostay 광고<span class="special-color">.</span></h1>
 					</div>
 
 					<div class="col-xs-12">
@@ -1154,7 +1153,7 @@
 							<div class="number-img">
 								<i class="fa fa-building"></i>
 							</div>
-							<span class="number-label text-color2">아파트</span>
+							<span class="number-label text-color2">단독주택</span>
 							<span class="number-big text-color3 count" data-from="0" data-to="130" data-speed="2000"></span>
 						</div>
 					</div>
@@ -1163,7 +1162,7 @@
 							<div class="number-img">
 								<i class="fa fa-home"></i>
 							</div>
-							<span class="number-label text-color2">일반주택</span>
+							<span class="number-label text-color2">공동주택</span>
 							<span class="number-big text-color3 count" data-from="0" data-to="107" data-speed="2000"></span>
 						</div>
 					</div>
@@ -1195,7 +1194,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-lg-3">
-						<h4 class="second-color">contact us</h4>
+						<h4 class="second-color">contact us<span class="special-color">.</span></h4>
 						<div class="footer-title-separator"></div>
 						<p class="footer-p">KoStay는 국내뿐만 아니라 국외 한인 동포 사회를 위한 쉐어하우스 서비스를 제공합니다.</p>
 						<address>
@@ -1208,7 +1207,7 @@
 						<div class="clear"></div>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-lg-3">
-						<h4 class="second-color">quick links</h4>
+						<h4 class="second-color">quick links<span class="special-color">.</span></h4>
 						<div class="footer-title-separator"></div>
 						<ul class="footer-ul">
 							<li><span class="custom-ul-bullet"></span><a href="index.html">Home</a></li>
@@ -1220,7 +1219,7 @@
 						</ul>
 					</div>
 					<div class="col-xs-12 col-sm-6 col-lg-3">
-						<h4 class="second-color">KoSay뉴스</h4>
+						<h4 class="second-color">KoSay뉴스<span class="special-color">.</span></h4>
 						<div class="footer-title-separator"></div>
 						<div class="row">
 							<div class="col-xs-6 col-sm-12">
@@ -1243,7 +1242,7 @@
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-6 col-lg-3">
-						<h4 class="second-color">좋은일소식</h4>
+						<h4 class="second-color">좋은일소식<span class="special-color">.</span></h4>
 						<div class="footer-title-separator"></div>
 						<p class="footer-p">컨텐츠 준비중입니다.</p>
 						<!--
