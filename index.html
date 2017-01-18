@@ -1418,7 +1418,25 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-
+	<script>
+		function logout(){
+			$.ajax({
+				url:"server/logout.php",
+				type:"POST",
+				data:{},
+				success: function(data){
+					swal({
+						title: "",
+						text: data,
+						timer: 2000,
+						type: "success"}, function(){location.href="index.html"});
+				},
+				error: function(){
+					swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+				}
+			});
+		}
+	</script>
 
 	<!-- jQuery  -->
 	<script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
