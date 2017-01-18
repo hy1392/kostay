@@ -1,18 +1,13 @@
 <?php
   include 'dbconnect.php';
-
-  $id   = $_GET['id'];
-  $pwd  = $_GET['pwd'];
+  extract($_POST);
+  $id   = $vid;
+  $pwd  = $vpwd;
 
   $query = "select * from users where email = '".$id."'"."and pwd = '".$pwd."'";
   $result = mysqli_query($conn, $query);
   if(mysqli_num_rows($result) === 0){
-    ?>
-    <script>
-      alert("사용자 정보를 찾을 수 없습니다. 메인페이지로 이동합니다.");
-      location.href = "../index.html";
-    </script>
-    <?
+    echo "사용자 정보를 찾을 수 없습니다. 메인페이지로 이동합니다." ;
   }
   else{
     $row = mysqli_fetch_assoc($result);
@@ -20,12 +15,7 @@
     $flag = $row['flag'];
 
     if($flag == 0){
-      ?>
-      <script>
-        alert(" <?php echo $name ?> 님. 가입 승인 대기 상태입니다. 가입 완료 후 Kostay 이용이 가능합니다.");
-        location.href = "../index.html";
-      </script>
-      <?
+       echo $name."님. 가입 승인 대기 상태입니다. 가입 완료 후 Kostay 이용이 가능합니다.";
     }
     else {
 
@@ -37,12 +27,7 @@
       $_SESSION['name'] = $name;
 
     }
-    ?>
-    <script>
-      alert(" <?php echo $name ?> 님. Kostay에 오신걸 환영합니다.");
-      location.href = "../index.html";
-    </script>
-    <?
+    echo $name."님. Kostay에 오신걸 환영합니다.";
   }
 
 ?>

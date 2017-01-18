@@ -1,0 +1,208 @@
+<!-- Login modal -->
+<div class="modal fade apartment-modal" id="login-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="modal-title">
+          <span class="special-color"><h1>로그인</h1></span>
+          <div class="short-title-separator"></div>
+        </div>
+        <input id="id" name="login" type="email" class="input-full main-input" placeholder="이메일" />
+        <input id="pwd" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
+
+        <script>
+          function loginchk() {
+            var id = document.getElementById("id").value;
+            var pwd = document.getElementById("pwd").value;
+            $.ajax({
+              url:"server/login.php",
+              type:"POST",
+              data:{
+                vid:id,
+                vpwd :pwd
+              },
+              success: function(data){
+                swal({
+                  title: "",
+                  text: data,
+                  timer: 2000,
+                  type: "success"}, function(){location.href="index.html"});
+              },
+              error: function(){
+                swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+              }
+            });
+            return true;
+          }
+        </script>
+
+        <a href="#" onclick="javascript:loginchk();" class="button-primary button-shadow button-full">
+          <span>로그인</span>
+          <div class="button-triangle"></div>
+          <div class="button-triangle2"></div>
+          <div class="button-icon"><i class="fa fa-user"></i></div>
+        </a>
+        <a href="#" class="forgot-link pull-right">비밀번호를 잊으셨나요?</a>
+        <div class="clearfix"></div>
+        <p class="login-or">OR</p>
+        <a href="#" class="facebook-button">
+          <i class="fa fa-facebook"></i>
+          <span>Login with Facebook</span>
+        </a>
+        <a href="#" class="google-button margin-top-15">
+          <i class="fa fa-google-plus"></i>
+          <span>Login with Google</span>
+        </a>
+        <p class="modal-bottom">아직 Kostay 계정이 없으신가요? <a href="#" class="register-link">회원가입</a></p>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Register modal -->
+<div class="modal fade apartment-modal" id="register-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="modal-title">
+          <span class="special-color"><h1>회원가입</h1></span>
+          <div class="short-title-separator"></div>
+        </div>
+        <input id="last-name" name="last-name" type="text" class="input-full main-input" placeholder="이름" />
+        <input id="email" name="email" type="email" class="input-full main-input" placeholder="이메일" />
+        <input id="password" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
+        <input name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
+        <select id="flag" name="country1" class="bootstrap-select" title="유형:">\
+          <option value="3">입주자</option>
+          <option value="2">운영자</option>
+        </select>
+        <!--<div class="row">
+          <div class="col-xs-6 no-padding-right">
+            <input id="r" name="button" type="radio" class="input-full main-input"  value="3" />입주자
+          </div>
+          <div class="col-xs-6 no-padding-left">
+            <input id="r2" name="button" type="radio" class="input-full main-input" value="2"/>운영자
+          </div>
+        </div>-->
+        <style>
+          .no-padding-right{
+            padding-right: 0px !important;
+          }
+          .no-padding-left{
+            padding-left: 0px !important;
+          }
+        </style>
+        <script>
+          function registerUser() {
+            var name = document.getElementById("last-name").value;
+            var email = document.getElementById("email").value;
+            var pwd = document.getElementById("password").value;
+            var flag = document.getElementById("flag").value;
+            $.ajax({
+              url:"server/registerUser.php",
+              type:"POST",
+              data:{
+                name:name,
+                email:email,
+                pwd:pwd,
+                flag:flag
+              },
+              success: function(data){
+                if(data=="Kostay에 오신걸 환영합니다."){
+                  swal({
+                    title: "",
+                    text: data,
+                    timer: 2000,
+                    type: "success"}, function(){location.href="index.html"});
+                }
+                else{
+                  swal({
+                    title: "",
+                    text: data,
+                    timer: 2000,
+                    type: "error"}, function(){});
+                }
+
+              },
+              error: function(){
+                swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+              }
+            });
+            return true;
+          }
+        </script>
+
+        <a href="#" onclick="javascript:registerUser();" class="button-primary button-shadow button-full">
+          <span>가입하기</span>
+          <div class="button-triangle"></div>
+          <div class="button-triangle2"></div>
+          <div class="button-icon"><i class="fa fa-user"></i></div>
+        </a>
+        <div class="clearfix"></div>
+        <p class="login-or">OR</p>
+        <a href="#" class="facebook-button">
+          <i class="fa fa-facebook"></i>
+          <span>Sing Up with Facebook</span>
+        </a>
+        <a href="#" class="google-button margin-top-15">
+          <i class="fa fa-google-plus"></i>
+          <span>Sing Up with Google</span>
+        </a>
+        <p class="modal-bottom">이미 Kostay 회원이신가요? <a href="#" class="login-link">로그인</a></p>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Forgotten password modal -->
+<div class="modal fade apartment-modal" id="forgot-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="modal-title">
+          <h1>비밀번호 찾기</h1>
+          <div class="short-title-separator"></div>
+        </div>
+        <p class="negative-margin forgot-info">이메일 주소를 입력해 주세요<br/>입력하신 이메일 주소로 비밀번호 초기화 이메일이 발송됩니다.</p>
+        <input name="login" type="email" class="input-full main-input" placeholder="이메일" />
+        <a href="my-profile.html" class="button-primary button-shadow button-full">
+          <span>비밀번호 초기화</span>
+          <div class="button-triangle"></div>
+          <div class="button-triangle2"></div>
+          <div class="button-icon"><i class="fa fa-user"></i></div>
+        </a>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<script>
+  function logout(){
+    $.ajax({
+      url:"server/logout.php",
+      type:"POST",
+      data:{},
+      success: function(data){
+        swal({
+          title: "",
+          text: data,
+          timer: 2000,
+          type: "success"}, function(){location.href="index.html"});
+      },
+      error: function(){
+        swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+      }
+    });
+  }
+</script>
