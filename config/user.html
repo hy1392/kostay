@@ -76,7 +76,7 @@
         <input id="last-name" name="last-name" type="text" class="input-full main-input" placeholder="이름" />
         <input id="email" name="email" type="email" class="input-full main-input" placeholder="이메일" />
         <input id="password" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
-        <input name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
+        <input id="rpassword" name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
         <select id="flag" name="country1" class="bootstrap-select" title="유형:">\
           <option value="3">입주자</option>
           <option value="2">운영자</option>
@@ -102,7 +102,25 @@
             var name = document.getElementById("last-name").value;
             var email = document.getElementById("email").value;
             var pwd = document.getElementById("password").value;
+            var rpwd = document.getElementById("rpassword").value;
             var flag = document.getElementById("flag").value;
+            if(name==""||email==""||pwd==""||rpwd==""||flag==""){
+              swal({
+                title: "에러!",
+                text: "이름, 이메일, 비밀번호, 가입자 유형을 모두 채워주세요.",
+                timer: 2000,
+                type: "error"});
+            }
+            else if(pwd!=rpwd){
+              swal({
+              title: "에러!",
+              text: "비밀번호와 비밀번호 확인이 같지 않습니다. 비밀번호를 다시 확인해주세요",
+              timer: 2000,
+              type: "error"});
+            }
+            else{
+
+            }
             $.ajax({
               url:"server/registerUser.php",
               type:"POST",
@@ -125,7 +143,7 @@
                     title: "",
                     text: data,
                     timer: 2000,
-                    type: "error"}, function(){});
+                    type: "error"});
                 }
 
               },

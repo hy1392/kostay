@@ -50,21 +50,21 @@ CREATE TABLE IF NOT EXISTS `message` (
   `title` varchar(500) NOT NULL COMMENT '제목',
   `receiver` varchar(500) NOT NULL COMMENT '받는사람',
   `content` varchar(500) NOT NULL COMMENT '내용',
+  `sdeleted` int(11) NOT NULL COMMENT '수신자 삭제여부 일반:1 삭제된:0',
+  `rdeleted` int(11) NOT NULL COMMENT '발신자 삭제여부 일반:1 삭제된:0',
   `sent_time` datetime NOT NULL COMMENT '발신시간',
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='메시지' AUTO_INCREMENT=4 ;
 
-INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
-(1, 'admin@admin.ac.kr','제목입니다1', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1', now());
-INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
-(2, 'admin@admin.ac.kr','제목입니다2', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2', now());
-INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
-(3, 'admin@admin.ac.kr','제목입니다3', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3', now());
-INSERT INTO `message` (`sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
-('admin@admin.ac.kr','제목입니다3', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3', now());
+INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sdeleted`, `rdeleted`,`sent_time`) VALUES
+(1, 'admin@admin.ac.kr','제목입니다1', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1', 1, 1, now());
+INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sdeleted`, `rdeleted`,`sent_time`) VALUES
+(2, 'admin@admin.ac.kr','제목입니다2', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1', 1, 1, now());
+INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sdeleted`, `rdeleted`,`sent_time`) VALUES
+(3, 'admin@admin.ac.kr','제목입니다3', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1', 1, 1, now());
 
 --
--- 테이블 구조 `message`
+-- 테이블 구조 `house_main`
 --
 
 CREATE TABLE IF NOT EXISTS `house_main` (
