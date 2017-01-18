@@ -113,7 +113,7 @@
 							<div class="col-xs-12">
 								<?
 								 include 'server/dbconnect.php';
-								 $query = "select sent_id,title,content,sent_time from message where sent_id = '".$_SESSION['id']."'";
+								 $query = "select sent_id,title,content,sent_time from message where sent_id = '".$_SESSION['id']."'  order by sent_time DESC ";
 							   $result = mysqli_query($conn, $query);
 								 while($row = mysqli_fetch_row($result)){
 								?>

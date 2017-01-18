@@ -60,6 +60,8 @@ INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_t
 (2, 'admin@admin.ac.kr','제목입니다2', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2', now());
 INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
 (3, 'admin@admin.ac.kr','제목입니다3', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3', now());
+INSERT INTO `message` (`sent_id`, `title`, `receiver`, `content`, `sent_time`) VALUES
+('admin@admin.ac.kr','제목입니다3', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3', now());
 
 --
 -- 테이블 구조 `message`
