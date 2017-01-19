@@ -84,7 +84,7 @@ function sendEmail()
 			";
 			
 			if( $smtpHost && $smtUsername && $smtpPassword && $smtpFrom && $smtpFromname ) {
-				require("mailphp/class.phpmailer.php");
+				require 'mailphp/PHPMailerAutoload.php';
 
 				$mail = new PHPMailer();
 
