@@ -137,22 +137,24 @@
 									<div class="title-separator-primary"></div>
 								</div>
 							</div>
-							<div class="col-xs-12">
-                <div class="col-sm-12 margin-bottom-30-10">
-                  <h4 class="title-negative-margin" style="display:inline">가입자 확인을 위해 비밀번호를 다시 입력해 주세요
-</h4>
-                  <div class="title-separator-primary"></div>
-                  <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="비밀번호:">
-                </div>
-                <div class="col-xs-12">
-                  <a href="my_info.html" class="button-primary button-shadow xs-100 pull-right">
-                    <span>확인</span>
-                    <div class="button-triangle"></div>
-                    <div class="button-triangle2"></div>
-                    <div class="button-icon"><i class="fa fa-search"></i></div>
-                  </a>
-                </div>
-							</div>
+							<form method="POST" action="my_info.html" id="infoForm">
+								<div class="col-xs-12">
+	                <div class="col-sm-12 margin-bottom-30-10">
+	                  <h4 class="title-negative-margin" style="display:inline">가입자 확인을 위해 비밀번호를 다시 입력해 주세요
+	</h4>
+	                  <div class="title-separator-primary"></div>
+	                  <input name="vpwd" type="password" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="비밀번호:">
+	                </div>
+	                <div class="col-xs-12">
+	                  <a href="#" onclick="document.getElementById('infoForm').submit()" class="button-primary button-shadow xs-100 pull-right">
+	                    <span>확인</span>
+	                    <div class="button-triangle"></div>
+	                    <div class="button-triangle2"></div>
+	                    <div class="button-icon"><i class="fa fa-search"></i></div>
+	                  </a>
+	                </div>
+								</div>
+						</form>
 							<div class="row margin-top-60"></div>
 						</div>
 						<div class="col-xs-12 col-md-3 col-md-pull-9">

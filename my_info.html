@@ -1,6 +1,16 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>"
+	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>";
+	include 'server/dbconnect.php';
+  extract($_POST);
+  $pwd  = $vpwd;
+
+  $query = "select * from users where email = '".$_SESSION['id']."'"."and pwd = '".$pwd."'";
+  $result = mysqli_query($conn, $query);
+	if(mysqli_num_rows($result) === 0){
+		$row = mysqli_fetch_array($result);
+    echo "<script>location.href='pre_my_info.html'</script>";
+  }
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -25,6 +35,10 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins.css">
 		<link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
 		<link rel="stylesheet" type="text/css" href="css/search_detail.css">
+		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+
+		<!--sweetalert2-->
+		<script src="js/sweetalert.min.js"></script>
 		<link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
 
 		<!--[if lt IE 9]>
@@ -140,17 +154,22 @@
                 <div class="col-sm-12 margin-bottom-30-10">
                   <h4 class="title-negative-margin" style="display:inline">아이디</h4>
                   <div class="title-separator-primary"></div>
-                  <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="아이디:">
+                  <input id="param1" name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="" disabled="disabled" value="<?=$_SESSION['id']?>">
                 </div>
                 <div class="col-sm-12 margin-bottom-30-10">
                   <h4 class="title-negative-margin" style="display:inline">비밀번호</h4>
                   <div class="title-separator-primary"></div>
-                  <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="비밀번호:">
+                  <input id="param2" name="name" type="password" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="" value="<?=$pwd?>">
+                </div>
+								<div class="col-sm-12 margin-bottom-30-10">
+                  <h4 class="title-negative-margin" style="display:inline">비밀번호 확인</h4>
+                  <div class="title-separator-primary"></div>
+                  <input id="param3" name="name" type="password" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="비밀번호 확인:">
                 </div>
                 <div class="col-sm-12 margin-bottom-30-10">
                   <h4 class="title-negative-margin" style="display:inline">이름</h4>
                   <div class="title-separator-primary"></div>
-                  <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="이름:">
+                  <input id="param4" name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="" value="<?=$_SESSION['name']?>">
                 </div>
                 <div class="col-xs-12">
                   <a href="#" class="button-primary button-shadow xs-100 pull-right">
@@ -159,13 +178,37 @@
                     <div class="button-triangle2"></div>
                     <div class="button-icon"><i class="fa fa-search"></i></div>
                   </a>
-                  <a href="#" class="button-primary button-shadow xs-100 pull-right">
+                  <a href="#" onclick="javascript:send()" class="button-primary button-shadow xs-100 pull-right">
                     <span>수정</span>
                     <div class="button-triangle"></div>
                     <div class="button-triangle2"></div>
                     <div class="button-icon"><i class="fa fa-search"></i></div>
                   </a>
                 </div>
+								<script>
+								function send(){
+									if($("#param2")==$("#param3")){
+										$.ajax({
+											url:"server/updateUser.php",
+											type:"POST",
+											data:{
+												email : $("#param1").val(),
+												pwd : $("#param2").val(),
+												name : $("#param4").val()
+											},
+											success: function(data){
+												swal("수정 완료!", "회원 정보를 성공적으로 갱신하였습니다.", "success")
+											},
+											error: function(){
+												swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+											}
+										});
+									}
+									else{
+										swal("에러 발생!","비밀번호와 비밀번호 확인이 일치하지 않습니다. 다시 확인해 주세요","error");
+									}
+								}
+								</script>
 							</div>
 							<div class="row margin-top-60"></div>
 						</div>
