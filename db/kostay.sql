@@ -70,7 +70,7 @@ INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sdelet
 CREATE TABLE IF NOT EXISTS `house_main` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(500) NOT NULL COMMENT '운영자 아이디',
-  `house_id` varchar(500) NOT NULL COMMENT '방 아이디(운영자아이디_숫자)',
+  `house_id` varchar(500) NOT NULL COMMENT '하우스 아이디(운영자아이디_숫자)',
   `house_title` varchar(500) NOT NULL COMMENT '하우스 제목',
   `resident_gender` int(11) NOT NULL COMMENT '거주자 성별 남:1 여:2 혼성:3 커플:4',
   `house_type` int(11) NOT NULL COMMENT '주택유형 공동:1 단독:2',
@@ -98,12 +98,12 @@ INSERT INTO `house_main` (`idx`, `user_id`, `house_id`, `house_title`, `resident
 
 
 --
--- 테이블 구조 `house_main`
+-- 테이블 구조 `house_public`
 --
 
 CREATE TABLE IF NOT EXISTS `house_public` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
-  `house_id` varchar(500) NOT NULL COMMENT '방 아이디(운영자아이디_숫자)',
+  `house_id` varchar(500) NOT NULL COMMENT '하우스 아이디(운영자아이디_숫자)',
   `description` varchar(500) NOT NULL COMMENT '소개',
   `services` varchar(500) NOT NULL COMMENT '제공 서비스',
   `goods` varchar(500) NOT NULL COMMENT '제공 물품',
@@ -111,3 +111,41 @@ CREATE TABLE IF NOT EXISTS `house_public` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='공용공간 정보' AUTO_INCREMENT=4 ;
 
 INSERT INTO `house_public` (`idx`, `house_id`, `description`, `services`, `goods`) VALUES (1, "user2@user.ac.kr_1", "소개입니다.소개입니다.소개입니다.소개입니다.", "제공 서비스입니다.제공 서비스입니다.제공 서비스입니다.제공 서비스입니다.", "제공 물품입니다.제공 물품입니다.제공 물품입니다.");
+
+
+--
+-- 테이블 구조 `house_rooms`
+--
+
+CREATE TABLE IF NOT EXISTS `house_rooms` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `house_id` varchar(500) NOT NULL COMMENT '하우스 아이디(운영자아이디_숫자)',
+  `room_id` varchar(500) NOT NULL COMMENT '방 아이디(하우스아이디_숫자)',
+  `person` int(11) NOT NULL COMMENT '거주인원',
+  `gender` int(11) NOT NULL COMMENT '거주가 성별 남:1 여:2 혼성:3 커플룸:4',
+  `master` int(11) NOT NULL COMMENT '마스터룸 여부 맞다:1 아니다:2',
+  `rule` int(11) NOT NULL COMMENT '모집단위 1명씩:1 커플(2인):2',
+  `rent` int(11) NOT NULL COMMENT '렌트비',
+  `guarantee` int(11) NOT NULL COMMENT '보증금',
+  `manage` int(11) NOT NULL COMMENT '관리비',
+  `goods` varchar(500) NOT NULL COMMENT '제공 물품',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='방별 정보' AUTO_INCREMENT=4 ;
+
+INSERT INTO `house_rooms` (`idx`, `house_id`, `room_id`, `person`, `gender`, `master`, `rule`, `rent`, `guarantee`, `manage`, `goods`) VALUES (1, "user2@user.ac.kr_1", "user2@user.ac.kr_1_0", 5, 1, 1, 1, 200000, 300000, 50000, "1,2,3" );
+
+
+--
+-- 테이블 구조 `house_beds`
+--
+
+CREATE TABLE IF NOT EXISTS `house_beds` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `room_id` varchar(500) NOT NULL COMMENT '방 아이디(하우스아이디_숫자)',
+  `bed_id` varchar(500) NOT NULL COMMENT '침대 아이디(방 아이디_숫자)',
+  `condition` int(11) NOT NULL COMMENT '입주상황 만실:1 공실예정:2 공실:3',
+  `vacant` date COMMENT '공실예정일',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='침대별 정보' AUTO_INCREMENT=4 ;
+
+INSERT INTO `house_beds` (`idx`, `room_id`, `bed_id`, `condition`, `vacant`) VALUES (1, "user2@user.ac.kr_1_0", "user2@user.ac.kr_1_0_0", 1, now());

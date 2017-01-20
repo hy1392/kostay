@@ -356,48 +356,77 @@
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="t2">
-                          <h3 class="title-negative-margin margin-bottom-15">대표사진 등록</h3>
+                          <h3 id="current_room_title" class="title-negative-margin margin-bottom-15">대표사진 등록(1번 방)</h3>
                           <div class="title-separator-primary margin-bottom-30"></div>
 
 
 
                           <div class="row margin-bottom-30">
                             <div class="col-xs-12 col-sm-4">
-                                <select name="country1" class="bootstrap-select" title="거주인원:">
-                                  <option>1명</option>
-                                  <option>2명</option>
-                                  <option>3명</option>
-                                  <option>4명 이상</option>
+                                <select id="r1" name="country1" class="bootstrap-select" title="거주인원:">
+																	<option value="1">1명</option>
+																	<option value="2">2명</option>
+																	<option value="3">3명</option>
+																	<option value="4">4명</option>
+																	<option value="5">5명</option>
+																	<option value="6">6명</option>
+																	<option value="7">7명</option>
+																	<option value="8">8명</option>
+																	<option value="9">9명</option>
+																	<option value="10">10명</option>
+																	<option value="11">11명</option>
+																	<option value="12">12명</option>
+																	<option value="13">13명</option>
+																	<option value="14">14명</option>
+																	<option value="15">15명</option>
+																	<option value="16">16명</option>
+																	<option value="17">17명</option>
+																	<option value="18">18명</option>
+																	<option value="19">19명</option>
+																	<option value="20">20명</option>
                                 </select>
                             </div>
                               <div class="col-xs-12 col-sm-4">
-                                  <select name="country1" class="bootstrap-select" title="거주자 성별:">
-                                    <option>남성 전용</option>
-                                    <option>여성 전용</option>
-                                    <option>혼합</option>
+                                  <select id="r2" name="country1" class="bootstrap-select" title="거주자 성별:">
+                                    <option value="1">남성 전용</option>
+                                    <option value="2">여성 전용</option>
+                                    <option value="3">혼합</option>
+																		<option value="4">커플룸</option>
                                   </select>
                               </div>
                               <div class="col-xs-12 col-sm-4">
-                                  <select name="country1" class="bootstrap-select" title="마스터룸 여부:">
-                                    <option>O</option>
-                                    <option>X</option>
+                                  <select id="r3" name="country1" class="bootstrap-select" title="마스터룸 여부:">
+                                    <option value="1">O</option>
+                                    <option value="2">X</option>
                                   </select>
                               </div>
                               <div class="col-xs-12 col-sm-3">
-                                <input name="name" id="size" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="방 크기">
+																<select id="r4" name="country1" class="bootstrap-select" title="모집단위:">
+																	<option  value="1">1명씩</option>
+																	<option  value="2">커플(2인)</option>
+																</select>
                               </div>
                               <div class="col-xs-12 col-sm-3">
-                                <input name="name" id="fee" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="렌트비">
+                                <input name="name" id="r5" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="렌트비">
                               </div>
                               <div class="col-xs-12 col-sm-3">
-                                <input name="name" id="deposit" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="보증금">
+                                <input name="name" id="r6" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="보증금">
                               </div>
                               <div class="col-xs-12 col-sm-3">
-                                <input name="name" id="management-expense" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="관리비">
+                                <input name="name" id="r7" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="관리비">
                               </div>
-                              <div class="col-xs-12">
-                                <input name="name" id="supply" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="제공물품(추후 체크박스로 대체)">
-                              </div>
+															<div class="col-xs-12 margin-bottom-30">
+		                            <select id="r8" name="city1" class="bootstrap-select no-margin-top" title="제공물품:" multiple data-actions-box="true">
+		              								<option value="1">의자</option>
+		              								<option value="2">책상</option>
+		              								<option value="3">스탠드</option>
+		              								<option value="4">옷장</option>
+		              								<option value="5">책장</option>
+		              								<option value="6">커튼</option>
+		              								<option value="7">이불</option>
+		              								<option value="8">침대</option>
+		              							</select>
+		                          </div>
                           </div>
                           <div class="row">
                             <div class="col-xs-12">
@@ -409,14 +438,14 @@
                                 </a>
                               </div>
                               <div class="col-xs-12 col-sm-3">
-                                <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
+                                <a href="#" id="save2" class="button-primary button-shadow btn-fit color-white">
                                   <span>저장</span>
                                   <div class="button-triangle"></div>
                                   <div class="button-triangle2"></div>
                                 </a>
                               </div>
                               <div class="col-xs-12 col-sm-3">
-                                <a onclick="return false;" class="button-primary button-shadow btn-fit color-white">
+                                <a href="#" id="addRoom" class="button-primary button-shadow btn-fit color-white">
                                   <span>방 추가</span>
                                   <div class="button-triangle"></div>
                                   <div class="button-triangle2"></div>
@@ -483,14 +512,14 @@
                                 </a>
                               </div>
                               <div class="col-xs-12 col-sm-3">
-                                <a href="#" class="button-primary button-shadow btn-fit color-white">
+                                <a href="#" id="save3" class="button-primary button-shadow btn-fit color-white">
                                   <span>저장</span>
                                   <div class="button-triangle"></div>
                                   <div class="button-triangle2"></div>
                                 </a>
                               </div>
                               <div class="col-xs-12 col-sm-3">
-                                <a href="set_room.html" class="button-primary button-shadow btn-fit color-white">
+                                <a href="#" id="done" class="button-primary button-shadow btn-fit color-white">
                                   <span>마침</span>
                                   <div class="button-triangle"></div>
                                   <div class="button-triangle2"></div>
@@ -674,16 +703,35 @@
     <script type="text/javascript" src="js/apartment.js"></script>
 
 		<script>
-		var rooms = 0;
-		var share = 0;
-		 $("#p3").change(function(){
-			 rooms = $("#p3").val();
-		 });
+		var canAdd = false;
+		var current_room = 0;
+		var done = false;
+
+		//초기 방 아이디 생성
+		$.ajax({
+			url:"server/registerHouse.php",
+			type:"POST",
+			data:{
+				condition : "getId"
+			},
+			success: function(data){
+				$("#save1").attr("value",data);
+				$("#save2").attr("value",data);
+				$("#save3").attr("value",data);
+				$(window).bind('beforeunload');
+			},
+			error: function(){
+				location.href="register_house_detail.html";
+			}
+		});
+
+		 //1단계 저장
 			$("#save1").on("click",function(){
 				$.ajax({
 					url:"server/registerHouse.php",
 					type:"POST",
 					data:{
+						condition : "register_1",
 						p1: $("#p1").val(),
 						p2: $("#p2").val(),
 						p3: $("#p3").val(),
@@ -698,20 +746,153 @@
 						p12: $("#p12").val(),
 						p13: $("#p13").val(),
 						p14: $("#p14").val(),
-						s1 : $("#s1").val(),
-						s2 : $("#s2").val(),
-						s3 : $("#s3").val()
+						target : $("#save1").attr("value")
 					},
 					success: function(data){
-						swal("", ""+data, "success")
-						$("#reply-box").remove();
+						if(data=="저장 성공!"){
+							swal("", ""+data, "success");
+							room = $("#p3").val();
+					}
+						else swal("", ""+data, "error");
+					},
+					error: function(){
+						swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+					}
+				});
+				$.ajax({
+					url:"server/registerHouse.php",
+					type:"POST",
+					data:{
+						condition : "check_trash",
+						target : $("#save1").attr("value")
+					},
+					success: function(data){
+						if(current_room>Number(data)-1){
+							current_room=Number(data)-1;
+							$("#current_room_title").text("대표사진 등록("+(current_room+1)+"번 방)");
+						}
+					},
+					error: function(){}
+				});
+			});
+
+			//2단계 저장
+ 			$("#save2").on("click",function(){
+
+					$.ajax({
+	 					url:"server/registerHouse.php",
+	 					type:"POST",
+	 					data:{
+	 						condition : "register_2",
+	 						r1: $("#r1").val(),
+	 						r2: $("#r2").val(),
+	 						r3: $("#r3").val(),
+	 						r4: $("#r4").val(),
+	 						r5: $("#r5").val(),
+	 						r6: $("#r6").val(),
+	 						r7: $("#r7").val(),
+	 						r8: $("#r8").val(),
+							current : current_room,
+	 						target : $("#save2").attr("value")
+	 					},
+	 					success: function(data){
+							if(data=="저장 성공!"){
+								canAdd = true;
+								swal("", ""+data, "success");
+							}
+							else swal("", ""+data, "error");
+	 					},
+	 					error: function(){
+	 						swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+	 					}
+	 				});
+
+ 			});
+
+			//3단계 저장
+			$("#save3").on("click",function(){
+				$.ajax({
+					url:"server/registerHouse.php",
+					type:"POST",
+					data:{
+						condition : "register_3",
+						s1 : $("#s1").val(),
+						s2 : $("#s2").val(),
+						s3 : $("#s3").val(),
+						target : $("#save3").attr("value")
+					},
+					success: function(data){
+						if(data=="저장 성공!") swal("", ""+data, "success");
+						else swal("", ""+data, "error");
 					},
 					error: function(){
 						swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
 					}
 				});
 			});
+
+			//페이지 이동시 저장된 레코드 삭제
+			$(window).on("beforeunload",function(){
+					$.ajax({
+						url:"server/registerHouse.php",
+						type:"POST",
+						data:{
+							condition : "delete",
+							target : $("#save1").attr("value")
+						},
+						success: function(data){},
+						error: function(){}
+					});
+				return "페이지 이동시 작성중이던 내용이 소실됩니다. 정말 현재 페이지를 벗어나시겠습니까?";
+			});
+
+			$("#addRoom").on("click",function(){
+				if(canAdd) {
+					$.ajax({
+						url:"server/registerHouse.php",
+						type:"POST",
+						data:{
+							condition : "check_add",
+							current : current_room,
+							target : $("#save1").attr("value")
+						},
+						success: function(data){
+							if(data=="canDo"){
+								current_room = current_room + 1;
+								canAdd=false;
+								$("#current_room_title").text("대표사진 등록("+(current_room+1)+"번 방)");
+							}
+							else swal("에러!","추가할 수 있는 방의 갯수는 1단계-일반사항에서 입력한 방의 갯수를 초과할 수 없습니다.","error");
+						},
+						error: function(){}
+					});
+				}
+				else{
+					swal("에러!","현재 입력중이 방의 정보가 아직 저장되지 않았습니다. 저장 후 다음 방을 추가해주세요.","error");
+				}
+			});
+
+			$("#done").on("click",function(){
+				$.ajax({
+					url:"server/registerHouse.php",
+					type:"POST",
+					data:{
+						condition : "check_done",
+						current : current_room,
+						target : $("#save1").attr("value")
+					},
+					success: function(data){
+						if(data=="done"){
+							$(window).unbind('beforeunload');
+							location.href = "set_room.html";
+						}
+						else swal("에러!","아직 저장하지 않은 단계가 있습니다("+data+")","error");
+					},
+					error: function(){}
+				});
+			});
 		</script>
+
 
     <!-- google maps initialization -->
     <script type="text/javascript">
