@@ -77,10 +77,26 @@
         <input id="email" name="email" type="email" class="input-full main-input" placeholder="이메일" />
         <input id="password" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
         <input id="rpassword" name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
+        <!--
         <select id="flag" name="country1" class="bootstrap-select" title="유형:">\
           <option value="3">입주자</option>
           <option value="2">운영자</option>
-        </select>
+        </select>-->
+        <script>
+          function checkBox(param){
+            $('.register_selected').removeClass('register_selected');
+            $(param).addClass('register_selected');
+          }
+        </script>
+        <div class="row">
+          <div class="col-xs-6 no-padding-right">
+            <input class="register_checkbox register_selected" type="button" name="3" value="입주자" onclick="checkBox(this)">
+          </div>
+          <div class="col-xs-6 no-padding-left">
+            <input class="register_checkbox" type="button" name="2" value="운영자" onclick="checkBox(this)">
+          </div>
+          <input class="" type="checkbox" name="3" value="입주자" onclick="checkBox(this)">
+        </div>
         <!--<div class="row">
           <div class="col-xs-6 no-padding-right">
             <input id="r" name="button" type="radio" class="input-full main-input"  value="3" />입주자
@@ -90,20 +106,41 @@
           </div>
         </div>-->
         <style>
+          .register_checkbox{
+            font-weight: bold;
+            width:100%;
+            height: 50px;
+            color: rgb(163, 163, 163);
+            background: white;
+            border-style: none;
+            border: 1px solid #ebebeb;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 10px !important;
+            margin-bottom: 10px !important;
+          }
+          .register_selected{
+            background-color: #3797dd;
+            color: white;
+          }
           .no-padding-right{
             padding-right: 0px !important;
           }
           .no-padding-left{
             padding-left: 0px !important;
           }
+          .register_checkbox:hover {
+          	opacity: 0.7;
+          }
         </style>
         <script>
+
           function registerUser() {
             var name = document.getElementById("last-name").value;
             var email = document.getElementById("email").value;
             var pwd = document.getElementById("password").value;
             var rpwd = document.getElementById("rpassword").value;
-            var flag = document.getElementById("flag").value;
+            var flag = $(".register_selected").attr("name");
             if(name==""||email==""||pwd==""||rpwd==""||flag==""){
               swal({
                 title: "에러!",
@@ -119,38 +156,38 @@
               type: "error"});
             }
             else{
+              $.ajax({
+                url:"server/registerUser.php",
+                type:"POST",
+                data:{
+                  name:name,
+                  email:email,
+                  pwd:pwd,
+                  flag:flag
+                },
+                success: function(data){
+                  if(data=="Kostay에 오신걸 환영합니다."){
+                    swal({
+                      title: "",
+                      text: data,
+                      timer: 2000,
+                      type: "success"}, function(){location.href="index.html"});
+                  }
+                  else{
+                    swal({
+                      title: "",
+                      text: data,
+                      timer: 2000,
+                      type: "error"});
+                  }
 
+                },
+                error: function(){
+                  swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+                }
+              });
             }
-            $.ajax({
-              url:"server/registerUser.php",
-              type:"POST",
-              data:{
-                name:name,
-                email:email,
-                pwd:pwd,
-                flag:flag
-              },
-              success: function(data){
-                if(data=="Kostay에 오신걸 환영합니다."){
-                  swal({
-                    title: "",
-                    text: data,
-                    timer: 2000,
-                    type: "success"}, function(){location.href="index.html"});
-                }
-                else{
-                  swal({
-                    title: "",
-                    text: data,
-                    timer: 2000,
-                    type: "error"});
-                }
 
-              },
-              error: function(){
-                swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
-              }
-            });
             return true;
           }
         </script>
