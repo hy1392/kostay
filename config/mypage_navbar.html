@@ -14,56 +14,87 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <?if($_SESSION['flag']==1 || $_SESSION['flag']==3){?>
-        <li>
-          <a href="search_detail.html">검색</a>
-        </li>
-
-        <li class="dropdown">
-          <a href="#" data-toggle="dropdown" class="dropdown-toggle">하우스입주<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="request_wait_list.html">입주대기</a></li>
-            <li><a href="request_movein_list.html">입주신청</a></li>
-            <li><a href="request_hope_list.html">찜리스트</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="alarm.html">알림설정</a>
-        </li>
-
-        <li>
-          <a href="my-profile.html">프로필</a>
-        </li>
-
-        <li class="dropdown">
-          <a href="#" data-toggle="dropdown" class="dropdown-toggle">메시지<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="inbox.html">받은 메시지</a></li>
-            <li><a href="sent_items.html">보낸 메시지</a></li>
-            <li><a href="deleted_items.html">휴지통</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="pre_my_info.html">가입정보</a>
-        </li>
-        <?}
-        else if($_SESSION['flag']==2){?>
+        <?if(!isset($_SESSION['id'])){?>
           <li>
-            <a href="register_house.html">하우스 등록</a>
+            <a href="search_detail.html">검색</a>
           </li>
 
+
+          <?php
+            if(!isset($_SESSION['id'])){
+          ?>
+
           <li>
-            <a href="set_room.html" >객실설정</a>
+            <a class="" href="#login-modal" data-toggle="modal">로그인</a>
+          </li>
+
+          <?php
+            }
+            else{
+              if($_SESSION['flag'] == 1){
+
+          ?>
+          <li>
+            <a href="my-profile.html">마이페이지</a>
+          </li>
+          <li>
+            <a class="" href="#" onclick="javascript:logout()">
+              <?php echo $_SESSION['name'] ?>님 로그아웃</a>
+          </li>
+
+          <?php
+            }
+
+            else if($_SESSION['flag'] == 2){
+
+          ?>
+          <li>
+            <a href="my-profile.html">마이페이지</a>
+          </li>
+          <li>
+            <a class="" href="#" onclick="javascript:logout()">
+              <?php echo $_SESSION['name'] ?>님 로그아웃</a>
+          </li>
+
+          <?php
+            }
+            else if($_SESSION['flag'] == 3){
+
+          ?>
+          <li>
+            <a href="my-profile.html">마이페이지</a>
+          </li>
+          <li>
+            <a class="" href="#" onclick="javascript:logout()">
+              <?php echo $_SESSION['name'] ?>님 로그아웃</a>
+          </li>
+
+          <?
+            }
+          }
+          ?>
+
+            <li>
+              <a href="#login-modal" data-toggle="modal">운영자</a>
+            </li>
+        <?} else{?>
+
+          <?if($_SESSION['flag']==1 || $_SESSION['flag']==3){?>
+          <li>
+            <a href="search_detail.html">검색</a>
           </li>
 
           <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">고객관리<b class="caret"></b></a>
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">하우스입주<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="manage_wait.html">대기자</a></li>
-              <li><a href="manage_movein.html">입주신청자</a></li>
+              <li><a href="request_wait_list.html">입주대기</a></li>
+              <li><a href="request_movein_list.html">입주신청</a></li>
+              <li><a href="request_hope_list.html">찜리스트</a></li>
             </ul>
+          </li>
+
+          <li>
+            <a href="alarm.html">알림설정</a>
           </li>
 
           <li>
@@ -80,19 +111,55 @@
           </li>
 
           <li>
-            <a href="my-profile.html">결제/광고</a>
-          </li>
-
-          <li>
             <a href="pre_my_info.html">가입정보</a>
           </li>
-        <?}
+          <?}
+          else if($_SESSION['flag']==2){?>
+            <li>
+              <a href="register_house.html">하우스 등록</a>
+            </li>
 
-        if($_SESSION['flag']==1){?>
-          <li>
-            <a href="management_user.html">사용자관리</a>
-          </li>
-        <?}?>
+            <li>
+              <a href="set_room.html" >객실설정</a>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">고객관리<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="manage_wait.html">대기자</a></li>
+                <li><a href="manage_movein.html">입주신청자</a></li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="my-profile.html">프로필</a>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">메시지<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="inbox.html">받은 메시지</a></li>
+                <li><a href="sent_items.html">보낸 메시지</a></li>
+                <li><a href="deleted_items.html">휴지통</a></li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="my-profile.html">결제/광고</a>
+            </li>
+
+            <li>
+              <a href="pre_my_info.html">가입정보</a>
+            </li>
+          <?}
+
+          if($_SESSION['flag']==1){?>
+            <li>
+              <a href="management_user.html">사용자관리</a>
+            </li>
+          <?}?>
+          <?}?>
+
 
       </ul>
     </div>

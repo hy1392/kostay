@@ -2,15 +2,20 @@
 	session_start();
 	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>";
 	include 'server/dbconnect.php';
-  extract($_POST);
-  $pwd  = $vpwd;
+	try{
+		extract($_POST);
+	  $pwd  = $vpwd;
 
-  $query = "select * from users where email = '".$_SESSION['id']."'"."and pwd = '".$pwd."'";
-  $result = mysqli_query($conn, $query);
-	if(mysqli_num_rows($result) === 0){
-		$row = mysqli_fetch_array($result);
-    echo "<script>location.href='pre_my_info.html'</script>";
-  }
+	  $query = "select * from users where email = '".$_SESSION['id']."'"."and pwd = '".$pwd."'";
+	  $result = mysqli_query($conn, $query);
+		if(mysqli_num_rows($result) === 0){
+			$row = mysqli_fetch_array($result);
+	    echo "<script>location.href='pre_my_info.html'</script>";
+	  }
+	}catch(Exception $e){
+		echo "<script>location.href='pre_my_info.html'</script>";
+	}
+
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -187,7 +192,7 @@
                 </div>
 								<script>
 								function send(){
-									if($("#param2")==$("#param3")){
+									if($("#param2").val()==$("#param3").val()){
 										$.ajax({
 											url:"server/updateUser.php",
 											type:"POST",
