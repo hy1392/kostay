@@ -96,7 +96,7 @@
       </div>
       <!-- /.Page top-bar-wrapper -->
 
-      <?include("config/mypage_navbar.html");?>
+      <?include("config/navbar.html");?>
       <!-- /.mani-menu-cont -->
     </header>
 
@@ -122,9 +122,10 @@
 		<!-- .이미지슬라이드 -->
 
     <div class="container view-detail-container">
+
       <div class="row">
-				<div class="col-lg-2"></div>
-        <div class="col-lg-8">
+
+        <div class="col-lg-12">
 
 					<!-- 상세보기탭 -->
 					<div class="view-detail-card">
@@ -397,8 +398,309 @@
 						</div>
 					</div>
 					<!-- .상세보기탭 -->
+
+					<!--
+          <div class="apartment-tabs view-detail-tabs">
+            <div class="tab-header">
+              <ul class="nav nav-tabs" role="tablist" style="display:inline">
+                <li role="presentation" class="tab-right view-detail-tab">
+                  <a href="#t4" aria-controls="settings" role="tab" data-toggle="tab">
+                    <span>운영자</span>
+                    <div class="button-triangle2"></div>
+                  </a>
+                </li>
+                <li role="presentation" class="tab-right view-detail-tab">
+                  <a href="#t4" aria-controls="settings" role="tab" data-toggle="tab">
+                    <span>평가글</span>
+                    <div class="button-triangle2"></div>
+                  </a>
+                </li>
+                <li role="presentation" class="tab-right view-detail-tab">
+                  <a href="#t3" aria-controls="messages" role="tab" data-toggle="tab">
+                    <span>공용공간</span>
+                    <div class="button-triangle2"></div>
+                  </a>
+                </li>
+                <li role="presentation" class="tab-right view-detail-tab">
+                  <a href="#t2" aria-controls="profile" role="tab" data-toggle="tab">
+                    <span>객실</span>
+                    <div class="button-triangle2"></div>
+                  </a>
+                </li>
+                <li role="presentation" class="active tab-right view-detail-tab">
+                  <a href="#t1" aria-controls="home" role="tab" data-toggle="tab">
+                    <span>일반사항</span>
+                    <div class="button-triangle2"></div>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="title-separator-primary"></div>
+          	Nav tabs
+
+
+
+            Tab panes
+            <div class="tab-content view-detail-tabContent custom-apartment-tabContent">
+              <div role="tabpanel" class="tab-pane active" id="t1">
+
+                <h4 class="title-negative-margin" style="display:inline">주택설명</h4>
+                <div class="title-separator-secondary margin-bottom-30" style="margin-top:0px;"></div>
+                <p class="margin-bottom-30">주택유형, 방 갯수, 화장실 갯수, 운영자거주여부, 주차, 애완동물(추후 아이콘으로 대체)</p>
+                <h4 class="title-negative-margin" style="display:inline">계약조건</h4>
+                <div class="title-separator-primary margin-bottom-30"></div>
+                <p class="margin-bottom-30">흡연불가, 애완동물 불가, 친구초대 불가, 2주 노티스, 쌀제공, 모든 공과금 포함</p>
+                <h4 class="title-negative-margin" style="display:inline">위치</h4>
+                <div class="title-separator-primary margin-bottom-30"></div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p>(주소) 120, pyrmont, sydney, nsw</p>
+                    <p>(교통) 달링하버에서 3분거리, 시티에서 10분거리, 달링하버역에서 5분</p>
+                    <p class="margin-bottom-30">(주변시설) 수영장 있는 아파트. 인근에 대형슈퍼(cols)가 있음. 달링하버 근처로 식당가 많아 살기 편함</p>
+                  </div>
+                  <div class="col-sm-6">
+                    <iframe class="gmap" style="border:0;display: block;height:300px;width: 100%;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&q=KOREATECH" allowfullscreen></iframe>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="t2">
+                <div class="row">
+                  <div class="col-xs-12 col-shadow padding-bottom-30 margin-bottom-30">
+                    <h3 class="title-negative-margin  margin-bottom-15">1인실</h3>
+                    <div class="title-separator-primary margin-bottom-30"></div>
+                    <div class="col-sm-4">
+                      <img src="images/tmpgrid-offer1.jpg" alt="" class="room-image" />
+                    </div>
+                    <div class="col-sm-4">
+                      <h4 class="title-negative-margin" style="display:inline">요금</h4>
+                      <div class="title-separator-primary"></div>
+                      <p class="margin-bottom-30">200$</p>
+                      <h4 class="title-negative-margin" style="display:inline">보증금</h4>
+                      <div class="title-separator-primary"></div>
+                      <p class="margin-bottom-30">500$</p>
+                      <h4 class="title-negative-margin" style="display:inline">관리비</h4>
+                      <div class="title-separator-primary"></div>
+                      <p class="margin-bottom-30">포함</p>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="col-xs-12">
+                        <h5 class="title-negative-margin" style="display:inline"></h5>
+                        <div class="title-separator-primary"></div>
+                        <div class="col-xs-6 no-padding">
+                          <div href="#" class="condition-full">
+                						<span>만실</span>
+                					</div>
+                        </div>
+                        <div class="col-xs-6 no-padding">
+                          <a href="request_wait.html" class="button-primary btn-default">
+                						<span>대기</span>
+                            <div class="button-triangle"></div>
+                						<div class="button-triangle2"></div>
+                						<div class="button-icon"><i class="jfont">&#xe802;</i></div>
+                					</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-shadow padding-bottom-30 margin-bottom-30">
+                    <h3 class="title-negative-margin  margin-bottom-15">4인실(마스터룸)</h3>
+                    <div class="title-separator-primary margin-bottom-30"></div>
+                    <div class="col-sm-4">
+                      <img src="images/tmpgrid-offer1.jpg" alt="" class="room-image" />
+                    </div>
+                    <div class="col-sm-4">
+                      <h4 class="title-negative-margin" style="display:inline">요금</h4>
+                      <div class="title-separator-primary"></div>
+                      <p class="margin-bottom-30">150$</p>
+                      <h4 class="title-negative-margin" style="display:inline">보증금</h4>
+                      <div class="title-separator-primary"></div>
+                      <p class="margin-bottom-30">300$</p>
+                      <h4 class="title-negative-margin" style="display:inline">관리비</h4>
+                      <div class="title-separator-primary"></div>
+                      <p class="margin-bottom-30">포함</p>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="col-xs-12">
+                        <h5 class="title-negative-margin" style="display:inline">2016.7.5~</h5>
+                        <div class="title-separator-primary"></div>
+                        <div class="col-xs-6 no-padding">
+                          <div href="#" class="condition-available">
+                						<span>입주가능</span>
+                					</div>
+                        </div>
+                        <div class="col-xs-6 no-padding">
+                          <a href="request_movein.html" class="button-primary btn-default">
+                						<span>신청</span>
+                            <div class="button-triangle"></div>
+                						<div class="button-triangle2"></div>
+                						<div class="button-icon"><i class="jfont">&#xe802;</i></div>
+                					</a>
+                        </div>
+                      </div>
+                      <div class="col-xs-12">
+                        <h5 class="title-negative-margin" style="display:inline">2016.8.5~</h5>
+                        <div class="title-separator-primary"></div>
+                        <div class="col-xs-6 no-padding">
+                          <div href="#" class="condition-available">
+                						<span>입주가능</span>
+                					</div>
+                        </div>
+                        <div class="col-xs-6 no-padding">
+                          <a href="request_movein.html" class="button-primary btn-default">
+                						<span>신청</span>
+                            <div class="button-triangle"></div>
+                						<div class="button-triangle2"></div>
+                						<div class="button-icon"><i class="jfont">&#xe802;</i></div>
+                					</a>
+                        </div>
+                      </div>
+                      <div class="col-xs-12">
+                        <h5 class="title-negative-margin" style="display:inline">2016.8.21~</h5>
+                        <div class="title-separator-primary"></div>
+                        <div class="col-xs-6 no-padding">
+                          <div href="#" class="condition-available">
+                						<span>입주가능</span>
+                					</div>
+                        </div>
+                        <div class="col-xs-6 no-padding">
+                          <a href="request_movein.html" class="button-primary btn-default">
+                						<span>신청</span>
+                            <div class="button-triangle"></div>
+                						<div class="button-triangle2"></div>
+                						<div class="button-icon"><i class="jfont">&#xe802;</i></div>
+                					</a>
+                        </div>
+                      </div>
+                      <div class="col-xs-12">
+                        <h5 class="title-negative-margin" style="display:inline"></h5>
+                        <div class="title-separator-primary"></div>
+                        <div class="col-xs-6 no-padding">
+                          <div href="#" class="condition-empty">
+                						<span>공실</span>
+                					</div>
+                        </div>
+                        <div class="col-xs-6 no-padding">
+                          <a href="request_movein.html" class="button-primary btn-default">
+                						<span>신청</span>
+                            <div class="button-triangle"></div>
+                						<div class="button-triangle2"></div>
+                						<div class="button-icon"><i class="jfont">&#xe802;</i></div>
+                					</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="t3">
+                <div class="row margin-bottom-30">
+                  <div class="col-xs-12 col-sm-6">
+                    <img src="images/testimonials-bg.jpg" class="img-responsive center-block" alt="" />
+                  </div>
+                  <div class="col-xs-12 col-sm-6 margin-top-xs-30">
+                    <h3 class="title-negative-margin margin-bottom-15">공용 공간에 대한 설명글</h3>
+                    <div class="title-separator-primary margin-bottom-30"></div>
+                    <p>공용 공간에 대한 설명글이 표시될 공간입니다.공용 공간에 대한 설명글이 표시될 공간입니다.공용 공간에 대한 설명글이 표시될 공간입니다.공용 공간에 대한 설명글이 표시될 공간입니다.공용 공간에 대한 설명글이 표시될 공간입니다.공용 공간에 대한 설명글이 표시될 공간입니다.공용 공간에 대한 설명글이 표시될 공간입니다.공용 공간에 대한 설명글이 표시될 공간입니다.공용 공간에 대한 설명글이 표시될 공간입니다.공용 공간에
+                      대한 설명글이 표시될 공간입니다.공용 공간에 대한 설명글이 표시될 공간입니다.공용 공간에 대한 설명글이 표시될 공간입니다.</p>
+                  </div>
+                </div>
+                <h4 class="title-negative-margin" style="display:inline">제공물품</h4>
+                <div class="title-separator-primary margin-bottom-30"></div>
+                <p class="margin-bottom-30">쇼파, 책상, 의자, 테이블, 식탁, 책장, 신발장, 공유기,스탠드, 텔레비전, 전자렌지, 냉장고, 압력밥솥, 청소기, 세탁기, 에어컨, 다리미, 미니오븐, 커피머신(추후 아이콘으로 대체)</p>
+                <h4 class="title-negative-margin" style="display:inline">제공 서비스</h4>
+                <div class="title-separator-primary margin-bottom-30"></div>
+                <p>출입용 카드키</p>
+                <p class="margin-bottom-30">쌀제공</p>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="t4">
+                <h4 class="title-negative-margin" style="display:inline">평가글</h4>
+                <div class="title-separator-primary margin-bottom-30"></div>
+                <div class="row">
+                  <div class="col-xs-12 margin-bottom-15">
+                    <div class="col-sm-4">
+                      <div class="col-xs-12 col-sm-7">
+                        <img src="images/agent3.jpg" alt="" class="user-image" />
+                      </div>
+                      <div class="col-xs-12 col-sm-5">
+                        <p>이름</p>
+                        <p>인스펙션 경험자</p>
+                        <p>2016/5/5</p>
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="col-xs-12">
+                        <p>★★★★★</p>
+                      </div>
+                      <div class="col-xs-12">
+                        <p>집은 사진과 동일했습니다. 운영하시는 분들도 친절해 보였어요. 제가 짐이 많아서 4인실에 살기 어려울 것 같아 포기했습니다. 추천합니다~</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 margin-bottom-15">
+                    <div class="col-sm-4">
+                      <div class="col-xs-12 col-sm-7">
+                        <img src="images/agent3.jpg" alt="" class="user-image" />
+                      </div>
+                      <div class="col-xs-12 col-sm-5">
+                        <p>이름</p>
+                        <p>인스펙션 경험자</p>
+                        <p>2016/5/5</p>
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="col-xs-12">
+                        <p>★★★★★</p>
+                      </div>
+                      <div class="col-xs-12">
+                        <p>집은 사진과 동일했습니다. 운영하시는 분들도 친절해 보였어요. 제가 짐이 많아서 4인실에 살기 어려울 것 같아 포기했습니다. 추천합니다~</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 margin-bottom-15">
+                    <div class="col-sm-4">
+                      <div class="col-xs-12 col-sm-7">
+                        <img src="images/agent3.jpg" alt="" class="user-image" />
+                      </div>
+                      <div class="col-xs-12 col-sm-5">
+                        <p>이름</p>
+                        <p>인스펙션 경험자</p>
+                        <p>2016/5/5</p>
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="col-xs-12">
+                        <p>★★★★★</p>
+                      </div>
+                      <div class="col-xs-12">
+                        <p>집은 사진과 동일했습니다. 운영하시는 분들도 친절해 보였어요. 제가 짐이 많아서 4인실에 살기 어려울 것 같아 포기했습니다. 추천합니다~</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="text-align:center">
+                  <a href="#" class="button-primary button-shadow pull-right">
+        						<span>더보기</span>
+        						<div class="button-triangle"></div>
+        						<div class="button-triangle2"></div>
+        						<div class="button-icon"><i class="jfont">&#xe802;</i></div>
+        					</a>
+                </div>
+                <div class="row margin-bottom-30 margin-top-90">
+                  <div class="col-xs-12 col-sm-6">
+                    <img src="images/testimonials-bg.jpg" class="img-responsive center-block" alt="" />
+                  </div>
+                  <div class="col-xs-12 col-sm-6 margin-top-xs-30">
+                    <h3 class="title-negative-margin  margin-bottom-15">운영자 프로필</h3>
+                    <div class="title-separator-primary margin-bottom-30"></div>
+                    <p>호주에 10년째 살고 있는 자매가 운영합니다. 저희는 모두 간호사이고요, 서핑같은 액티비티가 취미입니다. 간호사로 일하고 싶은 분들은 적극 도와드리겠습니다~~</p>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+
           </div>
-					<div class="col-lg-2"></div>
         </div>
       </div>
     </div>
