@@ -17,7 +17,7 @@
       echo "저장 실패! 아직 입력하지 않은 값이 있는지 확인하여 주세요";
       return;
     }
-    $query = "select * from house_main where house_id='".$target."'";
+    $query = "select * from house_main where house_id='".$target."';";
     $result = mysqli_query($conn, $query);
     if(mysqli_num_rows($result)===1){
       $query = "update house_main set `user_id`='".$_SESSION['id']."', `house_id`='".$target."', `house_title`='".$p14."', `resident_gender`=".$p1.", `house_type`=".$p2.", `number_of_rooms`=".$p3.", `number_of_toilet`=".$p4.", `live_master`=".$p5.", `parking`=".$p6.", `pet`=".$p7.", `address`='".$p8."', `address_detail`='".$p9."', `address_detail_show`
@@ -53,10 +53,26 @@
         if(mysqli_num_rows($result)===1){
           $query = "update `house_rooms` set `house_id`='".$target."', `room_id`='".$room_id."', `person`=".$r1.", `gender`=".$r2.", `master`=".$r3.", `rule`=".$r4.", `rent`=".$r5.", `guarantee`=".$r6.", `manage`=".$r7.", `goods`='".$goods."' where room_id='".$room_id."';";
           $result = mysqli_query($conn, $query);
+          $query = "delete from `house_beds` where room_id='".$room_id."';";
+          $result = mysqli_query($conn, $query);
+          $i=0;
+          while($i<$r1){
+            $bed_id=$room_id."_".$i;
+            $query = "insert into `house_beds` (`room_id`, `bed_id`, `condition`) value ('".$room_id."', '".$bed_id."', 1);";
+            $result = mysqli_query($conn, $query);
+            $i = $i + 1;
+          }
         }
         else{
           $query = "insert into `house_rooms` (`house_id`, `room_id`, `person`, `gender`, `master`, `rule`, `rent`, `guarantee`, `manage`, `goods`) values ('".$target."', '".$room_id."', ".$r1.", ".$r2.", ".$r3.", ".$r4.", ".$r5.", ".$r6.", ".$r7.", '".$goods."' );";
           $result = mysqli_query($conn, $query);
+          $i=0;
+          while($i<$r1){
+            $bed_id=$room_id."_".$i;
+            $query = "insert into `house_beds` (`room_id`, `bed_id`, `condition`) value ('".$room_id."', '".$bed_id."', 1);";
+            $result = mysqli_query($conn, $query);
+            $i = $i + 1;
+          }
         }
 
         if($result) echo "저장 성공!";
@@ -90,6 +106,12 @@
   elseif($condition=="delete"){
     $query = "delete from house_main where house_id='".$target."'";
     $result = mysqli_query($conn, $query);
+    $query = "select room_id from house_rooms where house_id='".$target."'";
+    $result = mysqli_query($conn, $query);
+    while($row = mysqli_fetch_row($result)){
+      $tmpQuery = "delete from house_beds where room_id='".$row[0]."'";
+      $tmpResult = mysqli_query($conn, $tmpQuery);
+    }
     $query = "delete from house_rooms where house_id='".$target."'";
     $result = mysqli_query($conn, $query);
     $query = "delete from house_public where house_id='".$target."'";
@@ -104,6 +126,8 @@
       $query = "select * from house_rooms where room_id='".$room_id."'";
       $result = mysqli_query($conn, $query);
       if(mysqli_num_rows($result)===1){
+        $tmpQuery = "delete from house_beds where room_id='".$room_id."'";
+        $tmpResult = mysqli_query($conn, $tmpQuery);
         $query = "delete from house_rooms where room_id='".$room_id."'";
         $result = mysqli_query($conn, $query);
       }
