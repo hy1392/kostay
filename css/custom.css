@@ -1,3 +1,40 @@
+.body{
+  font-family: "NanumGothoc";
+}
+
+.nanum-16-bol-3a{
+  font-family: "NanumGothic";
+  font-size: 16px;
+  font-weight: bold;
+  color: #3a3939;
+}
+
+.nanum-16-bol{
+  font-family: "NanumGothic";
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.margin-bottom-100{
+  margin-bottom: 100px;
+}
+
+.margin-bottom-200{
+  margin-bottom: 200px;
+}
+
+.margin-bottom-500{
+  margin-bottom: 500px;
+}
+
+.margin-top-10{
+  margin-top: 10px;
+}
+
+.margin-top-0{
+  margin-top: 0px !important;
+}
+
 /* 검색 페이지 */
 .list-offer-title{
   font-family: "NanumGothic";
@@ -21,18 +58,263 @@
   font-family: "NanumGothic";
   font-size: 20px;
   font-weight: bold;
-  color: #03c1a8;
+  color: #867e7e;
 }
 
 .max-price{
   font-family: "NanumGothic";
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
-  color: #fb0f5a;
+  color: #867e7e;
 }
 
 .custom-btn-danger{
   width: 100% !important;
   border-radius: 0px;
+  background-color: #ff3838;
+  border: 1px solid #ff3838;
 }
 /* .검색 페이지 */
+
+/* 검색 상세페이지 */
+.view-detail-container{
+  margin-top: 12px;
+  margin: 12px 0px 12px 0px;
+  padding: 0px 0px 0px 0px;
+  width: 100% !important;
+}
+
+.view-detail-tab{
+  width: 20%;
+  text-align: center;
+}
+
+.custom-apartment-tabContent{
+  border: 0px !important;
+}
+
+.view-detail-swiper-container{
+  height: 600px !important;
+}
+
+.view-detail-slider{
+  height: 600px !important;
+}
+
+.view-detail-wrapper{
+  height: 600px !important;
+}
+
+.house-basic-title-box{
+  width: 100px;
+  padding: 5px 5px 5px 5px;
+  /*border-right: 2px solid #e5e5e5;*/
+  margin-right: 50px;
+  margin-bottom: 20px;
+}
+
+.house-basic-title{
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.house-basic-info-box{
+  float: left;
+  width: 600px;
+}
+
+.house-basic-info{
+  float: left;
+  text-align: left;
+  width: 180px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+.house-basic-info span{
+  font-family: "NanumGothic";
+  font-size: 16px;
+  color: #000;
+}
+
+.terms-conditions-title-box{
+  width: 100px;
+  padding: 5px 5px 5px 5px;
+  /*border-right: 2px solid #e5e5e5;*/
+  margin-right: 50px;
+  margin-bottom: 20px;
+}
+
+.terms-conditions-title{
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.terms-conditions-info-box{
+  width: 600px;
+}
+
+.terms-conditions-info{
+  float: left;
+  text-align: left;
+  width: 600px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+.terms-conditions-info p{
+  font-size: 16px;
+  color: #000;
+}
+
+.position-title{
+  font-size: 18px;
+  height: 40px;
+}
+
+.sm-size{
+  float: left;
+  width: 70px;
+}
+
+.lg-size{
+  float: left;
+  width: 200px;
+}
+
+.use-image-small{
+  width: 60%;
+  left: 25%;
+}
+
+/* .검색 상세페이지 */
+
+/* 검색 상세페이지 탭 */
+.view-detail-card {background: #FFF none repeat scroll 0% 0%; /*box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);*/ margin-bottom: 30px; }
+
+.view-detail-tabs { border-bottom: 2px solid #DDD;}
+.view-detail-tabs > li{
+  margin-right: 40px;
+}
+.view-detail-tabs > li > a{
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.view-detail-tabs > li.active > a, .view-detail-tabs > li.active > a:focus, .view-detail-tabs > li.active > a:hover { border-width: 0; }
+.view-detail-tabs > li > a { border: none; color: #666; }
+.view-detail-tabs > li.active > a, .view-detail-tabs > li > a:hover { border: none; color: #4285F4 !important; background: transparent; }
+.view-detail-tabs > li > a::after { content: ""; background: #4285F4; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+.view-detail-tabs > li.active > a::after, .view-detail-tabs > li:hover > a::after { transform: scale(1); }
+.view-detail-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
+
+.view-detail-tab-pane { padding: 15px 0; }
+.view-detail-tab-content{
+  box-shadow: none !important;
+  background: #fff !important;
+  padding:20px;
+}
+/* .검색 상세페이지 탭 */
+
+/* 입주자 - 입주대기 */
+.list-offer-custom-right-large{
+  width: 600px !important;
+}
+/* .입주자 - 입주대기 */
+
+/* 입주자 - 입주신청 */
+.complete-type-container{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: #2b2a2a;
+  opacity: 0.5;
+}
+
+.complete-transaction-type{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: #2b2a2a;
+  opacity: 0.6;
+
+  font-family: "NanumGothic";
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  padding: 50% 10%;
+}
+/* .입주자 - 입주신청 */
+
+/* 알림설정 */
+.alarm-info-container{
+  padding: 20px 20px !important;
+  border: 2px solid #e5e5e5;
+}
+
+.alarm-info-container img{
+  float: left;
+  margin-left: 150px;
+  margin-right: 80px;
+}
+
+.alarm-info-container p{
+  padding: 10px;
+
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #5d5d5d;
+}
+
+.condition-title{
+  text-align: center;
+  padding: 10px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #5d5d5d;
+}
+
+.condition-count{
+  padding: 10px 10px;
+  font-size: 16px;
+  color: #5d5d5d;
+}
+
+.condition-onoff{
+  padding: 10px 10px;
+  font-size: 16px;
+  color: #5d5d5d;
+}
+
+.condition-onoff-check{
+  top: -2;
+}
+
+.btn-alart-update{
+  width: 100%;
+  border-radius: 0px;
+  border: 2px solid #ccc;
+  font-weight: bold;
+}
+
+.btn-alart-delete{
+  width: 100%;
+  border-radius: 0px;
+  border: 2px solid #ccc;
+  font-weight: bold;
+}
+
+.alarm-detail-row{
+  margin: 0px;
+  border-bottom: 1px solid #e5e5e5;
+  width: 100%;
+  padding: 10px 5px;
+  text-align: center;
+}
+
+/* .알림설정*/
