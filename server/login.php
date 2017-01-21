@@ -7,7 +7,7 @@
   $query = "select * from users where email = '".$id."'"."and pwd = '".$pwd."'";
   $result = mysqli_query($conn, $query);
   if(mysqli_num_rows($result) === 0){
-    echo "사용자 정보를 찾을 수 없습니다. 메인페이지로 이동합니다." ;
+    echo "사용자 정보를 찾을 수 없습니다. 아이디, 비밀번호를 확인하시고 다시 시도해 주세요." ;
   }
   else{
     $row = mysqli_fetch_assoc($result);

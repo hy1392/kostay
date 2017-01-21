@@ -245,7 +245,6 @@
 
 							<script>
 							function updateCon(param){
-								console.log($(param).attr("name")+$(param).val());
 								$.ajax({
 		              url:"server/set_room.php",
 		              type:"POST",
@@ -261,7 +260,6 @@
 		            });
 							}
 							function updateDay(param){
-								console.log($(param).attr("name")+$(param).val());
 								$.ajax({
 		              url:"server/set_room.php",
 		              type:"POST",
@@ -279,7 +277,6 @@
 							function getVacant(param){
 								$(".table-responsive").remove();
 								var st = $(param).parent().parent().parent().parent().parent();
-								console.log(st);
 								$.ajax({
 									url:"server/set_room.php",
 									type:"POST",
@@ -289,12 +286,6 @@
 									},
 									success: function(data){
 										var obj = JSON.parse(data);
-										console.log(obj[0]);
-										console.log(obj[1]);
-										console.log(obj[2]);
-										console.log(obj[3]);
-										console.log(obj[4]);
-										console.log(obj[5]);
 										var table = "<div class='table-responsive'><table class='table'><tr ><th >구분</th><th >침대번호</th><th >성별</th><th >입주상황</th><th >공실예정일</th></tr><tr>";
 										var current = 0;
 												for(var i=0; i<obj[0].length;){
@@ -314,7 +305,6 @@
 														table +="' /> </td></tr>";
 													}
 													i+=Number(obj[1][i]);
-													console.log(i);
 												}
 
 

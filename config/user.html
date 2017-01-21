@@ -8,10 +8,12 @@
           <span class="special-color"><h1>로그인</h1></span>
           <div class="short-title-separator"></div>
         </div>
-        <input id="id" name="login" type="email" class="input-full main-input" placeholder="이메일" />
-        <input id="pwd" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
-
+        <form id="login">
+        <input id="id" name="login" type="email" class="input-full main-input login_modal" placeholder="이메일" />
+        <input id="pwd" name="password" type="password" class="input-full main-input login_modal" placeholder="비밀번호" />
+        </form>
         <script>
+
           function loginchk() {
             var id = document.getElementById("id").value;
             var pwd = document.getElementById("pwd").value;
@@ -23,11 +25,20 @@
                 vpwd :pwd
               },
               success: function(data){
-                swal({
-                  title: "",
-                  text: data,
-                  timer: 2000,
-                  type: "success"}, function(){location.href="index.html"});
+                if(data=="사용자 정보를 찾을 수 없습니다. 아이디, 비밀번호를 확인하시고 다시 시도해 주세요."){
+                  swal({
+                    title: "",
+                    text: data,
+                    timer: 3000,
+                    type: "success"});
+                }
+                else{
+                  swal({
+                    title: "",
+                    text: data,
+                    timer: 2000,
+                    type: "success"}, function(){location.href="index.html"});
+                }
               },
               error: function(){
                 swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
@@ -134,7 +145,6 @@
           }
         </style>
         <script>
-
           function registerUser() {
             var name = document.getElementById("last-name").value;
             var email = document.getElementById("email").value;
@@ -190,6 +200,7 @@
 
             return true;
           }
+
         </script>
 
         <a href="#" onclick="javascript:registerUser();" class="button-primary button-shadow button-full">
