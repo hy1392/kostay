@@ -75,9 +75,10 @@
           ?>
 
             <li>
-              <a href="#login-modal" data-toggle="modal">운영자</a>
+              <a href="change_permission.html">운영자</a>
             </li>
-        <?} else{?>
+        <?}
+         else{?>
 
           <?if($_SESSION['flag']==1 || $_SESSION['flag']==3){?>
           <li>
@@ -113,7 +114,11 @@
           <li>
             <a href="pre_my_info.html">가입정보</a>
           </li>
-          
+
+          <li>
+            <a href="change_permission.html">운영자</a>
+          </li>
+
           <li>
             <a href="#" onclick="javascript:logout()">로그아웃</a>
           </li>

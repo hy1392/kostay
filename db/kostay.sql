@@ -39,6 +39,56 @@ INSERT INTO `users` (`idx`, `username`, `email`, `pwd`, `flag`) VALUES
 (2, '박진태(입주)', 'user1@user.ac.kr', 'user', 3),
 (3, '박진태(운영)', 'user2@user.ac.kr', 'user', 2);
 
+--
+-- 테이블 구조 `user_profile`
+--
+
+CREATE TABLE IF NOT EXISTS `user_profile` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(500) NOT NULL COMMENT '사용자아이디',
+  `img` varchar(500)  COMMENT '프로필사진',
+  `description` varchar(500)  COMMENT '자기소개',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='사용자 프로필' AUTO_INCREMENT=4 ;
+
+
+--
+-- 테이블 구조 `user_movein_list`
+--
+
+CREATE TABLE IF NOT EXISTS `user_movein_list` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(500) NOT NULL COMMENT '사용자아이디',
+  `house_id` varchar(500) NOT NULL COMMENT '하우스 아이디(운영자아이디_숫자)',
+    `bed_id` varchar(500) NOT NULL COMMENT '침대 아이디(방 아이디_숫자)',
+  `time` datetime NOT NULL COMMENT '요청시간',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='사용자 입주대기' AUTO_INCREMENT=4 ;
+
+--
+-- 테이블 구조 `user_wait_list`
+--
+
+CREATE TABLE IF NOT EXISTS `user_wait_list` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(500) NOT NULL COMMENT '사용자아이디',
+  `house_id` varchar(500) NOT NULL COMMENT '하우스 아이디(운영자아이디_숫자)',
+    `bed_id` varchar(500) NOT NULL COMMENT '침대 아이디(방 아이디_숫자)',
+  `time` datetime NOT NULL COMMENT '요청시간',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='사용자 대기리스트' AUTO_INCREMENT=4 ;
+
+--
+-- 테이블 구조 `user_wish_list`
+--
+
+CREATE TABLE IF NOT EXISTS `user_wish_list` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(500) NOT NULL COMMENT '사용자아이디',
+  `house_id` varchar(500) NOT NULL COMMENT '하우스 아이디(운영자아이디_숫자)',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='사용자 찜리스트' AUTO_INCREMENT=4 ;
+
 
 --
 -- 테이블 구조 `message`

@@ -381,14 +381,15 @@
 					<div class="col-xs-12 col-sm-9">
 						<h5 class="subtitle-margin second-color">Kostay 추천</h5>
 						<?php
-							if(!isset($_SESSION['name'])){
-						?>
-							<h1 class="second-color">Kostay가 추천합니다 <span class="special-color">.</span></h1>
-						<?
+	            if(!isset($_SESSION['name'])){
+	          ?>
+								<h1 class="second-color">Kostay가 추천합니다 <span class="special-color">.</span></h1>
+	          <?php
 							}
 							else{
+								$name = $_SESSION['name'];
 						?>
-							<h1 class="second-color"><? echo $_SESSION['name']; ?> 님께 Kostay가 추천합니다 <span class="special-color">.</span></h1>
+								<h1 class="second-color"><? echo $_SESSION['name']; ?> 님께 Kostay가 추천합니다 <span class="special-color">.</span></h1>
 						<?
 							}
 						?>

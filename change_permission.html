@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>"
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -135,110 +134,81 @@
 				<div class="container">
 					<div class="row">
 
-						<div class="col-xs-12 col-md-12">
+						<div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0 0;">
 
-							<div class="row">
-								<div class="col-xs-12 alarm-info-container">
-									<img src="images/alarm.png" class="img-responsible img-rounded" width="100" height="100"/>
-									<p>[셰어하우스를 찾는 스마트한 방법 - 알림 간편설정]</p>
-									<p>알림을 설정해 두세요. 원하는 집이 등록되면 바로 알려드립니다.</p>
+							<div class="row alarm-info-container">
+                <div class="col-xs-12">
+                  <p style="text-align:center;">[KOSTAY를 제대로 즐기는 방법 - <strong>운영자 회원 전환</strong>]</p>
+                </div>
+
+								<div class="col-xs-12">
+                  <div class="col-md-3">
+									  <img src="images/infotech.jpg" class="img-responsible img-circle" width="70%" height="70%"/>
+                  </div>
+
+                  <div class="col-md-9">
+  									<p><strong>혜택 1.</strong>&nbsp;입주 대기자를 확보하실 수 있습니다. 공실 발생에 미리 대비하세요!</p>
+                    <p><strong>혜택 2.</strong>&nbsp;셰어하우스 입주자를 쉽게 구하실 수 있습니다.</p>
+                    <p><strong>혜택 3.</strong>&nbsp;소중한 개인정보를 안전하게 보호할 수 있습니다.</p>
+                  </div>
 								</div>
 							</div>
 
-							<div class="row margin-top-60">
-								<h3>조건 설정</h3>
-								<div class="title-separator-primary" style="margin-bottom:20px;"></div>
-							</div>
+              <div class="row" id="integration-list">
+                <ul>
+                  <li>
+                    <a onclick="javascript:expand();" class="expand">
+                      <div class="right-arrow">+</div>
+                      <div>
+                        <h2>운영자로 가입하시면 본 사이트의 운영자 서비스 약관에 동의하는 것으로 간주합니다.</h2>
+                        <span>운영자 회원에 대한 약관을 확인하시려면 클릭하세요.</span>
+                      </div>
+                    </a>
 
-              <div class="row">
-                <div class="col-xs-4 col-md-3 col-sm-4 col-lg-3">
-                  <input name="name" id="name" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="지역">
+                    <div class="detail">
+
+                      <div id="right" style="width:100%;float:left;height:100%;">
+                        <div id="sup">
+                          <div>
+                            <span>
+                              회원약관 CSS 작업.....
+                            </span>
+                            <br />
+                            <br /><a href="#">자세히보기</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </div>
+                <script>
+                  function expand(){
+                    $(".expand").on( "click", function() {
+                      $(this).next().slideToggle(0);
+                      $expand = $(this).find(">:first-child");
+
+                      if($expand.text() == "+") {
+                        $expand.text("-");
+                      } else {
+                        $expand.text("+");
+                      }
+                    });
+                  }
+
+                </script>
+
+                <div class="row margin-top-30 pull-right">
+  								<div class="col-xs-12 col-md-3 col-sm-12 col-lg-3">
+  									<a href="#login-modal" data-toggle="modal" class="button-alternative button-shadow">
+  										<span>운영자 회원 가입</span>
+  										<div class="button-triangle"></div>
+  										<div class="button-triangle2"></div>
+  										<div class="button-icon"><i class="jfont fa-lg">&#xe804;</i></div>
+  									</a>
+  								</div>
                 </div>
 
-                <div class="col-xs-4  col-md-3 col-sm-4 col-lg-3">
-                  <select name="country1" class="bootstrap-select" title="성별:">
-										<option>남성</option>
-										<option>여성</option>
-										<option>혼성</option>
-									</select>
-                </div>
-
-                <div class="col-xs-4 col-md-3 col-sm-4 col-lg-3">
-                  <select name="city1" class="bootstrap-select" title="룸타입:">
-										<option>무관</option>
-										<option>1인실</option>
-										<option>2인실</option>
-										<option>3인실 이상</option>
-									</select>
-                </div>
-
-								<div class="col-xs-12 col-md-3 col-sm-12 col-lg-3">
-									<a href="#" class="button-alternative button-shadow">
-										<span>간편 조건등록</span>
-										<div class="button-triangle"></div>
-										<div class="button-triangle2"></div>
-										<div class="button-icon"><i class="jfont fa-lg">&#xe804;</i></div>
-									</a>
-								</div>
-              </div>
-
-							<div class="row">
-                <div class="col-xs-4 col-md-3 col-sm-4 col-lg-3"></div>
-                <div class="col-xs-4 col-md-3 col-sm-4 col-lg-3"></div>
-                <div class="col-xs-4 col-md-3 col-sm-4 col-lg-3"></div>
-
-								<div class="col-xs-12 col-md-3 col-sm-12 col-lg-3">
-									<a href="#detail-alarm-modal" class="button-secondary button-shadow" data-toggle="modal">
-										<span>상세 조건입력</span>
-										<div class="button-triangle"></div>
-										<div class="button-triangle2"></div>
-										<div class="button-icon"><i class="jfont fa-lg">&#xe804;</i></div>
-									</a>
-								</div>
-              </div>
-
-
-							<div class="row margin-top-60">
-								<h3>조건 설정 결과 보기</h3>
-								<div class="title-separator-primary" style="margin-bottom:20px;"></div>
-							</div>
-
-							<!-- 기존 조건 설정에 부합하는  결과가 없을 경우-->
-							<div class="row margin-top-60">
-                <div class="col-xs-12" style="text-align:center; font-size:18px;">
-									<p>조건에 부합하는 결과가 존재하지 않습니다.</p>
-                </div>
-              </div>
-							<!-- .기존 조건 설정에 부합하는  결과가 없을 경우-->
-
-							<!-- 기존 조건 설정에 부합하는  결과가 있을 경우-->
-              <div class="row margin-top-60">
-                <div class="col-xs-4 col-sm-4 col-lg-3 col-md-3 condition-title">
-									조건 # 제목
-                </div>
-								<div class="col-xs-4 col-sm-4 col-lg-3 col-md-3 condition-count">
-									<a href="">조건 검색 결과(ex. n개)</a>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-lg-3 col-md-3 condition-onoff">
-									알림계속 설정&nbsp;
-									<input class="condition-onoff-check" type="checkbox" checked data-toggle="toggle">
-                </div>
-                <div class="col-xs-12 col-sm-12 col-lg-1 col-md-1">
-                  <button onclick="return false;" class="btn btn-default btn-alart-update">
-                    <span>수정</span>
-                  </button>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-lg-1 col-md-1">
-									<button onclick="return false;" class="btn btn-default btn-alart-delete">
-                    <span>삭제</span>
-                  </button>
-                </div>
-              </div>
-							<!-- .기존 조건 설정에 부합하는  결과가 있을 경우-->
-
-							<div class="row margin-top-60"></div>
 						</div>
-
 					</div>
 				</div>
 			</section>

@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>"
+	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>";
+	include ('server/dbconnect.php');
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -24,7 +25,12 @@
 		<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,500,500italic,700,700italic&amp;subset=latin,latin-ext'>
 		<link rel="stylesheet" type="text/css" href="css/plugins.css">
 		<link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
+		<link rel="stylesheet" type="text/css" href="css/custom.css">
 		<link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
+		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+
+		<!--sweetalert2-->
+		<script src="js/sweetalert.min.js"></script>
 
 		<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -103,7 +109,7 @@
 			<section class="section-light section-top-shadow">
 				<div class="container">
 					<div class="row">
-						<div class="col-xs-12 col-md-9 col-md-push-3">
+						<div class="col-xs-12 col-md-9">
 							<div class="row">
 								<div class="col-xs-12">
 									<h1>프로필</h1>
@@ -122,127 +128,201 @@
 											<input type="text" disabled="disabled" id="agent-file-name" class="main-input" />
 										</div>
 									</div>
-									<div class="col-xs-12 col-sm-9 col-md-8">
-										<div class="labelled-input">
-											<label for="first-name">이름</label><input id="first-name" name="first-name" type="text" class="input-full main-input" placeholder="" value="<? echo $_SESSION['name'] ?>" />
-											<div class="clearfix"></div>
-										</div>
-										<!--
-							<div class="labelled-input">
-								<label for="last-name">Last name</label><input id="last-name" name="last-name" type="text" class="input-full main-input" placeholder="" value="Johnson"/>
-								<div class="clearfix"></div>
-							</div>
-						-->
-										<div class="labelled-input">
-											<label for="email">아이디</label><input id="email" name="email" type="email" class="input-full main-input" placeholder="" value="<? echo $_SESSION['id'] ?>" />
-											<div class="clearfix"></div>
-										</div>
-										<!--
-							<div class="labelled-input">
-								<label for="phone">Phone</label><input id="phone" name="phone" type="tel" class="input-full main-input" placeholder="" value="123-456-789"/>
-								<div class="clearfix"></div>
-							</div>
 
-							<div class="labelled-input last">
-								<label for="address">Address</label><input id="address" name="address" type="text" class="input-full main-input" placeholder="" value="Some address here"/>
-								<div class="clearfix"></div>
-							</div>
-						-->
-									</div>
-								</div>
-								<div class="row margin-top-15">
-									<div class="col-xs-12">
+									<?
+									$query = "select * from user_profile where email='".$_SESSION['id']."'";
+								  $result = mysqli_query($conn, $query);
+									if(mysqli_num_rows($result)===1){
+										$row=mysqli_fetch_row($result);
+									?>
+									<div class="col-xs-12 col-sm-9 col-md-8">
 										<div class="labelled-textarea">
 											<label for="description">자기소개</label>
-											<textarea id="description" name="description" class="input-full main-input" placeholder="자신에 대한 소개를 입력해 주시기 바랍니다."></textarea>
+											<textarea id="description" name="description" class="input-full main-input" placeholder="자신에 대한 소개를 입력해 주시기 바랍니다."><?=$row[3]?></textarea>
 										</div>
-									</div>
-								</div>
-								<div class="row margin-top-30">
-									<div class="col-xs-12 col-lg-6">
-										<div class="labelled-input-short">
-											<label for="facebook">
-									<span class="label-icon-circle pull-left">
-										<i class="fa fa-facebook"></i>
-									</span>
-									Facebook
-								</label>
-											<input id="facebook" name="facebook" type="text" class="input-full main-input" placeholder="" value="http://facebook.url" />
-											<div class="clearfix"></div>
-										</div>
-										<div class="labelled-input-short">
-											<label for="gplus">
-									<span class="label-icon-circle pull-left">
-										<i class="fa fa-google-plus"></i>
-									</span>
-									Google +
-								</label>
-											<input id="gplus" name="gplus" type="text" class="input-full main-input" placeholder="" value="http://gplus.url" />
-											<div class="clearfix"></div>
-										</div>
-									</div>
-									<div class="col-xs-12 col-lg-6">
-										<div class="labelled-input-short">
-											<label for="twitter">
-									<span class="label-icon-circle pull-left">
-										<i class="fa fa-twitter"></i>
-									</span>
-									Twitter
-								</label>
-											<input id="twitter" name="twitter" type="text" class="input-full main-input" placeholder="" value="http://twitter.url" />
-											<div class="clearfix"></div>
-										</div>
-										<div class="labelled-input-short">
-											<label for="skype">
-									<span class="label-icon-circle pull-left">
-										<i class="fa fa-skype"></i>
-									</span>
-									Skype
-								</label>
-											<input id="skype" name="skype" type="text" class="input-full main-input" placeholder="" value="Skype_name" />
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</div>
+									<?}
+									else{
+									?>
+											<div class="col-xs-12 col-sm-9 col-md-8">
+												<div class="labelled-textarea">
+													<label for="description">자기소개</label>
+													<textarea id="description" name="description" class="input-full main-input" placeholder="자신에 대한 소개를 입력해 주시기 바랍니다."></textarea>
+												</div>
+									<?
+										}
+									?>
 
-								<div class="row margin-top-15">
-									<div class="col-xs-12">
-										<div class="center-button-cont center-button-cont-border">
-											<a href="#" class="button-primary button-shadow">
-												<span>save</span>
-												<div class="button-triangle"></div>
-												<div class="button-triangle2"></div>
-												<div class="button-icon"><i class="fa fa-lg fa-floppy-o"></i></div>
-											</a>
+
+											</div>
 										</div>
-									</div>
-								</div>
+
+										<div class="row margin-top-15">
+											<div class="col-xs-12">
+											</div>
+										</div>
+
+
+										<div class="row margin-top-15">
+											<div class="col-xs-12">
+												<div class="center-button-cont center-button-cont-border">
+													<a class="button-primary button-shadow" style="cursor:pointer" onclick="saveProfile2()">
+														<span>save</span>
+														<div class="button-triangle"></div>
+														<div class="button-triangle2"></div>
+														<div class="button-icon"><i class="fa fa-lg fa-floppy-o"></i></div>
+													</a>
+												</div>
+											</div>
+										</div>
+
+										<script>
+											function saveProfile() {
+												var file_data = $("#agent-photo").prop("files")[0];
+												var form_data = new FormData();
+												form_data.append('file', file_data);
+												form_data.append('description', $("#description").val());
+												form_data.append('condition', "updateProfile");
+												$.ajax({
+													url: "server/profile.php",
+													dataType: 'text',
+													cache: false,
+													contentType: false,
+													processData: false,
+													type: "POST",
+													data: {
+														form_data
+													},
+													success: function(data) {
+														swal("에러 발생!", data, "error");
+													},
+													error: function() {
+														swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
+													}
+												});
+											}
+
+											function saveProfile2() {
+												$.ajax({
+													url: "server/profile.php",
+													type: "POST",
+													data: {
+														description: $("#description").val()
+													},
+													success: function(data) {
+														swal("저장 완료!", data, "success");
+													},
+													error: function() {
+														swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
+													}
+												});
+											}
+										</script>
 							</form>
+
 							<div class="row margin-top-60"></div>
-						</div>
-						<div class="col-xs-12 col-md-3 col-md-pull-9">
-							<div class="sidebar-left">
-								<h3 class="sidebar-title">Welcome back</h3>
-								<div class="title-separator-primary"></div>
+							</div>
 
-								<div class="profile-info margin-top-60">
-									<div class="profile-info-title negative-margin"><?=$_SESSION['id']?></div>
-									<img src="images/comment-photo2.jpg" alt="" class="pull-left" />
-									<div class="profile-info-text pull-left">
-										<p class="subtitle-margin"><?=$_SESSION['name']?></p>
-										<p class="">42 Estates</p>
+							<div class="col-xs-12 col-md-3">
+								<div class="sidebar">
+									<h3 class="sidebar-title">마이페이지</h3>
+									<div class="title-separator-primary"></div>
 
-										<a href="#" class="logout-link margin-top-30"><i class="fa fa-lg fa-sign-out"></i>Logout</a>
+									<div class="profile-info margin-top-30">
+										<div class="profile-info-title negative-margin">
+											<?=$_SESSION['id']?>
+										</div>
+										<img src="images/comment-photo2.jpg" alt="" class="pull-left" />
+										<div class="profile-info-text pull-left">
+											<p class="subtitle-margin">
+												<?=$_SESSION['name']?>
+											</p>
+											<p class="">42 Estates</p>
+
+											<a href="#" class="logout-link margin-top-30"><i class="fa fa-lg fa-sign-out"></i>Logout</a>
+										</div>
+										<div class="clearfix"></div>
 									</div>
-									<div class="clearfix"></div>
+
+									<div class="center-button-cont margin-top-30">
+										<a href="alarm.html" class="button-alternative button-shadow button-full">
+											<span style="font-size:14px;">알림 바로가기</span>
+											<div class="button-triangle"></div>
+											<div class="button-triangle2"></div>
+											<div class="button-icon"><i class="fa fa-bell-o"></i></div>
+										</a>
+									</div>
+									<div class="center-button-cont margin-top-15">
+										<a href="my-profile.html" class="button-alternative button-shadow button-full">
+											<span>프로필 바로가기</span>
+											<div class="button-triangle"></div>
+											<div class="button-triangle2"></div>
+											<div class="button-icon"><i class="fa fa-user"></i></div>
+										</a>
+									</div>
+									<div class="center-button-cont margin-top-15">
+										<a href="pre_my_info.html" class="button-alternative button-shadow button-full">
+											<span>가입정보 바로가기</span>
+											<div class="button-triangle"></div>
+											<div class="button-triangle2"></div>
+											<div class="button-icon"><i class="fa fa-users"></i></div>
+										</a>
+									</div>
+
+									<div class="profile-info margin-top-30" style="padding:0px;">
+										<div class="profile-info-title negative-margin">추천 하우스</div>
+									</div>
+
+									<div class="sidebar-featured-cont margin-top-0">
+										<div class="sidebar-featured">
+											<a class="sidebar-featured-image" href="#">
+												<img src="images/sidebar-featured1.jpg" alt="" />
+												<div class="sidebar-featured-type">
+													<div class="sidebar-featured-estate" style="width:30px;">추천</div>
+													<!-- 주택유형 -->
+												</div>
+											</a>
+											<div class="sidebar-featured-title"><a href="#">주소</a></div>
+											<!--주소 -->
+											<div class="sidebar-featured-price">가격</div>
+											<!-- 가격 -->
+											<div class="clearfix"></div>
+										</div>
+										<div class="sidebar-featured">
+											<a class="sidebar-featured-image" href="#">
+												<img src="images/sidebar-featured2.jpg" alt="" />
+												<div class="sidebar-featured-type">
+													<div class="sidebar-featured-estate" style="width:30px;">추천</div>
+													<!-- 주택유형 -->
+												</div>
+											</a>
+											<div class="sidebar-featured-title"><a href="#">주소</a></div>
+											<!--주소 -->
+											<div class="sidebar-featured-price">가격</div>
+											<!-- 가격 -->
+											<div class="clearfix"></div>
+										</div>
+										<div class="sidebar-featured">
+											<a class="sidebar-featured-image" href="#">
+												<img src="images/sidebar-featured3.jpg" alt="" />
+												<div class="sidebar-featured-type">
+													<div class="sidebar-featured-estate" style="width:30px;">추천</div>
+													<!-- 주택유형 -->
+												</div>
+											</a>
+											<div class="sidebar-featured-title"><a href="#">주소</a></div>
+											<!--주소 -->
+											<div class="sidebar-featured-price">가격</div>
+											<!-- 가격 -->
+											<div class="clearfix"></div>
+										</div>
+									</div>
+
+
+
 								</div>
-
-
-
 							</div>
 						</div>
 					</div>
-				</div>
 			</section>
 
 			<footer class="large-cont">
@@ -322,157 +402,37 @@
 					</div>
 				</div>
 			</footer>
-		</div>
-
-		<!-- Move to top button -->
-
-		<div class="move-top">
-			<div class="big-triangle-second-color"></div>
-			<div class="big-icon-second-color"><i class="jfont fa-lg">&#xe803;</i></div>
-		</div>
-
-		<!-- Login modal -->
-		<div class="modal fade apartment-modal" id="login-modal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<div class="modal-title">
-							<span class="special-color"><h1>로그인</h1></span>
-							<div class="short-title-separator"></div>
-						</div>
-						<input id="id" name="login" type="email" class="input-full main-input" placeholder="이메일" />
-						<input id="pwd" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
-
-						<script>
-							function loginchk() {
-								var id = document.getElementById("id").value;
-								var pwd = document.getElementById("pwd").value;
-
-								location.href = "server/login.php?id=" + id + "&pwd=" + pwd;
-								return true;
-							}
-						</script>
-
-						<a href="#" onclick="javascript:loginchk();" class="button-primary button-shadow button-full">
-							<span>로그인</span>
-							<div class="button-triangle"></div>
-							<div class="button-triangle2"></div>
-							<div class="button-icon"><i class="fa fa-user"></i></div>
-						</a>
-						<a href="#" class="forgot-link pull-right">비밀번호를 잊으셨나요?</a>
-						<div class="clearfix"></div>
-						<p class="login-or">OR</p>
-						<a href="#" class="facebook-button">
-							<i class="fa fa-facebook"></i>
-							<span>Login with Facebook</span>
-						</a>
-						<a href="#" class="google-button margin-top-15">
-							<i class="fa fa-google-plus"></i>
-							<span>Login with Google</span>
-						</a>
-						<p class="modal-bottom">아직 Kostay 계정이 없으신가요? <a href="#" class="register-link">회원가입</a></p>
-					</div>
-				</div>
-				<!-- /.modal-content -->
 			</div>
-			<!-- /.modal-dialog -->
-		</div>
-		<!-- /.modal -->
 
-		<!-- Register modal -->
-		<div class="modal fade apartment-modal" id="register-modal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<div class="modal-title">
-							<span class="special-color"><h1>회원가입</h1></span>
-							<div class="short-title-separator"></div>
-						</div>
-						<input id="last-name" name="last-name" type="text" class="input-full main-input" placeholder="이름" />
-						<input id="email" name="email" type="email" class="input-full main-input" placeholder="이메일" />
-						<input id="password" name="password" type="password" class="input-full main-input" placeholder="비밀번호" />
-						<input name="repeat-password" type="password" class="input-full main-input" placeholder="비밀번호 확인" />
+			<!-- Move to top button -->
 
-						<script>
-							function registerUser() {
-								var name = document.getElementById("last-name").value;
-								var email = document.getElementById("email").value;
-								var pwd = document.getElementById("password").value;
-
-								location.href = "server/registerUser.php?name=" + name + "&email=" + email + "&pwd=" + pwd;
-								return true;
-							}
-						</script>
-
-						<a href="#" onclick="javascript:registerUser();" class="button-primary button-shadow button-full">
-							<span>가입하기</span>
-							<div class="button-triangle"></div>
-							<div class="button-triangle2"></div>
-							<div class="button-icon"><i class="fa fa-user"></i></div>
-						</a>
-						<div class="clearfix"></div>
-						<p class="login-or">OR</p>
-						<a href="#" class="facebook-button">
-							<i class="fa fa-facebook"></i>
-							<span>Sing Up with Facebook</span>
-						</a>
-						<a href="#" class="google-button margin-top-15">
-							<i class="fa fa-google-plus"></i>
-							<span>Sing Up with Google</span>
-						</a>
-						<p class="modal-bottom">이미 Kostay 회원이신가요? <a href="#" class="login-link">로그인</a></p>
-					</div>
-				</div>
-				<!-- /.modal-content -->
+			<div class="move-top">
+				<div class="big-triangle-second-color"></div>
+				<div class="big-icon-second-color"><i class="jfont fa-lg">&#xe803;</i></div>
 			</div>
-			<!-- /.modal-dialog -->
-		</div>
-		<!-- /.modal -->
 
-		<!-- Forgotten password modal -->
-		<div class="modal fade apartment-modal" id="forgot-modal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<div class="modal-title">
-							<h1>Forgot your password<span class="special-color">?</span></h1>
-							<div class="short-title-separator"></div>
-						</div>
-						<p class="negative-margin forgot-info">Instert your account email address.<br/>We will send you a link to reset your password.</p>
-						<input name="login" type="email" class="input-full main-input" placeholder="Your email" />
-						<a href="my-profile.html" class="button-primary button-shadow button-full">
-							<span>Reset password</span>
-							<div class="button-triangle"></div>
-							<div class="button-triangle2"></div>
-							<div class="button-icon"><i class="fa fa-user"></i></div>
-						</a>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-		</div>
-		<!-- /.modal -->
+			<!--로그인, 회원가입, 비밀번호 찾기-->
+			<?include("config/user.html")?>
+			<!--sweetalert2-->
+			<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+			<script src="js/sweetalert.min.js"></script>
 
-		<!-- jQuery  -->
-		<script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
-		<script type="text/javascript" src="js/jQuery/jquery-ui.min.js"></script>
+			<!-- jQuery  -->
+			<script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
+			<script type="text/javascript" src="js/jQuery/jquery-ui.min.js"></script>
 
-		<!-- Bootstrap-->
-		<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+			<!-- Bootstrap-->
+			<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
 
-		<!-- Google Maps -->
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDfDCV5hXiPamCIT8_vwGXuzimLQ9MF76g&amp;sensor=false&amp;libraries=places"></script>
+			<!-- Google Maps -->
+			<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDfDCV5hXiPamCIT8_vwGXuzimLQ9MF76g&amp;sensor=false&amp;libraries=places"></script>
 
-		<!-- plugins script -->
-		<script type="text/javascript" src="js/plugins.js"></script>
+			<!-- plugins script -->
+			<script type="text/javascript" src="js/plugins.js"></script>
 
-		<!-- template scripts -->
-		<script type="text/javascript" src="mail/validate.js"></script>
-		<script type="text/javascript" src="js/apartment.js"></script>
+			<!-- template scripts -->
+			<script type="text/javascript" src="mail/validate.js"></script>
+			<script type="text/javascript" src="js/apartment.js"></script>
 
 	</body>
 

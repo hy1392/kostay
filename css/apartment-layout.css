@@ -47,7 +47,7 @@ Author: Jan Skwara - http://themeforest.net/user/johnnychaos
 
 textarea,
 input {
-    -webkit-appearance: none;
+    /*-webkit-appearance: none;*/
     -webkit-border-radius: 0;
 	outline: none;
 }
