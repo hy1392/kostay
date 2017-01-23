@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>"
+	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>";
+	include 'server/dbconnect.php';
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -127,147 +128,95 @@
 			</header>
 
 
-			<section class="section-light section-top-shadow">
+			<section class="section-light section-top-shadow" style="padding-top:40px;">
 				<div class="container">
 					<div class="row">
-						<div class="col-xs-12 col-md-9 col-md-push-3">
+						<div class="col-xs-12 col-md-12">
+
 							<div class="row">
 								<div class="col-xs-12">
-                  <h5 class="subtitle-margin">고객관리</h5>
 									<h1>입주신청자</h1>
-									<div class="title-separator-primary"></div>
+									<div class="title-separator-primary" style="margin-top:10px;"></div>
 								</div>
 							</div>
-							<div class="col-xs-12">
-								<div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <div class="col-xs-12">
-                            <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                            <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.</h4>
-                          </div>
-                            <div class="col-xs-12 padding-top-30">
-                              <div class="col-xs-12 col-sm-6 text-center fixed-middle">
-                                <p>룸 5개</p>
-                              </div>
-                              <div class="col-xs-12 col-sm-6 text-center fixed-middle">
-                                <p>정원 10명</p>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-md-3 no-padding">
-                          <div class="col-xs-12 no-padding">
-                              <div class="condition-1">
-                    						<span>입주대기자</span>
-                            </div>
-                          </div>
-                          <div class="col-xs-12 no-padding">
-                              <div class="condition-2">
-                    						<span>총 11명</span>
-                            </div>
-                          </div>
-                          <div class="col-xs-12 no-padding">
-                              <div class="condition-3" onclick="location.href='manage_movein_detail.html'">
-                    						<span>상세보기</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
 
-                <div class="list-offer">
-                  <div class="list-offer-left">
-                    <div class="list-offer-front">
-                      <div class="list-offer-photo height-100">
-                        <img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-offer-right-large" >
-                    <div class="list-offer-text">
-                      <div class="clearfix"></div>
-                      <div class="row">
-                        <div class="list-offer-h4 col-sm-12 col-md-9">
-                          <div class="col-xs-12">
-                            <i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
-                            <h4 class="list-offer-title">매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.</h4>
-                          </div>
-                            <div class="col-xs-12 padding-top-30">
-                              <div class="col-xs-12 col-sm-6 text-center fixed-middle">
-                                <p>룸 5개</p>
-                              </div>
-                              <div class="col-xs-12 col-sm-6 text-center fixed-middle">
-                                <p>정원 10명</p>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-md-3 no-padding">
-                          <div class="col-xs-12 no-padding">
-                              <div class="condition-1">
-                    						<span>입주대기자</span>
-                            </div>
-                          </div>
-                          <div class="col-xs-12 no-padding">
-                              <div class="condition-2">
-                    						<span>총 11명</span>
-                            </div>
-                          </div>
-                          <div class="col-xs-12 no-padding">
-                              <div class="condition-3" onclick="location.href='manage_movein_detail.html'">
-                    						<span>상세보기</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-
-
-
-
-
-
+							<div class="row" style="margin-top:10px;">
+								<div class="col-xs-12">
+									<blockquote>
+								    <p>운영자 회원 혜택. 등록한 하우스 정보 및 하우스 별 신청자 정보를 볼 수 있습니다. (추가 설명 작성)</p>
+								    <footer> 입주 신청자 메뉴 설명</footer>
+								  </blockquote>
+								</div>
 							</div>
-							<div class="row margin-top-60"></div>
-						</div>
-						<div class="col-xs-12 col-md-3 col-md-pull-9">
-							<div class="sidebar-left">
-								<h3 class="sidebar-title">Welcome back</h3>
-								<div class="title-separator-primary"></div>
 
-								<div class="profile-info margin-top-60">
-									<div class="profile-info-title negative-margin"><?=$_SESSION['id']?></div>
-									<img src="images/comment-photo2.jpg" alt="" class="pull-left" />
-									<div class="profile-info-text pull-left">
-										<p class="subtitle-margin"><?=$_SESSION['name']?></p>
-										<p class="">42 Estates</p>
 
-										<a href="#" class="logout-link margin-top-30"><i class="fa fa-lg fa-sign-out"></i>Logout</a>
+							<?
+							$query = "select * from house_main where user_id='".$_SESSION['id']."'";
+							$result = mysqli_query($conn, $query);
+							while($row = mysqli_fetch_array($result)){
+								$query = "select sum(person) from house_rooms where house_id='".$row['house_id']."'";
+								$result2 = mysqli_query($conn, $query);
+								$row2 = mysqli_fetch_row($result2);
+							?>
+							<!-- item -->
+							<div class="col-xs-12 col-sm-6 col-lg-4 grid-offer-col">
+								<div class="grid-offer">
+									<div>
+										<div class="grid-offer-photo">
+											<img src="images/grid-offer1.jpg" alt="" />
+										</div>
+
+										<div class="grid-offer-text" style="padding:15px 10px 15px 10px;">
+
+											<div class="grid-offer-h4" style="margin-bottom:5px; width:100%;">
+												<p class="grid-offer-title" style="font-size:1.5em;">
+													<?=$row['house_title']?><!--하우스제목 -->
+												</p>
+											</div>
+
+
+											<span style="font-size:1.3em; font-weight:bold; margin-right:20px;">
+												룸&nbsp;&nbsp;&nbsp;<i class="fa fa-bed"></i>&nbsp;&nbsp;&nbsp;&nbsp;<?=$row['number_of_rooms']?>
+											</span>
+											<span style="font-size:1.3em; font-weight:bold;">
+												정원&nbsp;&nbsp;&nbsp;<i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;&nbsp;<?=$row2[0]?>
+											</span>
+
+										</div>
+
+										<div class="price-grid-cont">
+											<div class="grid-price-label pull-left">입주신청자 </div>
+											<div class="grid-price pull-right">
+												<?
+													$query_wait = "select count(*) from user_movein_list where house_id='".$row['house_id']."'";
+													$result_wait = mysqli_query($conn, $query_wait);
+													$row_wait = mysqli_fetch_row($result_wait);
+													echo $row_wait[0];
+												?>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+
+										<div class="grid-offer-params">
+											<div class="grid-rooms" style="font-size:14px; width:100%; text-align:center; padding:2px 0px 2px 0px;">
+
+												<div class="col-xs-12 no-padding">
+													<div onclick="location.href='manage_movein_detail.html?target=<?=$row['house_id']?>'">
+														<span>입주신청자 리스트 상세보기</span>
+													</div>
+												</div>
+
+											</div>
+										</div>
+
 									</div>
-									<div class="clearfix"></div>
 								</div>
-
-
-
 							</div>
+							<!-- .item -->
+							<?}?>
+
 						</div>
+
 					</div>
 				</div>
 			</section>

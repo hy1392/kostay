@@ -137,16 +137,16 @@
 									 $tmp = $row[0]."".$i;
 								?>
 
-								<div class="list-offer" id="<?=$tmp?>" style="height:auto;">
+								<div class="list-offer" id="<?=$tmp?>">
 
-									<div class="row list-offer-right-large" style="padding:0px 0px; border-width:0 0 0 0;">
+									<div class="row list-offer-right-large" style=" width:100%; padding:0px 0px; border-width:0 0 0 0;">
                     <div class="list-offer-text">
 
 											<div class="row" style="float:left; width:20%; margin-right:10px;">
                       	<img src="images/tmpagent1.jpg" class="img-circle" alt="" style="width:80%; height:80%;"/>
 											</div>
 
-                      <div class="row" style="float:left; width:80%">
+                      <div class="row" style="float:left; width:80%;">
                         <div class="list-offer-h4">
                           <h4 class="list-offer-title"><?=$row[1]?> (<?=$row[3]?>)</h4>
 													<p><?=$row[2]?></p>
@@ -173,7 +173,7 @@
 									var st = $(this).parent().parent().parent().parent().attr('id');
 									var target = st.substring(0,st.length-1);
 									st = $(this).parent().parent().parent().parent();
-									var reply = '<div class="col-xs-12" id="reply-box" style="border:1px solid rgb(224, 224, 224); padding:10px;x">\
+									var reply = '<div class="row list-offer-text" id="reply-box" style="position:relative; border:1px solid rgb(224, 224, 224); padding:10px;x">\
 										<input name="title" id="title" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="제목:">\
 										<textarea id="content" name="content" class="input-full main-input" rows="5" placeholder="내용:"></textarea>\
 										<input type="button" class="pull-right send message-btn" name="" value="보내기" id="'+target+'" onclick="javascript:send(this)">\

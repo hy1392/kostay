@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>"
+	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>";
+	include 'server/dbconnect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,16 +122,21 @@
       </div>
       <!-- /.Page top-bar-wrapper -->
 
-      <?include("config/navbar.html")?>
+      <?include("config/mypage_navbar.html");?>
       <!-- /.mani-menu-cont -->
     </header>
 
+		<?
+			$query="select * from user_wait_list where email='".$_SESSION['id']."' order by time DESC";
+			$result = mysqli_query($conn,$query);
+			$row = mysqli_fetch_array($result);
+		?>
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="margin-top-60 apartment-tabs">
             <div class="tab-header">
-              <h3 class="title-negative-margin" style="display:inline">대기신청</h3>
+              <h3 class="title-negative-margin" style="display:inline">입주신청</h3>
             </div>
 
             <div class="title-separator-primary"></div>
@@ -140,84 +146,97 @@
             <!-- Tab panes -->
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="t1">
+
+								<div style="display:none" id="house" name="<?=$_GET['house']?>"></div>
+								<div style="display:none" id="bed" name="<?=$_GET['bed']?>"></div>
+
                 <div class="row">
+									<!--성별-->
                   <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
-                    <h4 class="title-negative-margin" style="display:inline">성별</h4>
+                    <h4  class="title-negative-margin" style="display:inline">성별</h4>
                     <div class="title-separator-primary"></div>
-                    <select name="country1" class="no-margin bootstrap-select" title="성별:">
-    									<option>여자</option>
-    									<option>남자</option>
+                    <select id="gender" name="country1" class="no-margin bootstrap-select" title="성별:">
+    									<option value="여자" <?if($row['gender']=="여자") echo "selected='selected'"?>>여자</option>
+    									<option value="남자" <?if($row['gender']=="남자") echo "selected='selected'"?>>남자</option>
 								    </select>
                   </div>
+
+									<!--국적-->
                   <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
                     <h4 class="title-negative-margin" style="display:inline">국적</h4>
                     <div class="title-separator-primary"></div>
-                    <select name="country1" class="no-margin bootstrap-select" title="국적:">
-    									<option>한국</option>
-    									<option>중국</option>
-                      <option>일본</option>
-                      <option>호주</option>
-                      <option>영국</option>
-                      <option>미국</option>
-                      <option>캐나다</option>
+                    <select id="nationality" name="country1" class="no-margin bootstrap-select" title="국적:">
+    									<option value="한국" <?if($row['nationality']=="한국") echo "selected='selected'"?>>한국</option>
+    									<option value="중국" <?if($row['nationality']=="중국") echo "selected='selected'"?>>중국</option>
+                      <option value="일본" <?if($row['nationality']=="일본") echo "selected='selected'"?>>일본</option>
+                      <option value="호주" <?if($row['nationality']=="호주") echo "selected='selected'"?>>호주</option>
+                      <option value="영국" <?if($row['nationality']=="영국") echo "selected='selected'"?>>영국</option>
+                      <option value="미국" <?if($row['nationality']=="미국") echo "selected='selected'"?>>미국</option>
+                      <option value="캐나다" <?if($row['nationality']=="캐나다") echo "selected='selected'"?>>캐나다</option>
 								    </select>
                   </div>
+
+									<!--나이-->
                   <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
                     <h4 class="title-negative-margin" style="display:inline">나이</h4>
                     <div class="title-separator-primary"></div>
-                    <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="나이:">
+                    <input name="name" id="age" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="나이:" value="<?=$row['age']?>">
                   </div>
-                  <div class="col-xs-12">
 
-                  </div>
+                  <div class="col-xs-12"></div>
+
+									<!--전화번호-->
                   <div class="col-xs-12 col-sm-5 margin-bottom-30-10">
                     <h4 class="title-negative-margin" style="display:inline">전화번호</h4>
                     <div class="title-separator-primary"></div>
-                    <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="전화번호:">
+                    <input name="name" id="hp" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="전화번호:" value="<?=$row['hp']?>">
                   </div>
+
+									<!--이메일-->
                   <div class="col-xs-12 col-sm-5 margin-bottom-30-10">
                     <h4 class="title-negative-margin" style="display:inline">이메일</h4>
                     <div class="title-separator-primary"></div>
-                    <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="이메일:">
+                    <input name="name" type="text" id="contact_email" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="이메일:" value="<?=$row['contact_email']?>">
                   </div>
+
+									<!--연락처 공개여부-->
                   <div class="col-xs-2 margin-bottom-30-10">
                     <h4 class="title-negative-margin" style="display:inline;">연락처 공개</h4>
                     <div class="title-separator-primary"></div>
-                    <select name="country1" class="no-margin bootstrap-select" title="연락처 공개:">
-                      <option>공개</option>
-                      <option>공개하지 않음</option>
+                    <select id="notify" name="country1" class="no-margin bootstrap-select" title="연락처 공개:">
+                      <option value="공개" <?if($row['notify']=="공개") echo "selected='selected'"?>>공개</option>
+                      <option value="공개하지 않음" <?if($row['notify']=="공개하지 않음") echo "selected='selected'"?>>공개하지 않음</option>
                     </select>
                   </div>
+
+									<!--입주희망일-->
                   <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
                     <h4 class="title-negative-margin" style="display:inline;">입주 희망일</h4>
                     <div class="title-separator-primary"></div>
-                    <input name="name" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="입주 희망일:">
+                    <input name="name" id="movein_date" type="date" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="입주 희망일:" value="<?=$row['movein_date']?>">
                   </div>
+
+									<!--인사말-->
                   <div class="col-xs-12 margin-bottom-30-10">
                     <h4 class="title-negative-margin" style="display:inline">인사말</h4>
                     <div class="title-separator-primary"></div>
-                    <textarea name="name" type="text" rows="3" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="인사말:"></textarea>
+                    <textarea name="name" id="description" type="text" rows="3" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="인사말:"> <?=$row['description']?></textarea>
                   </div>
+
+									<!--확인, 다시작성, 취소 버튼-->
                   <div class="col-xs-12 margin-bottom-30-10 centered-text">
-                    <a href="#" class="button-primary button-shadow xs-100">
+                    <a style="cursor:pointer" onclick="save();" class="btn btn-default xs-100">
       								<span>확인</span>
-      								<div class="button-triangle"></div>
-      								<div class="button-triangle2"></div>
-      								<div class="button-icon"><i class="fa fa-search"></i></div>
       							</a>
-                    <a href="#" class="button-primary button-shadow xs-100">
+                    <a style="cursor:pointer" onclick="window.location.reload(true);" class="btn btn-default xs-100">
       								<span>다시작성</span>
-      								<div class="button-triangle"></div>
-      								<div class="button-triangle2"></div>
-      								<div class="button-icon"><i class="fa fa-search"></i></div>
       							</a>
-                    <a href="#" class="button-primary button-shadow xs-100">
+                    <a style="cursor:pointer" onclick="history.go(-1);" class="btn btn-default xs-100">
       								<span>취소</span>
-      								<div class="button-triangle"></div>
-      								<div class="button-triangle2"></div>
-      								<div class="button-icon"><i class="fa fa-search"></i></div>
       							</a>
                   </div>
+
+
                 </div>
               </div>
             </div>
@@ -226,6 +245,48 @@
         </div>
       </div>
     </div>
+		<?
+			$house_id = $_GET['house'];
+			$bed_id = $_GET['bed'];
+		?>
+		<script>
+		function save(){
+			if($("#gender").val()==""||$("#nationality").val()==""||$("#age").val()==""||$("#hp").val()==""||$("#contact_email").val()==""||$("#notify").val()==""||$("#skip_visit").val()==""||$("#description").val()=="" ||$("#visit_date").val()=="" ||$("#visit_time").val()=="" ||$("#movein_date").val()=="")swal("에러 발생!","양식의 빈 칸을 모두 채운 후 다시 시도해주세요.","error");
+			else{
+				$.ajax({
+					url:"server/wait_list.php",
+					type:"POST",
+					data:{
+						condition : "대기",
+						gender : $("#gender").val(),
+						nationality : $("#nationality").val(),
+						age : $("#age").val(),
+						hp : $("#hp").val(),
+						contact_email : $("#contact_email").val(),
+						notify : $("#notify").val(),
+						visit_date : $("#visit_date").val(),
+						visit_time : $("#visit_time").val(),
+						skip_visit : $("#skip_visit").val(),
+						movein_date : $("#movein_date").val(),
+						description : $("#description").val(),
+						house_id :  $("#house").attr("name"),
+						bed_id : $("#bed").attr("name")
+					},
+					success: function(data){
+						if(data=="대기신청을 요청하였습니다."){
+							var loc = "view_detail.html?house=" + $("#house").attr("name");
+								swal({title:"대기신청 성공!",text:data,type:"success"},function(){location.href = loc;});
+						 }
+						else swal("에러!",data,"warning");
+
+					},
+					error: function(){
+						swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+					}
+				});
+			}
+		}
+		</script>
 
     <footer class="small-cont">
       <div class="container">
@@ -271,6 +332,12 @@
   <!-- template scripts -->
   <script type="text/javascript" src="mail/validate.js"></script>
   <script type="text/javascript" src="js/apartment.js"></script>
+
+	<!--로그인, 회원가입, 비밀번호 찾기-->
+	<?include("config/user.html")?>
+	<!--sweetalert2-->
+	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+	<script src="js/sweetalert.min.js"></script>
 
   <!-- google maps initialization -->
   <script type="text/javascript">

@@ -18,9 +18,11 @@
 .btn-fit{
   width: 100%;
 }
+
 .list-offer-text a{
-  color: white !important;
+  /*color: white !important;*/
 }
+
 .list-offer-text a:hover{
   color: #3797dd !important;
 }

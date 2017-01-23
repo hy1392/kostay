@@ -252,8 +252,9 @@
 							</div>
 							<!-- .일반사항 탭 콘텐츠 -->
 
+
 							<!-- 객실 탭 콘텐츠 -->
-							<div role="tabpanel" class="tab-pane view-detail-tab-pane" id="rooms-info">
+							<div role="tabpanel" class="tab-pane view-detail-tab-pane" id="rooms-info" name="">
 
 								<div class="col-xs-12 margin-bottom-100">
 
@@ -347,6 +348,13 @@
 									</div>
 									<?}?>
 									<script>
+									$(".btn-request").on("click",function(){
+										var loc;
+										if($(this).text()=="신청") loc="request_movein.html?";
+										else loc="request_wait.html?";
+										loc+= "bed="+$(this).attr("name")+"&house="+"<?=$target?>";
+										$(location).attr("href",loc);
+									});
 										/*$(".btn-request").on("click", function(){
 											$.ajax({
 												url:"server/wait_list.php",

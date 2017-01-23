@@ -1,4 +1,5 @@
 <!-- Login modal -->
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <div class="modal fade apartment-modal" id="login-modal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -12,8 +13,8 @@
         <input id="id" name="login" type="email" class="input-full main-input login_modal" placeholder="이메일" />
         <input id="pwd" name="password" type="password" class="input-full main-input login_modal" placeholder="비밀번호" />
         </form>
-        <script>
 
+        <script>
           function loginchk() {
             var id = document.getElementById("id").value;
             var pwd = document.getElementById("pwd").value;
@@ -48,6 +49,57 @@
           }
         </script>
 
+        <script>
+            $(document).ready(function() {
+                Kakao.init("dad3e558adfeb984fe09dff44314615d");
+
+
+                function getKakaotalkUserProfile() {
+                    Kakao.API.request({
+                        url: '/v1/user/me',
+                        success: function(res) {
+
+                          //location.href="change_permission.html";
+
+                          /*
+                            $("#kakao-profile").append(res.properties.email);
+                            $("#kakao-profile").append($("<img/>", {
+                                "src": res.properties.profile_image,
+                                "alt": res.properties.nickname + "님의 프로필 사진"
+                            }));
+                          */
+
+
+                        },
+                        fail: function(error) {
+                            console.log(error);
+                        }
+                    });
+                }
+
+                function createKakaotalkLogin() {
+                  $('#kakao-login').click(function() {
+                        Kakao.Auth.login({
+                            persistAccessToken: true,
+                            persistRefreshToken: true,
+                            success: function(authObj) {
+                                getKakaotalkUserProfile();
+                            },
+                            fail: function(err) {
+                                console.log(err);
+                            }
+                        });
+                    });
+                }
+
+                if (Kakao.Auth.getRefreshToken() != undefined && Kakao.Auth.getRefreshToken().replace(/ /gi, "") != "") {
+                    createKakaotalkLogout();
+                } else {
+                    createKakaotalkLogin();
+                }
+            });
+        </script>
+
         <a href="#" onclick="javascript:loginchk();" class="button-primary button-shadow button-full">
           <span>로그인</span>
           <div class="button-triangle"></div>
@@ -57,14 +109,21 @@
         <a href="#" class="forgot-link pull-right">비밀번호를 잊으셨나요?</a>
         <div class="clearfix"></div>
         <p class="login-or">OR</p>
-        <a href="#" class="facebook-button">
-          <i class="fa fa-facebook"></i>
-          <span>Login with Facebook</span>
+
+        <a id="kakao-login" class="google-button" style="background-color:#ffef3f; border:1px solid #ffef3f;">
+          <span style="color:#333;">카카오톡로그인</span>
         </a>
+
+        <a href="#" class="facebook-button margin-top-15">
+          <i class="fa fa-facebook"></i>
+          <span>페이스북로그인</span>
+        </a>
+
         <a href="#" class="google-button margin-top-15">
           <i class="fa fa-google-plus"></i>
-          <span>Login with Google</span>
+          <span>구글로그인</span>
         </a>
+
         <p class="modal-bottom">아직 Kostay 계정이 없으신가요? <a href="#" class="register-link">회원가입</a></p>
       </div>
     </div>

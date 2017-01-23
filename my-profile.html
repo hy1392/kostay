@@ -29,6 +29,8 @@
 		<link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
 		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 
+		<!-- jQeury -->
+		<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 		<!--sweetalert2-->
 		<script src="js/sweetalert.min.js"></script>
 
@@ -222,7 +224,7 @@
 							<div class="row margin-top-60"></div>
 							</div>
 
-							<div class="col-xs-12 col-md-3">
+							<div class="col-xs-12 col-md-3" style="padding-left:5px;">
 								<div class="sidebar">
 									<h3 class="sidebar-title">마이페이지</h3>
 									<div class="title-separator-primary"></div>
@@ -244,12 +246,29 @@
 									</div>
 
 									<div class="center-button-cont margin-top-30">
-										<a href="alarm.html" class="button-alternative button-shadow button-full">
-											<span style="font-size:14px;">알림 바로가기</span>
-											<div class="button-triangle"></div>
-											<div class="button-triangle2"></div>
-											<div class="button-icon"><i class="fa fa-bell-o"></i></div>
-										</a>
+											<?
+												if($_SESSION['flag'] == "3"){
+											?>
+													<a href="alarm.html" class="button-alternative button-shadow button-full">
+														<span style="font-size:14px;">알림 바로가기</span>
+														<div class="button-triangle"></div>
+														<div class="button-triangle2"></div>
+														<div class="button-icon"><i class="fa fa-bell-o"></i></div>
+													</a>
+											<?
+												}
+												else{
+											?>
+													<a href="pay-adv.html" class="button-alternative button-shadow button-full">
+														<span style="font-size:14px;">결제/광고 바로가기</span>
+														<div class="button-triangle"></div>
+														<div class="button-triangle2"></div>
+														<div class="button-icon"><i class="fa fa-bell-o"></i></div>
+													</a>
+											<?
+												}
+											?>
+
 									</div>
 									<div class="center-button-cont margin-top-15">
 										<a href="my-profile.html" class="button-alternative button-shadow button-full">

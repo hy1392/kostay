@@ -59,8 +59,18 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
 CREATE TABLE IF NOT EXISTS `user_movein_list` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(500) NOT NULL COMMENT '사용자아이디',
+  `gender` varchar(500) NOT NULL COMMENT '성별 남자, 여자',
+  `nationality` varchar(500) NOT NULL COMMENT '국적',
+  `age` varchar(500) NOT NULL COMMENT '나이',
+  `hp` varchar(500) NOT NULL COMMENT '핸드폰',
+  `contact_email` varchar(500) NOT NULL COMMENT '연락용 이메일',
+  `notify` varchar(500) NOT NULL COMMENT '연락처 공개 여부',
+  `visit_date` datetime  COMMENT '방문 희망일',
+  `movein_date` date  COMMENT '입주 희망일',
+  `skip_visit` varchar(500) NOT NULL COMMENT '방문 희망일 생략',
+  `description` varchar(500) NOT NULL COMMENT '인사말',
   `house_id` varchar(500) NOT NULL COMMENT '하우스 아이디(운영자아이디_숫자)',
-    `bed_id` varchar(500) NOT NULL COMMENT '침대 아이디(방 아이디_숫자)',
+  `bed_id` varchar(500) NOT NULL COMMENT '침대 아이디(방 아이디_숫자)',
   `time` datetime NOT NULL COMMENT '요청시간',
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='사용자 입주대기' AUTO_INCREMENT=4 ;
@@ -72,8 +82,16 @@ CREATE TABLE IF NOT EXISTS `user_movein_list` (
 CREATE TABLE IF NOT EXISTS `user_wait_list` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(500) NOT NULL COMMENT '사용자아이디',
+  `gender` varchar(500) NOT NULL COMMENT '성별 남자, 여자',
+  `nationality` varchar(500) NOT NULL COMMENT '국적',
+  `age` varchar(500) NOT NULL COMMENT '나이',
+  `hp` varchar(500) NOT NULL COMMENT '핸드폰',
+  `contact_email` varchar(500) NOT NULL COMMENT '연락용 이메일',
+  `notify` varchar(500) NOT NULL COMMENT '연락처 공개 여부',
+  `movein_date` date  COMMENT '입주 희망일',
+  `description` varchar(500) NOT NULL COMMENT '인사말',
   `house_id` varchar(500) NOT NULL COMMENT '하우스 아이디(운영자아이디_숫자)',
-    `bed_id` varchar(500) NOT NULL COMMENT '침대 아이디(방 아이디_숫자)',
+  `bed_id` varchar(500) NOT NULL COMMENT '침대 아이디(방 아이디_숫자)',
   `time` datetime NOT NULL COMMENT '요청시간',
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='사용자 대기리스트' AUTO_INCREMENT=4 ;

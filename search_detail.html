@@ -201,12 +201,49 @@
 							<div class="row">
 								<?
 									include 'server/dbconnect.php';
-									$query = "select count(*) from house_main";
+									$query_house = array();
+									$query_room = array();
+									if($_GET['search_region']!=null) array_push($query_house, " address like '%".$_GET['search_region']."%' ");
+									if($_GET['search_gender']!=null) array_push($query_house, " `resident_gender` = ".$_GET['search_gender']." ");
+
+									if($_GET['search_type']!=null) {
+
+										if($_GET['search_type']==0){
+
+										}
+
+										elseif($_GET['search_type']==3){
+											array_push($query_room, " `person` >= ".$_GET['search_type']." ");
+										}
+
+										else{
+											array_push($query_room, " `person` = ".$_GET['search_type']." ");
+										}
+
+									}
+									$query = "select * from house_main ";
+									$query_count = "select count(*) from house_main";
+									for($i=0; $i<count($query_house);++$i){
+										if($i==0) {
+												$query .= " where ";
+												$query_count .= " where ";
+										}
+										else{
+											$query .= " and ";
+											$query_count .= " and ";
+										}
+										$query .= $query_house[$i];
+										$query_count .= $query_house[$i];
+									}
+									$query .=  " order by register_time DESC, house_title ASC";
+									$query_count .=  " order by register_time DESC, house_title ASC";
 									$result = mysqli_query($conn, $query);
-									$row = mysqli_fetch_array($result)
+									$row = mysqli_fetch_array($result);
+									$result_count = mysqli_query($conn, $query_count);
+									$row_count = mysqli_fetch_array($result_count);
 								?>
 								<div class="col-xs-12 col-lg-6">
-									<h2>총 <?=$row[0]?>개의 결과가 검색되었습니다.</h2>
+									<h2>총 <?=$row_count[0]?>개의 결과가 검색되었습니다.</h2>
 								</div>
 								<div class="col-xs-12 col-lg-6">
 									<div class="order-by-container">
@@ -228,8 +265,6 @@
 								<div class="col-xs-12">
 									<!-- Item -->
 									<?
-									 include 'server/dbconnect.php';
-									 $query = "select * from house_main order by register_time DESC, house_title ASC";
 								   $result = mysqli_query($conn, $query);
 									 while($row = mysqli_fetch_array($result)){
 										 $query = "select sum(person), max(rent), min(rent) from house_rooms where house_id='".$row['house_id']."'";
@@ -257,7 +292,7 @@
 										<!-- .Item 사진 -->
 										<!-- Item 정보 -->
 										<div class="list-offer-right-large" name="<?=$row['house_id']?>">
-											<div class="list-offer-text">
+											<div class="list-offer-text" style="padding-top:10px;">
 												<div class="clearfix"></div>
 
 												<div class="row">
@@ -269,51 +304,64 @@
 												</div>
 
 												<div class="row text-right search-price-div">
-													<div class="col-sm-12 col-md-12">
-														<span class="search-price">최소가격 : </span>
+													<div class="col-xs-12 col-lg-12 col-sm-12 col-md-12">
+														<span class="search-price">렌트비 : </span>
 														<span class="mini-price"><?=$row2[2]?></span>
 														&nbsp;&nbsp;~&nbsp;&nbsp;
-														<span class="search-price">최대가격 : </span>
 														<span class="max-price"><?=$row2[1]?></span>
 													</div>
 												</div>
 
-												<div class="row">
-													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
-														<p>등록일 : <?=$row['register_time']?></p>
+												<div class="row margin-top-10">
+													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
+														<p style="font-size:1.4em;">등록일 : <?=$row['register_time']?></p>
 													</div>
-													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
-														<p>입실일 : <?=$row5[0]?></p>
+													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
+														<p style="font-size:1.4em;">입실일 : <?=$row5[0]?></p>
 													</div>
-													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
-														<p>룸 : <?=$row['number_of_rooms']?>개</p>
-													</div>
-													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
-														<h5 class="title-negative-margin" style="display:inline">
-															<?=$row5[0]?> ~ 입주가능
-														</h5>
-														<div class="title-separator-primary"></div>
+													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
+														<p style="font-size:1.4em;">
+															룸&nbsp;
+															<i class="fa fa-bed"></i>&nbsp;
+															<?=$row['number_of_rooms']?>
+														</p>
 													</div>
 												</div>
 
 												<div class="row">
-													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
-														<p>거리 : </p>
-														<p>렌트비 : </p>
+													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
+														<p style="font-size:1.4em;">거리 : </p>
 													</div>
-													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
-														<p>거주인원 : <?=$row4[0]?></p>
+													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
+														<p style="font-size:1.4em;">
+															거주인원&nbsp;
+															<i class="fa fa-user"></i>&nbsp;
+															<?=$row4[0]?>
+														</p>
 													</div>
-													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
-														<p>정원 : <?=$row2[0]?></p>
+													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
+														<p style="font-size:1.4em;">
+															정원&nbsp;
+															<i class="fa fa-users"></i>&nbsp;
+															 <?=$row2[0]?></p>
 													</div>
-													<div class="col-xs-12 col-sm-3 col-md-3 text-left fixed-middle">
-														<a class="btn btn-danger btn-lg custom-btn-danger" style="cursor:pointer" name="<?=$row['house_id']?>" onclick="wish(this)">
-															<i class="fa fa-heart-o fa-lg"></i> <span>찜하기</span>
+												</div>
+
+												<div class="row">
+													<div class="col-xs-12 clo-lg-8 col-sm-8 col-md-8 text-left fixed-middle" style="height:100%;">
+														<p class="title-negative-margin" style=" font-size:1.4em; display:inline">
+															<?=$row5[0]?> 부터 <strong>입주가능</strong>
+														</p>
+													</div>
+
+													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
+														<a class="btn btn-danger" style="background-color:#fd3b3b; cursor:pointer; width:100%; height:50%;" name="<?=$row['house_id']?>" onclick="wish(this)">
+															<span style="font-size:1.2em; font-weight:bold; color:white;"><i class="fa fa-heart-o fa-lg"></i>&nbsp;찜하기</span>
 														</a>
 													</div>
-
 												</div>
+
+
 
 												<div class="clearfix"></div>
 											</div>

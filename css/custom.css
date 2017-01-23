@@ -287,6 +287,10 @@
   margin-bottom: 500px;
 }
 
+.margin-top-30{
+  margin-top: 30px;
+}
+
 .margin-top-10{
   margin-top: 10px;
 }
@@ -316,23 +320,24 @@
 
 .mini-price{
   font-family: "NanumGothic";
-  font-size: 20px;
+  font-size: 1.2em;
   font-weight: bold;
-  color: #867e7e;
+  color: #5d5d5d;
 }
 
 .max-price{
   font-family: "NanumGothic";
-  font-size: 24px;
+  font-size: 1.5em;
   font-weight: bold;
-  color: #867e7e;
+  color: #5d5d5d;
 }
 
 .custom-btn-danger{
   width: 100% !important;
   border-radius: 0px;
-  background-color: #ff3838;
-  border: 1px solid #ff3838;
+  /*background-color: #ff3838;
+  border: 1px solid #ff3838;*/
+  color: #5d5d5d !important;
 }
 /* .검색 페이지 */
 
@@ -519,7 +524,7 @@
 
 .alarm-info-container img{
   float: left;
-  margin-left: 150px;
+  margin-left: 40px;
   margin-right: 80px;
 }
 
@@ -729,4 +734,151 @@
   font-weight: bold;
   color: #5d5d5d;
 }
-/* .알림설정*/
+/* .알림설정 */
+
+/* 운영자 페이지 */
+.row{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+#integration-list {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    /*margin: 0 auto;*/
+    display: table;
+}
+#integration-list ul {
+    padding: 0;
+    margin: 20px 0;
+    color: #555;
+}
+#integration-list ul > li {
+    list-style: none;
+    border-top: 1px solid #ddd;
+    display: block;
+    padding: 15px;
+    overflow: hidden;
+}
+#integration-list ul:last-child {
+    border-bottom: 1px solid #ddd;
+}
+#integration-list ul > li:hover {
+    background: #efefef;
+}
+.expand {
+    display: block;
+    text-decoration: none;
+    color: #555;
+    cursor: pointer;
+}
+h2 {
+    padding: 0;
+    margin: 0;
+    font-size: 17px;
+    font-weight: 400;
+}
+span {
+    font-size: 12.5px;
+}
+#left,#right{
+    display: table;
+}
+#sup{
+    display: table-cell;
+    vertical-align: middle;
+    width: 80%;
+}
+
+.detail a {
+    text-decoration: none;
+    color: #C0392B;
+    border: 1px solid #C0392B;
+    padding: 6px 10px 5px;
+    font-size: 14px;
+}
+
+.detail {
+    margin: 10px 0 10px 0px;
+    display: none;
+    line-height: 22px;
+    height: 150px;
+}
+.detail span{
+    margin: 0;
+}
+.right-arrow {
+    margin-top: 12px;
+    margin-left: 20px;
+    width: 10px;
+    height: 100%;
+    float: right;
+    font-weight: bold;
+    font-size: 20px;
+}
+.icon {
+    height: 75px;
+    width: 75px;
+    float: left;
+    margin: 0 15px 0 0;
+}
+/* .운영자 페이지*/
+
+/* 하우스 등록 */
+.register-cr-checkbox{
+  position: none;
+}
+
+.register-cr-checkbox .cr{
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+}
+
+.register-cr-checkbox .cr .cr-icon{
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+}
+
+.register-cr-checkbox label input[type="checkbox"],
+.register-cr-checkbox label input[type="checkbox"] + .cr > .cr-icon{
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.register-cr-checkbox label input[type="checkbox"]:checked + .cr > .cr-icon{
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+.register-cr-checkbox label input[type="checkbox"]:disabled + .cr{
+    opacity: .5;
+}
+
+.register_house_info{
+  margin-top: 10px;
+}
+
+.register_house_in a {
+    text-decoration: none !important;
+    color: #C0392B !important;
+    border: 1px solid #C0392B !important;
+    padding: 6px 10px 5px !important;
+    font-size: 14px !important;
+}
+
+.register_house_btn span{
+  font-size: 1.0em;
+  font-weight: bold;
+  color: #5d5d5d;
+}
+/* 하우스 등록 */

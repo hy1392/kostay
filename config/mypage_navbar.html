@@ -1,3 +1,5 @@
+<!-- jQeury -->
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <nav class="navbar main-menu-cont">
   <div class="container">
     <div class="navbar-header">
@@ -16,7 +18,7 @@
       <ul class="nav navbar-nav navbar-right">
         <?if(!isset($_SESSION['id'])){?>
           <li>
-            <a href="search_detail.html">검색</a>
+            <a href="search_detail.html?search_region=&search_gender=&search_type=">검색</a>
           </li>
 
 
@@ -82,7 +84,7 @@
 
           <?if($_SESSION['flag']==1 || $_SESSION['flag']==3){?>
           <li>
-            <a href="search_detail.html">검색</a>
+            <a href="search_detail.html?search_region=&search_gender=&search_type=">검색</a>
           </li>
 
           <li class="dropdown">
@@ -125,6 +127,10 @@
           <?}
           else if($_SESSION['flag']==2){?>
             <li>
+              <a href="search_detail.html?search_region=&search_gender=&search_type=">검색</a>
+            </li>
+
+            <li>
               <a href="register_house.html">하우스 등록</a>
             </li>
 
@@ -154,7 +160,7 @@
             </li>
 
             <li>
-              <a href="my-profile.html">결제/광고</a>
+              <a href="pay-adv.html">결제/광고</a>
             </li>
 
             <li>
