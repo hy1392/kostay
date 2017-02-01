@@ -111,7 +111,7 @@
 
 								<?
 								include 'server/dbconnect.php';
-								$query = "select * from user_wait_list order by time DESC";
+								$query = "select * from user_wait_list where email='".$_SESSION['id']."' order by time DESC";
 								$result = mysqli_query($conn, $query);
 								while($row = mysqli_fetch_array($result)){
 									$query = "select sum(person), max(rent), min(rent) from house_rooms where house_id='".$row['house_id']."'";

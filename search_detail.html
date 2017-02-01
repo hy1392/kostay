@@ -243,7 +243,7 @@
 									$row_count = mysqli_fetch_array($result_count);
 								?>
 								<div class="col-xs-12 col-lg-6">
-									<h2>총 <?=$row_count[0]?>개의 결과가 검색되었습니다.</h2>
+									<h3>총 <?=$row_count[0]?>개의 결과가 검색되었습니다.</h3>
 								</div>
 								<div class="col-xs-12 col-lg-6">
 									<div class="order-by-container">
@@ -297,7 +297,7 @@
 
 												<div class="row">
 													<div class="list-offer-h4 col-sm-12 col-md-12">
-														<i class="fa fa-map-marker list-offer-localization hidden-xs"></i>
+														<!--<strong><i class="fa fa-home list-offer-localization" style="font-size:1.4em;"></i></strong>-->
 														<h4 class="list-offer-title"><?=$row['house_title']?>
                         		</h4>
 													</div>
@@ -306,18 +306,20 @@
 												<div class="row text-right search-price-div">
 													<div class="col-xs-12 col-lg-12 col-sm-12 col-md-12">
 														<span class="search-price">렌트비 : </span>
-														<span class="mini-price"><?=$row2[2]?></span>
+														<span class="mini-price"><?=$row2[2]?>원</span>
 														&nbsp;&nbsp;~&nbsp;&nbsp;
-														<span class="max-price"><?=$row2[1]?></span>
+														<span class="max-price"><?=$row2[1]?>원</span>
 													</div>
 												</div>
 
 												<div class="row margin-top-10">
 													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-														<p style="font-size:1.4em;">등록일 : <?=$row['register_time']?></p>
+														<p style="font-size:1.4em;">등록일&nbsp;
+														<i class="fa fa-calendar"></i>&nbsp;&nbsp;<?=$row['register_time']?></p>
 													</div>
 													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-														<p style="font-size:1.4em;">입실일 : <?=$row5[0]?></p>
+														<p style="font-size:1.4em;">입실일&nbsp;
+														<i class="fa fa-clock-o"></i>&nbsp;<?=$row5[0]?></p>
 													</div>
 													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
 														<p style="font-size:1.4em;">
@@ -330,7 +332,8 @@
 
 												<div class="row">
 													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-														<p style="font-size:1.4em;">거리 : </p>
+														<p style="font-size:1.4em;">거리&nbsp;
+														<i class="fa fa-road"></i>&nbsp;&nbsp;-</p>
 													</div>
 													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
 														<p style="font-size:1.4em;">

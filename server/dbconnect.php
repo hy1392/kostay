@@ -4,11 +4,15 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 $db_host = "localhost";
-  //$db_host = "localhost";
+/*
   $db_user = "root";
-  //$db_passwd = "apmsetup";
   $db_passwd = "root";
   $db_name = "kostay";
+*/
+  $db_user = "kosta680";
+  $db_passwd = "s1qckf4jht";
+  $db_name = "kosta680_kostay";
+
   $conn = mysqli_connect($db_host, $db_user, $db_passwd, $db_name);
   mysqli_set_charset($conn,"utf8");
 
