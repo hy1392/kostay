@@ -375,17 +375,21 @@
 										</a>
 
 										<div class="small-triangle"></div>
-										<div class="small-triangle2"></div>
-										<a class="small-icon" href="agency-details-right-sidebar.html"><i class="jfont fa-2x">&#xe804;</i></a>
 									</div>
 									<?}?>
+									<div class="condition-checker" value="<?if(isset($_SESSION['id'])) echo "1"; ?>"></div>
 									<script>
 									$(".btn-request").on("click",function(){
 										var loc;
-										if($(this).text()=="신청") loc="request_movein.html?";
-										else loc="request_wait.html?";
-										loc+= "bed="+$(this).attr("name")+"&house="+"<?=$target?>";
-										$(location).attr("href",loc);
+										if($(".condition-checker").attr("value")==1){
+											if($(this).text()=="신청") loc="request_movein.html?";
+											else loc="request_wait.html?";
+											loc+= "bed="+$(this).attr("name")+"&house="+"<?=$target?>";
+											$(location).attr("href",loc);
+										}
+										else{
+											swal("에러!","로그인이 필요한 서비스입니다. 로그인 후 다시 시도해주세요.","warning");
+										}
 									});
 										/*$(".btn-request").on("click", function(){
 											$.ajax({
@@ -554,7 +558,7 @@
 
 		<!--small footer-->
 		<?include("config/footer.html")?>
-		
+
   </div>
 
   <!-- Move to top button -->

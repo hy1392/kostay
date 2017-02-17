@@ -196,7 +196,7 @@
                   <div class="col-xs-12 col-sm-5 margin-bottom-30-10">
                     <h4 class="title-negative-margin" style="display:inline">이메일</h4>
                     <div class="title-separator-primary"></div>
-                    <input name="name" type="text" id="contact_email" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="이메일:" value="<?=$row['contact_email']?>">
+                    <input name="name" type="text" id="contact_email" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="이메일:" value="<?=$_SESSION['id']?>">
                   </div>
 
 									<!--연락처 공개여부-->
@@ -231,7 +231,7 @@
                   <div class="col-xs-12 col-sm-2 margin-bottom-30-10">
                     <h4 class="title-negative-margin" style="display:inline;">생략 여부</h4>
                     <div class="title-separator-primary"></div>
-                    <select id="skip_visit" name="country1" class="no-margin bootstrap-select" title="생략:">
+                    <select id="skip_visit" name="country1" class="no-margin bootstrap-select" title="생략 여:">
                       <option value="생략" <?if($row['skip_visit']=="생략") echo "selected='selected'"?>>생략</option>
                       <option value="생략하지 않음" <?if($row['skip_visit']=="생략하지 않음") echo "selected='selected'"?>>생략하지 않음</option>
 								    </select>
@@ -256,7 +256,8 @@
                     <a style="cursor:pointer" onclick="save();" class="btn btn-default xs-100">
       								<span>확인</span>
       							</a>
-                    <a style="cursor:pointer" onclick="window.location.reload(true);" class="btn btn-default xs-100">
+                    <!-- <a style="cursor:pointer" onclick="window.location.reload(true);" class="btn btn-default xs-100"> -->
+										<a style="cursor:pointer" onclick="reset();" class="btn btn-default xs-100">
       								<span>다시작성</span>
       							</a>
                     <a style="cursor:pointer" onclick="history.go(-1);" class="btn btn-default xs-100">
@@ -314,11 +315,17 @@
 				});
 			}
 		}
+
+		function reset(){
+			$("input").val('');
+			$("textarea").val('');
+			$("#contact_email").val("<?=$_SESSION['id']?>");
+		}
 		</script>
 
 		<!--small footer-->
 		<?include("config/footer.html")?>
-		
+
   </div>
 
   <!-- Move to top button -->
