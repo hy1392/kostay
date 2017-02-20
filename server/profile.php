@@ -6,10 +6,10 @@
     echo "업로드할 파일이 잘못되었습니다. 파일을 확인하시고 다시 첨부해 주세요";
   }
   else{
-    $filename=date('Y/m/d')."_".date('H:i:s').$_FILES['file']['error'];
+    $filename=$_SESSION['id'];
     move_uploaded_file($_FILES['file']['tmp_name'], 'user_profile/'.$filename);
   }
-  $loc='user_profile/'.$_FILES['file']['name'];
+  $loc='user_profile/'.$filename;
   if(isset($condition)){
     $query = "select * from user_profile where email='".$_SESSION['id']."'";
     $result = mysqli_query($conn, $query);
