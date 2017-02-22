@@ -126,9 +126,27 @@
 								 $query = "select * from house_main where user_id='".$_SESSION['id']."'";
 								 $result = mysqli_query($conn, $query);
 								 while($row = mysqli_fetch_array($result)){
-									 $query = "select sum(person), max(rent), min(rent)from house_rooms where house_id='".$row['house_id']."'";
+									 $query = "select sum(person), max(rent), min(rent) from house_rooms where house_id='".$row['house_id']."'";
 									 $result2 = mysqli_query($conn, $query);
-									 $row2 = mysqli_fetch_row($result2);
+									 $row2 = mysqli_fetch_array($result2);
+									 $roomIdQuery = "select room_id from house_rooms where house_id='".$row['house_id']."';";
+									 $roomIdResult = mysqli_query($conn, $roomIdQuery);
+									 $roomCondition="";
+									 $isFirst=true;
+									 while($roomIdRow = mysqli_fetch_array($roomIdResult)){
+										 if($isFirst){
+											 $isFirst=false;
+											 $toAdd="room_id = '".$roomIdRow[0]."'";
+											 $roomCondition.=$toAdd;
+										 }
+										 else{
+											 $toAdd="or room_id = '".$roomIdRow[0]."'";
+											 $roomCondition.=$toAdd;
+										 }
+									 }
+									$vacantQuery = "select min(vacant) from house_beds where (".$roomCondition.") and `condition`=2;";
+									$vacantResult = mysqli_query($conn, $vacantQuery);
+									$vacantRow = mysqli_fetch_array($vacantResult);
 								?>
 								<div class="clo-lg-6 col-md-6 col-sm-6 col-xs-12">
 									<div class="list-offer">
@@ -182,7 +200,7 @@
 														<p style="font-size:1.2em;">정원&nbsp;<i class="fa fa-users"></i>&nbsp;&nbsp;<?=$row2[0]?></p>
 													</div>
 													<div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 register_house_in text-left fixed-middle">
-														<p style="font-size:1.2em;"><a>2017-01-02 부터 입주가능</a></p>
+														<p style="font-size:1.2em;"><a><? if($vacantRow[0]!=null){echo $vacantRow[0]." 부터 입주가능";}else{echo "공실 예정일이 없습니다.";}?></a></p>
 													</div>
 												</div>
 
@@ -284,7 +302,7 @@
 
 			<!--small footer-->
 			<?include("config/footer.html")?>
-			
+
 		</div>
 
 		<!-- Move to top button -->

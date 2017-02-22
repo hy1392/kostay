@@ -276,9 +276,24 @@
 										 $query = "select count(*) from house_beds where room_id='".$row3[0]."' and `condition`!=3;";
 										 $result4 = mysqli_query($conn, $query);
 										 $row4 = mysqli_fetch_row($result4);
-										 $query = "select min(vacant) from house_beds where room_id='".$row3[0]."' and `condition`=2;";
-										 $result5 = mysqli_query($conn, $query);
-										 $row5 = mysqli_fetch_row($result5);
+										 $roomIdQuery = "select room_id from house_rooms where house_id='".$row['house_id']."';";
+										 $roomIdResult = mysqli_query($conn, $roomIdQuery);
+										 $roomCondition="";
+										 $isFirst=true;
+										 while($roomIdRow = mysqli_fetch_array($roomIdResult)){
+											 if($isFirst){
+												 $isFirst=false;
+												 $toAdd="room_id = '".$roomIdRow[0]."'";
+												 $roomCondition.=$toAdd;
+											 }
+											 else{
+												 $toAdd="or room_id = '".$roomIdRow[0]."'";
+												 $roomCondition.=$toAdd;
+											 }
+										 }
+										$vacantQuery = "select min(vacant) from house_beds where (".$roomCondition.") and `condition`=2;";
+										$vacantResult = mysqli_query($conn, $vacantQuery);
+										$vacantRow = mysqli_fetch_array($vacantResult);
 									?>
 									<div class="list-offer">
 										<!-- Item 사진 -->
@@ -319,7 +334,7 @@
 													</div>
 													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
 														<p style="font-size:1.4em;">입실일&nbsp;
-														<i class="fa fa-clock-o"></i>&nbsp;<?=$row5[0]?></p>
+														<i class="fa fa-clock-o"></i>&nbsp;<?=$vacantRow[0]?></p>
 													</div>
 													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
 														<p style="font-size:1.4em;">
@@ -353,7 +368,7 @@
 												<div class="row">
 													<div class="col-xs-12 clo-lg-8 col-sm-8 col-md-8 text-left fixed-middle" style="height:100%;">
 														<p class="title-negative-margin" style=" font-size:1.4em; display:inline">
-															<?=$row5[0]?> 부터 <strong>입주가능</strong>
+															<? if($vacantRow[0]!=null){echo $vacantRow[0]." 부터 <strong>입주가능</strong>";}else{echo "공실 예정일이 없습니다.";}?>
 														</p>
 													</div>
 

@@ -385,7 +385,8 @@
 											if($(this).text()=="신청") loc="request_movein.html?";
 											else loc="request_wait.html?";
 											loc+= "bed="+$(this).attr("name")+"&house="+"<?=$target?>";
-											$(location).attr("href",loc);
+											// $(location).attr("href",loc);
+											window.open(loc,"popupWindow",'height=900,width=1080');
 										}
 										else{
 											swal("에러!","로그인이 필요한 서비스입니다. 로그인 후 다시 시도해주세요.","warning");

@@ -62,69 +62,7 @@
   <div class="loader-bg"></div>
   <div id="wrapper">
 
-    <!-- Page header -->
-    <header>
-
-      <div class="top-bar-wrapper">
-        <div class="container top-bar">
-          <div class="row">
-            <div class="col-xs-5 col-sm-8">
-              <div class="top-mail pull-left hidden-xs">
-                <span class="top-icon-circle">
-						<i class="fa fa-envelope fa-sm"></i>
-					</span>
-                <span class="top-bar-text">admin@koreatech.ac.kr</span>
-              </div>
-              <div class="top-phone pull-left hidden-xxs">
-                <span class="top-icon-circle">
-						<i class="fa fa-phone"></i>
-					</span>
-                <span class="top-bar-text">(0)-123-456-789</span>
-              </div>
-              <div class="top-localization pull-left hidden-sm hidden-md hidden-xs">
-                <span class="top-icon-circle pull-left">
-						<i class="fa fa-map-marker"></i>
-					</span>
-                <span class="top-bar-text">KOREA</span>
-              </div>
-            </div>
-            <div class="col-xs-7 col-sm-4">
-              <div class="top-social-last top-dark pull-right" data-toggle="tooltip" data-placement="bottom" title="Login/Register">
-                <a class="top-icon-circle" href="#login-modal" data-toggle="modal">
-                  <i class="fa fa-lock"></i>
-                </a>
-              </div>
-
-              <div class="top-social pull-right">
-                <a class="top-icon-circle" href="#">
-                  <i class="fa fa-facebook"></i>
-                </a>
-              </div>
-              <div class="top-social pull-right">
-                <a class="top-icon-circle" href="#">
-                  <i class="fa fa-twitter"></i>
-                </a>
-              </div>
-              <div class="top-social pull-right">
-                <a class="top-icon-circle" href="#">
-                  <i class="fa fa-google-plus"></i>
-                </a>
-              </div>
-              <div class="top-social pull-right">
-                <a class="top-icon-circle" href="#">
-                  <i class="fa fa-skype"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.top-bar -->
-      </div>
-      <!-- /.Page top-bar-wrapper -->
-
-      <?include("config/mypage_navbar.html");?>
-      <!-- /.mani-menu-cont -->
-    </header>
+    
 
 		<?
 			$query="select * from user_movein_list where email='".$_SESSION['id']."' order by time DESC";
@@ -302,9 +240,9 @@
 						bed_id : $("#bed").attr("name")
 					},
 					success: function(data){
-						if(data=="입주신청을 요청하였습니다."){
+						if(data!="처리도중 에러가 발생하였습니다. 잠시후 다시 시도해주세요."){
 							var loc = "view_detail.html?house=" + $("#house").attr("name");
-								swal({title:"입주요청 성공!",text:data,type:"success"},function(){location.href = loc;});
+								swal({title:"입주요청 성공!",text:data,type:"success"},function(){window.close();});
 						 }
 						else swal("에러!",data,"warning");
 

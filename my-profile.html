@@ -118,7 +118,7 @@
 									<div class="title-separator-primary"></div>
 								</div>
 							</div>
-							<form name="agent-from" action="#" enctype="multipart/form-data">
+
 								<div class="row margin-top-60">
 									<div class="col-xs-6 col-xs-offset-3 col-sm-offset-0 col-sm-3 col-md-4">
 										<div class="agent-photos">
@@ -177,50 +177,53 @@
 											</div>
 										</div>
 
-										<script>
-											function saveProfile() {
-												var file_data = $("#agent-photo").prop("files")[0];
-												var form_data = new FormData();
-												form_data.append('file', file_data);
-												form_data.append('description', $("#description").val());
-												form_data.append('condition', "updateProfile");
-												$.ajax({
-													url: "server/profile.php",
-													dataType: 'text',
-													cache: false,
-													contentType: false,
-													processData: false,
-													type: "POST",
-													data: {
-														form_data
-													},
-													success: function(data) {
-														swal("에러 발생!", data, "error");
-													},
-													error: function() {
-														swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
-													}
-												});
-											}
 
-											function saveProfile2() {
-												$.ajax({
-													url: "server/profile.php",
-													type: "POST",
-													data: {
-														description: $("#description").val()
-													},
-													success: function(data) {
-														swal("저장 완료!", data, "success");
-													},
-													error: function() {
-														swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
-													}
-												});
-											}
-										</script>
-							</form>
 
+
+
+							<script>
+								function saveProfile() {
+									var file_data = $("#agent-photo").prop("files")[0];
+									var form_data = new FormData();
+									form_data.append('file', file_data);
+									form_data.append('description', $("#description").val());
+									console.log(form_data);
+									console.log($("#description").val());
+									$.ajax({
+										url: "server/profile.php",
+										dataType: 'text',
+										cache: false,
+										contentType: false,
+										processData: false,
+										type: "post",
+										data: {
+											form_data
+										},
+										success: function(data) {
+											swal("프로필 저장 성공!", data, "success");
+										},
+										error: function() {
+											swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
+										}
+									});
+								}
+
+								function saveProfile2() {
+									$.ajax({
+										url: "server/profile.php",
+										type: "POST",
+										data: {
+											description: $("#description").val()
+										},
+										success: function(data) {
+											swal("저장 완료!", data, "success");
+										},
+										error: function() {
+											swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
+										}
+									});
+								}
+							</script>
 							<div class="row margin-top-60"></div>
 							</div>
 
