@@ -118,11 +118,16 @@
 									<div class="title-separator-primary"></div>
 								</div>
 							</div>
-
+							<?
+							$query = "select * from user_profile where email='".$_SESSION['id']."'";
+							$result = mysqli_query($conn, $query);
+							if(mysqli_num_rows($result)===1){
+								$row=mysqli_fetch_row($result);
+							?>
 								<div class="row margin-top-60">
 									<div class="col-xs-6 col-xs-offset-3 col-sm-offset-0 col-sm-3 col-md-4">
 										<div class="agent-photos">
-											<img src="images/agent3.jpg" id="agent-profile-photo" class="img-responsive" alt="" />
+											<img src="<?if(isset($row[2])) {echo 'server/'.$row[2];}else{echo 'images/agent3.jpg';}?>" id="agent-profile-photo" class="img-responsive" alt="" />
 											<div class="change-photo">
 												<i class="fa fa-pencil fa-lg"></i>
 												<input type="file" name="agent-photo" id="agent-photo" />
@@ -131,12 +136,7 @@
 										</div>
 									</div>
 
-									<?
-									$query = "select * from user_profile where email='".$_SESSION['id']."'";
-								  $result = mysqli_query($conn, $query);
-									if(mysqli_num_rows($result)===1){
-										$row=mysqli_fetch_row($result);
-									?>
+
 									<div class="col-xs-12 col-sm-9 col-md-8">
 										<div class="labelled-textarea">
 											<label for="description">자기소개</label>
@@ -185,20 +185,16 @@
 								function saveProfile() {
 									var file_data = $("#agent-photo").prop("files")[0];
 									var form_data = new FormData();
-									form_data.append('file', file_data);
-									form_data.append('description', $("#description").val());
+									form_data.append("file", file_data);
+									form_data.append("description", $("#description").val());
 									console.log(form_data);
 									console.log($("#description").val());
 									$.ajax({
 										url: "server/profile.php",
-										dataType: 'text',
-										cache: false,
-										contentType: false,
-										processData: false,
-										type: "post",
-										data: {
-											form_data
-										},
+											type: "post",
+											processData: false,  // file전송시 필수
+    	    	           contentType: false,  // file전송시 필수
+											 data: form_data,
 										success: function(data) {
 											swal("프로필 저장 성공!", data, "success");
 										},

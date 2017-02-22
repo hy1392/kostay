@@ -7,7 +7,9 @@
     echo "업로드할 파일이 잘못되었습니다. 파일을 확인하시고 다시 첨부해 주세요";
   }
   else{
-    $filename="test.png";
+    $filename=$file['name'];
+    $tmp_name=explode(".",$filename);
+    $filename=$_SESSION['id'].".".$tmp_name[1];
     move_uploaded_file($file['tmp_name'], 'user_profile/'.$filename);
   }
   $loc='user_profile/'.$filename;
