@@ -125,6 +125,7 @@
 								 include 'server/dbconnect.php';
 								 $query = "select * from house_main where user_id='".$_SESSION['id']."'";
 								 $result = mysqli_query($conn, $query);
+								 $cnt=0;
 								 while($row = mysqli_fetch_array($result)){
 									 $query = "select sum(person), max(rent), min(rent) from house_rooms where house_id='".$row['house_id']."'";
 									 $result2 = mysqli_query($conn, $query);
@@ -160,7 +161,7 @@
 													<div class="list-offer-h4 col-sm-12 col-md-12" style="padding-left:0px;">
 														<div class="register-cr-checkbox">
 										          <label>
-										            <input id="house-check" type="checkbox" value="">
+										            <input id="<?='house-check'.$cnt?>" type="checkbox" value="">
 										            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
 										          </label>
 										        </div>
@@ -212,7 +213,10 @@
 									</div>
 									<!-- .Item -->
 								</div>
-								<?}?>
+								<?
+									$cnt+=1;
+									}
+								?>
 
 								<div class="col-xs-12 register_house_btn">
                   <div class="col-sm-3">

@@ -9,6 +9,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
+
 		<title>Kostay</title>
 		<meta name="keywords" content="Download, Apartment, Premium, Real Estate, HMTL, Site Template, property, mortgage, CSS" />
 		<meta name="description" content="Download Apartment - Premium Real Estate HMTL Site Template" />
@@ -108,79 +109,79 @@
 					<!-- /.mani-menu-cont -->
 			</header>
 
-
 			<section class="adv-search-section no-padding">
 				<div id="offers-map"></div>
-				<form class="adv-search-form" action="#">
+				<form class="adv-search-form" id="adv-search-form" action="search_detail.html" method="post">
 					<div class="adv-search-cont">
 						<div class="container">
 							<div class="row tab-content">
 								<div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
 									<div class="row">
 										<div class="col-xs-12 col-sm-6 col-lg-3">
-											<select name="country1" class="bootstrap-select" title="위치기준:">
-
-								<option>지역기준</option>
-								<option>시티레일기준</option>
-								<option>출퇴근기준</option>
-							</select>
+											<select name="condition" class="bootstrap-select" title="위치기준:">
+												<option>지역기준</option>
+												<option>시티레일기준</option>
+												<option>출퇴근기준</option>
+											</select>
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3">
-											<input name="name" id="name" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="(직접입력)">
+											<input name="search_region" id="name" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="(직접입력)">
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3">
-											<select name="country1" class="bootstrap-select" title="성별:">
-
-								<option>남성</option>
-								<option>여성</option>
-								<option>혼합</option>
-								<option>커플</option>
-							</select>
+											<select name="search_gender" class="bootstrap-select" title="성별:">
+												<option value="1">남성</option>
+												<option value="2">여성</option>
+												<option value="3">혼성</option>
+												<option value="4">커플용</option>
+											</select>
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3">
-											<select name="city1" class="bootstrap-select" title="주택유형:">
-								<option>무관</option>
-								<option>단독주택</option>
-								<option>공동주택(유닛, 아파트, 타운하우스)</option>
-							</select>
+											<select name="search_type" class="bootstrap-select" title="주택유형:">
+												<option value="0">무관</option>
+												<option value="2">단독주택</option>
+												<option value="1">공동주택(유닛, 아파트, 타운하우스)</option>
+											</select>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12 col-sm-6 col-lg-3">
-											<select name="city1" class="bootstrap-select" title="룸타입:">
-								<option>무관</option>
-								<option>1인실</option>
-								<option>2인실</option>
-								<option>3인실 이상</option>
-							</select>
+											<select name="search_room_type" class="bootstrap-select" title="룸타입:">
+												<option value="0">무관</option>
+												<option value="1">1인실</option>
+												<option value="2">2인실</option>
+												<option value="3">3인실 이상</option>
+											</select>
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3">
 											<div class="adv-search-range-cont">
 												<label for="slider-range-price1-value" class="adv-search-label">렌트비:</label>
 												<span>$</span>
-												<input type="text" id="slider-range-price1-value" readonly class="adv-search-amount">
+												<input type="text" name="price" id="slider-range-price1-value" readonly class="adv-search-amount">
 												<div class="clearfix"></div>
 												<div id="slider-range-price1" data-min="0" data-max="300000" class="slider-range"></div>
 											</div>
+										</div>
 
-										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3">
-											<select name="city1" class="bootstrap-select" title="주차:">
-								<option>무관</option>
-								<option>가능</option>
-							</select>
+											<select name="search_park" class="bootstrap-select" title="주차:">
+												<option value="0">무관</option>
+												<option value="1">가능</option>
+											</select>
 										</div>
+
 										<div class="col-xs-12 col-sm-6 col-lg-3">
-											<input name="name" id="datepicker" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="입주일">
+											<input name="search_date" id="datepicker" type="date" class="bootstrap-select input-short2 main-input required,all" placeholder="입주일">
 										</div>
+
 									</div>
 								</div>
 							</div>
 						</div>
+
 						<div class="container">
 							<div class="row">
 								<div class="col-sm-12 col-md-6 col-lg-3 col-md-offset-6 col-lg-offset-9 adv-search-button-cont">
-									<a href="#" class="button-primary pull-right">
+									<a style="cursor:pointer" id="submit_search" class="button-primary width-100">
 										<span>search</span>
 										<div class="button-triangle"></div>
 										<div class="button-triangle2"></div>
@@ -193,6 +194,11 @@
 					</div>
 				</form>
 			</section>
+			<script>
+			 $("#submit_search").on("click",function(){
+				 $("#adv-search-form").submit();
+			 });
+			</script>
 
 			<section class="section-light section-top-shadow">
 				<div class="container">
@@ -203,30 +209,80 @@
 									include 'server/dbconnect.php';
 									$query_house = array();
 									$query_room = array();
-									if($_GET['search_region']!=null) array_push($query_house, " address like '%".$_GET['search_region']."%' ");
-									if($_GET['search_gender']!=null) array_push($query_house, " `resident_gender` = ".$_GET['search_gender']." ");
-
-									if($_GET['search_type']!=null) {
-
-										if($_GET['search_type']==0){
-
-										}
-
-										elseif($_GET['search_type']==3){
-											array_push($query_room, " `person` >= ".$_GET['search_type']." ");
-										}
-
-										else{
-											array_push($query_room, " `person` = ".$_GET['search_type']." ");
-										}
-
+									if(isset($_POST['search_region'])){
+										if($_POST['search_region']!=null) array_push($query_house, " address like '%".$_POST['search_region']."%' ");
 									}
-									$query = "select * from house_main ";
-									$query_count = "select count(*) from house_main";
+
+									if(isset($_POST['search_gender'])){
+										if($_POST['search_gender']!=null) array_push($query_house, " `gender` = '".$_POST['search_gender']."' ");
+									}
+
+									if(isset($_POST['search_type'])){
+										if($_POST['search_type']!=null){
+											if($_POST['search_type']==0){
+												array_push($query_house, " (`house_type`  = '1' or `house_type` = '2')");
+											}
+											else if($_POST['search_type']==1) array_push($query_house, " `house_type` = '1'");
+											else if($_POST['search_type']==2) array_push($query_house, " `house_type` = '2'");
+										}
+									}
+
+									if(isset($_POST['search_room_type'])){
+										if($_POST['search_room_type']!=null){
+											if($_POST['search_room_type']==0){
+
+											}
+											else if($_POST['search_room_type']==1) array_push($query_house, " `type` like '%1%'");
+											else if($_POST['search_room_type']==2) array_push($query_house, " `type` like '%2%'");
+											else if($_POST['search_room_type']==3) array_push($query_house, " `type` like '%3%'");
+										}
+									}
+
+									if(isset($_POST['price'])){
+											$low=explode(" - ", $_POST['price'])[0];
+											$high=explode(" - ", $_POST['price'])[1];
+											array_push($query_house, " (`min_rent` >= ".$low." and `max_rent` <= ".$high.")");
+									}
+
+									if(isset($_POST['search_park'])){
+										if($_POST['search_park']!=null){
+											if($_POST['search_park']=="0"){}
+											else if($_POST['search_park']=="1") array_push($query_house, " `park` = 1");
+										}
+									}
+
+									if(isset($_POST['search_date'])){
+										if($_POST['search_date']!=null){
+											array_push($query_house, " `date` <= '".$_POST['search_date']."'");
+										}
+									}
+
+
+
+									if(isset($_POST['search_type'])){
+										if($_POST['search_type']!=null) {
+
+											if($_POST['search_type']==0){
+
+											}
+
+											elseif($_POST['search_type']==3){
+												array_push($query_room, " `person` >= ".$_POST['search_type']." ");
+											}
+
+											else{
+												array_push($query_room, " `person` = ".$_POST['search_type']." ");
+											}
+
+										}
+									}
+
+									$query = "select * from search ";
+									$query_count = "select count(*) from search";
 									for($i=0; $i<count($query_house);++$i){
 										if($i==0) {
-												$query .= " where ";
-												$query_count .= " where ";
+											$query .= " where ";
+											$query_count .= " where ";
 										}
 										else{
 											$query .= " and ";
@@ -235,8 +291,8 @@
 										$query .= $query_house[$i];
 										$query_count .= $query_house[$i];
 									}
-									$query .=  " order by register_time DESC, house_title ASC";
-									$query_count .=  " order by register_time DESC, house_title ASC";
+									$query .=  " order by register_time DESC";
+									$query_count .=  " order by register_time DESC";
 									$result = mysqli_query($conn, $query);
 									$row = mysqli_fetch_array($result);
 									$result_count = mysqli_query($conn, $query_count);
@@ -260,7 +316,24 @@
 									<div class="title-separator-primary"></div>
 								</div>
 							</div>
-
+							<input type="button" class="save" name="" value="">
+							<script>
+								$(".save").on("click",function(){
+									$.ajax({
+										url:"server/search.php",
+										type:"POST",
+										data:{
+											house_id:'user2@user.ac.kr_3'
+										},
+										success: function(data){
+											swal("에러!",data,"warning");
+										},
+										error: function(){
+											swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+										}
+									});
+								});
+							</script>
 							<div class="row list-offer-row">
 								<div class="col-xs-12">
 									<!-- Item -->
@@ -294,6 +367,9 @@
 										$vacantQuery = "select min(vacant) from house_beds where (".$roomCondition.") and `condition`=2;";
 										$vacantResult = mysqli_query($conn, $vacantQuery);
 										$vacantRow = mysqli_fetch_array($vacantResult);
+										$titleQuery="select house_title,number_of_rooms from house_main where house_id='".$row['house_id']."'";
+										$titleResult=mysqli_query($conn,$titleQuery);
+										$titleRow = mysqli_fetch_array($titleResult);
 									?>
 									<div class="list-offer">
 										<!-- Item 사진 -->
@@ -313,7 +389,7 @@
 												<div class="row">
 													<div class="list-offer-h4 col-sm-12 col-md-12">
 														<!--<strong><i class="fa fa-home list-offer-localization" style="font-size:1.4em;"></i></strong>-->
-														<h4 class="list-offer-title"><?=$row['house_title']?>
+														<h4 class="list-offer-title"><?=$titleRow['house_title']?>
                         		</h4>
 													</div>
 												</div>
@@ -340,7 +416,7 @@
 														<p style="font-size:1.4em;">
 															룸&nbsp;
 															<i class="fa fa-bed"></i>&nbsp;
-															<?=$row['number_of_rooms']?>
+															<?=$titleRow['number_of_rooms']?>
 														</p>
 													</div>
 												</div>

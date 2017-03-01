@@ -17,6 +17,36 @@
       echo "저장 실패! 아직 입력하지 않은 값이 있는지 확인하여 주세요";
       return;
     }
+
+//파일 업로드 부분
+    for($i=1;$i<9;$i++){
+      if(isset($_FILES["upload".$i])){
+        $file=$_FILES["upload".$i];
+        if(0<$file['error']){
+          echo "업로드할 파일이 잘못되었습니다. 파일을 확인하시고 다시 첨부해 주세요";
+        }
+        else{
+          $filename=$file['name'];
+          $tmp_name=explode(".",$filename);
+          $filename=$target."_".$i.".".$tmp_name[1];
+          move_uploaded_file($file['tmp_name'], 'houses/'.$filename);
+        }
+        $loc='houses/'.$filename;
+
+        $query = "select * from house_main_image where email='".$target."_".$i."'";
+        $result = mysqli_query($conn, $query);
+        if(mysqli_num_rows($result)===1){
+          $query = "update house_main_image set `img`='".$loc."' where email = '".$target."_".$i."'";
+          $result = mysqli_query($conn, $query);
+        }
+        else{
+          $query = "insert into house_main_image (`email`, `img`) values('".$target."_".$i."','".$loc."')";
+          $result = mysqli_query($conn, $query);
+        }
+      }
+    }
+
+
     $query = "select * from house_main where house_id='".$target."';";
     $result = mysqli_query($conn, $query);
     if(mysqli_num_rows($result)===1){
@@ -46,8 +76,39 @@
         echo "추가할 수 있는 방의 갯수는 1단계-일반사항에서 입력한 방의 갯수를 초과할 수 없습니다.";
       }
       else{
-        $goods = join(',', $r8);
+        $goods = $r8;
         $room_id = $target."_".$current;
+
+
+        //파일 업로드 부분
+            for($i=9;$i<13;$i++){
+              if(isset($_FILES["upload".$i])){
+                $file=$_FILES["upload".$i];
+                if(0<$file['error']){
+                  echo "업로드할 파일이 잘못되었습니다. 파일을 확인하시고 다시 첨부해 주세요";
+                }
+                else{
+                  $filename=$file['name'];
+                  $tmp_name=explode(".",$filename);
+                  $filename=$room_id."_".($i-8).".".$tmp_name[1];
+                  move_uploaded_file($file['tmp_name'], 'houses/'.$filename);
+                }
+                $loc='houses/'.$filename;
+
+                $query = "select * from house_main_image where email='".$room_id."_".($i-8)."'";
+                $result = mysqli_query($conn, $query);
+                if(mysqli_num_rows($result)===1){
+                  $query = "update house_main_image set `img`='".$loc."' where email = '".$room_id."_".($i-8)."'";
+                  $result = mysqli_query($conn, $query);
+                }
+                else{
+                  $query = "insert into house_main_image (`email`, `img`) values('".$room_id."_".($i-8)."','".$loc."')";
+                  $result = mysqli_query($conn, $query);
+                }
+              }
+            }
+
+
         $query = "select * from house_rooms where room_id='".$room_id."'";
         $result = mysqli_query($conn, $query);
         if(mysqli_num_rows($result)===1){
@@ -89,9 +150,36 @@
       echo "저장 실패! 아직 입력하지 않은 값이 있는지 확인하여 주세요";
       return;
     }
+
+    //파일 업로드 부분
+    if(isset($_FILES["image_public"])){
+      $file=$_FILES["image_public"];
+      if(0<$file['error']){
+        echo "업로드할 파일이 잘못되었습니다. 파일을 확인하시고 다시 첨부해 주세요";
+      }
+      else{
+        $filename=$file['name'];
+        $tmp_name=explode(".",$filename);
+        $filename=$target."_public.".$tmp_name[1];
+        move_uploaded_file($file['tmp_name'], 'houses/'.$filename);
+      }
+      $loc='houses/'.$filename;
+
+      $query = "select * from house_main_image where email='".$target."_public'";
+      $result = mysqli_query($conn, $query);
+      if(mysqli_num_rows($result)===1){
+        $query = "update house_main_image set `img`='".$loc."' where email = '".$target."_public'";
+        $result = mysqli_query($conn, $query);
+      }
+      else{
+        $query = "insert into house_main_image (`email`, `img`) values('".$target."_public','".$loc."')";
+        $result = mysqli_query($conn, $query);
+      }
+    }
+
     $query = "select * from house_public where house_id='".$target."'";
     $result = mysqli_query($conn, $query);
-    $goods = join(',', $s3);
+    $goods = $s3;
     if(mysqli_num_rows($result)===1){
       $query = "update house_public set `house_id`='".$target."', `description`='".$s1."', `services`='".$s2."', `goods`='".$goods."' where house_id='".$target."';";
       $result = mysqli_query($conn, $query);
@@ -109,6 +197,14 @@
     $query = "select room_id from house_rooms where house_id='".$target."'";
     $result = mysqli_query($conn, $query);
     while($row = mysqli_fetch_row($result)){
+      for($i=1;$i<5;$i++){
+        $locQuery = "select * from house_main_image where email='".$row[0]."_".$i."'";
+        $locResult = mysqli_query($conn, $locQuery);
+        $loc=mysqli_fetch_array($locResult);
+        unlink($loc['img']);
+        $deleteQuery = "delete from house_main_image where email='".$row[0]."_".$i."'";
+        $deleteResult = mysqli_query($conn, $deleteQuery);
+      }
       $tmpQuery = "delete from house_beds where room_id='".$row[0]."'";
       $tmpResult = mysqli_query($conn, $tmpQuery);
     }
@@ -116,6 +212,22 @@
     $result = mysqli_query($conn, $query);
     $query = "delete from house_public where house_id='".$target."'";
     $result = mysqli_query($conn, $query);
+
+    for($i=1;$i<9;$i++){
+      $locQuery = "select * from house_main_image where email='".$target."_".$i."'";
+      $locResult = mysqli_query($conn, $locQuery);
+      $loc=mysqli_fetch_array($locResult);
+      unlink($loc['img']);
+      $deleteQuery = "delete from house_main_image where email='".$target."_".$i."'";
+      $deleteResult = mysqli_query($conn, $deleteQuery);
+    }
+
+    $locQuery = "select * from house_main_image where email='".$target."_public'";
+    $locResult = mysqli_query($conn, $locQuery);
+    $loc=mysqli_fetch_array($locResult);
+    unlink($loc['img']);
+    $deleteQuery = "delete from house_main_image where email='".$target."_public'";
+    $deleteResult = mysqli_query($conn, $deleteQuery);
   }
   elseif($condition=="check_trash"){
     $query = "select number_of_rooms from house_main where house_id='".$target."'";
@@ -132,6 +244,7 @@
         $result = mysqli_query($conn, $query);
       }
     }
+
     echo $row[0];
   }
   elseif($condition=="check_add"){
@@ -159,5 +272,52 @@
       echo "done";
     }
     else echo $return;
+  }
+
+  elseif($condition=="get_image"){
+    $return = array();
+    for($i=1;$i<9;$i++){
+      $query = "select * from house_main_image where email='".$target."_".$i."'";
+      $result = mysqli_query($conn, $query);
+      if(mysqli_num_rows($result)===1){
+        $row = mysqli_fetch_array($result);
+        array_push($return, $row['img']);
+      }
+      else{
+        array_push($return, null);
+      }
+    }
+    echo json_encode($return);
+  }
+
+  elseif($condition=="get_image_room"){
+    $room_id = $target."_".$current;
+    $return = array();
+    for($i=1;$i<5;$i++){
+      $query = "select * from house_main_image where email='".$room_id."_".$i."'";
+      $result = mysqli_query($conn, $query);
+      if(mysqli_num_rows($result)===1){
+        $row = mysqli_fetch_array($result);
+        array_push($return, $row['img']);
+      }
+      else{
+        array_push($return, null);
+      }
+    }
+    echo json_encode($return);
+  }
+
+  elseif($condition=="get_image_public"){
+    $room_id = $target."_public";
+    $return = array();
+    $query = "select * from house_main_image where email='".$room_id."'";
+    $result = mysqli_query($conn, $query);
+    if(mysqli_num_rows($result)===1){
+      $row = mysqli_fetch_array($result);
+      echo $row['img'];
+    }
+    else{
+      echo null;
+    }
   }
 ?>

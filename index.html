@@ -297,26 +297,26 @@
 						<div class="row tab-content">
 							<div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
 								<div class="row">
-									<div class="col-xs-12 col-sm-6 col-lg-3">
-										<input name="search_region" id="search_region" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="지역:">
-									</div>
-									<div class="col-xs-12 col-sm-6 col-lg-3">
-										<select name="search_gender" id="search_gender" class="bootstrap-select" title="성별:">
-
-								<option value="1">남성</option>
-								<option value="2">여성</option>
-								<option value="3">혼성</option>
-								<option value="4">커플용</option>
-							</select>
-									</div>
-									<div class="col-xs-12 col-sm-6 col-lg-3">
-										<select name="search_type" id="search_type" class="bootstrap-select" title="룸타입:">
-								<option value="0">무관</option>
-								<option value="1">1인실</option>
-								<option value="2">2인실</option>
-								<option value="3">3인실 이상</option>
-							</select>
-									</div>
+									<form method="post" id="form_search" action="search_detail.html">
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<input name="search_region" id="search_region" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="지역:">
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<select name="search_gender" id="search_gender" class="bootstrap-select" title="성별:">
+												<option value="1">남성</option>
+												<option value="2">여성</option>
+												<option value="3">혼성</option>
+												<option value="4">커플용</option>
+											</select>
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3">
+											<select name="search_type" id="search_type" class="bootstrap-select" title="룸타입:">
+												<option value="0">무관</option>
+												<option value="1">1인실</option>
+												<option value="2">2인실</option>
+												<option value="3">3인실 이상</option>
+											</select>
+										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3 adv-search-button-cont bootstrap-select">
 											<a style="cursor:pointer" id="submit_search" class="button-primary width-100">
 												<span>search</span>
@@ -325,6 +325,7 @@
 												<div class="button-icon"><i class="fa fa-search"></i></div>
 											</a>
 										</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -332,7 +333,9 @@
 				</div>
 			<script>
 				$("#submit_search").on("click", function(){
-					location.href = "search_detail.html?search_region="+$("#search_region").val()+"&search_gender="+$("#search_gender").val()+"&search_type="+$("#search_type").val();
+					$("#form_search").submit();
+					// $.post("search_detail.html",{"search_region":$("#search_region").val(), "search_gender":$("#search_gender").val(), "search_type":$("#search_type").val()})
+					// location.href = "search_detail.html?search_region="+$("#search_region").val()+"&search_gender="+$("#search_gender").val()+"&search_type="+$("#search_type").val();
 				});
 			</script>
 		</section>

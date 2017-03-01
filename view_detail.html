@@ -41,7 +41,8 @@
 		</style>
 </head>
 
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
   <div class="loader-bg"></div>
   <div id="wrapper">
     <!-- Page header -->
@@ -136,425 +137,837 @@
 		 $result = mysqli_query($conn, $query);
 		 $row = mysqli_fetch_array($result);
 		?>
-    <div class="container view-detail-container">
-      <div class="row">
-				<div class="col-lg-2"></div>
-        <div class="col-lg-8">
-					<!-- 상세보기탭 -->
-					<div class="view-detail-card">
-						<ul class="nav nav-tabs view-detail-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">일반사항</a></li>
-							<li role="presentation"><a href="#rooms-info" aria-controls="rooms-info" role="tab" data-toggle="tab">객실</a></li>
-							<li role="presentation"><a href="#public-sapce" aria-controls="public-sapce" role="tab" data-toggle="tab">공용공간</a></li>
-							<li role="presentation"><a href="#evaluation" aria-controls="evaluation" role="tab" data-toggle="tab">평가글</a></li>
-							<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">운영자</a></li>
-						</ul>
 
-						<!-- Tab panes -->
-						<div class="tab-content view-detail-tab-content">
+		<!-- affix & scrillpy -->
+		<style>
+		body {
+      position: relative;
+	  }
+	  .affix {
+	    top:50px;
+	    width: 100%;
+	    z-index: 170 !important;
+	  }
 
-							<!-- 일반사항 탭 콘텐츠 -->
-							<div role="tabpanel" class="tab-pane view-detail-tab-pane active" id="basic">
+	  .navbar .view-detail-navbar {
+	    margin-bottom: 0px;
+			display: inline-block;
+    	float: none;
+	  }
 
-								<div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
+		.navbar-default{
+			background-color: white;
+			border-bottom: 2px solid #eee;
+			border-top: 2px solid #eee;
+			margin-top: 5px;
+		}
 
-									<!-- 주택설명 -->
-									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left:0px; color:#5a5a5a;">
-										<div class="details-parameters-name house-basic-title-box"><p class="house-basic-title" style="font-size:1.5em;">주택 설명</p></div>
-									</div>
+		.navbar .navbar-nav {
+    	display: inline-block;
+    	float: none;
+		}
 
-									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom:20px;">
-										<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 no-padding">
-											<div class="details-parameters-name" style="font-size:1.4em;font-weight:bold;">주택유형&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-home"></i></div>
-										</div>
+		.navbar .navbar-collapse {
+    	text-align: center;
+			padding: 0px;
+		}
 
-										<div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 no-padding">
-											<div class="details-parameters-val"><span style="font-size:1.2em;"><?if($row['house_type']==1){echo "공동주택";} else{echo "단독주택";}?></span></div>
-										</div>
+		.navbar.view-detail-navbar  ul{
+			width: 100%;
+		}
 
-										<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-											<div class="details-parameters-name" style="font-size:1.3em;font-weight:bold;">방&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-bed"></i></div>
-										</div>
+		.navbar.view-detail-navbar  ul  li{
+			width: 20%;
+			height: auto;
+		}
 
-										<div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 no-padding">
-											<div class="details-parameters-val"><span style="font-size:1.2em;"><?echo $row['number_of_rooms']?></span></div>
-										</div>
-									</div>
+		.navbar.view-detail-navbar  ul  li a{
+			font-family: "나눔고딕";
+			font-size: 18px;
+			font-weight: bold;
+			color: #484848;
+			padding: 20px 20px 20px 20px;
+		}
 
-									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom:20px;">
-										<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 no-padding">
-											<div class="details-parameters-name" style="font-size:1.3em;font-weight:bold;">화장실&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-child"></i></div>
-										</div>
+		.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+			background-color: #fff;
+			border-bottom: 3px solid #008489;
+			color: #008489;
+		}
 
-										<div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 no-padding">
-											<div class="details-parameters-val"><span style="font-size:1.2em;"><?echo $row['number_of_toilet'];?></span></div>
-										</div>
+		.navbar.view-detail-navbar  ul  li:active,.navbar.view-detail-navbar  ul  li:focus,.navbar.view-detail-navbar  ul  li:hover{
+			background-color: #fff;
+			border-bottom: 3px solid #008489;
+			color: #008489;
+		}
 
-										<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-											<div class="details-parameters-name" style="font-size:1.3em;font-weight:bold;">운영자거주&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-child"></i></div>
-										</div>
+	  .affix ~ .container-fluid {
+	    position: relative;
+	  }
 
-										<div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 no-padding">
-											<div class="details-parameters-val"><span style="font-size:1.2em;"><?if($row['live_master']==1){echo "거주";} else{echo "미거주";}?></span></div>
-										</div>
-									</div>
+		.container-fluid {
+			padding: 0px;
+			width: 90%;
+		}
 
-									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom:30px;">
-										<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 no-padding">
-											<div class="details-parameters-name" style="font-size:1.3em;font-weight:bold;">주차공간&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-car"></i></div>
-										</div>
-
-										<div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 no-padding">
-											<div class="details-parameters-val"><span style="font-size:1.2em;"><?if($row['parking']==1){echo "제공";} else{echo "미제공";}?></span></div>
-										</div>
-
-										<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-											<div class="details-parameters-name" style="font-size:1.3em;font-weight:bold;">애완동물&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-ban"></i></div>
-										</div>
-
-										<div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 no-padding">
-											<div class="details-parameters-val"><span style="font-size:1.2em;"><?if($row['pet']==1){echo "가능";} else{echo "불가능";}?></span></div>
-										</div>
-
-									</div>
-									<!-- .주택설명 -->
-
-									<!-- 계약조건 -->
-									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left:0px; color:#5a5a5a;">
-										<div class="details-parameters-name terms-conditions-title-box"><p class="terms-conditions-title" style="font-size:1.5em;">계약 조건</p></div>
-									</div>
-
-									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-										<div class="terms-conditions-info-box">
-											<div class="terms-conditions-info">
-												<p><?=$row['condition']?></p>
-											</div>
-										</div>
-									</div>
-									<!-- .계약조건 -->
-								</div>
-
-								<!-- 위치 -->
-								<div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
-									<div class="details-parameters-price position-title">위치</div>
-									<div class="details-parameters">
-										<div class="details-parameters-cont">
-											<div class="details-parameters-name sm-size" style="font-size: 14px; font-weight:bold;">주소</div>
-											<div class="details-parameters-name lg-size"><?if($row['address_detail_show']==1){echo $row['address']."<br />".$row['address_detail'];} else{echo $row['address'];}?></div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="details-parameters-cont">
-											<div class="details-parameters-name sm-size" style="font-size: 14px; font-weight:bold;">교통</div>
-											<div class="details-parameters-name lg-size"><?=$row['traffic']?></div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="details-parameters-cont">
-											<div class="details-parameters-name sm-size" style="font-size: 14px; font-weight:bold;">주변시설</div>
-											<div class="details-parameters-name lg-size"><?=$row['facilities']?></div>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</div>
-								<!-- .위치 -->
-
-								<div class="row margin-top-45">
-									<!-- map tab -->
-									<div class="col-xs-12 apartment-tabs">
-
-										<ul class="nav nav-tabs" role="tablist">
-											<li role="presentation" class="active">
-												<a href="#tab-map" aria-controls="tab-map" role="tab" data-toggle="tab">
-													<span>Map</span>
-													<div class="button-triangle2"></div>
-												</a>
-											</li>
-										</ul>
-
-										<div class="tab-content">
-											<div role="tabpanel" class="tab-pane active" id="tab-map">
-												<div id="estate-map" class="details-map">
-													<iframe class="gmap" style="border:0;display: block;height:100%;width: 100%;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&q=KOREATECH" allowfullscreen></iframe>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- .map tab -->
-								</div>
-
-							</div>
-							<!-- .일반사항 탭 콘텐츠 -->
+	  #section1 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; margin-bottom: 30px;}
+	  #section2 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; #8e8e8e; margin-bottom: 30px;}
+	  #section3 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; border-bottom: 1px solid #8e8e8e; margin-bottom: 30px;}
+	  #section4 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; margin-bottom: 30px;}
+	  #section5 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; margin-bottom: 30px;}
+		</style>
 
 
-							<!-- 객실 탭 콘텐츠 -->
-							<div role="tabpanel" class="tab-pane view-detail-tab-pane" id="rooms-info" name="">
+		<nav class="navbar navbar-default view-detail-navbar" data-spy="affix" data-offset-top="200">
+  		<div class="container-fluid">
+    		<div>
+      		<div class="collapse navbar-collapse" id="myNavbar">
+        		<ul class="nav navbar-nav">
+          		<li><a href="#section1">일반사항</a></li>
+          		<li><a href="#section2">객실</a></li>
+          		<li><a href="#section3">공용공간</a></li>
+							<li><a href="#section4">평가글</a></li>
+							<li><a href="#section5">운영자</a></li>
+        		</ul>
+      		</div>
+    		</div>
+  		</div>
+		</nav>
 
-								<div class="col-xs-12 margin-bottom-100">
+		<!-- 일반사항 -->
+		<div id="section1" class="container-fluid">
 
-									<?
-										$query = "select * from house_rooms where house_id='".$target."' order by house_id ASC";
-									 	$result = mysqli_query($conn, $query);
-										while($row = mysqli_fetch_array($result)){
-											$query_main = "select * from house_main where house_id='".$target."'";
-								 		  $result_main = mysqli_query($conn, $query_main);
-								 		  $house_main = mysqli_fetch_array($result_main);
-									?>
-									<div class="list-agency">
-										<div class="list-agency-left">
-											<img src="images/tmpfeatured-offer3.jpg" width="260" height="250" alt="객실사진" />
-										</div>
+			<!-- -->
+			<style>
+				.card {
+					display: block;
+					margin-bottom: 20px;
+					line-height: 2.0;
+					background-color: #fff;
+					border-radius: 2px;
+					box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+					transition: box-shadow .25s;
+					padding-bottom: 5%;
+				}
+				.card:hover {
+					box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+				}
+				.img-card {
+					width: 100%;
+					height:200px;
+					border-top-left-radius:2px;
+					border-top-right-radius:2px;
+					display:block;
+					overflow: hidden;
+				}
+				.img-card img{
+					width: 100%;
+					height: 200px;
+					object-fit:cover;
+					transition: all .25s ease;
+				}
+				.card-content {
+					padding:15px;
+					text-align:left;
+				}
+				.card-title {
+					margin-top:0px;
+					font-weight: 700;
+					font-size: 20px;
+					line-height: 50px;
+					color: #767676;
+					font-family: "나눔고딕";
+				}
+				.card-content p{
+					line-height: 30px;
+					font-size: 16px;
+					color: #787878;
+					font-family: "나눔고딕";
+				}
 
-										<a class="list-agency-right-large" href="#" style="max-width:none; width:100%">
-											<div class="list-agency-text row">
-												<h4 class="list-agency-title" style="font-size:1.5em; line-height:2;"><?=$house_main['house_title']?></h4>
-												<i class="fa fa-map-marker"></i>
-												<span class="list-agency-address" style="font-size:1.2em;"><?=$house_main['address']?></span>
-												<div class="list-agency-separator"></div>
-												<div class="col-xs-12 col-sm-8">
-													<div class="row">
-															<div class="col-xs-12 col-sm-4">
-																<span class="nanum-16-bol" >요금 : <?=$row['rent']?>원</span>
-															</div>
-															<div class="col-xs-12 col-sm-4">
-																<span class="nanum-16-bol" >보증금 : <?=$row['guarantee']?>원</span>
-															</div>
-															<div class="col-xs-12 col-sm-4">
-																<span class="nanum-16-bol" >관리비 : <?=$row['manage']?>원</span>
-															</div>
-														</div>
-												</div>
-												<div class="col-xs-12 col-sm-4">
-													<div class="row">
-													<?
-														$query2 = "select * from house_beds where room_id='".$row['room_id']."' order by bed_id ASC";
-													 	$result2 = mysqli_query($conn, $query2);
-														$row2 = mysqli_fetch_array($result2);
-													?>
-													<div class="col-xs-12">
-													<?if($row2['condition']==2){?>
-													<!--  DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
-													<span class="nanum-16-bol" >입주가능일 : <?if($row2['vacant']==null){echo "상시가능";} else {echo $row2['vacant'];}?>~</span>
-													<button class="btn btn-info btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
-													<!--  .DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
-													<?} elseif($row2['condition']==1){?>
-													<!--  DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
-													<span class="nanum-16-bol" >만실</span>
-													<button class="btn btn-info btn-request pull-right" name="<?=$row2['bed_id']?>">대기</button>
-													<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
-													<?} elseif($row2['condition']==3){?>
-													<!--  DB 검색 결과를 기준으로 공실이면 공실, 신청버튼 출력 -->
-													<span class="nanum-16-bol" >공실</span>
-													<button class="btn btn-info btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
-													<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
-													<?}?>
-													</div>
-													<?while($row2 = mysqli_fetch_array($result2)){?>
-														<div class="col-xs-12">
-													<?if($row2['condition']==2){?>
-														<!--  DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
-														<span class="nanum-16-bol" >입주가능일 : <?if($row2['vacant']==null){echo "상시가능";} else {echo $row2['vacant'];}?>~</span>
-														<button class="btn btn-info btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
-														<!--  .DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
-													<?} elseif($row2['condition']==1){?>
-													<!--  DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
-													<span class="nanum-16-bol" >만실</span>
-													<button class="btn btn-info btn-request pull-right" name="<?=$row2['bed_id']?>">대기</button>
-													<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
-													<?} elseif($row2['condition']==3){?>
-													<!--  DB 검색 결과를 기준으로 공실이면 공실, 신청버튼 출력 -->
-													<span class="nanum-16-bol" >공실</span>
-													<button class="btn btn-info btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
-													<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
-													<?}?>
-													</div>
-													<?}?>
-													</div>
-													</div>
-
-											</div>
-
-										</a>
-
-										<div class="small-triangle"></div>
-									</div>
-									<?}?>
-									<div class="condition-checker" value="<?if(isset($_SESSION['id'])) echo "1"; ?>"></div>
-									<script>
-									$(".btn-request").on("click",function(){
-										var loc;
-										if($(".condition-checker").attr("value")==1){
-											if($(this).text()=="신청") loc="request_movein.html?";
-											else loc="request_wait.html?";
-											loc+= "bed="+$(this).attr("name")+"&house="+"<?=$target?>";
-											// $(location).attr("href",loc);
-											window.open(loc,"popupWindow",'height=900,width=1080');
-										}
-										else{
-											swal("에러!","로그인이 필요한 서비스입니다. 로그인 후 다시 시도해주세요.","warning");
-										}
-									});
-										/*$(".btn-request").on("click", function(){
-											$.ajax({
-												url:"server/wait_list.php",
-												type:"POST",
-												data:{
-													condition : $(this).text(),
-													target:$(this).attr("name")
-												},
-												success: function(data){
-													if(data=="하우스가 찜리스트에 추가되었습니다.") swal("추가 성공!",data,"success");
-													else swal("에러!",data,"warning");
-												},
-												error: function(){
-													swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
-												}
-											});
-										});*/
-									</script>
-								</div>
-
-							</div>
-							<!-- .객실 탭 콘텐츠 -->
-
-							<!-- 공용공간 탭 콘텐츠 -->
-							<div role="tabpanel" class="tab-pane view-detail-tab-pane" id="public-sapce">
-
-								<div class="col-xs-12 margin-bottom-100">
-									<?
-									 $query = "select * from house_public where house_id='".$target."'";
-									 $result = mysqli_query($conn, $query);
-									 $row = mysqli_fetch_array($result);
-									?>
-									<div class="row margin-top-30">
-										<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 full-width">
-											<img src="images/tmpfeatured-offer2.jpg" class=" img-rounded"alt="공용 공간" width="100%"/>
-											<div class="type-container" style="left:20px;">
-												<div class="transaction-type">공용 공간</div>
-											</div>
-
-											<div class="details-parameters agency-details margin-top-30">
-												<div class="team-desc-line">
-													<span class="nanum-16-bol-3a" style="font-size:1.5em;">제공물품</span>
-												</div>
-												<div class="team-desc-line">
-													<span>
-														<?
-															$tmp = explode(",",$row['goods']);
-															$goods = "";
-															for($i=0;$i<sizeof($tmp);++$i){
-																if($tmp[$i]==1) $goods.="의자 ";
-																elseif($tmp[$i]==2) $goods.="책상 ";
-																elseif($tmp[$i]==3) $goods.="스탠드 ";
-																elseif($tmp[$i]==4) $goods.="옷장 ";
-																elseif($tmp[$i]==5) $goods.="책장 ";
-																elseif($tmp[$i]==6) $goods.="커튼 ";
-																elseif($tmp[$i]==7) $goods.="이불 ";
-																elseif($tmp[$i]==8) $goods.="침대 ";
-															}
-															echo $goods;
-														?>
-													</span>
-												</div>
-												<div class="team-desc-line">
-													<span class="nanum-16-bol-3a" style="font-size:1.5em;">제공서비스</span>
-												</div>
-												<div class="team-desc-line">
-													<span style="font-size:1.2em; line-height:1.5;"><?=$row['services']?></span>
-												</div>
-											</div>
-
-										</div>
-										<div class="col-xs-12 col-sm-6 col-md-6 col-lg-8">
-											<p class="negative-margin">
-												<span style="font-size:1.5em;"><?=$row['description']?></span>
-											</p>
-										</div>
-									</div>
-
-								</div>
-							</div>
-							<!-- .공용공간 탭 콘텐츠 -->
-
-							<!-- 평가글 탭 콘텐츠 -->
-							<div role="tabpanel" class="tab-pane view-detail-tab-pane margin-bottom-200" id="evaluation">
-								<div class="row">
-                  <div class="col-xs-12">
-                    <div class="col-sm-4">
-                      <div class="col-xs-12 col-sm-7">
-                        <img src="images/agent3.jpg" alt="" class="user-image use-image-small" />
-                      </div>
-                      <div class="col-xs-12 col-sm-5">
-                        <p>이름</p>
-                        <p>인스펙션 경험자</p>
-                        <p>2016/5/5</p>
-                      </div>
-                    </div>
-                    <div class="col-sm-8">
-                      <div class="col-xs-12">
-                        <p>★★★★★</p>
-                      </div>
-                      <div class="col-xs-12">
-                        <p>집은 사진과 동일했습니다. 운영하시는 분들도 친절해 보였어요. 제가 짐이 많아서 4인실에 살기 어려울 것 같아 포기했습니다. 추천합니다~</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-								<div class="row margin-top-30" style="border-bottom: 2px solid #e5e5e5; padding-bottom:30px; margin-bottom:80px;">
-									<a href="#" class="button-secondary button-shadow pull-right">
-										<span>더보기</span>
-										<div class="button-triangle"></div>
-										<div class="button-triangle2"></div>
-										<div class="button-icon"><i class="fa fa-search"></i></div>
-									</a>
-								</div>
-								<?
-									$query = "select user_id from house_main where house_id='".$_GET['house']."'";
-									$result = mysqli_query($conn, $query);
-									$row=mysqli_fetch_row($result);
-									$query = "select * from user_profile where email='".$row[0]."'";
-									$result = mysqli_query($conn, $query);
-									$row=mysqli_fetch_row($result);
-								?>
-
-								<div class="row margin-top-30 margin-bottom-30">
-									<h3 class="title-negative-margin  margin-bottom-15">운영자 프로필</h3>
-									<div class="title-separator-primary margin-bottom-30"></div>
-								</div>
-
-								<div class="row margin-top-30 margin-bottom-30">
-                  <div class="col-xs-12 col-sm-4">
-                    <img src="images/tmpblog-grid1e.jpg" class="img-responsive img-circle center-block" alt="운영자프로필" width="50%" height="50%"/>
-                  </div>
-                  <div class="col-xs-12 col-sm-8 margin-top-xs-30">
-                    <p style="font-size:1.5em;"><?if($row[3]!=null){echo $row[3];} else{echo "하우스 운영자가 아직 프로필을 등록하지 않았습니다. 잠시만 기다려 주세요.";}?></p>
-                  </div>
-                </div>
-
-							</div>
-							<!-- 평가글 탭 콘텐츠 -->
-
-							<!-- 운영자 탭 콘텐츠 -->
-							<div role="tabpanel" class="tab-pane view-detail-tab-pane" id="settings">
-								<div class="row margin-bottom-30">
-                  <div class="col-xs-12 col-sm-4">
-                    <img src="images/tmpblog-grid1e.jpg" class="img-responsive img-circle center-block" alt="운영자프로필" width="50%" height="50%"/>
-                  </div>
-                  <div class="col-xs-12 col-sm-8 margin-top-xs-30">
-                    <p style="font-size:1.5em;"><?if($row[3]!=null){echo $row[3];} else{echo "하우스 운영자가 아직 프로필을 등록하지 않았습니다. 잠시만 기다려 주세요.";}?></p>
-                  </div>
-                </div>
-							</div>
-							<!-- 운영자 탭 콘텐츠 -->
-
+				.card-title a {
+					color: #000;
+					text-decoration: none !important;
+				}
+				.card-read-more {
+					border-top: 1px solid #D4D4D4;
+				}
+				.card-read-more a {
+					text-decoration: none !important;
+					padding:10px;
+					font-weight:600;
+					text-transform: uppercase;
+				}
+				.text-center{
+					text-align: center;
+				}
+				.font-bold{
+					font-weight: bold;
+				}
+				.gmap{
+					border: 0;
+					display: block;
+					height:100%;
+					width: 100%;
+				}
+				.details-map{
+					width: 100%;
+					height: 100%;
+				}
+				.card-content-2{
+					text-align: left;
+					padding: 0px 0px 15px 0px;
+				}
+				.card-title-2{
+					font-family: "나눔고딕";
+					font-weight: bold;
+					font-size: 18px;
+					color: #565656;
+				}
+			</style>
+			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"></div>
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="card">
+          <a class="img-card">
+						<div id="estate-map" class="details-map">
+							<iframe class="gmap" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&q=KOREATECH" allowfullscreen></iframe>
 						</div>
-					</div>
-					<!-- .상세보기탭 -->
+          	<!--하우스 대표 사진 -->
+          </a>
+          <div class="card-content">
+            <h4 class="card-title">
+							주택 설명
+            </h4>
+          	<p>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
+								<p>주택유형&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-home"></i></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
+								<p><strong><?if($row['house_type']==1){echo "공동주택";} else{echo "단독주택";}?></strong></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
+								<p>방&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-bed"></i></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
+								<p><strong><?echo $row['number_of_rooms']?></strong></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
+								<p>화장실&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-child"></i></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
+								<p><strong><?echo $row['number_of_toilet'];?></strong></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
+								<p>운영자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-child"></i></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
+								<p><strong><?if($row['live_master']==1){echo "거주";} else{echo "미거주";}?></strong></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
+								<p>주차공간&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-car"></i></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
+								<p><strong><?if($row['parking']==1){echo "제공";} else{echo "미제공";}?></strong></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
+								<p>애완동물&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-ban"></i></p>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
+								<p><strong><?if($row['pet']==1){echo "가능";} else{echo "불가능";}?></strong></p>
+							</div>
+            </p>
+						<div class="clearfix"></div>
+
           </div>
-					<div class="col-lg-2"></div>
+
         </div>
       </div>
-    </div>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+        <div class="card-content">
+          <h4 class="card-title">
+						주소
+          </h4>
+          <p>
+						<?if($row['address_detail_show']==1){echo $row['address'].$row['address_detail'];} else{echo $row['address'];}?>
+          </p>
+					<div class="clearfix"></div>
+        </div>
 
+				<div class="card-content">
+          <h4 class="card-title">
+						교통
+          </h4>
+          <p>
+						<?=$row['traffic']?>
+          </p>
+					<div class="clearfix"></div>
+        </div>
+
+				<div class="card-content">
+          <h4 class="card-title">
+						주변시설
+          </h4>
+          <p>
+						<?=$row['facilities']?>
+          </p>
+					<div class="clearfix"></div>
+        </div>
+
+				<div class="card-content">
+          <h4 class="card-title">
+						계약조건
+          </h4>
+          <p>
+						<?=$row['condition']?>
+          </p>
+					<div class="clearfix"></div>
+        </div>
+      </div>
+			<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+
+    </div>
+		<!-- .일반사항 -->
+
+		<!-- 객실 -->
+		<div id="section2" class="container-fluid">
+
+			<style>
+			.media-body{
+				padding: 0px 0px 0px 20px;
+			}
+			.media-heading{
+				font-family: "나눔고딕";
+				font-size: 18px;
+				font-weight: 600;
+				margin-bottom: 30px;
+			}
+			.media-heading-2{
+				font-family: "나눔고딕";
+				font-size: 16px;
+				margin-top: 20px;
+				margin-bottom: 15px;
+				line-height: 20px;
+			}
+			.room_info_title{
+				font-family: "나눔고딕";
+				font-size: 18px;
+				font-weight: bold;
+				line-height: 2.0;
+				color: #484848;
+			}
+			.offered-sub{
+				border: 1px solid #e5e5e5;
+				width: auto;
+				height: auto;
+				padding: 5px;
+			}
+			.offered-sub img{
+				margin: 10px 15px 10px 50px;
+			}
+			</style>
+
+
+			<?
+				$query = "select * from house_rooms where house_id='".$target."' order by house_id ASC";
+				$result = mysqli_query($conn, $query);
+				while($row = mysqli_fetch_array($result)){
+			?>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-2"></div>
+			  <div class="col-xs-12 col-sm-12 col-md-10 col-lg-9">
+			    <table class="table table-hover">
+						<thead>
+	            <tr>
+	              <th class="room_info_title"><? echo $row['person']."인실"; ?></th>
+	            </tr>
+	          </thead>
+						<?
+							$query_main = "select * from house_main where house_id='".$target."'";
+							$result_main = mysqli_query($conn, $query_main);
+							$house_main = mysqli_fetch_array($result_main);
+						?>
+	          <tbody>
+	            <tr>
+	              <td class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+	              	<div class="media">
+										<img class="img-responsible media-object full-width" src="images/tmpfeatured-offer3.jpg" style="width:250px;">
+									</div>
+								</td>
+								<td class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+	                <div class="media-body">
+	                  <h5 class="media-heading-2">
+											요금: <span class="text-success"><strong><?=$row['rent']?>원</strong></span>
+											&nbsp;&nbsp;&nbsp;보증금: <span class="text-success"><strong><?=$row['guarantee']?>원</strong></span>
+											&nbsp;&nbsp;&nbsp;관리비: <span class="text-success"><strong><?=$row['manage']?>원</strong></span>
+										</h5>
+										<h5 class="media-heading-2">
+											<strong>제공물품</strong>
+										</h5>
+										<div class="row offered-sub">
+											<img class="media-object pull-left full-width" src="images/icons/icon_chair.png" style="width: 30px; height: 30px;">
+											<img class="media-object pull-left full-width" src="images/icons/icon_table_1.png" style="width: 30px; height: 30px;">
+											<img class="media-object pull-left full-width" src="images/icons/icon_stand.png" style="width: 30px; height: 30px;">
+											<img class="media-object pull-left full-width" src="images/icons/icon_dressingtable.png" style="width: 30px; height: 30px;">
+											<img class="media-object pull-left full-width" src="images/icons/icon_closet.png" style="width: 30px; height: 30px;">
+											<img class="media-object pull-left full-width" src="images/icons/icon_booktable.png" style="width: 30px; height: 30px;">
+											<img class="media-object pull-left full-width" src="images/icons/icon_coton.png" style="width: 30px; height: 30px;">
+											<img class="media-object pull-left full-width" src="images/icons/icon_blanket.png" style="width: 30px; height: 30px;">
+											<img class="media-object pull-left full-width" src="images/icons/icon_bed.png" style="width: 30px; height: 30px;">
+										</div>
+	                </div>
+								</td>
+							</tr>
+	          </tbody>
+
+						<tfoot>
+	            <tr>
+								<td></td>
+	              <td class="col-xs-6 col-sm-6 col-md-8 col-lg-10" style="padding: 20px 0px 0px 0px;">
+									<div class="media-body">
+									<?
+										$query2 = "select * from house_beds where room_id='".$row['room_id']."' order by bed_id ASC";
+										$result2 = mysqli_query($conn, $query2);
+										$row2 = mysqli_fetch_array($result2);
+									?>
+
+									<style>
+									.btn-request{
+										background-color: white;
+										border-radius: 0px;
+										border: 1px solid #656567;
+										color: black;
+									}
+									.nanum-16-bol{
+										letter-spacing: 2px;
+									}
+
+									</style>
+										<?if($row2['condition']==2){?>
+										<!--  DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
+										<div class="row" style="margin-bottom:20px;">
+											<div class="pull-left">
+												<p class="nanum-16-bol margin-top-10" ><?if($row2['vacant']==null){echo "입주 상시 가능";} else {echo $row2['vacant']. "부터 입주 가능";}?></p>
+											</div>
+											<div class="pull-right">
+												<button class="btn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
+											</div>
+										</div>
+
+										<!--  .DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
+										<?} elseif($row2['condition']==1){?>
+										<!--  DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
+										<div class="row" style="margin-bottom:20px;">
+											<div class="pull-left">
+												<p class="nanum-16-bol" >만실</p>
+											</div>
+											<div class="pull-right">
+												<button class="btn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">대기</button>
+											</div>
+										</div>
+
+										<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
+										<?} elseif($row2['condition']==3){?>
+										<!--  DB 검색 결과를 기준으로 공실이면 공실, 신청버튼 출력 -->
+										<div class="row" style="margin-bottom:20px;">
+											<div class="pull-left">
+												<p class="nanum-16-bol" >공실</p>
+											</div>
+											<div class="pull-right">
+												<button class="btn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
+											</div>
+										</div>
+										<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
+										<?}?>
+
+									<?while($row2 = mysqli_fetch_array($result2)){?>
+
+
+									<?if($row2['condition']==2){?>
+										<!--  DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
+										<div class="row" style="margin-bottom:20px;">
+											<div class="pull-left">
+												<p class="nanum-16-bol margin-top-10"><?if($row2['vacant']==null){echo "입주 상시 가능";} else {echo $row2['vacant']. "부터 입주 가능";}?></p>
+											</div>
+											<div class="pull-right">
+												<button class="btn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
+											</div>
+										</div>
+
+										<!--  .DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
+									<?} elseif($row2['condition']==1){?>
+										<!--  DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
+										<div class="row" style="margin-bottom:20px;">
+											<div class="pull-left">
+												<p class="nanum-16-bol" >만실</p>
+											</div>
+											<div class="pull-right">
+												<button class="bbtn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">대기</button>
+											</div>
+										</div>
+
+										<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
+									<?} elseif($row2['condition']==3){?>
+										<!--  DB 검색 결과를 기준으로 공실이면 공실, 신청버튼 출력 -->
+										<div class="row" style="margin-bottom:20px;">
+											<div class="pull-left">
+												<p class="nanum-16-bol" >공실</p>
+											</div>
+											<div class="pull-right">
+												<button class="bbtn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
+											</div>
+										</div>
+										<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
+									<?}?>
+
+									<?}?>
+									</div>
+
+								</td>
+	            </tr>
+	          </tfoot>
+	        </table>
+	      </div>
+				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+			</div>
+			<?
+				}
+			?>
+
+		</div>
+		<!-- .객실 -->
+
+		<!-- 공용공간 -->
+		<div id="section3" class="container-fluid">
+
+			<div class="col-xs-12 col-sm-12 col-md-1 col-lg-2"></div>
+			<div class="col-xs-12 col-sm-12 col-md-10 col-lg-9">
+				<table class="table">
+					<thead>
+            <tr>
+              <th class="room_info_title">공용공간</th>
+            </tr>
+          </thead>
+
+					<tbody>
+            <tr>
+              <td class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+              	<div class="media">
+									<img class="media-object full-width" src="images/tmpfeatured-offer3.jpg" style="width: 300px; height: 300px;">
+								</div>
+							</td>
+
+							<?
+							 $query = "select * from house_public where house_id='".$target."'";
+							 $result = mysqli_query($conn, $query);
+							 $row = mysqli_fetch_array($result);
+							?>
+							<td class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                <div class="media-body">
+									<h4 class="media-heading"><a href="#">소개</a></h4>
+                  <h5 class="media-heading-2">
+										<strong><?=$row['description']?></strong>
+									</h5>
+									<h5 class="media-heading-2">
+										<strong>제공서비스 : </strong> <span class="text-info"><strong><?=$row['services']?></strong></span>
+									</h5>
+
+									<h5 class="media-heading-2">
+										<strong>제공물품</strong>
+									</h5>
+									<!--
+									<?
+										$tmp = explode(",",$row['goods']);
+										$goods = "";
+										for($i=0;$i<sizeof($tmp);++$i){
+											if($tmp[$i]==1) $goods.="의자 ";
+											elseif($tmp[$i]==2) $goods.="책상 ";
+											elseif($tmp[$i]==3) $goods.="스탠드 ";
+											elseif($tmp[$i]==4) $goods.="옷장 ";
+											elseif($tmp[$i]==5) $goods.="책장 ";
+											elseif($tmp[$i]==6) $goods.="커튼 ";
+											elseif($tmp[$i]==7) $goods.="이불 ";
+											elseif($tmp[$i]==8) $goods.="침대 ";
+										}
+										echo $goods;
+									?>
+									-->
+									<div class="row offered-sub">
+										<!-- 쇼파 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_sofa.png" style="width: 30px; height: 30px;">
+										<!-- 책상 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_table_1.png" style="width: 30px; height: 30px;">
+										<!-- 의자 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_chair.png" style="width: 30px; height: 30px;">
+										<!-- 테이블 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_table_2.png" style="width: 30px; height: 30px;">
+										<!-- 책장 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_booktable.png" style="width: 30px; height: 30px;">
+										<!-- 신발장 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_shoestable.png" style="width: 30px; height: 30px;">
+										<!-- 공유기 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_wifi.png" style="width: 30px; height: 30px;">
+										<!-- 스탠드 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_stand.png" style="width: 30px; height: 30px;">
+										<!-- 텔레비젼 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_tv.png" style="width: 30px; height: 30px;">
+										<!-- 전자렌지 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_microwave.png" style="width: 30px; height: 30px;">
+										<!-- 냉장고 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_refri.png" style="width: 30px; height: 30px;">
+										<!-- 압력밥솥 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_cooker.png" style="width: 30px; height: 30px;">
+										<!-- 청소기 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_vacuum.png" style="width: 30px; height: 30px;">
+										<!-- 세탁기 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_washer.png" style="width: 30px; height: 30px;">
+										<!-- 에어컨 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_aircon.png" style="width: 30px; height: 30px;">
+										<!-- 다리미 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_iron.png" style="width: 30px; height: 30px;">
+										<!-- 미니오븐 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_minioven.png" style="width: 30px; height: 30px;">
+										<!-- 커피머신 -->
+										<img class="media-object pull-left full-width" src="images/icons/icon_coffeemechine.png" style="width: 30px; height: 30px;">
+									</div>
+                </div>
+							</td>
+						</tr>
+          </tbody>
+				</table>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+
+		</div>
+		<!-- .공용공간-->
+
+		<style>
+		.commect_name, .commect_type, .commect_date{
+			font-family: "나눔고딕";
+			font-size: 16px;
+			color: #767676;
+			font-weight: 600;
+		}
+		.commect_content{
+			font-family: "나눔고딕";
+			line-height: 3.0;
+			font-size: 14px;
+			color: #484848;
+		}
+		.commect_score{
+			font-size: 18px;
+			font-weight: bold;
+			color: #ffe47d;
+		}
+
+
+		</style>
+		<!-- 평가글 -->
+		<div id="section4" class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+				<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="margin-bottom:20px;">
+					<table class="table">
+						<thead>
+							<tr>
+								<th class="room_info_title">평가글 총 개</th>
+								<th></th><th></th><th></th><th></th><th></th>
+								<th></th><th></th><th></th><th></th><th></th>
+								<th></th><th></th><th></th><th></th><th></th>
+								<th></th><th></th><th></th><th></th><th></th>
+								<th></th><th></th><th></th><th></th><th></th>
+								<th></th><th></th><th></th><th></th><th></th>
+								<th></th><th></th><th></th><th></th><th></th>
+								<th></th><th></th><th></th><th></th><th></th>
+								<th class="room_info_title">
+									<a href=""><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;더보기</a>
+								</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+			</div>
+
+			<?
+			 for($i=0; $i<2; $i++){
+			?>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+
+				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+					<div class="col-xs-12">
+
+						<div class="col-sm-12">
+							<div class="col-xs-12 col-sm-4">
+								<img src="images/agent3.jpg" alt="" class="img-responsive img-circle center-block" width="70%" height="80%"/>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<p class="commect_name">이름</p>
+								<p class="commect_type">인스펙션 경험자</p>
+								<p class="commect_date">2016/5/5</p>
+							</div>
+						</div>
+
+						<div class="col-sm-12" style="margin-top: 20px;">
+							<div class="col-xs-12">
+								<p class="commect_score">★★★★★</p>
+							</div>
+							<div class="col-xs-12">
+								<p class="commect_content">집은 사진과 동일했습니다. 운영하시는 분들도 친절해 보였어요. 제가 짐이 많아서 4인실에 살기 어려울 것 같아 포기했습니다. 추천합니다~</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+					<div class="col-xs-12">
+
+						<div class="col-sm-12">
+							<div class="col-xs-12 col-sm-4">
+								<img src="images/agent3.jpg" alt="" class="img-responsive img-circle center-block" width="70%" height="80%"/>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<p class="commect_name">이름</p>
+								<p class="commect_type">인스펙션 경험자</p>
+								<p class="commect_date">2016/5/5</p>
+							</div>
+						</div>
+
+						<div class="col-sm-12" style="margin-top: 20px;">
+							<div class="col-xs-12">
+								<p class="commect_score">★★★★★</p>
+							</div>
+							<div class="col-xs-12">
+								<p class="commect_content">집은 사진과 동일했습니다. 운영하시는 분들도 친절해 보였어요. 제가 짐이 많아서 4인실에 살기 어려울 것 같아 포기했습니다. 추천합니다~</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+			</div>
+			<?
+				}
+			?>
+
+
+
+
+		</div>
+		<!-- .평가글 -->
+
+		<!-- 운영자 -->
+		<div id="section5" class="container-fluid">
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+				<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="margin-bottom:20px;">
+					<table class="table">
+						<thead>
+							<tr>
+								<th class="room_info_title">운영자 프로필</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+			<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+
+				<div class="row margin-top-30 margin-bottom-30">
+					<div class="col-xs-12 col-sm-3">
+						<img src="images/tmpblog-grid1e.jpg" class="img-responsive img-circle center-block" alt="운영자프로필" width="150" height="150"/>
+					</div>
+					<?
+						$query = "select user_id from house_main where house_id='".$_GET['house']."'";
+						$result = mysqli_query($conn, $query);
+						$row=mysqli_fetch_row($result);
+					?>
+					<style>
+					.host_name{
+						font-family: "나눔고딕";
+						font-size: 24px;
+						color: #484848;
+						font-weight: bold;
+						line-height: 25px;
+					}
+					.host_info{
+						font-family: "나눔고딕";
+						font-size: 16px;
+						color: #767676;
+						line-height: 50px;
+					}
+					</style>
+					<div class="col-xs-12 col-sm-9 margin-top-xs-30">
+						<p class="host_name">
+							<? echo $row[0]; ?>
+						</p>
+					<?
+						$query = "select * from user_profile where email='".$row[0]."'";
+						$result = mysqli_query($conn, $query);
+						$row=mysqli_fetch_row($result);
+					?>
+						<p class="host_info">
+							<?
+								if($row[3]!=null){
+									echo $row[3];
+								}
+								else
+								{
+									echo "하우스 운영자가 아직 프로필을 등록하지 않았습니다. 잠시만 기다려 주세요.";
+									echo "샘플_호주에 10년째 살고 있는 자매가 운영합니다. 저희는 모두 간호사이고요, 서핑같은 액티비티가 취미입니다. 간호사로 일하고 싶은 분들은 적극 도와드리겠습니다~~";
+								}
+							?>
+						</p>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+
+		</div>
+		<!-- .운영자 -->
+		<!-- .affix & scrillpy-->
+    </div>
+		<div class="condition-checker" value="<?if(isset($_SESSION['id'])) echo '1'; ?>"></div>
+		<script>
+		$(".btn-request").on("click",function(){
+			var loc;
+			if($(".condition-checker").attr("value")==1){
+				if($(this).text()=="신청") loc="request_movein.html?";
+				else loc="request_wait.html?";
+				loc+= "bed="+$(this).attr("name")+"&house="+"<?=$target?>";
+				// $(location).attr("href",loc);
+				window.open(loc,"popupWindow",'height=900,width=1080');
+			}
+			else{
+				swal("에러!","로그인이 필요한 서비스입니다. 로그인 후 다시 시도해주세요.","warning");
+			}
+		});
+			/*$(".btn-request").on("click", function(){
+				$.ajax({
+					url:"server/wait_list.php",
+					type:"POST",
+					data:{
+						condition : $(this).text(),
+						target:$(this).attr("name")
+					},
+					success: function(data){
+						if(data=="하우스가 찜리스트에 추가되었습니다.") swal("추가 성공!",data,"success");
+						else swal("에러!",data,"warning");
+					},
+					error: function(){
+						swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+					}
+				});
+			});*/
+		</script>
 
 
 		<!--small footer-->

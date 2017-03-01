@@ -145,6 +145,17 @@
 									<?}
 									else{
 									?>
+									<div class="row margin-top-60">
+										<div class="col-xs-6 col-xs-offset-3 col-sm-offset-0 col-sm-3 col-md-4">
+											<div class="agent-photos">
+												<img src="images/agent3.jpg" id="agent-profile-photo" class="img-responsive" alt="" />
+												<div class="change-photo">
+													<i class="fa fa-pencil fa-lg"></i>
+													<input type="file" name="agent-photo" id="agent-photo" />
+												</div>
+												<input type="text" disabled="disabled" id="agent-file-name" class="main-input" />
+											</div>
+										</div>
 											<div class="col-xs-12 col-sm-9 col-md-8">
 												<div class="labelled-textarea">
 													<label for="description">자기소개</label>
@@ -187,8 +198,6 @@
 									var form_data = new FormData();
 									form_data.append("file", file_data);
 									form_data.append("description", $("#description").val());
-									console.log(form_data);
-									console.log($("#description").val());
 									$.ajax({
 										url: "server/profile.php",
 											type: "post",

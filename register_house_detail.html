@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>"
+	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>";
+	include ('server/dbconnect.php');
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -30,6 +31,7 @@
 		<link rel="stylesheet" type="text/css" href="css/custom.css">
 		<link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
 		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+		<link rel="stylesheet" type="text/css" href="css/register_house_detail.css">
 
 		<!--sweetalert2-->
 		<script src="js/sweetalert.min.js"></script>
@@ -189,8 +191,8 @@
 							<!-- .1번탭 일반사항 -->
 							<div role="tabpanel" class="tab-pane active" id="t1">
 
-								<div class="gallery-grid margin-top-10">
-									<div class="gallery-grid-sizer"></div>
+								<div class="margin-top-10 margin-bottom-30 row gallery">
+									<!-- <div class="gallery-grid-sizer"></div>
 									<div class="gallery-grid-lg">
 										<a href="images/gallery/gallery1.jpg" class="gallery-grid-item living dining bedroom2" data-sub-html="Living room">
 											<img src="images/gallery/gallery1-thumb.jpg" alt="" />
@@ -252,7 +254,7 @@
 											<span>사진<br/><i class="fa fa-search-plus"></i></span>
 											<div class="big-triangle"></div>
 										</a>
-									</div>
+									</div> -->
 								</div>
 
 								<h3 class="title-negative-margin margin-top-30 margin-bottom-15">주택 설명</h3>
@@ -262,6 +264,10 @@
 									<div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
 										<div class="col-xs-12">
 											<input name="name" id="p14" type="text" class="bootstrap-select input-short2 main-input required,all no-margin-top" placeholder="하우스명:">
+										</div>
+
+										<div class="col-xs-12">
+											<input name="name" id="p12" type="text" class="bootstrap-select input-short2 main-input required,all no-margin-top" placeholder="주택 설명(직접입력)">
 										</div>
 
 										<div class="row margin-bottom-30">
@@ -387,9 +393,6 @@
 												<input name="name" id="p11" type="text" class="bootstrap-select input-short2 main-input required,all no-margin-top" placeholder="교통 및 주변시설(직접입력)">
 											</div>
 
-											<div class="col-xs-12">
-												<input name="name" id="p12" type="text" class="bootstrap-select input-short2 main-input required,all no-margin-top" placeholder="주택 설명(직접입력)">
-											</div>
 										</div>
 									</div>
 								</div>
@@ -453,14 +456,14 @@
 								<div class="title-separator-primary margin-bottom-30"></div>
 
 								<h4 class="title-negative-margin margin-bottom-15" style="font-weight:bold;">대표사진 등록</h4>
-								<section class="thumbs-slider section-both-shadow">
+								<div class="margin-top-10 margin-bottom-30 row gallery2">
+
+								</div>
+								<!-- <section class="thumbs-slider section-both-shadow">
 									<div class="row" style="height:200px;">
 										<div class="col-xs-12">
-											<!-- Slider main container -->
 											<div id="swiper-thumbs" class="swiper-container">
-												<!-- Additional required wrapper -->
 												<div class="swiper-wrapper">
-													<!-- Slides -->
 													<div class="swiper-slide" style="width:20%;">
 														<img class="slide-thumb" src="images/slides/m1.jpg" alt="">
 													</div>
@@ -485,7 +488,7 @@
 											</div>
 										</div>
 									</div>
-								</section>
+								</section> -->
 
 								<h4 class="title-negative-margin margin-top-30" style="font-weight:bold;">객실정보 입력</h4>
 								<div class="row margin-bottom-30">
@@ -522,16 +525,19 @@
                                   </select>
 									</div>
 									<div class="col-xs-12 col-sm-4">
-										<select id="r3" name="country1" class="bootstrap-select" title="마스터룸 여부:">
-                                    <option value="1">O</option>
-                                    <option value="2">X</option>
-                                  </select>
+										<select id="r3" name="country1" class="bootstrap-select" title="방의 특성:" multiple data-actions-box="true">
+                      <option value="0">해당없음</option>
+                      <option value="1">마스터룸</option>
+											<option value="2">커플룸</option>
+                      <option value="3">거실셰어</option>
+											<option value="4">granny flat</option>
+                    </select>
 									</div>
 									<div class="col-xs-12 col-sm-3">
-										<select id="r4" name="country1" class="bootstrap-select" title="모집단위:">
+										<select id="r4" name="country1" class="bootstrap-select" title="모집단위:" >
 																	<option  value="1">1명씩</option>
 																	<option  value="2">커플(2인)</option>
-																</select>
+										</select>
 									</div>
 									<div class="col-xs-12 col-sm-3">
 										<input name="name" id="r5" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="렌트비">
@@ -548,8 +554,8 @@
 		              								<option value="2">책상</option>
 		              								<option value="3">스탠드</option>
 		              								<option value="4">옷장</option>
-		              								<option value="5">책장</option>
-		              								<option value="6">커튼</option>
+		              								<option value="5">에어컨</option>
+		              								<option value="6">서랍장</option>
 		              								<option value="7">이불</option>
 		              								<option value="8">침대</option>
 		              							</select>
@@ -629,13 +635,8 @@
 								<form name="agent-from" action="#" enctype="multipart/form-data">
 									<div class="row margin-top-60">
 										<div class="col-xs-6 col-xs-offset-3 col-sm-offset-0 col-sm-3 col-md-4">
-											<div class="agent-photos">
-												<img src="images/agent3.jpg" id="agent-profile-photo" class="img-responsive" alt="" />
-												<div class="change-photo">
-													<i class="fa fa-pencil fa-lg"></i>
-													<input type="file" name="agent-photo" id="agent-photo" />
-												</div>
-												<input type="text" disabled="disabled" id="agent-file-name" class="main-input" />
+											<div class="agent-photos public-photo">
+
 											</div>
 										</div>
 										<div class="col-xs-12 col-sm-9 col-md-8">
@@ -651,15 +652,27 @@
 								</div>
 								<div class="col-xs-12 margin-bottom-30">
 									<select id="s3" name="city1" class="bootstrap-select no-margin-top" title="제공물품:" multiple data-actions-box="true">
-              								<option value="1">의자</option>
-              								<option value="2">책상</option>
-              								<option value="3">스탠드</option>
-              								<option value="4">옷장</option>
-              								<option value="5">책장</option>
-              								<option value="6">커튼</option>
-              								<option value="7">이불</option>
-              								<option value="8">침대</option>
-              							</select>
+              								<option value="1">소파</option>
+              								<option value="2">인터넷</option>
+              								<option value="3">에어컨</option>
+              								<option value="4">컴퓨터</option>
+              								<option value="5">텔레비전</option>
+              								<option value="6">신발장</option>
+              								<option value="7">식탁세트</option>
+              								<option value="8">냉장고</option>
+															<option value="9">밥솥</option>
+															<option value="10">전자레인지</option>
+															<option value="11">커피머신</option>
+															<option value="12">토스터</option>
+															<option value="13">오븐</option>
+															<option value="14">냄비셋트</option>
+															<option value="15">식기세트</option>
+															<option value="16">정수기</option>
+															<option value="17">세탁기</option>
+															<option value="18">건조기</option>
+															<option value="19">청소기</option>
+															<option value="20">빨래대</option>
+										</select>
 								</div>
 
 								<div class="row">
@@ -790,7 +803,12 @@
 				var canAdd = false;
 				var current_room = 0;
 				var done = false;
-
+				$("#addmoreBtn").on("click",function(){
+					done=true;
+				});
+				$("#doneBtn").on("click",function(){
+					done=true;
+				});
 				//초기 방 아이디 생성
 				$.ajax({
 					url: "server/registerHouse.php",
@@ -803,40 +821,145 @@
 						$("#save2").attr("value", data);
 						$("#save3").attr("value", data);
 						$(window).bind('beforeunload');
+						$.ajax({
+							url: "server/registerHouse.php",
+							type: "POST",
+							data: {
+								condition: "get_image",
+								target: $("#save1").attr("value")
+							},
+							success: function(data) {
+								var loc = JSON.parse(data);
+								$(".gallery").html("");
+								for(var i=1; i<9; ++i){
+									var src;
+									if(loc[i-1]==null) src="images/gallery/gallery3-thumb.jpg";
+									else src="server/"+loc[i-1];
+									$(".gallery").append('<div class="image_uploader">\
+										<img src="'+src+'" alt="" />\
+										<input type="file" class="house-detail-image upload'+i+'">\
+									</div>');
+								}
+							},
+							error: function() {}
+						});
+
+						$.ajax({
+							url: "server/registerHouse.php",
+							type: "POST",
+							data: {
+								condition: "get_image_room",
+								target: $("#save1").attr("value"),
+								current : current_room
+							},
+							success: function(data) {
+								var loc = JSON.parse(data);
+								$(".gallery2").html("");
+								for(var i=1; i<5; ++i){
+									var src;
+									if(loc[i-1]==null) src="images/gallery/gallery3-thumb.jpg";
+									else src="server/"+loc[i-1];
+									$(".gallery2").append('<div class="image_uploader">\
+										<img src="'+src+'" alt="" />\
+										<input type="file" class="house-detail-image upload'+(i+8)+'">\
+									</div>');
+								}
+							},
+							error: function() {}
+						});
+
+
+						$.ajax({
+							url: "server/registerHouse.php",
+							type: "POST",
+							data: {
+								condition: "get_image_public",
+								target: $("#save1").attr("value")
+							},
+							success: function(data) {
+								$(".public-photo").html("");
+								var src;
+								if(data=="") src="images/gallery/gallery3-thumb.jpg";
+								else src="server/"+data;
+								$(".public-photo").append('<img src="'+src+'" id="agent-profile-photo" class="img-responsive" alt="" />\
+								<div class="change-photo">\
+									<i class="fa fa-pencil fa-lg"></i>\
+									<input type="file" name="agent-photo" id="agent-photo" class="image_public"/>\
+								</div>\
+								<input type="text" disabled="disabled" id="agent-file-name" class="main-input" />');
+							},
+							error: function() {}
+						});
+
 					},
 					error: function() {
 						location.href = "register_house_detail.html";
 					}
 				});
 
+
 				//1단계 저장
 				$("#save1").on("click", function() {
+					var form_data = new FormData();
+					for(var i=1; i<9; ++i){
+						var name="upload"+i;
+						var target=$('.'+name).prop("files")[0];
+						if(target!=null){
+							form_data.append(name, target);
+						}
+					}
+					form_data.append("condition", "register_1");
+					form_data.append("p1", $("#p1").val());
+					form_data.append("p2", $("#p2").val());
+					form_data.append("p3", $("#p3").val());
+					form_data.append("p4", $("#p4").val());
+					form_data.append("p5", $("#p5").val());
+					form_data.append("p6", $("#p6").val());
+					form_data.append("p7", $("#p7").val());
+					form_data.append("p8", $("#p8").val());
+					form_data.append("p9", $("#p9").val());
+					form_data.append("p10", $("#p10").val());
+					form_data.append("p11", $("#p11").val());
+					form_data.append("p12", $("#p12").val());
+					form_data.append("p13", $("#p13").val());
+					form_data.append("p14", $("#p14").val());
+					form_data.append("target", $("#save1").attr("value"));
 					$.ajax({
 						url: "server/registerHouse.php",
-						type: "POST",
-						data: {
-							condition: "register_1",
-							p1: $("#p1").val(),
-							p2: $("#p2").val(),
-							p3: $("#p3").val(),
-							p4: $("#p4").val(),
-							p5: $("#p5").val(),
-							p6: $("#p6").val(),
-							p7: $("#p7").val(),
-							p8: $("#p8").val(),
-							p9: $("#p9").val(),
-							p10: $("#p10").val(),
-							p11: $("#p11").val(),
-							p12: $("#p12").val(),
-							p13: $("#p13").val(),
-							p14: $("#p14").val(),
-							target: $("#save1").attr("value")
-						},
+						type: "post",
+						processData: false,  // file전송시 필수
+						contentType: false,  // file전송시 필수
+						data: form_data,
 						success: function(data) {
 							if (data == "저장 성공!") {
 								swal("", "" + data, "success");
 								room = $("#p3").val();
+
+								$.ajax({
+									url: "server/registerHouse.php",
+									type: "POST",
+									data: {
+										condition: "get_image",
+										target: $("#save1").attr("value")
+									},
+									success: function(data) {
+										var loc = JSON.parse(data);
+										$(".gallery").html("");
+										for(var i=1; i<9; ++i){
+											var src;
+											if(loc[i-1]==null) src="images/gallery/gallery3-thumb.jpg";
+											else src="server/"+loc[i-1];
+											$(".gallery").append('<div class="image_uploader">\
+												<img src="'+src+'" alt="" />\
+												<input type="file" class="house-detail-image upload'+i+'">\
+											</div>');
+										}
+									},
+									error: function() {}
+								});
 							} else swal("", "" + data, "error");
+
+
 						},
 						error: function() {
 							swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
@@ -858,31 +981,71 @@
 						},
 						error: function() {}
 					});
+
+
+
 				});
 
 				//2단계 저장
 				$("#save2").on("click", function() {
 
+					var form_data = new FormData();
+					for(var i=9; i<13; ++i){
+						var name="upload"+i;
+						var target=$('.'+name).prop("files")[0];
+						if(target!=null){
+							form_data.append(name, target);
+						}
+					}
+					form_data.append("condition","register_2");
+					form_data.append("r1",$("#r1").val());
+					form_data.append("r2",$("#r2").val());
+					form_data.append("r3",$("#r3").val());
+					form_data.append("r4",$("#r4").val());
+					form_data.append("r5",$("#r5").val());
+					form_data.append("r6",$("#r6").val());
+					form_data.append("r7",$("#r7").val());
+					form_data.append("r8",$("#r8").val());
+					form_data.append("current",current_room);
+					form_data.append("target",$("#save2").attr("value"));
+
 					$.ajax({
 						url: "server/registerHouse.php",
 						type: "POST",
-						data: {
-							condition: "register_2",
-							r1: $("#r1").val(),
-							r2: $("#r2").val(),
-							r3: $("#r3").val(),
-							r4: $("#r4").val(),
-							r5: $("#r5").val(),
-							r6: $("#r6").val(),
-							r7: $("#r7").val(),
-							r8: $("#r8").val(),
-							current: current_room,
-							target: $("#save2").attr("value")
-						},
+						processData: false,  // file전송시 필수
+						contentType: false,  // file전송시 필수
+						data: form_data,
 						success: function(data) {
 							if (data == "저장 성공!") {
 								canAdd = true;
 								swal("", "" + data, "success");
+
+								$.ajax({
+									url: "server/registerHouse.php",
+									type: "POST",
+									data: {
+										condition: "get_image_room",
+										target: $("#save1").attr("value"),
+										current : current_room
+									},
+									success: function(data) {
+										var loc = JSON.parse(data);
+										$(".gallery2").html("");
+										for(var i=1; i<5; ++i){
+											var src;
+											if(loc[i-1]==null) src="images/gallery/gallery3-thumb.jpg";
+											else src="server/"+loc[i-1];
+											$(".gallery2").append('<div class="image_uploader">\
+												<img src="'+src+'" alt="" />\
+												<input type="file" class="house-detail-image upload'+(i+8)+'">\
+											</div>');
+										}
+									},
+									error: function() {}
+								});
+
+
+
 							} else swal("", "" + data, "error");
 						},
 						error: function() {
@@ -894,18 +1057,49 @@
 
 				//3단계 저장
 				$("#save3").on("click", function() {
+					var form_data = new FormData();
+					var name="image_public";
+					var target=$('.'+name).prop("files")[0];
+					if(target!=null){
+						form_data.append(name, target);
+					}
+					form_data.append("s1",$("#s1").val());
+					form_data.append("s2",$("#s2").val());
+					form_data.append("s3",$("#s3").val());
+					form_data.append("condition","register_3");
+					form_data.append("target",$("#save3").attr("value"));
+
 					$.ajax({
 						url: "server/registerHouse.php",
 						type: "POST",
-						data: {
-							condition: "register_3",
-							s1: $("#s1").val(),
-							s2: $("#s2").val(),
-							s3: $("#s3").val(),
-							target: $("#save3").attr("value")
-						},
+						processData: false,  // file전송시 필수
+						contentType: false,  // file전송시 필수
+						data: form_data,
 						success: function(data) {
-							if (data == "저장 성공!") swal("", "" + data, "success");
+							if (data == "저장 성공!"){
+								swal("", "" + data, "success");
+								$.ajax({
+									url: "server/registerHouse.php",
+									type: "POST",
+									data: {
+										condition: "get_image_public",
+										target: $("#save1").attr("value")
+									},
+									success: function(data) {
+										$(".public-photo").html("");
+										var src;
+										if(data==null) src="images/gallery/gallery3-thumb.jpg";
+										else src="server/"+data;
+										$(".public-photo").append('<img src="'+src+'" id="agent-profile-photo" class="img-responsive" alt="" />\
+										<div class="change-photo">\
+											<i class="fa fa-pencil fa-lg"></i>\
+											<input type="file" name="agent-photo" id="agent-photo" class="image_public"/>\
+										</div>\
+										<input type="text" disabled="disabled" id="agent-file-name" class="main-input" />');
+									},
+									error: function() {}
+								});
+							}
 							else swal("", "" + data, "error");
 						},
 						error: function() {
@@ -916,17 +1110,22 @@
 
 				//페이지 이동시 저장된 레코드 삭제
 				$(window).on("beforeunload", function() {
-					$.ajax({
-						url: "server/registerHouse.php",
-						type: "POST",
-						data: {
-							condition: "delete",
-							target: $("#save1").attr("value")
-						},
-						success: function(data) {},
-						error: function() {}
-					});
 					return "페이지 이동시 작성중이던 내용이 소실됩니다. 정말 현재 페이지를 벗어나시겠습니까?";
+				});
+
+				$(window).on("unload",function(){
+					if(!done){
+						$.ajax({
+							url: "server/registerHouse.php",
+							type: "POST",
+							data: {
+								condition: "delete",
+								target: $("#save1").attr("value")
+							},
+							success: function(data) {},
+							error: function() {}
+						});
+					}
 				});
 
 				$("#addRoom").on("click", function() {
@@ -943,7 +1142,30 @@
 								if (data == "canDo") {
 									current_room = current_room + 1;
 									canAdd = false;
-									$("#current_room_title").text("대표사진 등록(" + (current_room + 1) + "번 방)");
+									$("#current_room_title").text((current_room + 1) + "번 방 등록하기");
+									$.ajax({
+										url: "server/registerHouse.php",
+										type: "POST",
+										data: {
+											condition: "get_image_room",
+											target: $("#save1").attr("value"),
+											current : current_room
+										},
+										success: function(data) {
+											var loc = JSON.parse(data);
+											$(".gallery2").html("");
+											for(var i=1; i<5; ++i){
+												var src;
+												if(loc[i-1]==null) src="images/gallery/gallery3-thumb.jpg";
+												else src="server/"+loc[i-1];
+												$(".gallery2").append('<div class="image_uploader">\
+													<img src="'+src+'" alt="" />\
+													<input type="file" class="house-detail-image upload'+(i+8)+'">\
+												</div>');
+											}
+										},
+										error: function() {}
+									});
 								} else swal("에러!", "추가할 수 있는 방의 갯수는 1단계-일반사항에서 입력한 방의 갯수를 초과할 수 없습니다.", "error");
 							},
 							error: function() {}
