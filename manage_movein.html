@@ -157,16 +157,25 @@
 								$query = "select sum(person) from house_rooms where house_id='".$row['house_id']."'";
 								$result2 = mysqli_query($conn, $query);
 								$row2 = mysqli_fetch_row($result2);
+								$return = array();
+                                    for($i=1;$i<9;$i++){
+                                      $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                      $imageresult = mysqli_query($conn, $imagequery);
+                                      if(mysqli_num_rows($imageresult)===1){
+                                        $imagerow = mysqli_fetch_array($imageresult);
+                                        array_push($return, $imagerow['img']);
+                                      }
+                                    }
 							?>
 							<!-- item -->
 							<div class="col-xs-12 col-sm-6 col-lg-4 grid-offer-col" onclick="location.href='manage_movein_detail.html?target=<?=$row['house_id']?>'">
 								<div class="grid-offer">
 									<div>
 										<div class="grid-offer-photo">
-											<img src="images/grid-offer1.jpg" alt="" />
+											<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" alt=""  style="height:195px"/>
 										</div>
 
-										<div class="grid-offer-text" style="padding:15px 10px 15px 10px;">
+										<div class="grid-offer-text" style="padding:15px 10px 15px 10px; height:100px;">
 
 											<div class="grid-offer-h4" style="margin-bottom:5px; width:100%;">
 												<p class="grid-offer-title" style="font-size:1.5em;">

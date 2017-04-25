@@ -121,13 +121,17 @@
 							<?
 							$query = "select * from user_profile where email='".$_SESSION['id']."'";
 							$result = mysqli_query($conn, $query);
+							$initQuery  = "select * from users where email='".$_SESSION['id']."'";
+                            $initResult = mysqli_query($conn,$initQuery);
+                            $initRow = mysqli_fetch_array($initResult);
 							if(mysqli_num_rows($result)===1){
-								$row=mysqli_fetch_row($result);
+								$row=mysqli_fetch_array($result);
+                                $tmp = explode(" ",$row['hp']);
 							?>
 								<div class="row margin-top-60">
 									<div class="col-xs-6 col-xs-offset-3 col-sm-offset-0 col-sm-3 col-md-4">
 										<div class="agent-photos">
-											<img src="<?if(isset($row[2])) {echo 'server/'.$row[2];}else{echo 'images/agent3.jpg';}?>" id="agent-profile-photo" class="img-responsive" alt="" />
+											<img src="<?if(isset($row[2])) {echo $row[2];}else{echo 'images/agent3.jpg';}?>" id="agent-profile-photo" class="img-responsive" alt="" />
 											<div class="change-photo">
 												<i class="fa fa-pencil fa-lg"></i>
 												<input type="file" name="agent-photo" id="agent-photo" />
@@ -142,6 +146,21 @@
 											<label for="description">자기소개</label>
 											<textarea id="description" name="description" class="input-full main-input" placeholder="자신에 대한 소개를 입력해 주시기 바랍니다."><?=$row[3]?></textarea>
 										</div>
+										<div style="margin-top:15px">
+                                            <div class="col-xs-3 margin-bottom-30-10" style="padding-right:0px; padding-left:0px;">
+                                                <select id="country" name="country1" class="no-margin bootstrap-select" title="국가코드">
+                                                    <option value="+82" <? if($tmp[0]=="+82") echo "selected='selected'";?> >한국(+82)</option>
+                                                    <option value="+61" <? if($tmp[0]=="+61") echo "selected='selected'";?>>호주(+61)</option>
+                                                </select>
+                                          </div>
+                                          <div class="col-xs-9 margin-bottom-30-10" style="padding-right:0px;">
+                                              <input name="hp" id="hp" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="전화번호:" value="<?if($row['hp']!="") echo $tmp[1];?>">
+                                          </div>
+                                        </div>
+                                        <input name="contactemail" id="contactemail" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="이메일:" value="<?=$row['contactemail']?>">
+                                        <input name="kakao" id="kakao" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="카카오톡 아이디:" value="<?=$row['kakao']?>">
+                                    </div>
+                            </div>
 									<?}
 									else{
 									?>
@@ -156,18 +175,32 @@
 												<input type="text" disabled="disabled" id="agent-file-name" class="main-input" />
 											</div>
 										</div>
-											<div class="col-xs-12 col-sm-9 col-md-8">
-												<div class="labelled-textarea">
-													<label for="description">자기소개</label>
-													<textarea id="description" name="description" class="input-full main-input" placeholder="자신에 대한 소개를 입력해 주시기 바랍니다."></textarea>
-												</div>
+                                        <div class="col-xs-12 col-sm-9 col-md-8">
+										<div class="labelled-textarea">
+											<label for="description">자기소개</label>
+											<textarea id="description" name="description" class="input-full main-input" placeholder="자신에 대한 소개를 입력해 주시기 바랍니다."><?=$row[3]?></textarea>
+										</div>
+										<div style="margin-top:15px">
+                                            <div class="col-xs-3 margin-bottom-30-10" style="padding-right:0px; padding-left:0px;">
+                                                <select id="country" name="country1" class="no-margin bootstrap-select" title="국가코드">
+                                                    <option value="+82" <? if($tmp[0]=="+82") echo "selected='selected'";?> >한국(+82)</option>
+                                                    <option value="+61" <? if($tmp[0]=="+61") echo "selected='selected'";?>>호주(+61)</option>
+                                                </select>
+                                          </div>
+                                          <div class="col-xs-9 margin-bottom-30-10" style="padding-right:0px;">
+                                              <input name="hp" id="hp" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="전화번호:" value="<?if($row['hp']!="") echo $tmp[1];?>">
+                                          </div>
+                                        </div>
+                                        <input name="contactemail" id="contactemail" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="이메일:" value="<?=$row['contactemail']?>">
+                                        <input name="kakao" id="kakao" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="카카오톡 아이디:" value="<?=$row['kakao']?>">
+                                    </div>
+                                    </div>
 									<?
 										}
 									?>
 
 
-											</div>
-										</div>
+											
 
 										<div class="row margin-top-15">
 											<div class="col-xs-12">
@@ -198,6 +231,9 @@
 									var form_data = new FormData();
 									form_data.append("file", file_data);
 									form_data.append("description", $("#description").val());
+                                    form_data.append("hp", $("#country").val()+" "+$("#hp").val());
+                                    form_data.append("contactemail", $("#contactemail").val());
+                                    form_data.append("kakao", $("#kakao").val());
 									$.ajax({
 										url: "server/profile.php",
 											type: "post",
@@ -205,7 +241,34 @@
     	    	           contentType: false,  // file전송시 필수
 											 data: form_data,
 										success: function(data) {
-											swal("프로필 저장 성공!", data, "success");
+
+                                            swal({
+                                            title: "프로필 저장 성공",
+                                            text: data,
+                                            type: "success",
+                                            showCancelButton: false,
+                                            confirmButtonColor: "#DD6B55",
+                                            confirmButtonText: "확인",
+                                            cancelButtonText: "아니오",
+                                            closeOnConfirm: false,
+                                            closeOnCancel: false
+                                          },
+                                          function(isConfirm){
+                                            location.reload();
+                                            }
+                                          );
+
+//											swal({
+//                                                  title: "프로필 정장 성공!",
+//                                                  text: data,
+//                                                  type: "success",
+//                                                  confirmButtonColor: "#DD6B55",
+//                                                  confirmButtonText: "확인",
+//                                                  closeOnConfirm: false
+//                                                },
+//                                                function(){
+//                                                  location.reload();
+//                                                });
 										},
 										error: function() {
 											swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
@@ -241,7 +304,15 @@
 										<div class="profile-info-title negative-margin">
 											<?=$_SESSION['id']?>
 										</div>
-										<img src="images/comment-photo2.jpg" alt="" class="pull-left" />
+										<?
+                                            $profileQuery = "select * from user_profile where email='".$_SESSION['id']."'";
+                                            $profileResult = mysqli_query($conn, $profileQuery);
+                                            if(mysqli_num_rows($profileResult)==1){
+                                                $profileRow = mysqli_fetch_array($profileResult);
+                                                echo '<img src="'.$profileRow['img'].'" alt="" class="img-responsible pull-left" style="height:83px"/>';
+                                            }
+                                            else echo '<img src="images/comment-photo2.jpg" alt="" class="img-responsible pull-left" style="height:83px"/>';
+                                        ?>
 										<div class="profile-info-text pull-left">
 											<p class="subtitle-margin">
 												<?=$_SESSION['name']?>
@@ -258,7 +329,7 @@
 												if($_SESSION['flag'] == "3"){
 											?>
 													<a href="alarm.html" class="button-alternative button-shadow button-full">
-														<span style="font-size:14px;">알림 바로가기</span>
+														<span style="font-size:14px;">알림</span>
 														<div class="button-triangle"></div>
 														<div class="button-triangle2"></div>
 														<div class="button-icon"><i class="fa fa-bell-o"></i></div>
@@ -268,7 +339,7 @@
 												else{
 											?>
 													<a href="pay-adv.html" class="button-alternative button-shadow button-full">
-														<span style="font-size:14px;">결제/광고 바로가기</span>
+														<span style="font-size:14px;">결제/광고</span>
 														<div class="button-triangle"></div>
 														<div class="button-triangle2"></div>
 														<div class="button-icon"><i class="fa fa-bell-o"></i></div>
@@ -278,17 +349,27 @@
 											?>
 
 									</div>
+<!--
 									<div class="center-button-cont margin-top-15">
 										<a href="my-profile.html" class="button-alternative button-shadow button-full">
-											<span>프로필 바로가기</span>
+											<span>프로필</span>
 											<div class="button-triangle"></div>
 											<div class="button-triangle2"></div>
 											<div class="button-icon"><i class="fa fa-user"></i></div>
 										</a>
 									</div>
+-->
 									<div class="center-button-cont margin-top-15">
-										<a href="pre_my_info.html" class="button-alternative button-shadow button-full">
-											<span>가입정보 바로가기</span>
+										<a href="request_movein_list.html" class="button-alternative button-shadow button-full">
+											<span>입주신청</span>
+											<div class="button-triangle"></div>
+											<div class="button-triangle2"></div>
+											<div class="button-icon"><i class="fa fa-users"></i></div>
+										</a>
+									</div>
+									<div class="center-button-cont margin-top-15">
+										<a href="request_wait_list.html" class="button-alternative button-shadow button-full">
+											<span>대기신청</span>
 											<div class="button-triangle"></div>
 											<div class="button-triangle2"></div>
 											<div class="button-icon"><i class="fa fa-users"></i></div>
@@ -296,57 +377,50 @@
 									</div>
 
 									<div class="profile-info margin-top-30" style="padding:0px;">
-										<div class="profile-info-title negative-margin">추천 하우스</div>
-									</div>
+									<div class="profile-info-title negative-margin">새로 등록된 하우스</div>
+								</div>
 
+								<?
+									 include 'server/dbconnect.php';
+									 $query = "select * from house_main order by register_time desc limit 6,8";
+									 $result = mysqli_query($conn, $query);
+									 $cnt= 0 ;
+									 $index = 0;
+									 while($row = mysqli_fetch_array($result)){
+								?>
 									<div class="sidebar-featured-cont margin-top-0">
 										<div class="sidebar-featured">
 											<a class="sidebar-featured-image" href="#">
-												<img src="images/sidebar-featured1.jpg" alt="" />
+												<?
+													$return = array();
+                                                        for($i=1;$i<9;$i++){
+                                                          $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                                          $imageresult = mysqli_query($conn, $imagequery);
+                                                          if(mysqli_num_rows($imageresult)===1){
+                                                            $imagerow = mysqli_fetch_array($imageresult);
+                                                            array_push($return, $imagerow['img']);
+                                                          }
+                                                        }
+												?>
+												<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" alt="" height="80"/>
+
 												<div class="sidebar-featured-type">
-													<div class="sidebar-featured-estate" style="width:30px;">추천</div>
+													<div class="sidebar-featured-estate" style="width:30px;">NEW</div>
 													<!-- 주택유형 -->
 												</div>
 											</a>
-											<div class="sidebar-featured-title"><a href="#">주소</a></div>
+											<div class="sidebar-featured-title"><a href="view_detail.html?house=<?=$row['house_id']?>"><?= $row['address'] ?></a></div>
 											<!--주소 -->
-											<div class="sidebar-featured-price">가격</div>
-											<!-- 가격 -->
 											<div class="clearfix"></div>
 										</div>
-										<div class="sidebar-featured">
-											<a class="sidebar-featured-image" href="#">
-												<img src="images/sidebar-featured2.jpg" alt="" />
-												<div class="sidebar-featured-type">
-													<div class="sidebar-featured-estate" style="width:30px;">추천</div>
-													<!-- 주택유형 -->
-												</div>
-											</a>
-											<div class="sidebar-featured-title"><a href="#">주소</a></div>
-											<!--주소 -->
-											<div class="sidebar-featured-price">가격</div>
-											<!-- 가격 -->
-											<div class="clearfix"></div>
-										</div>
-										<div class="sidebar-featured">
-											<a class="sidebar-featured-image" href="#">
-												<img src="images/sidebar-featured3.jpg" alt="" />
-												<div class="sidebar-featured-type">
-													<div class="sidebar-featured-estate" style="width:30px;">추천</div>
-													<!-- 주택유형 -->
-												</div>
-											</a>
-											<div class="sidebar-featured-title"><a href="#">주소</a></div>
-											<!--주소 -->
-											<div class="sidebar-featured-price">가격</div>
-											<!-- 가격 -->
-											<div class="clearfix"></div>
-										</div>
-									</div>
+								<?
+
+									}
+								?>
 
 
-
-								</div>
+								    </div>
+									
 							</div>
 						</div>
 					</div>
@@ -386,6 +460,9 @@
 			<!-- template scripts -->
 			<script type="text/javascript" src="mail/validate.js"></script>
 			<script type="text/javascript" src="js/apartment.js"></script>
+			
+			<script>
+        </script>
 
 	</body>
 

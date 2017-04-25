@@ -60,6 +60,26 @@
         text-align: center;
         height:60px;
       }
+			.change-logo{
+				width: 50%;
+				height: auto;
+				margin: auto;
+				position: relative;
+				left: 25%;
+				margin-bottom: 30px;
+			}
+			.btn-change{
+				background: black;
+				width: 100%;
+				height: 10vh;
+				color: white;
+				font-weight: bold;
+				text-align: center;
+				font-size: 32px;
+			}
+			.description-change{
+				font-size: 9px;
+			}
     </style>
 	</head>
 
@@ -132,7 +152,249 @@
 
 			<section class="section-light section-top-shadow">
 				<div class="container">
+
 					<div class="row">
+						<div class="col-xs-12 col-md-6" style="border: 1px solid #eee; margin-bottom:50px;">
+							<img src="images/naro_c_ani.gif" alt="" class="change-logo">
+							<input type="button" name="<?=$_SESSION['id']?>" class="btn-change" value="운영자 회원가입">
+							<p class="description-change">운영자로 가입하면 본 사이트의 <b><u>운영자 서비스 약관</u></b>에 동의하는 것으로 간주합니다.</p>
+						</div>
+						<div class="col-xs-12 col-md-6" style=" margin-bottom:50px;padding-top:50px;">
+							<h1 style="margin-bottom:70px; text-align:center"><b>셰어하우스 운영자로 등록하세요!</b></h1>
+							<h4 style="margin-bottom:10px;    padding: 0px 10px;">1. 입주대기자를 확보할 수 있습니다. 공실발생에 대비하여 수익을 높이세요!</h4>
+							<h4 style="margin-bottom:58px;    padding: 0px 10px;" class="margin-top-60">2. 입주자 모집도 편해집니다.</h4>
+							<br>
+							<!-- <h3 class="title-negative-margin">운영자 서비스 약관</h3>
+	            <div class="title-separator-primary" style="margin-top:5px"></div>
+							<textarea id="description" name="description" class="input-full main-input" placeholder="" disabled="" rows="8" style="background-color:white">회원약관입니다.
+							회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.
+						회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.
+					회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.
+				회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.
+			회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.
+		회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.회원약관입니다.</textarea> -->
+						</div>
+					</div>
+					<script>
+						$(".btn-change").on("click",function(){
+							swal({
+								title: "운영자 회원가입",
+								text: '지금 바로 운영자로 권한을 변경하고 KOSTAY만의 특별 혜택을 받으시겠습니까?\
+								<div class="rule-container manager-rule" style="width:100%; height:55px; border:1px solid #eee; padding: 15px 0px; margin-bottom:15px; cursor:pointer; margin-top:20px;" onclick="javascript:change_permission_rule()">\
+				          <span class="accept-rule pull-left" style="margin-left:20px;">Kostay 운영자 이용 약관 보기</span>\
+									<div class="pull-right">\
+									<div class="accept-rule-round accept-rule-round2" style="top:0px;left:-20px;"></div>\
+									<div class="checkmark checkmark2" style="top:-20px;left:-11px;"></div>\
+									</div>\
+				        </div>',
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "예",
+								cancelButtonText: "아니오",
+								closeOnConfirm: false,
+								closeOnCancel: true,
+								html:true,
+							},
+							function(isConfirm){
+								if (isConfirm) {
+									$.ajax({
+										url:"server/updateUser.php",
+										type:"POST",
+										data:{
+											target: $(".btn-change").attr("name")
+										},
+										success: function(data){
+											swal({
+												title: "운영자 회원가입 완료",
+												text: "지금 바로 셰어하우스를 등록하시겠습니까?",
+												type: "success",
+												showCancelButton: true,
+												confirmButtonColor: "#DD6B55",
+												confirmButtonText: "예",
+												cancelButtonText: "아니오",
+												closeOnConfirm: false,
+												closeOnCancel: false
+											},
+											function(isConfirm){
+												if (isConfirm) {
+													location.href="register_house.html";
+												} else {
+													location.href="index.html";
+												}
+											});
+										},
+										error: function(){}
+									});
+								}
+								else {}
+							});
+
+						});
+						function change_permission_rule(){
+							swal({
+								title: "사용자 약관",
+								text: '<p class="accept-rule">약관1</p><textarea name="description" class="input-full main-input rule-1" rows="4" disabled></textarea>',
+								html:true,
+								confirmButtonColor: "#1fbc02",
+								confirmButtonText: "확인",
+								allowOutsideClick:true,
+								closeOnConfirm: false,
+								closeOnCancel: false
+							},
+							function(isConfirm){
+								swal({
+								title: "운영자 회원가입",
+								text: '지금 바로 운영자로 권한을 변경하고 KOSTAY만의 특별 혜택을 받으시겠습니까?\
+								<div class="rule-container manager-rule" style="width:100%; height:55px; border:1px solid #eee; padding: 15px 0px; margin-bottom:15px; cursor:pointer; margin-top:20px;" onclick="javascript:change_permission_rule()">\
+				          <span class="accept-rule pull-left" style="margin-left:20px;">Kostay 운영자 이용 약관 보기</span>\
+									<div class="pull-right">\
+									<div class="accept-rule-round accept-rule-round2" style="top:0px;left:-20px;"></div>\
+									<div class="checkmark checkmark2" style="top:-20px;left:-11px;"></div>\
+									</div>\
+				        </div>',
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "예",
+								cancelButtonText: "아니오",
+								closeOnConfirm: false,
+								closeOnCancel: true,
+								html:true,
+							},
+							function(isConfirm){
+								if (isConfirm) {
+									$.ajax({
+										url:"server/updateUser.php",
+										type:"POST",
+										data:{
+											target: $(".btn-change").attr("name")
+										},
+										success: function(data){
+											swal({
+												title: "운영자 회원가입 완료",
+												text: "지금 바로 셰어하우스를 등록하시겠습니까?",
+												type: "success",
+												showCancelButton: true,
+												confirmButtonColor: "#DD6B55",
+												confirmButtonText: "예",
+												cancelButtonText: "아니오",
+												closeOnConfirm: false,
+												closeOnCancel: false
+											},
+											function(isConfirm){
+												if (isConfirm) {
+													location.href="register_house.html";
+												} else {
+													location.href="index.html";
+												}
+											});
+										},
+										error: function(){}
+									});
+								}
+								else {}
+							});
+							});
+						}
+
+						function canChange(){
+							swal({
+								title: "운영자 회원가입",
+								text: '지금 바로 운영자로 권한을 변경하고 KOSTAY만의 특별 혜택을 받으시겠습니까?\
+								<div class="rule-container manager-rule" style="width:100%; height:55px; border:1px solid #1fbc02; padding: 15px 0px; margin-bottom:15px; cursor:pointer; margin-top:20px;" onclick="javascript:change_permission_rule()">\
+									<span class="accept-rule pull-left" style="margin-left:20px;">Kostay 운영자 이용 약관 동의</span>\
+									<div class="pull-right">\
+									<div class="accept-rule-round accept-rule-round2" style="top:0px;left:-20px; border:2px solid #1fbc02"></div>\
+									<div class="checkmark checkmark2" style="top:-20px;left:-11px; border: solid #1fbc02; border-width: 0 2px 2px 0;"></div>\
+									</div>\
+								</div>',
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "예",
+								cancelButtonText: "아니오",
+								closeOnConfirm: false,
+								closeOnCancel: true,
+								html:true,
+							},
+							function(isConfirm){
+								if (isConfirm) {
+									$.ajax({
+										url:"server/updateUser.php",
+										type:"POST",
+										data:{
+											target: $(".btn-change").attr("name")
+										},
+										success: function(data){
+											swal({
+												title: "운영자 회원가입 완료",
+												text: "지금 바로 셰어하우스를 등록하시겠습니까?",
+												type: "success",
+												showCancelButton: true,
+												confirmButtonColor: "#DD6B55",
+												confirmButtonText: "예",
+												cancelButtonText: "아니오",
+												closeOnConfirm: false,
+												closeOnCancel: false
+											},
+											function(isConfirm){
+												if (isConfirm) {
+													location.href="register_house.html";
+												} else {
+													location.href="index.html";
+												}
+											});
+										},
+										error: function(){}
+									});
+								}
+								else {}
+							});
+						}
+						function cantChange(){
+							swal({
+								title: "운영자 회원가입",
+								text: '지금 바로 운영자로 권한을 변경하고 KOSTAY만의 특별 혜택을 받으시겠습니까?\
+								<div class="rule-container manager-rule" style="width:100%; height:55px; border:1px solid rgb(238, 238, 238); padding: 15px 0px; margin-bottom:15px; cursor:pointer; margin-top:20px;" onclick="javascript:change_permission_rule()">\
+									<span class="accept-rule pull-left" style="margin-left:20px;">Kostay 운영자 이용 약관 동의</span>\
+									<div class="pull-right">\
+									<div class="accept-rule-round accept-rule-round2" style="top:0px;left:-20px; border:2px solid rgb(238, 238, 238)"></div>\
+									<div class="checkmark checkmark2" style="top:-20px;left:-11px; border: solid rgb(238, 238, 238); border-width: 0 2px 2px 0;"></div>\
+									</div>\
+								</div>',
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "예",
+								cancelButtonText: "아니오",
+								closeOnConfirm: false,
+								closeOnCancel: true,
+								html:true,
+							},
+							function(isConfirm){
+								if (isConfirm) {
+									swal({
+										title: "에러",
+										text: "운영자로 권한을 변경하기 위해서는 먼저 Kostay 운영자 약관에 동의해 주세요.",
+										type: "error",
+										confirmButtonColor: "#DD6B55",
+										confirmButtonText: "확인",
+										cancelButtonText: "아니오",
+										closeOnConfirm: false,
+										closeOnCancel: false
+									},
+									function(isConfirm){
+										if (isConfirm) {
+											cantChange();
+										}
+									});
+								}
+								else {}
+							});
+						}
+					</script>
+					<!-- <div class="row">
 
 						<div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0 0;">
 
@@ -209,7 +471,7 @@
                 </div>
 
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</section>
 

@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	include 'server/dbconnect.php';
+
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -8,7 +10,6 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
 
 		<title>Kostay</title>
 		<meta name="keywords" content="Download, Apartment, Premium, Real Estate, HMTL, Site Template, property, mortgage, CSS" />
@@ -31,6 +32,8 @@
 		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 		<script src="js/sweetalert.min.js"></script>
 
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAxwBuJWDjuX_iABj5vaPO5ljMD_nGflB4&amp;libraries=places"></script>
+
 		<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -38,6 +41,85 @@
 		<style media="screen">
 			.adv-search-section {
 				height: 40vh;
+			}
+			.item-row{
+				border:  1px solid rgba(226, 226, 226, 0.72);
+				cursor: pointer;
+				margin-bottom: 20px;
+			}
+			.list-img{
+				width: 40% !important;
+				height: auto;
+				margin: 5px;
+				max-width: 25px;
+				max-height: 25px;
+			}
+			.icon-contanier{
+				color: white;
+				font-size: 1.5em;
+			}
+			.resize-icon-container{
+				display: inline;
+				position: relative;
+			}
+
+			@media (max-width: 600px) {
+				.resize-icon-container{
+  				left: 25%;
+  			}
+			}
+
+			.icon-contanier span{
+				margin-left: 10%;
+				font-size: 1em;
+				margin-top: 3px;
+				position: relative;
+				top: 3px;
+			}
+			h5{
+				margin-bottom: 25px;
+			}
+		</style>
+		<style media="screen">
+			.adv-search-section {
+				height: 40vh;
+			}
+			.item-row{
+				border:  1px solid rgba(226, 226, 226, 0.72);
+				cursor: pointer;
+				margin-bottom: 20px;
+			}
+			.list-img{
+				width: 40% !important;
+				height: auto;
+				margin: 5px;
+				max-width: 25px;
+				max-height: 25px;
+			}
+			.icon-contanier{
+				color: white;
+				font-size: 1.5em;
+			}
+			.resize-icon-container{
+				display: inline;
+				position: relative;
+			}
+
+			@media (max-width: 600px) {
+				.resize-icon-container{
+  				left: 25%;
+  			}
+			}
+
+			.icon-contanier span{
+				margin-left: 10%;
+				font-size: 1em;
+				margin-top: 3px;
+				position: relative;
+				top: 3px;
+			}
+			h5{
+				margin-bottom: 25px;
 			}
 		</style>
 	</head>
@@ -109,24 +191,111 @@
 					<!-- /.mani-menu-cont -->
 			</header>
 
-			<section class="adv-search-section no-padding">
+			<section class="adv-search-section no-padding" style="height:60vh">
 				<div id="offers-map"></div>
-				<form class="adv-search-form" id="adv-search-form" action="search_detail.html" method="post">
+				<form class="adv-search-form" id="adv-search-form" action="search_details2.html" method="post">
 					<div class="adv-search-cont">
 						<div class="container">
 							<div class="row tab-content">
 								<div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
 									<div class="row">
 										<div class="col-xs-12 col-sm-6 col-lg-3">
-											<select name="condition" class="bootstrap-select" title="위치기준:">
-												<option>지역기준</option>
-												<option>시티레일기준</option>
-												<option>출퇴근기준</option>
+											<select name="search_condition" class="bootstrap-select sel-condition condition-container" title="위치기준:">
+												<option value="1">지역기준</option>
+												<option value="2">시티레일기준</option>
+												<option value="3">출퇴근기준</option>
 											</select>
 										</div>
-										<div class="col-xs-12 col-sm-6 col-lg-3">
-											<input name="search_region" id="name" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="(직접입력)">
+										<script>
+										$(document).ready(function(){
+											$(".condition-container option[value=1]").attr("selected","selected");
+											$(".rail-selector").hide();
+											$(".con-in").hide();
+                                            $(".con-rail").hide();
+											$(".min-selector").hide();
+                                            $(".con2").hide();
+										});
+											$(".sel-condition").on("change",function(){
+												$(".region-container").hide();
+												$(".rail-selector").hide();
+												$(".km-selector").hide();
+												$(".min-selector").hide();
+												$(".con-near").hide();
+												$(".con-in").hide();
+                                                $(".con-rail").hide();
+                                                $(".con1").hide();
+                                                $(".con2").hide();
+												if($(".sel-condition option:selected").val()=="1"){
+													$(".region-container").show();
+													$(".con-near").show();
+													$(".km-selector").show();
+                                                    $(".con1").show();
+												}
+												else if($(".sel-condition option:selected").val()=="2"){
+													$(".rail-selector").show();
+													$(".con-rail").show();
+												}
+												else {
+													$(".region-container").show();
+													$(".con-in").show();
+													$(".min-selector").show();
+                                                    $(".con2").show();
+												}
+											});
+										</script>
+										<div class="col-xs-12 col-sm-6 col-lg-3 region-container">
+											<input name="search_region" id="name" type="text" class="bootstrap-select main-input required,all col-xs-10" placeholder="" style="display:inline">
+											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;" class="col-xs-2 con1">에서</span>
+											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;" class="col-xs-2 con2">까지</span>
 										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3 rail-selector"  style="margin-bottom:15px">
+											<select name="station" class="bootstrap-select sel-condition" title="노선명:">
+												 <?
+													$railQuery = "select * from station order by name ASC;";
+													$railResult = mysqli_query($conn, $railQuery);
+													while($railRow = mysqli_fetch_array($railResult)){
+														echo "<option>".$railRow['name']."</option>";
+													}
+												?> 
+											</select>
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3 km-selector"  style="margin-bottom:15px">
+										    <span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;" class="col-xs-2">반경</span>
+											<select name="km" class="bootstrap-select sel-condition col-xs-10 padding-left-0" title="Km:">
+												<option value="1">1km</option>
+												<option value="2">2km</option>
+												<option value="3">3km</option>
+												<option value="4">4km</option>
+												<option value="5">5km</option>
+											</select>
+										</div>
+										<style>
+                                            .padding-left-0{
+                                                 padding-left:0px;   
+                                            }
+                                        </style>
+										<div class="col-xs-12 col-sm-6 col-lg-3 min-selector"  style="margin-bottom:15px">
+										    <span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;" class="col-xs-5">대중교통으로</span>
+											<select name="min" class="bootstrap-select sel-condition padding-left-0 col-xs-7" title="분:">
+												<option value="1">10분</option>
+												<option value="2">20분</option>
+												<option value="3">30분</option>
+												<option value="4">40분</option>
+												<option value="5">50분</option>
+												<option value="6">60분</option>
+											</select>
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3 con-near">
+											<label class="bootstrap-select input-short2 main-input required,all" style="font-size:16px; padding-top:20px; color:black">이내의 집</label>
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3 con-rail">
+											<label class="bootstrap-select input-short2 main-input required,all" style="font-size:16px; padding-top:20px; color:black">역세권에 있는 집</label>
+										</div>
+										<div class="col-xs-12 col-sm-6 col-lg-3 con-in">
+											<label class="bootstrap-select input-short2 main-input required,all"style="font-size:16px; padding-top:20px; color:black">이내에 도착하는 집</label>
+										</div>
+									</div>
+									<div class="row">
 										<div class="col-xs-12 col-sm-6 col-lg-3">
 											<select name="search_gender" class="bootstrap-select" title="성별:">
 												<option value="1">남성</option>
@@ -142,14 +311,12 @@
 												<option value="1">공동주택(유닛, 아파트, 타운하우스)</option>
 											</select>
 										</div>
-									</div>
-									<div class="row">
 										<div class="col-xs-12 col-sm-6 col-lg-3">
 											<select name="search_room_type" class="bootstrap-select" title="룸타입:">
-												<option value="0">무관</option>
 												<option value="1">1인실</option>
 												<option value="2">2인실</option>
-												<option value="3">3인실 이상</option>
+												<option value="3">3인실</option>
+												<option value="4">4인실 이상</option>
 											</select>
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3">
@@ -158,10 +325,11 @@
 												<span>$</span>
 												<input type="text" name="price" id="slider-range-price1-value" readonly class="adv-search-amount">
 												<div class="clearfix"></div>
-												<div id="slider-range-price1" data-min="0" data-max="300000" class="slider-range"></div>
+												<div id="slider-range-price1" data-min="0" data-max="800" class="slider-range"></div>
 											</div>
 										</div>
-
+									</div>
+									<div class="row">
 										<div class="col-xs-12 col-sm-6 col-lg-3">
 											<select name="search_park" class="bootstrap-select" title="주차:">
 												<option value="0">무관</option>
@@ -169,8 +337,9 @@
 											</select>
 										</div>
 
-										<div class="col-xs-12 col-sm-6 col-lg-3">
-											<input name="search_date" id="datepicker" type="date" class="bootstrap-select input-short2 main-input required,all" placeholder="입주일">
+										<div class="col-xs-12 col-sm-6 col-lg-6">
+											<input name="search_date" id="datepicker" type="text" onfocus="(this.type='date')" class="bootstrap-select input-short2 main-input required,all col-xs-6" placeholder="입주일" style="display:inline">
+											<span class="col-xs-3" style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;margin-left:13px">이후의 집</span>
 										</div>
 
 									</div>
@@ -180,9 +349,9 @@
 
 						<div class="container">
 							<div class="row">
-								<div class="col-sm-12 col-md-6 col-lg-3 col-md-offset-6 col-lg-offset-9 adv-search-button-cont">
-									<a style="cursor:pointer" id="submit_search" class="button-primary width-100">
-										<span>search</span>
+								<div class="col-sm-12 col-md-6 col-lg-3 col-md-offset-6 col-lg-offset-9 adv-search-button-cont" style="padding:0px;">
+									<a style="cursor:pointer;float:right" id="submit_search" class="button-primary width-100">
+										<span>검색</span>
 										<div class="button-triangle"></div>
 										<div class="button-triangle2"></div>
 										<div class="button-icon"><i class="fa fa-search"></i></div>
@@ -199,116 +368,247 @@
 				 $("#adv-search-form").submit();
 			 });
 			</script>
+            <script>
+                search_id = "<? if(isset($_SESSION['id'])) {echo $_SESSION['id'];} else {echo 'guest';}?>" ;
+            if("<?if(isset($_GET['result'])) echo 'true';?>"=="true"){
+               $.ajax({
+                  url:"server/search_result.php",
+                  type:"POST",
+                  data:{
+                    condition:"delete",search_id:search_id
+                  },
+                  success: function(data){
+                  },
+                  error: function(){
+                  }
+                });
+            }
+            </script>
 
 			<section class="section-light section-top-shadow">
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="row">
+
+								<?php
+								$query_house = array();
+								$query_room = array();
+								$targets = "";
+
+								if(isset($_POST['search_gender'])){
+								  if($_POST['search_gender']!=null) array_push($query_house, " `gender` = '".$_POST['search_gender']."' ");
+								}
+
+								if(isset($_POST['search_type'])){
+								  if($_POST['search_type']!=null){
+								    if($_POST['search_type']==0){
+								      array_push($query_house, " (`house_type`  = '1' or `house_type` = '2')");
+								    }
+								    else if($_POST['search_type']==1) array_push($query_house, " `house_type` = '1'");
+								    else if($_POST['search_type']==2) array_push($query_house, " `house_type` = '2'");
+								  }
+								}
+
+								if(isset($_POST['search_room_type'])){
+								  if($_POST['search_room_type']!=null){
+								    if($alarmRow['type']==4){
+                                        array_push($query_house, " `type` like '%4%'");
+                                    }
+								    else if($_POST['search_room_type']==1) array_push($query_house, " `type` like '%1%'");
+								    else if($_POST['search_room_type']==2) array_push($query_house, " `type` like '%2%'");
+								    else if($_POST['search_room_type']==3) array_push($query_house, " `type` like '%3%'");
+								  }
+								}
+
+								if(isset($_POST['price'])){
+								    $low=explode(" - ", $_POST['price'])[0];
+								    $high=explode(" - ", $_POST['price'])[1];
+								    array_push($query_house, " (`min_rent` >= ".$low." and `max_rent` <= ".$high.")");
+								}
+
+								if(isset($_POST['search_park'])){
+								  if($_POST['search_park']!=null){
+								    if($_POST['search_park']=="0"){}
+								    else if($_POST['search_park']=="1") array_push($query_house, " `park` = 1");
+								  }
+								}
+
+								if(isset($_POST['search_date'])){
+								  if($_POST['search_date']!=null){
+								    array_push($query_house, " `date` >= '".$_POST['search_date']."'");
+								  }
+								}
+
+								if(isset($_POST['search_type'])){
+								  if($_POST['search_type']!=null) {
+								    if($_POST['search_type']==0){
+								    }
+								    elseif($_POST['search_type']==3){
+								      array_push($query_room, " `person` >= ".$_POST['search_type']." ");
+								    }
+								    else{
+								      array_push($query_room, " `person` = ".$_POST['search_type']." ");
+								    }
+								  }
+								}
+								array_push($query_house, " ad='1'");
+
+								$origin="";
+								$origin_condition=-1;
+
+								if(isset($_POST['search_condition'])){
+								  if($_POST['search_condition']==1){
+								    $origin = $_POST['search_region'];
+								    $origin_condition = $_POST['km'];
+								  }
+								  else if($_POST['search_condition']==2){
+								    $origin = $_POST['station'];
+								    $origin_condition = 8;
+								  }
+								  else if($_POST['search_condition']==3){
+								    $origin = $_POST['search_region'];
+								    $origin_condition = $_POST['min'] * 5;
+								  }
+								}
+
+								$query = "select house_id from search ";
+								$query_count = "select count(*) from search";
+								for($i=0; $i<count($query_house);++$i){
+								  if($i==0) {
+								    $query .= " where ";
+								    $query_count .= " where ";
+								  }
+								  else{
+								    $query .= " and ";
+								    $query_count .= " and ";
+								  }
+								  $query .= $query_house[$i];
+								  $query_count .= $query_house[$i];
+								}
+
+								$query .=  " order by register_time DESC";
+								$query_count .=  " order by register_time DESC";
+                                //echo $query;
+								$result = mysqli_query($conn, $query);
+								$index=0;
+								while($row=mysqli_fetch_array($result)){
+								  $query_second = "select * from search where house_id = '".$row['house_id']."'";
+								  $second_result = mysqli_query($conn, $query_second);
+								  $second_row=mysqli_fetch_array($second_result);
+								  //echo $second_row['address'];
+								  //echo $second_row['house_id'];
+								?>
+								<script type="text/javascript">
+								  var geocoder;
+								  var origin;
+								  var latlng;
+                                    var search_id;
+                                    
+
+                                  
+
+								  geocoder =  new google.maps.Geocoder();
+								  geocoder.geocode({'address':'<?=$origin?>'}, function(results, status) {
+								          if (status == google.maps.GeocoderStatus.OK)
+								          {
+                                              
+								              origin = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+								              var destination = "<?= $second_row['address'] ?>";
+								              var service = new google.maps.DistanceMatrixService();
+								              service.getDistanceMatrix(
+								              {
+								                  origins: [origin],
+								                  destinations: [destination],
+								                  travelMode: google.maps.TravelMode.DRIVING,
+								                  unitSystem: google.maps.UnitSystem.METRIC,
+								                  avoidHighways: false,
+								                  avoidTolls: false
+								              },
+								                  callback<?=$index?>
+								              );
+								        
+								          }
+								          else{
+								            //alert("Geocode was not successful for the following reason: " + status);
+								          }
+								      });
+
+								      //var origin = new google.maps.LatLng(55.930385, -3.118425),
+								      //var origin = new google.maps.LatLng(37.335887, 126.584063),
+								      function callback<?=$index?>(response, status) {
+								        /*
+								        var orig = document.getElementById("orig"),
+								            dest = document.getElementById("dest"),
+								            dist = document.getElementById("dist");
+								        */
+
+								        if(status=="OK"){
+								          /*
+								          dest.value = response.destinationAddresses[0];
+								          orig.value = response.originAddresses[0];
+								          */
+								          //dist.value = response.rows[0].elements[0].distance.text;
+                                            try{
+                                                distance = response.rows[0].elements[0].distance.text.split(' ');            
+                                            }catch(exception){
+                                                distance = new Array();
+                                                distance.push(1000);
+                                            }
+                                          
+								          
+								          var origin_condition = parseInt("<?=$origin_condition?>");
+                                          var cur_dist = parseInt(distance[0]);
+								          
+								          search_id = "<? if(isset($_SESSION['id'])) {echo $_SESSION['id'];} else {echo 'guest';}?>" ;
+                                            
+								          if(origin_condition >= cur_dist){
+								            //alert("<?=$second_row['address']?>");
+								            $.ajax({
+								              url:"server/search_result.php",
+								              type:"POST",
+								              data:{
+								                house_id:"<?=$row['house_id']?>",search_id:search_id
+								              },
+								              success: function(data){
+								              },
+								              error: function(){
+								              }
+								            });
+                                              
+								          }
+								        } else {
+								          //alert("ERROR");
+								          //alert("Error: " + status);
+								        }
+								      }
+								      </script>
+								      <?
+								      $index+=1;
+								    }
+								  ?>
+
+
 								<?
-									include 'server/dbconnect.php';
-									$query_house = array();
-									$query_room = array();
-									if(isset($_POST['search_region'])){
-										if($_POST['search_region']!=null) array_push($query_house, " address like '%".$_POST['search_region']."%' ");
+									if(isset($_POST['search_condition'])){
+										if($_SESSION['id']==null) $search_id="guest";
+										else $search_id = $_SESSION['id'];
+										$final_count_query = "select count(*) from search_result where username='".$search_id."'";
 									}
-
-									if(isset($_POST['search_gender'])){
-										if($_POST['search_gender']!=null) array_push($query_house, " `gender` = '".$_POST['search_gender']."' ");
+									else{
+										$final_count_query = "select count(*) from search where ad='1'";
 									}
-
-									if(isset($_POST['search_type'])){
-										if($_POST['search_type']!=null){
-											if($_POST['search_type']==0){
-												array_push($query_house, " (`house_type`  = '1' or `house_type` = '2')");
-											}
-											else if($_POST['search_type']==1) array_push($query_house, " `house_type` = '1'");
-											else if($_POST['search_type']==2) array_push($query_house, " `house_type` = '2'");
-										}
-									}
-
-									if(isset($_POST['search_room_type'])){
-										if($_POST['search_room_type']!=null){
-											if($_POST['search_room_type']==0){
-
-											}
-											else if($_POST['search_room_type']==1) array_push($query_house, " `type` like '%1%'");
-											else if($_POST['search_room_type']==2) array_push($query_house, " `type` like '%2%'");
-											else if($_POST['search_room_type']==3) array_push($query_house, " `type` like '%3%'");
-										}
-									}
-
-									if(isset($_POST['price'])){
-											$low=explode(" - ", $_POST['price'])[0];
-											$high=explode(" - ", $_POST['price'])[1];
-											array_push($query_house, " (`min_rent` >= ".$low." and `max_rent` <= ".$high.")");
-									}
-
-									if(isset($_POST['search_park'])){
-										if($_POST['search_park']!=null){
-											if($_POST['search_park']=="0"){}
-											else if($_POST['search_park']=="1") array_push($query_house, " `park` = 1");
-										}
-									}
-
-									if(isset($_POST['search_date'])){
-										if($_POST['search_date']!=null){
-											array_push($query_house, " `date` <= '".$_POST['search_date']."'");
-										}
-									}
-
-
-
-									if(isset($_POST['search_type'])){
-										if($_POST['search_type']!=null) {
-
-											if($_POST['search_type']==0){
-
-											}
-
-											elseif($_POST['search_type']==3){
-												array_push($query_room, " `person` >= ".$_POST['search_type']." ");
-											}
-
-											else{
-												array_push($query_room, " `person` = ".$_POST['search_type']." ");
-											}
-
-										}
-									}
-
-									$query = "select * from search ";
-									$query_count = "select count(*) from search";
-									for($i=0; $i<count($query_house);++$i){
-										if($i==0) {
-											$query .= " where ";
-											$query_count .= " where ";
-										}
-										else{
-											$query .= " and ";
-											$query_count .= " and ";
-										}
-										$query .= $query_house[$i];
-										$query_count .= $query_house[$i];
-									}
-									$query .=  " order by register_time DESC";
-									$query_count .=  " order by register_time DESC";
-									$result = mysqli_query($conn, $query);
-									$row = mysqli_fetch_array($result);
-									$result_count = mysqli_query($conn, $query_count);
-									$row_count = mysqli_fetch_array($result_count);
+									$final_count_result = mysqli_query($conn, $final_count_query);
+									$final_count_row = mysqli_fetch_array($final_count_result);
 								?>
 								<div class="col-xs-12 col-lg-6">
-									<h3>총 <?=$row_count[0]?>개의 결과가 검색되었습니다.</h3>
+									<h3>총 <?=$final_count_row[0]?>개의 결과가 검색되었습니다.</h3>
 								</div>
 								<div class="col-xs-12 col-lg-6">
 									<div class="order-by-container">
 										<select name="sort" class="bootstrap-select" title="정렬 :">
-										<option>최신순</option>
-										<option>거리순</option>
-										<option>렌트비</option>
-										<option>입실일</option>
-                    <option>거주인원</option>
+										<option>공실만 보기</option>
+										<option>만실 제외</option>
 									</select>
 									</div>
 								</div>
@@ -316,27 +616,11 @@
 									<div class="title-separator-primary"></div>
 								</div>
 							</div>
-							<input type="button" class="save" name="" value="">
-							<script>
-								$(".save").on("click",function(){
-									$.ajax({
-										url:"server/search.php",
-										type:"POST",
-										data:{
-											house_id:'user2@user.ac.kr_3'
-										},
-										success: function(data){
-											swal("에러!",data,"warning");
-										},
-										error: function(){
-											swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
-										}
-									});
-								});
-							</script>
 							<div class="row list-offer-row">
 								<div class="col-xs-12">
-									<!-- Item -->
+                                    <div class="items">
+                                        
+                                        <!-- Item -->
 									<?
 								   $result = mysqli_query($conn, $query);
 									 while($row = mysqli_fetch_array($result)){
@@ -346,7 +630,7 @@
 										 $query = "select room_id from house_rooms where house_id='".$row['house_id']."'";
 										 $result3 = mysqli_query($conn, $query);
 										 $row3 = mysqli_fetch_row($result3);
-										 $query = "select count(*) from house_beds where room_id='".$row3[0]."' and `condition`!=3;";
+										 $query = "select count(*) from house_beds where room_id like '".$row['house_id']."_%' and `condition`!=3;";
 										 $result4 = mysqli_query($conn, $query);
 										 $row4 = mysqli_fetch_row($result4);
 										 $roomIdQuery = "select room_id from house_rooms where house_id='".$row['house_id']."';";
@@ -367,105 +651,129 @@
 										$vacantQuery = "select min(vacant) from house_beds where (".$roomCondition.") and `condition`=2;";
 										$vacantResult = mysqli_query($conn, $vacantQuery);
 										$vacantRow = mysqli_fetch_array($vacantResult);
-										$titleQuery="select house_title,number_of_rooms from house_main where house_id='".$row['house_id']."'";
+										$vacantQuery2 = "select * from house_beds where (".$roomCondition.") and `condition`=3;";
+										$vacantResult2 = mysqli_query($conn, $vacantQuery2);
+										$titleQuery="select house_title,number_of_rooms, facilities,number_of_toilet from house_main where house_id='".$row['house_id']."'";
 										$titleResult=mysqli_query($conn,$titleQuery);
 										$titleRow = mysqli_fetch_array($titleResult);
+										
+
+                                        $return = array();
+                                        for($i=1;$i<11;$i++){
+                                          $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                          $imageresult = mysqli_query($conn, $imagequery);
+                                          if(mysqli_num_rows($imageresult)===1){
+                                            $imagerow = mysqli_fetch_array($imageresult);
+                                            array_push($return, $imagerow['img']);
+                                          }
+                                        }
 									?>
-									<div class="list-offer">
-										<!-- Item 사진 -->
-										<div class="list-offer-left">
-											<div class="list-offer-front">
-												<div class="list-offer-photo height-100">
-													<img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
+
+									<div class="row item-row" name="<?=$row['house_id']?>">
+										<div class="col-sm-12 col-md-4 col-lg-3"  style="padding:0px;">
+											<div class="list-offer-photo height-100">
+												<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" alt="" style="height:182px; width:100%" />
+
+												<div class="col-xs-12 icon-contanier" style="background-color:black; position:absolute; bottom:0px;">
+													<div class="col-xs-4">
+														<div class="resize-icon-container">
+															<img class="list-img" src="images/icons/w_master.png" alt=""><span class="list-span" style="font-size:0.8em"><?=$row2[0]?></span>
+														</div>
+													</div>
+													<div class="col-xs-4">
+														<div class="resize-icon-container">
+															<img class="list-img" src="images/rooms-icon.png" alt=""><span class="list-span" style="font-size:0.8em"><?=$titleRow['number_of_rooms']?></span>
+														</div>
+													</div>
+													<div class="col-xs-4">
+														<div class="resize-icon-container">
+															<img class="list-img" src="images/icons/w_toilet.png" alt=""><span class="list-span" style="font-size:0.8em"><?=$titleRow['number_of_toilet']?></span>
+														</div>
+													</div>
 												</div>
+
 											</div>
 										</div>
-										<!-- .Item 사진 -->
-										<!-- Item 정보 -->
-										<div class="list-offer-right-large" name="<?=$row['house_id']?>">
-											<div class="list-offer-text" style="padding-top:10px;">
+                                        
+                                        <style>
+                                            .desc-default-option-title{
+                                                    margin: 0px;
+                                                    display: block;
+                                                    white-space: nowrap;
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    height: 50px;
+                                                    font-weight: bold;
+                                            }
+                                            .desc-default-option{
+                                                    margin: 0px;
+                                                    display: -webkit-box; 
+                                                    -webkit-line-clamp: 3;
+                                                    text-overflow: ellipsis; 
+                                                    overflow: hidden;
+                                                    -webkit-box-orient: vertical;
+                                            }
+                                        </style>
+                                        
+										<div class="col-sm-12 col-md-5 col-lg-7" style="padding:0px;">
+											<div class="" style="padding-top:5px;">
 												<div class="clearfix"></div>
 
 												<div class="row">
 													<div class="list-offer-h4 col-sm-12 col-md-12">
 														<!--<strong><i class="fa fa-home list-offer-localization" style="font-size:1.4em;"></i></strong>-->
-														<h4 class="list-offer-title"><?=$titleRow['house_title']?>
-                        		</h4>
+														<h4 class="list-offer-title title-default  desc-default-option-title" style="margin-bottom:20px !important;"><?=$titleRow['house_title']?></h4>
+														<h5 class="desc-default desc-default-option" style="margin:0px"><?=$titleRow['facilities']?></h5>
 													</div>
 												</div>
-
-												<div class="row text-right search-price-div">
-													<div class="col-xs-12 col-lg-12 col-sm-12 col-md-12">
-														<span class="search-price">렌트비 : </span>
-														<span class="mini-price"><?=$row2[2]?>$</span>
-														&nbsp;&nbsp;~&nbsp;&nbsp;
-														<span class="max-price"><?=$row2[1]?>$</span>
-													</div>
-												</div>
-
-												<div class="row margin-top-10">
-													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-														<p style="font-size:1.4em;">등록일&nbsp;
-														<i class="fa fa-calendar"></i>&nbsp;&nbsp;<?=$row['register_time']?></p>
-													</div>
-													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-														<p style="font-size:1.4em;">입실일&nbsp;
-														<i class="fa fa-clock-o"></i>&nbsp;<?=$vacantRow[0]?></p>
-													</div>
-													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-														<p style="font-size:1.4em;">
-															룸&nbsp;
-															<i class="fa fa-bed"></i>&nbsp;
-															<?=$titleRow['number_of_rooms']?>
-														</p>
-													</div>
-												</div>
-
-												<div class="row">
-													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-														<p style="font-size:1.4em;">거리&nbsp;
-														<i class="fa fa-road"></i>&nbsp;&nbsp;-</p>
-													</div>
-													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-														<p style="font-size:1.4em;">
-															거주인원&nbsp;
-															<i class="fa fa-user"></i>&nbsp;
-															<?=$row4[0]?>
-														</p>
-													</div>
-													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-														<p style="font-size:1.4em;">
-															정원&nbsp;
-															<i class="fa fa-users"></i>&nbsp;
-															 <?=$row2[0]?></p>
-													</div>
-												</div>
-
-												<div class="row">
-													<div class="col-xs-12 clo-lg-8 col-sm-8 col-md-8 text-left fixed-middle" style="height:100%;">
-														<p class="title-negative-margin" style=" font-size:1.4em; display:inline">
-															<? if($vacantRow[0]!=null){echo $vacantRow[0]." 부터 <strong>입주가능</strong>";}else{echo "공실 예정일이 없습니다.";}?>
-														</p>
-													</div>
-
-													<div class="col-xs-12 clo-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-														<a class="btn btn-danger" style="background-color:#fd3b3b; cursor:pointer; width:100%; height:50%;" name="<?=$row['house_id']?>" onclick="wish(this)">
-															<span style="font-size:1.2em; font-weight:bold; color:white;"><i class="fa fa-heart-o fa-lg"></i>&nbsp;찜하기</span>
-														</a>
-													</div>
-												</div>
-
-
-
-												<div class="clearfix"></div>
 											</div>
 										</div>
-										<!-- .Item 정보 -->
-										<div class="clearfix"></div>
+
+										<div class="col-sm-12 col-md-3 col-lg-2" style="padding:0px">
+											<table style="width:100%; height:100%">
+												<tr>
+													<td>
+														<div style="background-color:rgb(242,242,242); cursor:pointer; width:100%; height:50%;padding: 10px;">
+															<p class="title-default" style="font-size:1.5em; font-weight:bold; color:black; width100%; text-align:center; margin-bottom:0px;"><?=$row2[2]?>~<?=$row2[1]?>$</p>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div style="background-color:rgb(242,242,242); cursor:pointer; width:100%; height:50%;padding: 10px; <? if($vacantRow[0]!=null){echo 'border:1px solid black';}?>">
+															<p style="font-size:1.3em; color:black; width100%; text-align:center; margin-bottom:0px;"><? if(mysqli_num_rows($vacantResult2)>0){echo"&nbsp";}else if($vacantRow[0]!=null){echo $vacantRow[0]."~";}else{echo "&nbsp;";}?></p>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div style="background-color:rgb(0,0,0); cursor:pointer; width:100%; height:50%;padding: 10px;">
+															<p class="title-default" style="font-size:1.5em; font-weight:bold; color:white; width100%; text-align:center; margin-bottom:0px;"><? if(mysqli_num_rows($vacantResult2)>0){echo"공실";} else if($vacantRow[0]!=null){echo "공실예정";}else if($row4[0]==$row2[0]){echo "만실";} else{ echo "공실";}?></p>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div style="background-color:rgb(55, 151, 221); cursor:pointer; width:100%; height:50%;padding: 10px;" name="<?=$row['house_id']?>" onclick="wish(this)">
+															<p class="title-default" style="font-size:1.5em; font-weight:bold; color:white; width100%; text-align:center; margin-bottom:0px;"><i class="fa fa-heart-o fa-lg"></i>&nbsp;찜하기</p>
+														</div>
+													</td>
+												</tr>
+											</table>
+
+										</div>
 									</div>
+
+
 									<!-- .Item -->
-									<?}?>
+                                        <?}?>
+                                    </div>
+									
+        
+        
+
 									<script>
+                                        
 									var canMove = true;
 										function wish(param){
 											$.ajax({
@@ -475,8 +783,11 @@
 													target:$(param).attr("name")
 												},
 												success: function(data){
-													if(data=="하우스가 찜리스트에 추가되었습니다.") swal("추가 성공!",data,"success");
-													else swal("에러!",data,"warning");
+													if(data=="하우스가 찜리스트에 추가되었습니다."){
+                                                        $("#hope-modal").modal("show");
+                                                        return;
+                                                    }
+													$("#fill-modal").modal("show");
 												},
 												error: function(){
 													swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
@@ -511,6 +822,46 @@
 			<?include("config/footer.html")?>
 
 		</div>
+		
+		<!-- hope modal -->
+        <div class="modal fade apartment-modal" id="hope-modal" style="top:10%;z-index:9999" data-keyboard="false">
+            <div class="modal-dialog" style="width :300px; height:450px;";z-index:9999>
+                <div class="modal-content" style="width :300px; height:450px;;z-index:9999">
+                    <div class="modal-body" style="width :300px; height:450px; padding:0px; border:4px solid black;z-index:9999">
+                        <div style="height:40px;background-color:black"><img src="images/logo/bottom_logo_webpage.png" alt="" style="height:23px; margin:8px; width:auto;"></div>
+                        <div style="margin-top: 20px;text-align: center;">
+                            <img src="images/naro_sub_ani.gif" alt="" style="height:150px; width:auto;">
+                            <p style="font-size:55px;text-align:center;color:black;font-weight:bold;margin-top: 35px;">추가성공</p>
+                            <p style="font-size:20px;text-align:center;color:black;margin-top: 40px; padding: 0px 30px;">감사합니다.<br/>찜리스트에 추가되었습니다.</p>
+                            <input type="button" style="font-size:25px;width:200px;  color:white; background:rgb(55, 151, 221); height:40px; margin:10px 47px; border:none; " value="확인" onclick="$('#hope-modal').modal('toggle');">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+                                    
+        <!-- fail modal -->
+        <div class="modal fade apartment-modal" id="fill-modal" style="top:10%;" data-keyboard="false">
+            <div class="modal-dialog" style="width :300px; height:450px;">
+                <div class="modal-content" style="width :300px; height:450px;">
+                    <div class="modal-body" style="width :300px; height:450px; padding:0px; border:4px solid black">
+                        <div style="height:40px;background-color:black"><img src="images/logo/bottom_logo_webpage.png" alt="" style="height:23px; margin:8px; width:auto;"></div>
+                        <div style="margin-top: 20px;text-align: center;">
+                            <img src="images/naro_b_basic.png" alt="" style="height:150px; width:auto;">
+                            <p style="font-size:55px;text-align:center;color:black;font-weight:bold;margin-top: 35px;">요청실패</p>
+                            <p style="font-size:20px;text-align:center;color:black;margin-top: 40px; padding: 0px 30px;">이미 찜리스트에 추가를 완료한 하우스 입니다.</p>
+                            <input type="button" style="font-size:25px;width:200px;  color:white; background:rgb(55, 151, 221); height:40px; margin:10px 47px; border:none; " value="확인" onclick="$('#fill-modal').modal('toggle');">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
 
 		<!-- Move to top button -->
 
@@ -521,67 +872,71 @@
 		<!-- Move to top button -->
 
 		<!--로그인, 회원가입, 비밀번호 찾기-->
-		<?include("config/user.html")?>
-		<!--sweetalert2-->
-		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
-		<script src="js/sweetalert.min.js"></script>
+	<?include("config/user.html")?>
+	<!--sweetalert2-->
+	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+	<script src="js/sweetalert.min.js"></script>
 
-		<!-- jQuery  -->
-		<script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
-		<script type="text/javascript" src="js/jQuery/jquery-ui.min.js"></script>
+	<!-- jQuery  -->
+	<script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jQuery/jquery-ui.min.js"></script>
 
-		<!-- Bootstrap-->
-		<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+	<!-- Bootstrap-->
+	<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
 
-		<!-- Google Maps -->
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&amp;sensor=false&amp;libraries=places"></script>
+	<!-- Google Maps -->
 
-		<!-- plugins script -->
-		<script type="text/javascript" src="js/plugins.js"></script>
 
-		<!-- template scripts -->
-		<script type="text/javascript" src="mail/validate.js"></script>
-		<script type="text/javascript" src="js/apartment.js"></script>
+	<!-- plugins script -->
+	<script type="text/javascript" src="js/plugins.js"></script>
 
-		<!-- google maps initialization -->
-		<script type="text/javascript">
-			google.maps.event.addDomListener(window, 'load', init);
+	<!-- template scripts -->
+	<script type="text/javascript" src="mail/validate.js"></script>
+	<script type="text/javascript" src="js/apartment.js"></script>
+	<!-- google maps initialization -->
+	<script type="text/javascript">
+         
+		google.maps.event.addDomListener(window, 'load', init);
 
-			function init() {
-				var locations = [
-					[40.6128, -73.9976, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "Fort Collins, Colorado 80523, USA", "$320 000"],
-					[40.7222, -73.7903, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
-					[41.0306, -73.7669, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer3.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
-					[41.3006, -72.9440, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer4.jpg", "Fort Collins, Colorado 80523, USA", "$410 000"],
-					[42.2418, -74.3626, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "West Fourth Street, New York 10003, USA", "$295 000"],
-					[38.8974, -77.0365, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
-					[38.7860, -77.0129, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer7.jpg", "Fort Collins, Colorado 80523, USA", "$299 000"],
-					[41.2693, -70.0874, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer8.jpg", "Fort Collins, Colorado 80523, USA", "$600 000"],
-					[33.7544, -84.3857, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer9.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
-					[33.7337, -84.4443, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer10.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$550 000"],
-					[33.8588, -84.4858, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$670 000"],
-					[34.0254, -84.3560, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
-					[39.6282, -86.1320, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
-					[40.5521, -84.5658, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
-					[41.6926, -87.6021, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"]
-				];
-				offersMapInit("offers-map", locations);
+		function init() {
+			var locations = [
+				[40.6128, -73.9976, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "Fort Collins, Colorado 80523, USA", "$320 000"],
+				[40.7222, -73.7903, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+				[41.0306, -73.7669, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer3.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
+				[41.3006, -72.9440, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer4.jpg", "Fort Collins, Colorado 80523, USA", "$410 000"],
+				[42.2418, -74.3626, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "West Fourth Street, New York 10003, USA", "$295 000"],
+				[38.8974, -77.0365, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
+				[38.7860, -77.0129, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer7.jpg", "Fort Collins, Colorado 80523, USA", "$299 000"],
+				[41.2693, -70.0874, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer8.jpg", "Fort Collins, Colorado 80523, USA", "$600 000"],
+				[33.7544, -84.3857, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer9.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+				[33.7337, -84.4443, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer10.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$550 000"],
+				[33.8588, -84.4858, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$670 000"],
+				[34.0254, -84.3560, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
+				[39.6282, -86.1320, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
+				[40.5521, -84.5658, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+				[41.6926, -87.6021, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"]
+			];
+			offersMapInit("offers-map", locations);
 
-				mapInit(41.2693, -70.0874, "list-map1", "images/pin-house.png", false);
-				mapInit(33.7544, -84.3857, "list-map2", "images/pin-apartment.png", false);
-				mapInit(33.7337, -84.4443, "list-map3", "images/pin-land.png", false);
-				mapInit(33.8588, -84.4858, "list-map4", "images/pin-commercial.png", false);
-				mapInit(34.0254, -84.3560, "list-map5", "images/pin-apartment.png", false);
-				mapInit(40.6128, -73.9976, "list-map6", "images/pin-house.png", false);
-				mapInit(40.6128, -73.7903, "list-map7", "images/pin-house.png", false);
-			}
-			$(".list-offer-right-large").on("click", function() {
-				var loc = "view_detail.html?house=" + $(this).attr("name");
-				if(canMove) {location.href = loc; canMove = true;}
-				else canMove = true;
-			});
-		</script>
-
-	</body>
-
-	</html>
+			mapInit(41.2693, -70.0874, "list-map1", "images/pin-house.png", false);
+			mapInit(33.7544, -84.3857, "list-map2", "images/pin-apartment.png", false);
+			mapInit(33.7337, -84.4443, "list-map3", "images/pin-land.png", false);
+			mapInit(33.8588, -84.4858, "list-map4", "images/pin-commercial.png", false);
+			mapInit(34.0254, -84.3560, "list-map5", "images/pin-apartment.png", false);
+			mapInit(40.6128, -73.9976, "list-map6", "images/pin-house.png", false);
+			mapInit(40.6128, -73.7903, "list-map7", "images/pin-house.png", false);
+		}
+		$(".list-offer-right-large").on("click", function() {
+			var loc = "view_detail.html?house=" + $(this).attr("name");
+			if(canMove) {location.href = loc; canMove = true;}
+			else canMove = true;
+		});
+		$(".item-row").on("click", function() {
+			var loc = "view_detail.html?house=" + $(this).attr("name");
+			if(canMove) {location.href = loc; canMove = true;}
+			else canMove = true;
+		});
+        search_id = "<? if(isset($_SESSION['id'])) {echo $_SESSION['id'];} else {echo 'guest';}?>" ;
+    </script>
+</body>
+</html>

@@ -31,6 +31,7 @@
 
 		<!--sweetalert2-->
 		<script src="js/sweetalert.min.js"></script>
+		<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 
 
 		<!--[if lt IE 9]>
@@ -56,7 +57,136 @@
       .no-margin{
         margin: 0px !important;
       }
+			body, html {
+    height:100%;
+    width:100%;
+    min-height:100%;
+    padding:0;
+    margin:0;
+		}
+		.error {
+		    width:200px;
+		    height:20px;
+		    height:auto;
+		    position:absolute;
+		    left:50%;
+		    margin-left:-100px;
+		    bottom:10px;
+		    background-color: #383838;
+		    color: #F0F0F0;
+		    font-family: Calibri;
+		    font-size: 20px;
+		    padding:10px;
+		    text-align:center;
+		    border-radius: 2px;
+		    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+		    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+		    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+		}
     </style>
+    <style media="screen">
+			.adv-search-section {
+				height: 40vh;
+			}
+			.item-row{
+				border:  1px solid rgba(226, 226, 226, 0.72);
+				cursor: pointer;
+				margin-bottom: 20px;
+			}
+			.list-img{
+				width: 40% !important;
+				height: auto;
+				margin: 5px;
+				max-width: 25px;
+				max-height: 25px;
+			}
+			.icon-contanier{
+				color: white;
+				font-size: 1.5em;
+			}
+			.resize-icon-container{
+				display: inline;
+				position: relative;
+			}
+
+			@media (max-width: 600px) {
+				.resize-icon-container{
+  				left: 25%;
+  			}
+			}
+
+
+			.icon-contanier span{
+				margin-left: 10%;
+				font-size: 1em;
+				margin-top: 3px;
+				position: relative;
+				top: 3px;
+			}
+			h5{
+				margin-bottom: 25px;
+			}
+		</style>
+		<style media="screen">
+			.adv-search-section {
+				height: 40vh;
+			}
+			.item-row{
+				border:  1px solid rgba(226, 226, 226, 0.72);
+				cursor: pointer;
+				margin-bottom: 20px;
+			}
+			.list-img{
+				width: 40% !important;
+				height: auto;
+				margin: 5px;
+				max-width: 25px;
+				max-height: 25px;
+			}
+			.icon-contanier{
+				color: white;
+				font-size: 1.5em;
+			}
+			.resize-icon-container{
+				display: inline;
+				position: relative;
+			}
+
+			@media (max-width: 600px) {
+				.resize-icon-container{
+  				left: 25%;
+  			}
+			}
+
+
+			.icon-contanier span{
+				margin-left: 10%;
+				font-size: 1em;
+				margin-top: 3px;
+				position: relative;
+				top: 3px;
+			}
+			h5{
+				margin-bottom: 25px;
+			}
+             .desc-default-option-title{
+                    margin: 0px;
+                    display: block;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    height: 50px;
+                    font-weight: bold;
+            }
+            .desc-default-option{
+                    margin: 0px;
+                    display: -webkit-box; 
+                    -webkit-line-clamp: 3;
+                    text-overflow: ellipsis; 
+                    overflow: hidden;
+                    -webkit-box-orient: vertical;
+            }
+		</style>
 	</head>
 
 	<body>
@@ -142,8 +272,7 @@
 							<div class="row margin-top-10">
 								<div class="col-xs-12">
 									<blockquote>
-										<p>운영자 회원 혜택. 하우스 별 객실관리 메뉴입니다.(추가 설명 작성) </p>
-										<footer>각 객실에 대한 공실 정보를 등록하세요.</footer>
+										<p>각 객실의 공실 관련 정보를 등록하세요</p>
 									</blockquote>
 								</div>
 							</div>
@@ -154,87 +283,112 @@
 							 $result = mysqli_query($conn, $query);
 							 while($row = mysqli_fetch_array($result)){
 								 $query = "select sum(person), max(rent), min(rent) from house_rooms where house_id='".$row['house_id']."'";
-								 $result2 = mysqli_query($conn, $query);
-								 $row2 = mysqli_fetch_row($result2);
-								 $query = "select room_id from house_rooms where house_id='".$row['house_id']."' order by room_id ASC";
+										 $result2 = mysqli_query($conn, $query);
+										 $row2 = mysqli_fetch_row($result2);
+										$titleQuery="select house_title,number_of_rooms, facilities,number_of_toilet from house_main where house_id='".$row['house_id']."'";
+										$titleResult=mysqli_query($conn,$titleQuery);
+										$titleRow = mysqli_fetch_array($titleResult);
+										$query = "select room_id from house_rooms where house_id='".$row['house_id']."' order by room_id ASC";
 								 $result3 = mysqli_query($conn, $query);
 								 $row3 = mysqli_fetch_row($result3);
-								 $query = "select count(*) from house_beds where room_id='".$row3[0]."' and `condition`!=3;";
-								 $result4 = mysqli_query($conn, $query);
-								 $row4 = mysqli_fetch_row($result4);
-								 $query = "select min(vacant) from house_beds where room_id='".$row3[0]."' and `condition`=2;";
+										$query = "select min(vacant) from house_beds where room_id='".$row3[0]."' and `condition`=2;";
 								 $result5 = mysqli_query($conn, $query);
 								 $row5 = mysqli_fetch_row($result5);
+                                $initQuery = "select * from search where house_id='".$row['house_id']."'";
+                                       $initResult = mysqli_query($conn,$initQuery);
+                                       $initRow = mysqli_fetch_array($initResult);
+                                        $return = array();
+                                        for($i=1;$i<9;$i++){
+                                          $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                          $imageresult = mysqli_query($conn, $imagequery);
+                                          if(mysqli_num_rows($imageresult)===1){
+                                            $imagerow = mysqli_fetch_array($imageresult);
+                                            array_push($return, $imagerow['img']);
+                                          }
+                                        }
 							?>
+                          <div class="set-container">  
+                                <div class="row item-row" name="<?=$row['house_id']?>">
+										<div class="col-sm-12 col-md-4 col-lg-3"  style="padding:0px;">
+											<div class="list-offer-photo height-100" style="width:100%;">
+												<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" alt="" style="height:182px; width:100%" />
 
-							<div class="list-offer" style="margin-bottom: 30px;">
-								<!-- Item 사진 -->
-								<div class="list-offer-left">
+												<div class="col-xs-12 icon-contanier" style="background-color:black; position:absolute; bottom:0px; width:100%">
+													<div class="col-xs-4">
+														<div class="resize-icon-container">
+															<img class="list-img" src="images/icons/w_master.png" alt=""><span class="list-span" style="font-size:0.8em"><?=$row2[0]?></span>
+														</div>
+													</div>
+													<div class="col-xs-4">
+														<div class="resize-icon-container">
+															<img class="list-img" src="images/rooms-icon.png" alt=""><span class="list-span" style="font-size:0.8em"><?=$titleRow['number_of_rooms']?></span>
+														</div>
+													</div>
+													<div class="col-xs-4">
+														<div class="resize-icon-container">
+															<img class="list-img" src="images/icons/w_toilet.png" alt=""><span class="list-span" style="font-size:0.8em"><?=$titleRow['number_of_toilet']?></span>
+														</div>
+													</div>
+												</div>
 
-									<div class="list-offer-front">
-										<div class="list-offer-photo height-100">
-											<img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
-										</div>
-									</div>
-
-									<div class="list-offer-back">
-										<div id="list-map1" class="list-offer-map">
-										</div>
-									</div>
-
-								</div>
-								<!-- .Item 사진 -->
-
-								<!-- Item 정보 -->
-								<div class="list-offer-right-large">
-									<div class="list-offer-text">
-										<div class="clearfix"></div>
-
-
-										<div class="row">
-											<div class="list-offer-h4 col-sm-12 col-md-12">
-												<i class="fa fa-home list-offer-localization hidden-xs"></i>
-												<p class="list-offer-title" style="font-size:1.5em; font-weight:bold;">
-													<?=$row['house_title']?>
-												</p>
 											</div>
 										</div>
+                                        
+                                        <style>
+                                            .desc-default-option-title{
+                                                    margin: 0px;
+                                                    display: block;
+                                                    white-space: nowrap;
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    height: 50px;
+                                                    font-weight: bold;
+                                            }
+                                            .desc-default-option{
+                                                    margin: 0px;
+                                                    display: -webkit-box; 
+                                                    -webkit-line-clamp: 3;
+                                                    text-overflow: ellipsis; 
+                                                    overflow: hidden;
+                                                    -webkit-box-orient: vertical;
+                                            }
+                                        </style>
+                                        
+										<div class="col-sm-12 col-md-8 col-lg-9" style="padding:0px;">
+											<div class="" style="padding-top:5px;">
+												<div class="clearfix"></div>
 
-										<div class="row text-right search-price-div">
-											<div class="col-sm-12 col-md-12">
-												<span class="search-price">렌트비 : </span>
-												<span class="mini-price"><?=$row2[2]?></span>
-												&nbsp;&nbsp;~&nbsp;&nbsp;
-												<span class="max-price"><?=$row2[1]?></span>
-											</div>
-										</div>
+												<div class="row">
+													<div class="list-offer-h4 col-sm-12 col-md-12">
+														<!--<strong><i class="fa fa-home list-offer-localization" style="font-size:1.4em;"></i></strong>-->
+														<h4 class="list-offer-title title-default  desc-default-option-title" style="margin-bottom:10px !important;"><?=$titleRow['house_title']?></h4>
+														<div class="clearfix"></div>
 
 										<div class="row margin-top-10">
-
+                                            <div class="col-sm-12 col-sm-4">
+												<span class="search-price"  style="font-size:1.4em; color:#898989" >렌트비 : </span>
+												<span class="mini-price" style="font-size:1.4em; color:#898989"><?=$initRow['min_rent']?></span>
+												&nbsp;&nbsp;~&nbsp;&nbsp;
+												<span class="max-price" style="font-size:1.4em; color:#898989"><?=$initRow['max_rent']?></span>
+											</div>
 											<div class="col-xs-12 col-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-												<p style="font-size:1.4em;">
+												<p style="font-size:1.4em; color:#898989">
 													룸&nbsp;&nbsp;&nbsp;&nbsp;
 													<i class="fa fa-bed"></i>&nbsp;&nbsp;&nbsp;&nbsp;
 													<?=$row['number_of_rooms']?>
 												</p>
 											</div>
 											<div class="col-xs-12 col-lg-4 col-sm-4 col-md-4 text-left fixed-middle">
-												<p style="font-size:1.4em;">
+												<p style="font-size:1.4em; color:#898989">
 													정원&nbsp;&nbsp;&nbsp;&nbsp;
 													<i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;&nbsp;
 													<?=$row2[0]?>
 												</p>
 											</div>
-											<div class="col-xs-12 col-sm-4 col-md-4 col-md-4 text-left fixed-middle">
-												<p class="title-negative-margin" style="font-size:1.4em; display:inline">
-													<?=$row5[0]?> ~ 입주가능
-												</p>
-												<div class="title-separator-primary"></div>
-											</div>
 
 										</div>
 
-										<div class="row margin-top-10">
+										<div class="row margin-top-10" style="margin-bottom:10px">
 											<div class="col-xs-12 col-sm-12 col-md-12 col-md-12 text-left fixed-middle">
 												<a class="btn btn-lg btn-default" name="<?=$row['house_id']?>"
 													onclick="javascript:getVacant(this)" style="border:2px solid; font-weight:bold; width:100%; cursor:pointer">
@@ -245,11 +399,18 @@
 										</div>
 
 										<div class="clearfix"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-12 col-md-3 col-lg-2" style="padding:0px">
+											
+
+										</div>
 									</div>
-								</div>
-								<!-- .Item 정보 -->
-								<div class="clearfix"></div>
-							</div>
+                        </div>
+							
 							<!-- .Item -->
 							<?}?>
 
@@ -280,7 +441,9 @@
 		                target:$(param).attr("name"),
 										value:$(param).val()
 		              },
-		              success: function(data){},
+		              success: function(data){
+										$(".loader-bg").fadeIn(200).fadeOut(200);
+									},
 		              error: function(){
 		                swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
 		              }
@@ -295,7 +458,9 @@
 		                target:$(param).attr("name"),
 										value:$(param).val()
 		              },
-		              success: function(data){},
+		              success: function(data){
+										$(".loader-bg").fadeIn(200).fadeOut(200);
+									},
 		              error: function(){
 		                swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
 		              }
@@ -303,7 +468,7 @@
 							}
 							function getVacant(param){
 								$(".table-responsive").remove();
-								var st = $(param).parent().parent().parent().parent().parent();
+								var st = $(param).parent().parent().parent().parent().parent().parent().parent().parent();
 								$.ajax({
 									url:"server/set_room.php",
 									type:"POST",
@@ -318,10 +483,14 @@
 												for(var i=0; i<obj[0].length;){
 													var isFirst = true;
 													current=i;
-													for(var j=i; j<(Number(obj[1][i])+current); ++j){
-
+                                                    var person = obj[1][i];
+                                                    person = person.split(" ");
+                                                    var tmp = person[0];
+													for(var j=i; j<(Number(person[0])+current); ++j){
+                                                        person = obj[1][j];
+                                                        person = person.split(" ");
 														if(isFirst){
-															table+="<td  rowspan='"+obj[1][j]+"'>"+obj[1][j]+"인실</td>";
+															table+="<td  rowspan='"+person[0]+"'>"+person[0]+person[1]+"</td>";
 															isFirst = false;
 														}
 														var day;
@@ -331,7 +500,7 @@
 														else table+= obj[5][j];
 														table +="' /> </td></tr>";
 													}
-													i+=Number(obj[1][i]);
+													i+=Number(tmp);
 												}
 
 
@@ -351,11 +520,12 @@
 
 					</div>
 				</div>
+
 			</section>
 
 			<!--small footer-->
 			<?include("config/footer.html")?>
-			
+
 		</div>
 
 		<!-- Move to top button -->

@@ -1,0 +1,1334 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>";
+	include ('server/dbconnect.php');
+?>
+	<!DOCTYPE html>
+	<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Kostay</title>
+		<meta name="keywords" content="Download, Apartment, Premium, Real Estate, HMTL, Site Template, property, mortgage, CSS" />
+		<meta name="description" content="Download Apartment - Premium Real Estate HMTL Site Template" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+		<!-- jQeury -->
+		<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+		<!-- Font awesome styles -->
+		<link rel="stylesheet" href="apartment-font/css/font-awesome.min.css">
+		<!-- Custom styles -->
+		<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,500,500italic,700,700italic&amp;subset=latin,latin-ext'>
+		<link rel="stylesheet" type="text/css" href="css/plugins.css">
+		<link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
+		<link rel="stylesheet" type="text/css" href="css/search_detail.css">
+		<link rel="stylesheet" type="text/css" href="css/custom.css">
+		<link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
+		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+		<link rel="stylesheet" type="text/css" href="css/register_house_detail.css">
+
+		<!--sweetalert2-->
+		<script src="js/sweetalert.min.js"></script>
+
+		<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+		<style>
+    th{
+      background-color: rgb(55, 151, 221);
+      color: white;
+    }
+      th, tr{
+        text-align: center;
+      }
+      th, td{
+        display: table-cell;
+        font-size: 1em;
+        vertical-align: middle !important;
+      }
+      .no-padding{
+        padding: 0px !important;
+      }
+      .no-margin{
+        margin: 0px !important;
+      }
+			.margin-bottom-30 {
+				margin-bottom: 30px;
+			}
+
+			.margin-bottom-15 {
+				margin-bottom: 15px;
+			}
+
+			.nav-tabs>.tab-right {
+				float: right;
+				margin-bottom: -1px;
+			}
+
+			.no-margin-top {
+				margin-top: 0px !important;
+			}
+
+			.no-margin-bottom {
+				margin-bottom: 0px !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="loader-bg"></div>
+		<div id="wrapper">
+
+			<!-- Page header -->
+			<header>
+
+				<div class="top-bar-wrapper">
+					<div class="container top-bar">
+						<div class="row">
+							<div class="col-xs-5 col-sm-8">
+								<div class="top-mail pull-left hidden-xs">
+									<span class="top-icon-circle">
+						<i class="fa fa-envelope fa-sm"></i>
+					</span>
+									<span class="top-bar-text">admin@koreatech.ac.kr</span>
+								</div>
+								<div class="top-phone pull-left hidden-xxs">
+									<span class="top-icon-circle">
+						<i class="fa fa-phone"></i>
+					</span>
+									<span class="top-bar-text">(0)-123-456-789</span>
+								</div>
+								<div class="top-localization pull-left hidden-sm hidden-md hidden-xs">
+									<span class="top-icon-circle pull-left">
+						<i class="fa fa-map-marker"></i>
+					</span>
+									<span class="top-bar-text">KOREA</span>
+								</div>
+							</div>
+							<div class="col-xs-7 col-sm-4">
+								<div class="top-social-last top-dark pull-right" data-toggle="tooltip" data-placement="bottom" title="Login/Register">
+									<a class="top-icon-circle" href="#login-modal" data-toggle="modal">
+										<i class="fa fa-lock"></i>
+									</a>
+								</div>
+
+								<div class="top-social pull-right">
+									<a class="top-icon-circle" href="#">
+										<i class="fa fa-facebook"></i>
+									</a>
+								</div>
+								<div class="top-social pull-right">
+									<a class="top-icon-circle" href="#">
+										<i class="fa fa-twitter"></i>
+									</a>
+								</div>
+								<div class="top-social pull-right">
+									<a class="top-icon-circle" href="#">
+										<i class="fa fa-google-plus"></i>
+									</a>
+								</div>
+								<div class="top-social pull-right">
+									<a class="top-icon-circle" href="#">
+										<i class="fa fa-skype"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.top-bar -->
+				</div>
+				<!-- /.Page top-bar-wrapper -->
+
+				<?include("config/mypage_navbar.html");?>
+					<!-- /.mani-menu-cont -->
+			</header>
+
+
+			<div class="container">
+				<div class="col-lg-12">
+					<div class="margin-top-60 apartment-tabs">
+						<div class="tab-header">
+
+							<ul id="register-house-detail-tab" class="nav nav-tabs" role="tablist" style="display:inline">
+								<li role="presentation" class="tab">
+									<h1 style="font-size:2.5em; font-weight:bold;">셰어하우스 추가 등록 단계</h1>
+								</li>
+								<li role="presentation" class="tab-right">
+									<a href="#t3" aria-controls="messages" role="tab" data-toggle="tab">
+										<span>3단계&nbsp;&nbsp;-&nbsp;&nbsp;공용공간</span>
+										<div class="button-triangle2"></div>
+									</a>
+								</li>
+								<li role="presentation" class="tab-right">
+									<a href="#t2" aria-controls="settings" role="tab" data-toggle="tab">
+										<span>2단계&nbsp;&nbsp;-&nbsp;&nbsp;객실</span>
+										<div class="button-triangle2"></div>
+									</a>
+								</li>
+								<li role="presentation" class="tab-right">
+									<a href="#t1" aria-controls="settings" role="tab" data-toggle="tab">
+										<span>1단계&nbsp;&nbsp;-&nbsp;&nbsp;일반사항</span>
+										<div class="button-triangle2"></div>
+									</a>
+								</li>
+							</ul>
+
+						</div>
+
+						<div class="title-separator-primary"></div>
+						<!-- Nav tabs -->
+
+						<?
+							$houseQuery = "select * from house_main where house_id='".$_GET['house']."'";
+							$roomQuery = "select * from house_rooms where room_id='".$_GET['house']."_0'";
+							$publicQuery = "select * from house_public where house_id='".$_GET['house']."'";
+							$houseResult = mysqli_query($conn, $houseQuery);
+							$roomResult = mysqli_query($conn, $roomQuery);
+							$publicResult = mysqli_query($conn, $publicQuery);
+							$houseRow = mysqli_fetch_array($houseResult);
+							$roomRow = mysqli_fetch_array($roomResult);
+							$publicRow = mysqli_fetch_array($publicResult);
+							if(!$houseRow) echo "<script>history.back();</script>";
+							if(!$roomRow) echo "<script>history.back();</script>";
+							if(mysqli_num_rows($houseResult)===0) echo "<script>history.back();</script>";
+							if(mysqli_num_rows($roomResult)===0) echo "<script>history.back();</script>";
+							if(!($houseRow['user_id']==$_SESSION['id'])) echo "<script>history.back();</script>";
+						?>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<!-- .1번탭 일반사항 -->
+							<div role="tabpanel" class="tab-pane active" id="t1">
+
+								<div class="margin-top-10 margin-bottom-30 row gallery">
+
+								</div>
+
+								<h3 class="title-negative-margin margin-top-30 margin-bottom-15">주택 설명</h3>
+								<div class="title-separator-primary margin-bottom-30"></div>
+
+								<div class="row">
+									<div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
+										<div class="col-xs-12">
+											<input name="name" id="p14" type="text" class="bootstrap-select input-short2 main-input required,all no-margin-top" placeholder="하우스명:" value="<?=$houseRow['house_title']?>">
+										</div>
+
+										<div class="col-xs-12">
+											<input name="name" id="p12" type="text" class="bootstrap-select input-short2 main-input required,all no-margin-top" placeholder="주택 설명(직접입력)" value="<?=$houseRow['facilities']?>">
+										</div>
+
+										<div class="row margin-bottom-30">
+											<div class="col-xs-12 col-sm-6 col-lg-3">
+												<div class="gender-condition" value="<?=$houseRow['resident_gender']?>"></div>
+												<select id="p1" name="country1" class="bootstrap-select gender-container" title="거주자 성별:">
+          								<option value="1">남성 전용</option>
+          								<option value="2" >여성 전용</option>
+          								<!-- <option value="3">혼합</option> -->
+													<option value="4">커플룸</option>
+          							</select>
+											</div>
+											<script>
+												$(document).ready(function(){
+													$(".gender-container option[value="+$(".gender-condition").attr("value")+"]").attr("selected","selected");
+												});
+											</script>
+
+											<div class="col-xs-12 col-sm-6 col-lg-3">
+												<div class="type-condition" value="<?=$houseRow['house_type']?>"></div>
+												<select id="p2" name="country1" class="bootstrap-select type-container" title="주택유형:">
+                  				<option value="2">공동주택</option>
+                  				<option value="1">단독주택</option>
+                  			</select>
+											</div>
+											<script>
+												$(document).ready(function(){
+													$(".type-container option[value="+$(".type-condition").attr("value")+"]").attr("selected","selected");
+												});
+											</script>
+
+											<div class="col-xs-12 col-sm-6 col-lg-3">
+												<div class="room-condition" value="<?=$houseRow['number_of_rooms']?>"></div>
+												<select id="p3" name="country1" class="bootstrap-select room-container" title="방갯수:">
+                  				<option value="1">1개</option>
+                          <option value="2">2개</option>
+                  				<option value="3" >3개</option>
+													<option value="4" >4개</option>
+                  				<option value="5" >5개</option>
+													<option value="6" >6개</option>
+													<option value="7" >7개</option>
+													<option value="8" >8개</option>
+													<option value="9" >9개</option>
+													<option value="10" >10개</option>
+													<option value="11" >11개</option>
+													<option value="12" >12개</option>
+													<option value="13" >13개</option>
+													<option value="14" >14개</option>
+													<option value="15" >15개</option>
+													<option value="16" >16개</option>
+													<option value="17" >17개</option>
+													<option value="18" >18개</option>
+													<option value="19" >19개</option>
+													<option value="20">20개</option>
+                  			</select>
+											</div>
+											<script>
+												$(document).ready(function(){
+													$(".room-container option[value="+$(".room-condition").attr("value")+"]").attr("selected","selected");
+												});
+											</script>
+
+											<div class="col-xs-12 col-sm-6 col-lg-3">
+												<div class="toilet-condition" value="<?=$houseRow['number_of_toilet']?>"></div>
+												<select id="p4" name="country1" class="bootstrap-select toilet-container" title="화장실:">
+													<option value="1">1개</option>
+													<option value="2">2개</option>
+													<option value="3" >3개</option>
+													<option value="4" >4개</option>
+													<option value="5" >5개</option>
+													<option value="6" >6개</option>
+													<option value="7" >7개</option>
+													<option value="8" >8개</option>
+													<option value="9" >9개</option>
+													<option value="10" >10개</option>
+													<option value="11" >11개</option>
+													<option value="12" >12개</option>
+													<option value="13" >13개</option>
+													<option value="14" >14개</option>
+													<option value="15" >15개</option>
+													<option value="16" >16개</option>
+													<option value="17" >17개</option>
+													<option value="18" >18개</option>
+													<option value="19" >19개</option>
+													<option value="20">20개</option>
+                  			</select>
+											</div>
+											<script>
+												$(document).ready(function(){
+													$(".toilet-container option[value="+$(".toilet-condition").attr("value")+"]").attr("selected","selected");
+												});
+											</script>
+
+											<div class="col-xs-12 col-sm-6 col-lg-3">
+												<div class="master-condition" value="<?if($houseRow['live_master']==1) {echo '1';} else {echo '2';}?>"></div>
+												<select id="p5" name="city1" class="bootstrap-select master-container" title="운영자 거주여부:">
+                  				<option value="1">거주</option>
+                          <option value="2">미거주</option>
+                  			</select>
+											</div>
+											<script>
+												$(document).ready(function(){
+													if($(".master-condition").attr("value")==1) $(".master-container option[value=1]").attr("selected","selected");
+													else $(".master-container option[value=1]").attr("selected","selected");
+												});
+											</script>
+
+											<div class="col-xs-12 col-sm-6 col-lg-3">
+												<div class="park-condition" value="<?if($houseRow['parking']==1) {echo '1';} else {echo '2';}?>"></div>
+												<select id="p6" name="city1" class="bootstrap-select park-container" title="주차:">
+                  				<option value="1">가능</option>
+                  				<option value="2">불가능</option>
+                  			</select>
+											</div>
+											<script>
+												$(document).ready(function(){
+													if($(".park-condition").attr("value")==1) $(".park-container option[value=1]").attr("selected","selected");
+													else $(".park-container option[value=1]").attr("selected","selected");
+												});
+											</script>
+
+											<div class="col-xs-12 col-sm-6 col-lg-3">
+												<div class="pet-condition" value="<?if($houseRow['pet']==1) {echo '1';} else {echo '2';}?>"></div>
+												<select id="p7" name="city1" class="bootstrap-select pet-container" title="애완동물:">
+                  				<option value="1">있음</option>
+                          <option value="2" >없음</option>
+                  			</select>
+											</div>
+											<script>
+												$(document).ready(function(){
+													if($(".pet-condition").attr("value")==1) $(".pet-container option[value=1]").attr("selected","selected");
+													else $(".pet-container option[value=1]").attr("selected","selected");
+												});
+											</script>
+
+										</div>
+									</div>
+								</div>
+
+								<h3 class="title-negative-margin margin-bottom-15">위치</h3>
+								<div class="title-separator-primary margin-bottom-30"></div>
+
+								<div class="row">
+									<div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
+										<div class="row margin-bottom-30">
+
+											<div class="col-xs-12">
+												<input name="name" id="p8" type="text" class="bootstrap-select input-short2 main-input required,all no-margin-top" placeholder="주소(직접입력)" value="<?=$houseRow['address']?>">
+											</div>
+
+											<div class="col-xs-12 no-margin-bottom">
+												<input name="name" id="p9" type="text" class="bootstrap-select input-short2 main-input required,all no-margin-top" placeholder="상세주소(직접입력)"  value="<?=$houseRow['address_detail']?>">
+											</div>
+
+
+											<div class="col-xs-12 margin-bottom-15">
+												<div class="p10-condition" value="<?if($houseRow['address_detail_show']==1) {echo '1';} else {echo '2';}?>"></div>
+												<select id="p10" name="city1" class="bootstrap-select no-margin-top p10-container" title="상세 주소 공개 여부:">
+                          <option  value="1" >공개</option>
+                          <option  value="2" >비공개</option>
+                        </select>
+											</div>
+											<script>
+												$(document).ready(function(){
+													if($(".p10-condition").attr("value")==1) $(".p10-container option[value=1]").attr("selected","selected");
+													else $(".p10-container option[value=1]").attr("selected","selected");
+												});
+											</script>
+
+											<div class="col-xs-12 margin-bottom-15">
+                                                <iframe class="gmap" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&q=호주 시드니 오페라하우스"  width="100%" height="100%" zoom="16" allowfullscreen></iframe>
+                                            </div>
+                                            <script>
+                                                $(".gmap").attr("src","https://www.google.com/maps/embed/v1/place?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&q="+$("#p8").val()+' '+$("#p9").val()); 
+                                                $("#p8").on("change",function(){
+                                                    var txt = $("#p8").val()+' '+$("#p9").val();
+                                                    txt=txt.replace(/\s/g, '');
+                                                    if(txt!="")
+                                                        $(".gmap").attr("src","https://www.google.com/maps/embed/v1/place?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&q="+$("#p8").val()+' '+$("#p9").val()); 
+                                                });
+                                                $("#p9").on("change",function(){
+                                                    var txt = $("#p8").val()+' '+$("#p9").val();
+                                                    txt=txt.replace(/\s/g, '');
+                                                    if(txt!="")
+                                                        $(".gmap").attr("src","https://www.google.com/maps/embed/v1/place?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&q="+$("#p8").val()+' '+$("#p9").val()); 
+                                                });
+                                            </script>
+
+											<div class="col-xs-12">
+												<input name="name" id="p11" type="text" class="bootstrap-select input-short2 main-input required,all no-margin-top" placeholder="교통 및 주변시설(직접입력)"  value="<?=$houseRow['traffic']?>">
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<h3 class="title-negative-margin margin-bottom-15">계약 조건</h3>
+								<div class="title-separator-primary margin-bottom-30"></div>
+
+								<div class="row">
+									<div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
+										<div class="row margin-bottom-30">
+											<div class="col-xs-12">
+												<input name="name" id="p13" type="text" class="bootstrap-select input-short2 main-input required,all no-margin-top" placeholder="(직접입력)"  value="<?=$houseRow['condition']?>">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
+										<div class="row">
+											<div class="col-xs-12">
+
+												<div class="col-sm-3 col-sm-offset-6">
+													<button id="save1" class="btn btn-default" style="width:100%; border-radius:0px; font-size:1.2em; font-weight:bold; color: #5d5d5d;" value="<?=$_GET['house']?>">
+														저장&nbsp;&nbsp;<i class="fa fa-floppy-o"></i>
+													</button>
+													<!--<a href="#" id="save1" class="button-primary button-shadow btn-fit color-white">
+														<span>저장</span>
+														<div class="button-triangle"></div>
+														<div class="button-triangle2"></div>
+													</a>-->
+												</div>
+
+												<div class="col-sm-3">
+													<button id="movetab-next1" class="btn btn-default" style="width:100%; border-radius:0px; font-size:1.2em; font-weight:bold; color: #5d5d5d;">
+														다음단계로이동&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>
+													</button>
+													<script>
+														$('#movetab-next1').click(function(e){
+															e.preventDefault();
+															$('#register-house-detail-tab a[href="#t2"]').tab('show');
+														})
+													</script>
+													<!--<a href="#t2" class="button-primary button-shadow btn-fit color-white" aria-controls="settings" role="tab" data-toggle="tab">
+														<span>다음단계</span>
+														<div class="button-triangle"></div>
+														<div class="button-triangle2"></div>
+													</a>-->
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<!-- .1번탭 일반사항 -->
+
+							<div role="tabpanel" class="tab-pane" id="t2">
+								<h3 id="current_room_title" class="title-negative-margin margin-bottom-15">1번 방 등록하기</h3>
+								<div class="title-separator-primary margin-bottom-30"></div>
+
+								<h4 class="title-negative-margin margin-bottom-15" style="font-weight:bold;">대표사진 등록</h4>
+								<div class="margin-top-10 margin-bottom-30 row gallery2">
+
+								</div>
+								<!-- <section class="thumbs-slider section-both-shadow">
+									<div class="row" style="height:200px;">
+										<div class="col-xs-12">
+											<div id="swiper-thumbs" class="swiper-container">
+												<div class="swiper-wrapper">
+													<div class="swiper-slide" style="width:20%;">
+														<img class="slide-thumb" src="images/slides/m1.jpg" alt="">
+													</div>
+
+													<div class="swiper-slide" style="width:20%;">
+														<img class="slide-thumb" src="images/slides/m1.jpg" alt="">
+													</div>
+
+													<div class="swiper-slide" style="width:20%;">
+														<img class="slide-thumb" src="images/slides/m1.jpg" alt="">
+													</div>
+
+													<div class="swiper-slide" style="width:20%;">
+														<img class="slide-thumb" src="images/slides/m1.jpg" alt="">
+													</div>
+
+													<div class="swiper-slide" style="width:20%;">
+														<img class="slide-thumb" src="images/slides/m1.jpg" alt="">
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</section> -->
+
+								<h4 class="title-negative-margin margin-top-30" style="font-weight:bold;">객실정보 입력</h4>
+								<div class="row margin-bottom-30">
+									<div class="col-xs-12 col-sm-4">
+										<select id="r1" name="country1" class="bootstrap-select" title="거주인원:">
+											<option value="1" <?if($roomRow['person']==1) echo "selected"?>>1명</option>
+											<option value="2" <?if($roomRow['person']==2) echo "selected"?>>2명</option>
+											<option value="3" <?if($roomRow['person']==3) echo "selected"?>>3명</option>
+											<option value="4" <?if($roomRow['person']==4) echo "selected"?>>4명</option>
+											<option value="5" <?if($roomRow['person']==5) echo "selected"?>>5명</option>
+											<option value="6" <?if($roomRow['person']==6) echo "selected"?>>6명</option>
+											<option value="7" <?if($roomRow['person']==7) echo "selected"?>>7명</option>
+											<option value="8" <?if($roomRow['person']==8) echo "selected"?>>8명</option>
+											<option value="9" <?if($roomRow['person']==9) echo "selected"?>>9명</option>
+											<option value="10" <?if($roomRow['person']==10) echo "selected"?>>10명</option>
+											<option value="11" <?if($roomRow['person']==11) echo "selected"?>>11명</option>
+											<option value="12" <?if($roomRow['person']==12) echo "selected"?>>12명</option>
+											<option value="13" <?if($roomRow['person']==13) echo "selected"?>>13명</option>
+											<option value="14" <?if($roomRow['person']==14) echo "selected"?>>14명</option>
+											<option value="15" <?if($roomRow['person']==15) echo "selected"?>>15명</option>
+											<option value="16" <?if($roomRow['person']==16) echo "selected"?>>16명</option>
+											<option value="17" <?if($roomRow['person']==17) echo "selected"?>>17명</option>
+											<option value="18" <?if($roomRow['person']==18) echo "selected"?>>18명</option>
+											<option value="19" <?if($roomRow['person']==19) echo "selected"?>>19명</option>
+											<option value="20" <?if($roomRow['person']==20) echo "selected"?>>20명</option>
+                    </select>
+									</div>
+									<div class="col-xs-12 col-sm-4">
+										<select id="r2" name="country1" class="bootstrap-select" title="거주자 성별:">
+                                    <option value="1" <?if($roomRow['gender']==1) echo "selected"?>>남성 전용</option>
+                                    <option value="2" <?if($roomRow['gender']==2) echo "selected"?>>여성 전용</option>
+                                    <!-- <option value="3" <?if($roomRow['gender']==3) echo "selected"?>>혼합</option> -->
+																		<option value="4" <?if($roomRow['gender']==4) echo "selected"?>>커플룸</option>
+                                  </select>
+									</div>
+									<div class="col-xs-12 col-sm-4">
+										<select id="r3" name="country1" class="bootstrap-select" title="방의 특성:" multiple data-actions-box="true">
+                      <option value="0">해당없음</option>
+                      <option value="1">마스터룸</option>
+											<option value="2">커플룸</option>
+                      <option value="3">거실셰어</option>
+											<option value="4">granny flat</option>
+                    </select>
+									</div>
+									<div class="r3_data" value="<?=$roomRow['master']?>"></div>
+									<script>
+									$(document).ready(function(){
+										var tmp = $(".r3_data").attr("value");
+										tmp = tmp.split(",");
+										$("#r3").val(tmp);
+									});
+									</script>
+
+									<div class="col-xs-12 col-sm-3">
+										<select id="r4" name="country1" class="bootstrap-select" title="모집단위:" >
+																	<option  value="1" <?if($roomRow['rule']==1) echo "selected"?>>1명씩</option>
+																	<option  value="2" <?if($roomRow['rule']==2) echo "selected"?>>커플(2인)</option>
+										</select>
+									</div>
+									<div class="col-xs-12 col-sm-3">
+										<input name="name" id="r5" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="렌트비" value="<?=$roomRow['rent']?>">
+									</div>
+									<div class="col-xs-12 col-sm-3">
+										<input name="name" id="r6" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="보증금" value="<?=$roomRow['guarantee']?>">
+									</div>
+									<div class="col-xs-12 col-sm-3">
+										<input name="name" id="r7" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="관리비 (렌트비포함 0입력)" value="<?=$roomRow['manage']?>">
+									</div>
+									<div class="col-xs-12 margin-bottom-30">
+										<select id="r8" name="city1" class="bootstrap-select no-margin-top" title="제공물품:" multiple data-actions-box="true">
+	    								<option value="1">의자</option>
+	    								<option value="2">책상</option>
+	    								<option value="3">스탠드</option>
+	    								<option value="4">옷장</option>
+	    								<option value="5">에어컨</option>
+	    								<option value="6">서랍장</option>
+	    								<option value="7">이불</option>
+	    								<option value="8">침대</option>
+	    							</select>
+									</div>
+									<div class="r8_data" value="<?=$roomRow['goods']?>"></div>
+									<script>
+									$(document).ready(function(){
+										var tmp = $(".r8_data").attr("value");
+										tmp = tmp.split(",");
+										$("#r8").val(tmp);
+									});
+									</script>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+
+										<div class="col-xs-12 col-sm-3">
+											<button id="movetab-prev2" class="btn btn-default" style="width:100%; border-radius:0px; font-size:1.2em; font-weight:bold; color: #5d5d5d;">
+												<i class="fa fa-arrow-left"></i>&nbsp;&nbsp;이전단계로이동
+											</button>
+											<script>
+												$('#movetab-prev2').click(function(e){
+													e.preventDefault();
+													$('#register-house-detail-tab a[href="#t1"]').tab('show');
+												})
+											</script>
+											<!--<a href="#t1" class="button-primary button-shadow btn-fit color-white" aria-controls="settings" role="tab" data-toggle="tab">
+												<span>이전단계</span>
+												<div class="button-triangle"></div>
+												<div class="button-triangle2"></div>
+											</a>-->
+										</div>
+
+										<div class="col-xs-12 col-sm-3">
+											<button id="save2" class="btn btn-default" style="width:100%; border-radius:0px; font-size:1.2em; font-weight:bold; color: #5d5d5d;" value="<?=$_GET['house']?>">
+												저장&nbsp;&nbsp;<i class="fa fa-floppy-o"></i>
+											</button>
+											<!--<a href="#" id="save2" class="button-primary button-shadow btn-fit color-white">
+												<span>저장</span>
+												<div class="button-triangle"></div>
+												<div class="button-triangle2"></div>
+											</a>-->
+										</div>
+
+										<div class="col-xs-12 col-sm-3">
+											<button id="addRoom" class="btn btn-default" style="width:100%; border-radius:0px; font-size:1.2em; font-weight:bold; color: #5d5d5d;">
+												방추가&nbsp;&nbsp;<i class="fa fa-plus"></i>
+											</button>
+											<!--<a href="#" id="addRoom" class="button-primary button-shadow btn-fit color-white">
+												<span>방 추가</span>
+												<div class="button-triangle"></div>
+												<div class="button-triangle2"></div>
+											</a>-->
+										</div>
+
+										<div class="col-xs-12 col-sm-3">
+											<button id="movetab-next2" class="btn btn-default" style="width:100%; border-radius:0px; font-size:1.2em; font-weight:bold; color: #5d5d5d;">
+												다음단계로이동&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>
+											</button>
+											<script>
+												$('#movetab-next2').click(function(e){
+													e.preventDefault();
+													$('#register-house-detail-tab a[href="#t3"]').tab('show');
+												})
+											</script>
+											<!--<a href="#t3" class="button-primary button-shadow btn-fit color-white" aria-controls="settings" role="tab" data-toggle="tab">
+												<span>다음단계</span>
+												<div class="button-triangle"></div>
+												<div class="button-triangle2"></div>
+											</a>-->
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+
+							<div role="tabpanel" class="tab-pane" id="t3">
+
+								<h3 class="title-negative-margin margin-bottom-15">공용공간</h3>
+								<div class="title-separator-primary margin-bottom-30"></div>
+
+								<form name="agent-from" action="#" enctype="multipart/form-data">
+									<div class="row margin-top-60">
+										<div class="col-xs-6 col-xs-offset-3 col-sm-offset-0 col-sm-3 col-md-4">
+											<div class="agent-photos public-photo">
+
+											</div>
+										</div>
+										<div class="col-xs-12 col-sm-9 col-md-8">
+											<div class="labelled-textarea">
+												<label for="description">공용공간 소개</label>
+												<textarea id="s1" name="description" class="input-full main-input" placeholder="공용공간에 대한 소개를 입력해 주시기 바랍니다."><?=$publicRow['description']?></textarea>
+											</div>
+										</div>
+									</div>
+								</form>
+								<div class="col-xs-12">
+									<? $goods = explode(",",$publicRow['goods']); ?>
+									<input name="name" id="s2" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="제공 서비스" value="<?=$publicRow['services']?>">
+								</div>
+								<div class="col-xs-12 margin-bottom-30">
+									<select id="s3" name="city1" class="bootstrap-select no-margin-top" title="제공물품:" multiple data-actions-box="true">
+    								<option value="1" <?if(in_array("1",$goods)) echo "checked";?>>소파</option>
+    								<option value="2" <?if(in_array("2",$goods)) echo "checked";?>>인터넷</option>
+    								<option value="3" <?if(in_array("3",$goods)) echo "checked";?>>에어컨</option>
+    								<option value="4" <?if(in_array("4",$goods)) echo "checked";?>>컴퓨터</option>
+    								<option value="5" <?if(in_array("5",$goods)) echo "checked";?>>텔레비전</option>
+    								<option value="6" <?if(in_array("6",$goods)) echo "checked";?>>신발장</option>
+    								<option value="7" <?if(in_array("7",$goods)) echo "checked";?>>식탁세트</option>
+    								<option value="8" <?if(in_array("8",$goods)) echo "checked";?>>냉장고</option>
+										<option value="9" <?if(in_array("9",$goods)) echo "checked";?>>밥솥</option>
+										<option value="10" <?if(in_array("10",$goods)) echo "checked";?>>전자레인지</option>
+										<option value="11" <?if(in_array("11",$goods)) echo "checked";?>>커피머신</option>
+										<option value="12" <?if(in_array("12",$goods)) echo "checked";?>>토스터</option>
+										<option value="13" <?if(in_array("13",$goods)) echo "checked";?>>오븐</option>
+										<option value="14" <?if(in_array("14",$goods)) echo "checked";?>>냄비셋트</option>
+										<option value="15" <?if(in_array("15",$goods)) echo "checked";?>>식기세트</option>
+										<option value="16" <?if(in_array("16",$goods)) echo "checked";?>>정수기</option>
+										<option value="17" <?if(in_array("17",$goods)) echo "checked";?>>세탁기</option>
+										<option value="18" <?if(in_array("18",$goods)) echo "checked";?>>건조기</option>
+										<option value="19" <?if(in_array("19",$goods)) echo "checked";?>>청소기</option>
+										<option value="20" <?if(in_array("20",$goods)) echo "checked";?>>빨래대</option>
+									</select>
+								</div>
+								<div class="s3_data" value="<?=$publicRow['goods']?>"></div>
+								<script>
+								$(document).ready(function(){
+									var tmp = $(".s3_data").attr("value");
+									tmp = tmp.split(",");
+									$("#s3").val(tmp);
+								});
+								</script>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="col-xs-12 col-sm-3 col-sm-offset-3">
+											<button id="movetab-prev3" class="btn btn-default" style="width:100%; border-radius:0px; font-size:1.2em; font-weight:bold; color: #5d5d5d;">
+												<i class="fa fa-arrow-left"></i>&nbsp;&nbsp;이전단계로이동
+											</button>
+											<script>
+												$('#movetab-prev3').click(function(e){
+													e.preventDefault();
+													$('#register-house-detail-tab a[href="#t2"]').tab('show');
+												})
+											</script>
+											<!--<a href="#t2" class="button-primary button-shadow btn-fit color-white" aria-controls="settings" role="tab" data-toggle="tab">
+												<span>이전단계</span>
+												<div class="button-triangle"></div>
+												<div class="button-triangle2"></div>
+											</a>-->
+										</div>
+										<div class="col-xs-12 col-sm-3">
+											<button id="save3" class="btn btn-default" style="width:100%; border-radius:0px; font-size:1.2em; font-weight:bold; color: #5d5d5d;" value="<?=$_GET['house']?>">
+												저장&nbsp;&nbsp;<i class="fa fa-floppy-o"></i>
+											</button>
+											<!--<a href="#" id="save3" class="button-primary button-shadow btn-fit color-white">
+												<span>저장</span>
+												<div class="button-triangle"></div>
+												<div class="button-triangle2"></div>
+											</a>-->
+										</div>
+										<div class="col-xs-12 col-sm-3">
+											<button id="done" class="btn btn-default" style="width:100%; border-radius:0px; font-size:1.2em; font-weight:bold; color: #5d5d5d;" data-toggle="modal">
+												마침&nbsp;&nbsp;<i class="fa fa-times"></i>
+											</button>
+											<!--<a href="#" id="done" class="button-primary button-shadow btn-fit color-white">
+												<span>마침</span>
+												<div class="button-triangle"></div>
+												<div class="button-triangle2"></div>
+											</a>-->
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!--small footer-->
+			<?include("config/footer.html")?>
+
+		</div>
+
+		<!-- register-house-confirm modal -->
+		<div class="modal fade apartment-modal" id="register-house-confirm">
+			<div class="modal-dialog" style="margin-top:10px; top:20%; width:50%;">
+				<div class="modal-content">
+					<div class="modal-body">
+
+						<div class="modal-title">
+							<div class="row">
+								<div class="alarm-confirm-container" style="border-width: 0px 0px 0px 0px;">
+									<img src="images/icons/check-24-ns.png" class="img-responsible img-rounded" width="50" height="50"/>
+									<p style="font-size:1.5em;">[축하합니다. 모든 등록을 마쳤습니다]</p>
+									<p style="font-size:1.0em;">마지막으로 현재 객실의 입주 상황을 체크해주세요!</p>
+								</div>
+							</div>
+						</div>
+						<div id="manageRoom">
+
+						</div>
+
+						<a style="cursor:pointer" id="addmoreBtn" class="google-button margin-top-15">
+							<i class="fa fa-plus"></i>
+							<span style="font-size:1.5em; font-weight:bold;">셰어하우스 추가</span>
+						</a>
+
+						<a style="cursor:pointer" id="doneBtn" class="facebook-button">
+							<i class="fa fa-check"></i>
+							<span style="font-size:1.5em; font-weight:bold;">완료</span>
+						</a>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+
+		</div>
+
+		<!-- Move to top button -->
+
+		<div class="move-top">
+			<div class="big-triangle-second-color"></div>
+			<div class="big-icon-second-color"><i class="jfont fa-lg">&#xe803;</i></div>
+		</div>
+		<!-- Move to top button -->
+
+		<!--로그인, 회원가입, 비밀번호 찾기-->
+		<?include("config/user.html")?>
+			<!--sweetalert2-->
+			<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+			<script src="js/sweetalert.min.js"></script>
+
+			<!-- jQuery  -->
+			<script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
+			<script type="text/javascript" src="js/jQuery/jquery-ui.min.js"></script>
+
+			<!-- Bootstrap-->
+			<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+
+			<!-- Google Maps -->
+			<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&amp;sensor=false&amp;libraries=places"></script>
+
+			<!-- plugins script -->
+			<script type="text/javascript" src="js/plugins.js"></script>
+
+			<!-- template scripts -->
+			<script type="text/javascript" src="mail/validate.js"></script>
+			<script type="text/javascript" src="js/apartment.js"></script>
+
+			<script>
+				var current_room = 0;
+				var done = false;
+				$("#addmoreBtn").on("click",function(){
+					done=true;
+				});
+				$("#doneBtn").on("click",function(){
+					done=true;
+				});
+				//초기 방 아이디 생성
+				$(document).ready(function(){
+					$.ajax({
+						url: "server/registerHouse.php",
+						type: "POST",
+						data: {
+							condition: "getId"
+						},
+						success: function(data) {
+							$(window).bind('beforeunload');
+							$.ajax({
+								url: "server/registerHouse.php",
+								type: "POST",
+								data: {
+									condition: "get_image",
+									target: $("#save1").attr("value")
+								},
+								success: function(data) {
+									var loc = JSON.parse(data);
+									$(".gallery").html("");
+									for(var i=1; i<9; ++i){
+										var src;
+										if(loc[i-1]==null) src="images/gallery/gallery3-thumb.jpg";
+										else src="server/"+loc[i-1];
+										$(".gallery").append('<div class="image_uploader">\
+											<img src="'+src+'" alt="" />\
+											<input type="file" class="house-detail-image upload'+i+'">\
+										</div>');
+									}
+								},
+								error: function() {}
+							});
+
+							$.ajax({
+								url: "server/registerHouse.php",
+								type: "POST",
+								data: {
+									condition: "get_image_room",
+									target: $("#save1").attr("value"),
+									current : current_room
+								},
+								success: function(data) {
+									var loc = JSON.parse(data);
+									$(".gallery2").html("");
+									for(var i=1; i<2; ++i){
+										var src;
+										if(loc[i-1]==null) src="images/gallery/gallery3-thumb.jpg";
+										else src="server/"+loc[i-1];
+										$(".gallery2").append('<div class="image_uploader">\
+											<img src="'+src+'" alt="" />\
+											<input type="file" class="house-detail-image upload'+(i+8)+'">\
+										</div>');
+									}
+								},
+								error: function() {}
+							});
+
+
+							$.ajax({
+								url: "server/registerHouse.php",
+								type: "POST",
+								data: {
+									condition: "get_image_public",
+									target: $("#save1").attr("value")
+								},
+								success: function(data) {
+									$(".public-photo").html("");
+									var src;
+									if(data=="") src="images/gallery/gallery3-thumb.jpg";
+									else src="server/"+data;
+									$(".public-photo").append('<img src="'+src+'" id="agent-profile-photo" class="img-responsive" alt="" />\
+									<div class="change-photo">\
+										<i class="fa fa-pencil fa-lg"></i>\
+										<input type="file" name="agent-photo" id="agent-photo" class="image_public"/>\
+									</div>\
+									<input type="text" disabled="disabled" id="agent-file-name" class="main-input" />');
+								},
+								error: function() {}
+							});
+
+						},
+						error: function() {}
+					});
+				});
+
+
+
+				//1단계 저장
+				$("#save1").on("click", function() {
+					var form_data = new FormData();
+					for(var i=1; i<9; ++i){
+						var name="upload"+i;
+						var target=$('.'+name).prop("files")[0];
+						if(target!=null){
+							form_data.append(name, target);
+						}
+					}
+					form_data.append("condition", "register_1");
+					form_data.append("p1", $("#p1").val());
+					form_data.append("p2", $("#p2").val());
+					form_data.append("p3", $("#p3").val());
+					form_data.append("p4", $("#p4").val());
+					form_data.append("p5", $("#p5").val());
+					form_data.append("p6", $("#p6").val());
+					form_data.append("p7", $("#p7").val());
+					form_data.append("p8", $("#p8").val());
+					form_data.append("p9", $("#p9").val());
+					form_data.append("p10", $("#p10").val());
+					form_data.append("p11", $("#p11").val());
+					form_data.append("p12", $("#p12").val());
+					form_data.append("p13", $("#p13").val());
+					form_data.append("p14", $("#p14").val());
+					form_data.append("target", $("#save1").attr("value"));
+					$.ajax({
+						url: "server/registerHouse.php",
+						type: "post",
+						processData: false,  // file전송시 필수
+						contentType: false,  // file전송시 필수
+						data: form_data,
+						success: function(data) {
+							if (data == "저장 성공!") {
+								swal("", "" + data, "success");
+								room = $("#p3").val();
+
+								$.ajax({
+									url: "server/registerHouse.php",
+									type: "POST",
+									data: {
+										condition: "get_image",
+										target: $("#save1").attr("value")
+									},
+									success: function(data) {
+										var loc = JSON.parse(data);
+										$(".gallery").html("");
+										for(var i=1; i<9; ++i){
+											var src;
+											if(loc[i-1]==null) src="images/gallery/gallery3-thumb.jpg";
+											else src="server/"+loc[i-1];
+											$(".gallery").append('<div class="image_uploader">\
+												<img src="'+src+'" alt="" />\
+												<input type="file" class="house-detail-image upload'+i+'">\
+											</div>');
+										}
+									},
+									error: function() {}
+								});
+
+								$.ajax({
+									url:"server/search.php",
+									type:"POST",
+									data:{
+										house_id: $("#save1").attr("value")
+									},
+									success: function(data){
+                                        
+                                    },
+									error: function(){}
+								});
+							} else swal("", "" + data, "error");
+
+
+						},
+						error: function() {
+							swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
+						}
+					});
+					$.ajax({
+						url: "server/registerHouse.php",
+						type: "POST",
+						data: {
+							condition: "check_trash",
+							target: $("#save1").attr("value")
+						},
+						success: function(data) {
+							if (current_room > Number(data) - 1) {
+								current_room = Number(data) - 1;
+								if(current_room<0) current_room=0;
+								$("#current_room_title").text("대표사진 등록(" + (current_room + 1) + "번 방)");
+							}
+						},
+						error: function() {}
+					});
+
+
+
+				});
+
+				//2단계 저장
+				$("#save2").on("click", function() {
+
+					var form_data = new FormData();
+					for(var i=9; i<13; ++i){
+						var name="upload"+i;
+						var target=$('.'+name).prop("files")[0];
+						if(target!=null){
+							form_data.append(name, target);
+						}
+					}
+					form_data.append("condition","register_2");
+					form_data.append("r1",$("#r1").val());
+					form_data.append("r2",$("#r2").val());
+					form_data.append("r3",$("#r3").val());
+					form_data.append("r4",$("#r4").val());
+					form_data.append("r5",$("#r5").val());
+					form_data.append("r6",$("#r6").val());
+					form_data.append("r7",$("#r7").val());
+					form_data.append("r8",$("#r8").val());
+					form_data.append("current",current_room);
+					form_data.append("target",$("#save2").attr("value"));
+
+					$.ajax({
+						url: "server/registerHouse.php",
+						type: "POST",
+						processData: false,  // file전송시 필수
+						contentType: false,  // file전송시 필수
+						data: form_data,
+						success: function(data) {
+							if (data == "저장 성공!") {
+								swal("", "" + data, "success");
+
+								$.ajax({
+									url: "server/registerHouse.php",
+									type: "POST",
+									data: {
+										condition: "get_image_room",
+										target: $("#save1").attr("value"),
+										current : current_room
+									},
+									success: function(data) {
+										var loc = JSON.parse(data);
+										$(".gallery2").html("");
+										for(var i=1; i<2; ++i){
+											var src;
+											if(loc[i-1]==null) src="images/gallery/gallery3-thumb.jpg";
+											else src="server/"+loc[i-1];
+											$(".gallery2").append('<div class="image_uploader">\
+												<img src="'+src+'" alt="" />\
+												<input type="file" class="house-detail-image upload'+(i+8)+'">\
+											</div>');
+										}
+									},
+									error: function() {}
+								});
+
+								$.ajax({
+									url:"server/search.php",
+									type:"POST",
+									data:{
+										house_id: $("#save1").attr("value")
+									},
+									success: function(data){},
+									error: function(){}
+								});
+
+
+							} else swal("", "" + data, "error");
+						},
+						error: function() {
+							swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
+						}
+					});
+
+				});
+
+				//3단계 저장
+				$("#save3").on("click", function() {
+					var form_data = new FormData();
+					var name="image_public";
+					var target=$('.'+name).prop("files")[0];
+					if(target!=null){
+						form_data.append(name, target);
+					}
+					form_data.append("s1",$("#s1").val());
+					form_data.append("s2",$("#s2").val());
+					form_data.append("s3",$("#s3").val());
+					form_data.append("condition","register_3");
+					form_data.append("target",$("#save3").attr("value"));
+
+					$.ajax({
+						url: "server/registerHouse.php",
+						type: "POST",
+						processData: false,  // file전송시 필수
+						contentType: false,  // file전송시 필수
+						data: form_data,
+						success: function(data) {
+							if (data == "저장 성공!"){
+								swal("", "" + data, "success");
+								$.ajax({
+									url: "server/registerHouse.php",
+									type: "POST",
+									data: {
+										condition: "get_image_public",
+										target: $("#save1").attr("value")
+									},
+									success: function(data) {
+										$(".public-photo").html("");
+										var src;
+										if(data==null) src="images/gallery/gallery3-thumb.jpg";
+										else src="server/"+data;
+										$(".public-photo").append('<img src="'+src+'" id="agent-profile-photo" class="img-responsive" alt="" />\
+										<div class="change-photo">\
+											<i class="fa fa-pencil fa-lg"></i>\
+											<input type="file" name="agent-photo" id="agent-photo" class="image_public"/>\
+										</div>\
+										<input type="text" disabled="disabled" id="agent-file-name" class="main-input" />');
+									},
+									error: function() {}
+								});
+
+								$.ajax({
+									url:"server/search.php",
+									type:"POST",
+									data:{
+										house_id: $("#save1").attr("value")
+									},
+									success: function(data){},
+									error: function(){}
+								});
+							}
+							else swal("", "" + data, "error");
+						},
+						error: function() {
+							swal("에러 발생!", "잠시후 다시 시도해 주세요.", "error");
+						}
+					});
+				});
+
+
+				$("#addRoom").on("click", function() {
+					var canAdd	= true;
+					if (canAdd) {
+						$.ajax({
+							url: "server/registerHouse.php",
+							type: "POST",
+							data: {
+								condition: "check_add",
+								current: current_room,
+								target: $("#save1").attr("value")
+							},
+							success: function(data) {
+								if (data == "canDo") {
+									current_room = current_room + 1;
+									$("#current_room_title").text((current_room + 1) + "번 방 등록하기");
+									$.ajax({
+										url: "server/registerHouse.php",
+										type: "POST",
+										data: {
+											condition: "get_image_room",
+											target: $("#save1").attr("value"),
+											current : current_room
+										},
+										success: function(data) {
+											var loc = JSON.parse(data);
+											$(".gallery2").html("");
+											for(var i=1; i<5; ++i){
+												var src;
+												if(loc[i-1]==null) src="images/gallery/gallery3-thumb.jpg";
+												else src="server/"+loc[i-1];
+												$(".gallery2").append('<div class="image_uploader">\
+													<img src="'+src+'" alt="" />\
+													<input type="file" class="house-detail-image upload'+(i+8)+'">\
+												</div>');
+											}
+										},
+										error: function() {}
+									});
+
+									$.ajax({
+										url:"server/registerHouse.php",
+										type:"POST",
+										data:{
+											condition : "get_room",
+											target:$(param).attr("name"),
+											value:$(param).val()
+										},
+										success: function(data){},
+										error: function(){
+											swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+										}
+									});
+
+
+								} else swal("에러!", "추가할 수 있는 방의 갯수는 1단계-일반사항에서 입력한 방의 갯수를 초과할 수 없습니다.", "error");
+							},
+							error: function() {}
+						});
+					} else {
+						swal("에러!", "현재 입력중인 방의 정보가 아직 저장되지 않았습니다. 저장 후 다음 방을 추가해주세요.", "error");
+					}
+				});
+
+				$("#done").on("click", function() {
+					location.href = "register_house.html";
+				});
+
+				function updateCon(param){
+					$.ajax({
+						url:"server/set_room.php",
+						type:"POST",
+						data:{
+							condition : "con",
+							target:$(param).attr("name"),
+							value:$(param).val()
+						},
+						success: function(data){},
+						error: function(){
+							swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+						}
+					});
+				}
+				function updateDay(param){
+					$.ajax({
+						url:"server/set_room.php",
+						type:"POST",
+						data:{
+							condition : "day",
+							target:$(param).attr("name"),
+							value:$(param).val()
+						},
+						success: function(data){},
+						error: function(){
+							swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+						}
+					});
+				}
+				$("#doneBtn").on("click", function(){
+					$(window).unbind('beforeunload');
+					location.href = "set_room.html";
+				});
+				$("#addmoreBtn").on("click", function(){
+					$(window).unbind('beforeunload');
+					location.href = "register_house.html";
+				});
+				$(window).on("beforeunload", function() {
+					return "페이지 이동시 저장하지 않은 내용들은 소실됩니다. 정말 현재 페이지를 벗어나시겠습니까?";
+				});
+			</script>
+
+
+			<!-- google maps initialization -->
+			<script type="text/javascript">
+				google.maps.event.addDomListener(window, 'load', init);
+
+				function init() {
+					var locations = [
+						[40.6128, -73.9976, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "Fort Collins, Colorado 80523, USA", "$320 000"],
+						[40.7222, -73.7903, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+						[41.0306, -73.7669, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer3.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
+						[41.3006, -72.9440, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer4.jpg", "Fort Collins, Colorado 80523, USA", "$410 000"],
+						[42.2418, -74.3626, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "West Fourth Street, New York 10003, USA", "$295 000"],
+						[38.8974, -77.0365, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
+						[38.7860, -77.0129, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer7.jpg", "Fort Collins, Colorado 80523, USA", "$299 000"],
+						[41.2693, -70.0874, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer8.jpg", "Fort Collins, Colorado 80523, USA", "$600 000"],
+						[33.7544, -84.3857, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer9.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+						[33.7337, -84.4443, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer10.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$550 000"],
+						[33.8588, -84.4858, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$670 000"],
+						[34.0254, -84.3560, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
+						[39.6282, -86.1320, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
+						[40.5521, -84.5658, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+						[41.6926, -87.6021, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"]
+					];
+					offersMapInit("offers-map", locations);
+
+					mapInit(41.2693, -70.0874, "list-map1", "images/pin-house.png", false);
+					mapInit(33.7544, -84.3857, "list-map2", "images/pin-apartment.png", false);
+					mapInit(33.7337, -84.4443, "list-map3", "images/pin-land.png", false);
+					mapInit(33.8588, -84.4858, "list-map4", "images/pin-commercial.png", false);
+					mapInit(34.0254, -84.3560, "list-map5", "images/pin-apartment.png", false);
+					mapInit(40.6128, -73.9976, "list-map6", "images/pin-house.png", false);
+					mapInit(40.6128, -73.7903, "list-map7", "images/pin-house.png", false);
+				}
+			</script>
+
+	</body>
+
+	</html>

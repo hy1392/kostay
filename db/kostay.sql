@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(500) NOT NULL COMMENT '사용자이름',
   `email` varchar(500) NOT NULL COMMENT '사용자아이디',
   `pwd` varchar(500) NOT NULL COMMENT '사용자패스워드',
+  `hp` varchar(500) NULL DEFAULT NULL COMMENT 'hp',
   `flag` int(11) NOT NULL COMMENT '0:승인대기 1:관리자 2:운영자 3:입주자',
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='사용자정보' AUTO_INCREMENT=4 ;
@@ -48,8 +49,25 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `email` varchar(500) NOT NULL COMMENT '사용자아이디',
   `img` varchar(500)  COMMENT '프로필사진',
   `description` varchar(500)  COMMENT '자기소개',
+  `hp` varchar(500)  COMMENT '전화번호',
+  `contactemail` varchar(500)  COMMENT '이메일',
+  `kakao` varchar(500)  COMMENT '카카오',
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='사용자 프로필' AUTO_INCREMENT=4 ;
+
+
+--
+-- 테이블 구조 `request_movein_list`
+--
+
+CREATE TABLE IF NOT EXISTS `request_movein_list` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(500) NOT NULL COMMENT '사용자아이디',
+  `date` date  COMMENT '입주 가능일',
+  `house_id` varchar(500) NOT NULL COMMENT '하우스 아이디(운영자아이디_숫자)',
+  `bed_id` varchar(500) NOT NULL COMMENT '침대 아이디(방 아이디_숫자)',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='입주요청 리스트' AUTO_INCREMENT=4 ;
 
 
 --
@@ -115,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `user_wish_list` (
 CREATE TABLE IF NOT EXISTS `message` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
   `sent_id` varchar(500) NOT NULL COMMENT '보낸사람',
-  `title` varchar(500) NOT NULL COMMENT '제목',
+  `title` varchar(500) NULL COMMENT '제목',
   `receiver` varchar(500) NOT NULL COMMENT '받는사람',
   `content` varchar(500) NOT NULL COMMENT '내용',
   `sdeleted` int(11) NOT NULL COMMENT '수신자 삭제여부 일반:1 삭제된:0',
@@ -124,12 +142,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='메시지' AUTO_INCREMENT=4 ;
 
-INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sdeleted`, `rdeleted`,`sent_time`) VALUES
-(1, 'admin@admin.ac.kr','제목입니다1', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1', 1, 1, now());
-INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sdeleted`, `rdeleted`,`sent_time`) VALUES
-(2, 'admin@admin.ac.kr','제목입니다2', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 2 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1', 1, 1, now());
-INSERT INTO `message` (`idx`, `sent_id`, `title`, `receiver`, `content`, `sdeleted`, `rdeleted`,`sent_time`) VALUES
-(3, 'admin@admin.ac.kr','제목입니다3', 'user1@user.ac.kr', '안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 3 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1 안녕하세요 관리자입니다. 메시지 기능 테스트 중입니다. 1', 1, 1, now());
+
 
 --
 -- 테이블 구조 `house_main`
@@ -148,21 +161,16 @@ CREATE TABLE IF NOT EXISTS `house_main` (
   `parking` int(11) NOT NULL COMMENT '주차 가능:1 불가능:2',
   `pet` int(11) NOT NULL COMMENT '애완동물 가눙:1 불가능:2',
   `address` varchar(500) NOT NULL COMMENT '주소',
-  `address_detail` varchar(500) NOT NULL COMMENT '상세주소',
+  `address_detail` varchar(500) COMMENT '상세주소',
   `address_detail_show` int(11) NOT NULL COMMENT '상세주소 공개여부 공개:1 비공개;2',
   `traffic` varchar(500) NOT NULL COMMENT '교통환경',
   `facilities` varchar(500) NOT NULL COMMENT '주변시설',
   `condition` varchar(500) NOT NULL COMMENT '계약조건',
-  `register_time` date NOT NULL COMMENT '등록일',
+  `register_time` datetime NOT NULL COMMENT '등록일',
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='하우스 기본정보' AUTO_INCREMENT=4 ;
 
-INSERT INTO `house_main` (`idx`, `user_id`, `house_id`, `house_title`, `resident_gender`, `house_type`, `number_of_rooms`, `number_of_toilet`, `live_master`, `parking`, `pet`, `address`, `address_detail`, `address_detail_show`, `traffic`, `facilities`, `condition`, `register_time`) VALUES
-(1, 'user2@user.ac.kr', 'user2@user.ac.kr_1', '매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.111', 1, 1, 5, 2, 1, 1, 1, '31253) 충청남도 천안시 동남구 병천면 충절로 1600 (가전리, 한국기술교육대학교)', '상세주소입니다.', 1, '달링하버에서 3분거리, 시티에서 10분거리, 달링하버역에서 5분', '수영장 있는 아파트. 인근에 대형슈퍼(cols)가 있음. 달링하버 근처로 식당가 많아 살기 편함', '흡연불가, 애완동물 불가, 친구초대 불가, 2주 노티스, 쌀제공, 모든 공과금 포함', now());
-INSERT INTO `house_main` (`idx`, `user_id`, `house_id`, `house_title`, `resident_gender`, `house_type`, `number_of_rooms`, `number_of_toilet`, `live_master`, `parking`, `pet`, `address`,`address_detail`, `address_detail_show`, `traffic`, `facilities`, `condition`, `register_time`) VALUES
-(2, 'user2@user.ac.kr', 'user2@user.ac.kr_1', '매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.222', 2, 2, 2, 1, 1, 2, 1, '31253) 충청남도 천안시 동남구 병천면 충절로 1600 (가전리, 한국기술교육대학교)', '상세주소입니다.', 1, '달링하버에서 3분거리, 시티에서 10분거리, 달링하버역에서 5분', '수영장 있는 아파트. 인근에 대형슈퍼(cols)가 있음. 달링하버 근처로 식당가 많아 살기 편함', '흡연불가, 애완동물 불가, 친구초대 불가, 2주 노티스, 쌀제공, 모든 공과금 포함', now());
-INSERT INTO `house_main` (`idx`, `user_id`, `house_id`, `house_title`, `resident_gender`, `house_type`, `number_of_rooms`, `number_of_toilet`, `live_master`, `parking`, `pet`, `address`,`address_detail`, `address_detail_show`, `traffic`, `facilities`, `condition`, `register_time`) VALUES
-(3, 'user2@user.ac.kr', 'user2@user.ac.kr_1', '매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.매일밤 야식파티 벌어지는 즐거운 하우스. 의리로 뭉쳤다.333', 3, 2, 3, 3, 1, 1, 2, '31253) 충청남도 천안시 동남구 병천면 충절로 1600 (가전리, 한국기술교육대학교)', '상세주소입니다.', 1, '달링하버에서 3분거리, 시티에서 10분거리, 달링하버역에서 5분', '수영장 있는 아파트. 인근에 대형슈퍼(cols)가 있음. 달링하버 근처로 식당가 많아 살기 편함', '흡연불가, 애완동물 불가, 친구초대 불가, 2주 노티스, 쌀제공, 모든 공과금 포함', now());
+
 
 
 --
@@ -178,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `house_public` (
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='공용공간 정보' AUTO_INCREMENT=4 ;
 
-INSERT INTO `house_public` (`idx`, `house_id`, `description`, `services`, `goods`) VALUES (1, "user2@user.ac.kr_1", "소개입니다.소개입니다.소개입니다.소개입니다.", "제공 서비스입니다.제공 서비스입니다.제공 서비스입니다.제공 서비스입니다.", "제공 물품입니다.제공 물품입니다.제공 물품입니다.");
+
 
 
 --
@@ -191,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `house_rooms` (
   `room_id` varchar(500) NOT NULL COMMENT '방 아이디(하우스아이디_숫자)',
   `person` int(11) NOT NULL COMMENT '거주인원',
   `gender` int(11) NOT NULL COMMENT '거주가 성별 남:1 여:2 혼성:3 커플룸:4',
-  `master` int(11) NOT NULL COMMENT '마스터룸 여부 맞다:1 아니다:2',
+  `master` varchar(500) NOT NULL COMMENT '마스터룸 여부 맞다:1 아니다:2',
   `rule` int(11) NOT NULL COMMENT '모집단위 1명씩:1 커플(2인):2',
   `rent` int(11) NOT NULL COMMENT '렌트비',
   `guarantee` int(11) NOT NULL COMMENT '보증금',
@@ -199,8 +207,6 @@ CREATE TABLE IF NOT EXISTS `house_rooms` (
   `goods` varchar(500) NOT NULL COMMENT '제공 물품',
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='방별 정보' AUTO_INCREMENT=4 ;
-
-INSERT INTO `house_rooms` (`idx`, `house_id`, `room_id`, `person`, `gender`, `master`, `rule`, `rent`, `guarantee`, `manage`, `goods`) VALUES (1, "user2@user.ac.kr_1", "user2@user.ac.kr_1_0", 5, 1, 1, 1, 200000, 300000, 50000, "1,2,3" );
 
 
 --
@@ -216,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `house_beds` (
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='침대별 정보' AUTO_INCREMENT=4 ;
 
-INSERT INTO `house_beds` (`idx`, `room_id`, `bed_id`, `condition`, `vacant`) VALUES (1, "user2@user.ac.kr_1_0", "user2@user.ac.kr_1_0_0", 1, now());
+
 
 --
 -- 테이블 구조 `house_main_image`
@@ -246,9 +252,51 @@ CREATE TABLE IF NOT EXISTS `search` (
   `person` int(11) NOT NULL  COMMENT '거주인원',
   `park` varchar(500) NOT NULL  COMMENT '주차',
   `date` date  COMMENT '입주가능일',
-  `register_time` date NOT NULL  COMMENT '등록일',
+  `register_time` datetime NOT NULL  COMMENT '등록일',
+  `ad` varchar(500) NOT NULL DEFAULT '1' COMMENT '광고',
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='검색용 디비' AUTO_INCREMENT=4 ;
+
+
+--
+-- 테이블 구조 `search_result`
+--
+
+CREATE TABLE IF NOT EXISTS `search_result` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(500) COMMENT '운영자 아이디',
+  `house_id` varchar(500) COMMENT '하우스 아이디(운영자아이디_숫자)',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='하우스 기본정보' AUTO_INCREMENT=4 ;
+
+
+--
+-- 테이블 구조 `alarm`
+--
+
+CREATE TABLE IF NOT EXISTS `alarm` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(500)  COMMENT ' 유저 아이디',
+  `alarm_id` varchar(500)  COMMENT ' 알람 아이디',
+  `alarm_title` varchar(500) COMMENT ' 알람 제목',
+  `alarm_loc` varchar(500)  COMMENT ' 알람 기준',
+  `alarm_param` varchar(500)  COMMENT '알람 상세 값',
+  `address` varchar(500)  COMMENT ' 주소',
+  `gender` varchar(500)   COMMENT '성별',
+  `house_type` varchar(500)   COMMENT '주택유형',
+  `type` varchar(500)   COMMENT '룸타입',
+  `min_rent` int(11)  COMMENT '렌트비 최소',
+  `max_rent` int(11)  COMMENT '렌트비 최대',
+  `person` int(11)  COMMENT '거주인원',
+  `park` varchar(500)  COMMENT '주차',
+  `date` date  COMMENT '입주가능일',
+  `date_condition` varchar(500)  COMMENT '이전 이후 무관',
+  `contact` varchar(500)  COMMENT '연락받을 이메일',
+  `cont` varchar(500)  COMMENT '연락 받을지 여부',
+  `register_time` datetime  COMMENT '등록일',
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='알람' AUTO_INCREMENT=4 ;
+
 
 --
 -- 테이블 구조 `station`

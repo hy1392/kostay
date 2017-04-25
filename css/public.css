@@ -1,0 +1,26 @@
+html, body{
+    font-family: "NanumGothic", sans-serif !important;
+}
+
+.title-default{
+    font-size: 3.0vh !important;
+    font-family: "NanumGothic", sans-serif !important;
+}
+
+.desc-default{
+    font-size: 2.5vh !important;
+    font-family: "NanumGothic", sans-serif !important;
+    line-height: 4vh !important;
+}
+
+.desc-grid{
+  padding: 25px 15px 25px 15px !important;
+}
+.desc-grid span{
+  display:inline-block !important;
+  vertical-align: middle !important;
+}
+
+.pull-center{
+  float:inherit !important;
+}

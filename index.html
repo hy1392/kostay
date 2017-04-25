@@ -26,6 +26,8 @@
 	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 	<link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
 
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
 	<!-- jQeury -->
 	<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 
@@ -53,23 +55,17 @@
 					<div class="row">
 						<div class="col-xs-5 col-sm-8">
 							<div class="top-mail pull-left hidden-xs">
-								<span class="top-icon-circle">
-									<i class="fa fa-envelope fa-sm"></i>
-								</span>
-								<span class="top-bar-text">admin@koreatech.ac.kr</span>
-							</div>
-							<div class="top-phone pull-left hidden-xxs">
-								<span class="top-icon-circle">
-									<i class="fa fa-phone"></i>
-								</span>
-								<span class="top-bar-text">(0)-123-456-789</span>
-							</div>
-							<div class="top-localization pull-left hidden-sm hidden-md hidden-xs">
-								<span class="top-icon-circle pull-left">
-									<i class="fa fa-map-marker"></i>
-								</span>
-								<span class="top-bar-text">KOREA</span>
-							</div>
+									<span class="top-icon-circle">
+                                        <i class="fa fa-envelope fa-sm"></i>
+                                    </span>
+									<span class="top-bar-text">info@kostay.net</span>
+								</div>
+								<div class="top-phone pull-left hidden-xxs">
+									<span class="top-icon-circle">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+									<span class="top-bar-text">(+82)070-8624-4800</span>
+								</div>
 						</div>
 						<div class="col-xs-7 col-sm-4">
 							<div class="top-social-last top-dark pull-right" data-toggle="tooltip" data-placement="bottom" title="Login/Register">
@@ -79,18 +75,18 @@
 							</div>
 
 							<div class="top-social pull-right">
-								<a class="top-icon-circle" href="#">
-									<i class="fa fa-facebook"></i>
+								<a class="top-icon-circle" href="https://www.facebook.com/kostayinau/">
+									<img src="images/FB.png" alt="" style="width:14px;height:14px;position:relative;top:-2px">
 								</a>
 							</div>
 							<div class="top-social pull-right">
-								<a class="top-icon-circle" href="#">
-									<i class="fa fa-twitter"></i>
-								</a>
-							</div>
+                                <a class="top-icon-circle" href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </div>
 							<div class="top-social pull-right">
-								<a class="top-icon-circle" href="#">
-									<i class="fa fa-google-plus"></i>
+								<a class="top-icon-circle" href="http://blog.naver.com/kostayinau">
+									<img src="images/NAVER.png" alt="" style="width:14px;height:14px;position:relative;top:-2px">
 								</a>
 							</div>
 							<div class="top-social pull-right">
@@ -109,195 +105,39 @@
 			<!-- /.mani-menu-cont -->
 		</header>
 
-
-
-		<section class="no-padding adv-search-section">
+		<section class="no-padding adv-search-section" style="height:60vh">
 			<!-- Slider main container -->
 			<div id="swiper1" class="swiper-container">
 				<!-- Additional required wrapper -->
 				<div class="swiper-wrapper">
 					<!-- Slides -->
 					<div class="swiper-slide">
-						<div class="slide-bg swiper-lazy" data-background="images/slides/tmp1.jpg"></div>
+						<div class="slide-bg swiper-lazy img-responsive" data-background="images/main_1_resize.jpg" height="100%"></div>
 						<!-- Preloader image -->
 						<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-						<div class="container">
-							<div class="row">
-								<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-sm-offset-2 col-md-offset-4 col-lg-offset-6 slide-desc-col animated fadeInDown slide-desc-1">
-									<div class="slide-desc pull-right">
-										<div class="slide-desc-text">
-
-											<div class="estate-type">쉐어하우스</div>
-											<div class="transaction-type">세일</div>
-											<h4>KOREA</h4>
-											<div class="clearfix"></div>
-
-											<p>
-												컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.
-											</p>
-										</div>
-										<div class="slide-desc-params">
-											<div class="slide-desc-area">
-												<img src="images/area-icon.png" alt="" />54m<sup>2</sup>
-											</div>
-											<div class="slide-desc-rooms">
-												<img src="images/rooms-icon.png" alt="" />3
-											</div>
-											<div class="slide-desc-baths">
-												<img src="images/bathrooms-icon.png" alt="" />1
-											</div>
-											<div class="slide-desc-parking">
-												<img src="images/parking-icon.png" alt="" />1
-											</div>
-										</div>
-										<div class="slide-desc-price">
-											320,000원
-										</div>
-										<div class="clearfix"></div>
-									</div>
-									<div class="slide-buttons slide-buttons-right">
-										<a href="#" class="navigation-box navigation-box-next slide-next">
-											<div class="navigation-triangle"></div>
-											<div class="navigation-box-icon"><i class="jfont">&#xe802;</i></div>
-										</a>
-										<a href="estate-details-right-sidebar.html" class="navigation-box navigation-box-more slide-more">
-											<div class="navigation-triangle"></div>
-											<div class="navigation-box-icon"><i class="jfont fa-lg">&#xe813;</i></div>
-										</a>
-										<a href="#" class="navigation-box navigation-box-prev slide-prev">
-											<div class="navigation-triangle"></div>
-											<div class="navigation-box-icon"><i class="jfont">&#xe800;</i></div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
+
 					<div class="swiper-slide">
-						<div class="slide-bg swiper-lazy" data-background="images/slides/tmp2.jpg"></div>
+						<div class="slide-bg swiper-lazy img-responsive" data-background="images/main_2_resize.jpg"></div>
 						<!-- Preloader image -->
 						<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-						<div class="container">
-							<div class="row">
-								<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 slide-desc-col animated slide-desc-2">
-									<div class="slide-desc pull-left">
-										<div class="slide-desc-text">
-
-											<div class="estate-type">쉐어하우스</div>
-											<div class="transaction-type">세일</div>
-											<h4>KOREA</h4>
-											<div class="clearfix"></div>
-
-											<p>
-												컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.
-											</p>
-										</div>
-										<div class="slide-desc-params">
-											<div class="slide-desc-area">
-												<img src="images/area-icon.png" alt="" />350m<sup>2</sup>
-											</div>
-											<div class="slide-desc-rooms">
-												<img src="images/rooms-icon.png" alt="" />8
-											</div>
-											<div class="slide-desc-baths">
-												<img src="images/bathrooms-icon.png" alt="" />3
-											</div>
-											<div class="slide-desc-parking">
-												<img src="images/parking-icon.png" alt="" />2
-											</div>
-										</div>
-										<div class="slide-desc-price">
-											650,000원
-										</div>
-										<div class="clearfix"></div>
-									</div>
-									<div class="slide-buttons slide-buttons-left">
-										<a href="#" class="navigation-box navigation-box-next slide-next">
-											<div class="navigation-triangle"></div>
-											<div class="navigation-box-icon"><i class="jfont">&#xe802;</i></div>
-										</a>
-										<a href="estate-details-right-sidebar.html" class="navigation-box navigation-box-more slide-more">
-											<div class="navigation-triangle"></div>
-											<div class="navigation-box-icon"><i class="jfont fa-lg">&#xe813;</i></div>
-										</a>
-										<a href="#" class="navigation-box navigation-box-prev slide-prev">
-											<div class="navigation-triangle"></div>
-											<div class="navigation-box-icon"><i class="jfont">&#xe800;</i></div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
+
+					
 					<div class="swiper-slide">
-						<div class="slide-bg swiper-lazy" data-background="images/slides/tmp3.jpg"></div>
+						<div class="slide-bg swiper-lazy img-responsive" data-background="images/main_3_resize.jpg"></div>
 						<!-- Preloader image -->
 						<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-						<div class="container">
-							<div class="row">
-								<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3 slide-desc-col animated slide-desc-3">
-									<div class="slide-desc center-block">
-										<div class="slide-desc-text">
-
-											<div class="estate-type">단독주택</div>
-											<div class="transaction-type">세일</div>
-											<h4>KOREA</h4>
-											<div class="clearfix"></div>
-
-											<p>
-												컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.컨텐츠 준비 중입니다.
-											</p>
-										</div>
-										<div class="slide-desc-params">
-											<div class="slide-desc-area">
-												<img src="images/area-icon.png" alt="" />70m<sup>2</sup>
-											</div>
-											<div class="slide-desc-rooms">
-												<img src="images/rooms-icon.png" alt="" />4
-											</div>
-											<div class="slide-desc-baths">
-												<img src="images/bathrooms-icon.png" alt="" />1
-											</div>
-											<div class="slide-desc-parking">
-												<img src="images/parking-icon.png" alt="" />1
-											</div>
-										</div>
-										<div class="slide-desc-price">
-											350,000원
-										</div>
-										<div class="clearfix"></div>
-									</div>
-									<div class="slide-buttons slide-buttons-center">
-										<a href="#" class="navigation-box navigation-box-next slide-next">
-											<div class="navigation-triangle"></div>
-											<div class="navigation-box-icon"><i class="jfont">&#xe802;</i></div>
-										</a>
-										<a href="estate-details-right-sidebar.html" class="navigation-box navigation-box-more slide-more">
-											<div class="navigation-triangle"></div>
-											<div class="navigation-box-icon"><i class="jfont fa-lg">&#xe813;</i></div>
-										</a>
-										<a href="#" class="navigation-box navigation-box-prev slide-prev">
-											<div class="navigation-triangle"></div>
-											<div class="navigation-box-icon"><i class="jfont">&#xe800;</i></div>
-										</a>
-									</div>
-
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
 
-
-
 				<div class="adv-search-cont">
-
 					<div class="container">
 						<div class="row tab-content">
 							<div role="tabpanel" class="col-xs-12 adv-search-outer tab-pane fade in active" id="apartments">
 								<div class="row">
-									<form method="post" id="form_search" action="search_detail.html">
+									<form method="post" id="form_search" action="search_details2.html">
 										<div class="col-xs-12 col-sm-6 col-lg-3">
 											<input name="search_region" id="search_region" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="지역:">
 										</div>
@@ -311,15 +151,16 @@
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3">
 											<select name="search_type" id="search_type" class="bootstrap-select" title="룸타입:">
-												<option value="0">무관</option>
+												
 												<option value="1">1인실</option>
 												<option value="2">2인실</option>
-												<option value="3">3인실 이상</option>
+												<option value="3">3인실</option>
+                                                                                                <option value="4">4인실 이상</option>
 											</select>
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3 adv-search-button-cont bootstrap-select">
 											<a style="cursor:pointer" id="submit_search" class="button-primary width-100">
-												<span>search</span>
+												<span>검색</span>
 												<div class="button-triangle"></div>
 												<div class="button-triangle2"></div>
 												<div class="button-icon"><i class="fa fa-search"></i></div>
@@ -341,50 +182,93 @@
 		</section>
 
 		<!-- 바로가기 메뉴 -->
-		<section class="section-light bottom-padding-45 section-both-shadow">
+		<section class="section-light section-both-shadow">
 			<div class="container">
 				<div class="row">
 
 					<div class="col-sm-6 col-lg-3">
-						<div class="feature wow fadeInLeft" id="feature1">
+						<div class="feature wow fadeInLeft" id="feature1" onclick="register_house();" <?if(!isset($_SESSION['id'])){echo ' href="#login-modal" data-toggle="modal"';}?>>
 							<div class="feature-icon center-block"><i class="fa fa-building"></i></div>
 							<div class="feature-text">
 								<h3>쉐어하우스 등록</h3>
 								<div class="title-separator center-block feature-separator"></div>
-								<p>메뉴 바로가기</p>
+								<p>운영자라면 당장 클릭<br>공실 없도록 도와드려요.</p>
 							</div>
 						</div>
+
+						<?
+							if(isset($_SESSION['id'])){
+								if($_SESSION['flag']==2){
+									echo "<script>function register_house(){location.href = 'register_house.html'}</script>";
+								}
+								else if($_SESSION['flag']==3){
+									echo "<script>function register_house(){location.href = 'change_permission.html'}</script>";
+								}
+							}
+							else{
+								echo "<script>function register_house(){return false;}</script>";
+							}
+						?>
+
 					</div>
+
 					<div class="col-sm-6 col-lg-3">
-						<div class="feature wow fadeInUp" id="feature2">
+						<div class="feature wow fadeInUp" id="feature2" onclick="register_alarm();" <?if(!isset($_SESSION['id'])){echo ' href="#login-modal" data-toggle="modal"';}?>>
 							<div class="feature-icon center-block"><i class="fa fa-bell"></i></div>
 							<div class="feature-text">
 								<h3>미리 알림설정</h3>
 								<div class="title-separator center-block feature-separator"></div>
-								<p>메뉴 바로가기</p>
+								<p>원하는 집을 찾는<br>가장 스마트한 방법</p>
 							</div>
 						</div>
 					</div>
+					<?
+						if(isset($_SESSION['id'])){
+							if($_SESSION['flag']==2){
+								echo "<script>
+												swal('에러!','입주자 회원만 사용할 수 있습니다.','warning');
+											</script>";
+							}
+							else if($_SESSION['flag']==3){
+								echo "<script>function register_alarm(){location.href = 'alarm.html'}</script>";
+							}
+						}
+						else{
+							echo "<script>function register_alarm(){return false;}</script>";
+						}
+					?>
+
 					<div class="col-sm-6 col-lg-3">
-						<div class="feature wow fadeInUp" id="feature3">
-							<div class="feature-icon center-block"><i class="fa fa-home"></i></div>
+						<div class="feature wow fadeInUp" id="feature3" onclick="mainToon1();">
+							<div class="feature-icon center-block"><i class="fa fa-industry"></i></div>
 							<div class="feature-text">
 								<h3>좋은집은 대기필수</h3>
 								<div class="title-separator center-block feature-separator"></div>
-								<p>메뉴 바로가기</p>
+								<p>세계 최초로 선보이는<br>쉐어하우스 대기서비스</p>
 							</div>
 						</div>
 					</div>
+					<script>
+						function mainToon1(){
+							location.href = 'main_toon_1.html';
+						}
+					</script>
+
 					<div class="col-sm-6 col-lg-3">
-						<div class="feature wow fadeInRight" id="feature4">
-							<div class="feature-icon center-block"><i class="fa fa-home"></i></div>
+						<div class="feature wow fadeInRight" id="feature4" onclick="mainToon2();">
+							<div class="feature-icon center-block"><i class="fa fa-tree"></i></div>
 							<div class="feature-text">
-								<h3>좋은집은 대기필수</h3>
+								<h3>안전입주 노하우</h3>
 								<div class="title-separator center-block feature-separator"></div>
-								<p>메뉴 바로가기</p>
+								<p>맘편한 호주생활을 위한<br>쉐어하우스 입주상식</p>
 							</div>
 						</div>
 					</div>
+					<script>
+						function mainToon2(){
+							location.href = 'main_toon_2.html';
+						}
+					</script>
 				</div>
 			</div>
 		</section>
@@ -426,295 +310,114 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="featured-offers-container">
 				<div class="owl-carousel" id="featured-offers-owl">
-					<div class="featured-offer-col">
+					<?
+						 include 'server/dbconnect.php';
+						 $query = "select * from search where ad='1' order by register_time desc limit 0,5 ";
+						 $result = mysqli_query($conn, $query);
+						 $cnt= 0 ;
+						 $index = 0;
+						 
+						 while($row = mysqli_fetch_array($result)){
+						     $query2 = "select * from house_main where house_id='".$row['house_id']."'";
+						     $result2 = mysqli_query($conn, $query2);
+						     $row2 = mysqli_fetch_array($result2);
+					?>
+					<!--추천 하우스 콘텐츠 -->
+					<div class="featured-offer-col" onclick="location.href='view_detail.html?house=<?=$row['house_id']?>';">
 						<div class="featured-offer-front">
-							<div class="featured-offer-photo">
-								<img src="images/tmpfeatured-offer1.jpg" alt="" />
+							<div class="featured-offer-photo" onclick="location.href='view_detail.html?house=<?=$row['house_id']?>';">
+								<?
+                                   $return = array();
+                                    for($i=1;$i<9;$i++){
+                                      $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                      $imageresult = mysqli_query($conn, $imagequery);
+                                      if(mysqli_num_rows($imageresult)===1){
+                                        $imagerow = mysqli_fetch_array($imageresult);
+                                        array_push($return, $imagerow['img']);
+                                      }
+                                    }
+								?>
+								<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" alt="" width="360" height="245"/>
+
 								<div class="type-container">
+									<?
+										if($row['house_type'] == 1){
+									?>
+									<div class="estate-type">공동주택</div>
+									<?
+										}else{
+									?>
 									<div class="estate-type">단독주택</div>
-									<div class="transaction-type">세일</div>
+									<?
+										}
+									?>
 								</div>
 							</div>
+
 							<div class="featured-offer-text">
-								<h4 class="featured-offer-title">KOREA</h4>
-								<p>콘텐츠 준비 중입니다.</p>
+								<h4 class="featured-offer-title" style="display: block;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?= $row2['house_title'] ?></h4>
+								<p><?= $row2['address'] ?></p>
 							</div>
+
+							<style>
+							.list-img{
+								width: 40% !important;
+								height: auto;
+								margin: 5px;
+								max-width: 25px;
+								max-height: 25px;
+							}
+							</style>
+
+							<?
+								$house_info_query = "select * from search where house_id = '".$row['house_id']."'";
+							 	$house_info_result = mysqli_query($conn, $house_info_query);
+							 	$house_info_row = mysqli_fetch_array($house_info_result);
+							?>
 							<div class="featured-offer-params">
 								<div class="featured-area">
-									<img src="images/area-icon.png" alt="" />54m<sup>2</sup>
+									<img class="list-img" src="images/icons/w_master.png" alt=""><span class="list-span" style="font-size:1.3em"><?=$house_info_row['person']?></span>
 								</div>
 								<div class="featured-rooms">
-									<img src="images/rooms-icon.png" alt="" />3
+									<img class="list-img" src="images/rooms-icon.png" alt=""><span class="list-span" style="font-size:1.3em"><?=$row2['number_of_rooms']?></span>
 								</div>
 								<div class="featured-baths">
-									<img src="images/bathrooms-icon.png" alt="" />1
+									<img class="list-img" src="images/icons/w_toilet.png" alt=""><span class="list-span" style="font-size:1.3em"><?=$row2['number_of_toilet']?></span>
 								</div>
 							</div>
+
 							<div class="featured-price">
-								320,000원
+								<?=$house_info_row['min_rent']?>
 							</div>
+
 						</div>
-						<div class="featured-offer-back">
-							<div id="featured-map1" class="featured-offer-map"></div>
+
+						<div class="featured-offer-back" onclick="location.href='view_detail.html?house=<?=$row['house_id']?>';">
+							<div style="width:100%; height:100%">
+								<iframe class="gmap" frameborder="0"
+								src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&q=<?=$row['address']?>"
+								width="100%" height="100%" zoom="16" allowfullscreen></iframe>
+							</div>
+
 							<div class="button">
-								<a href="estate-details-right-sidebar.html" class="button-primary">
-									<span>read more</span>
+								<a href="#" class="button-primary" onclick="location.href='view_detail.html?house=<?=$row['house_id']?>';">
+									<span>더보기</span>
 									<div class="button-triangle"></div>
 									<div class="button-triangle2"></div>
 									<div class="button-icon"><i class="fa fa-search"></i></div>
 								</a>
 							</div>
 						</div>
-
 					</div>
-					<div class="featured-offer-col">
-						<div class="featured-offer-front">
-							<div class="featured-offer-photo">
-								<img src="images/tmpfeatured-offer2.jpg" alt="" />
-								<div class="type-container">
-									<div class="estate-type">단독주택</div>
-									<div class="transaction-type">세일</div>
-								</div>
-							</div>
-							<div class="featured-offer-text">
-								<h4 class="featured-offer-title">KOREA</h4>
-								<p>콘텐츠 준비 중입니다.</p>
-							</div>
-							<div class="featured-offer-params">
-								<div class="featured-area">
-									<img src="images/area-icon.png" alt="" />70m<sup>2</sup>
-								</div>
-								<div class="featured-rooms">
-									<img src="images/rooms-icon.png" alt="" />4
-								</div>
-								<div class="featured-baths">
-									<img src="images/bathrooms-icon.png" alt="" />1
-								</div>
-							</div>
-							<div class="featured-price">
-								350,000원
-							</div>
-						</div>
-						<div class="featured-offer-back">
-							<div id="featured-map2" class="featured-offer-map"></div>
-							<div class="button">
-								<a href="estate-details-right-sidebar.html" class="button-primary">
-									<span>read more</span>
-									<div class="button-triangle"></div>
-									<div class="button-triangle2"></div>
-									<div class="button-icon"><i class="fa fa-search"></i></div>
-								</a>
-							</div>
-						</div>
+					<?
+						}
+					?>
 
-					</div>
-					<div class="featured-offer-col">
-						<div class="featured-offer-front">
-							<div class="featured-offer-photo">
-								<img src="images/tmpfeatured-offer3.jpg" alt="" />
-								<div class="type-container">
-									<div class="estate-type">공동주택</div>
-									<div class="transaction-type">세일</div>
-								</div>
-							</div>
-							<div class="featured-offer-text">
-								<h4 class="featured-offer-title">KOREA</h4>
-								<p>콘텐츠 준비 중입니다.</p>
-							</div>
-							<div class="featured-offer-params">
-								<div class="featured-area">
-									<img src="images/area-icon.png" alt="" />250m<sup>2</sup>
-								</div>
-								<div class="featured-rooms">
-									<img src="images/rooms-icon.png" alt="" />7
-								</div>
-								<div class="featured-baths">
-									<img src="images/bathrooms-icon.png" alt="" />3
-								</div>
-							</div>
-							<div class="featured-price">
-								650,000원
-							</div>
-						</div>
-						<div class="featured-offer-back">
-							<div id="featured-map3" class="featured-offer-map"></div>
-							<div class="button">
-								<a href="estate-details-right-sidebar.html" class="button-primary">
-									<span>read more</span>
-									<div class="button-triangle"></div>
-									<div class="button-triangle2"></div>
-									<div class="button-icon"><i class="fa fa-search"></i></div>
-								</a>
-							</div>
-						</div>
+					<!--.추천 하우스 콘텐츠 -->
 
-					</div>
-					<div class="featured-offer-col">
-						<div class="featured-offer-front">
-							<div class="featured-offer-photo">
-								<img src="images/featured-offer4.jpg" alt="" />
-								<div class="type-container">
-									<div class="estate-type">단독주택</div>
-									<div class="transaction-type">세일</div>
-								</div>
-							</div>
-							<div class="featured-offer-text">
-								<h4 class="featured-offer-title">KOREA</h4>
-								<p>콘텐츠 준비 중입니다.</p>
-							</div>
-							<div class="featured-offer-params">
-								<div class="featured-area">
-									<img src="images/area-icon.png" alt="" />40m<sup>2</sup>
-								</div>
-								<div class="featured-rooms">
-									<img src="images/rooms-icon.png" alt="" />2
-								</div>
-								<div class="featured-baths">
-									<img src="images/bathrooms-icon.png" alt="" />1
-								</div>
-							</div>
-							<div class="featured-price">
-								299,000원
-							</div>
-						</div>
-						<div class="featured-offer-back">
-							<div id="featured-map4" class="featured-offer-map"></div>
-							<div class="button">
-								<a href="estate-details-right-sidebar.html" class="button-primary">
-									<span>read more</span>
-									<div class="button-triangle"></div>
-									<div class="button-triangle2"></div>
-									<div class="button-icon"><i class="fa fa-search"></i></div>
-								</a>
-							</div>
-						</div>
-
-					</div>
-					<div class="featured-offer-col">
-						<div class="featured-offer-front">
-							<div class="featured-offer-photo">
-								<img src="images/featured-offer5.jpg" alt="" />
-								<div class="type-container">
-									<div class="estate-type">공동주택</div>
-									<div class="transaction-type">세일</div>
-								</div>
-							</div>
-							<div class="featured-offer-text">
-								<h4 class="featured-offer-title">KOREA</h4>
-								<p>콘텐츠 준비 중입니다.</p>
-							</div>
-							<div class="featured-offer-params">
-								<div class="featured-area">
-									<img src="images/area-icon.png" alt="" />80m<sup>2</sup>
-								</div>
-								<div class="featured-rooms">
-									<img src="images/rooms-icon.png" alt="" />3
-								</div>
-								<div class="featured-baths">
-									<img src="images/bathrooms-icon.png" alt="" />1
-								</div>
-							</div>
-							<div class="featured-price">
-								390,000원
-							</div>
-						</div>
-						<div class="featured-offer-back">
-							<div id="featured-map5" class="featured-offer-map"></div>
-							<div class="button">
-								<a href="estate-details-right-sidebar.html" class="button-primary">
-									<span>read more</span>
-									<div class="button-triangle"></div>
-									<div class="button-triangle2"></div>
-									<div class="button-icon"><i class="fa fa-search"></i></div>
-								</a>
-							</div>
-						</div>
-
-					</div>
-					<div class="featured-offer-col">
-						<div class="featured-offer-front">
-							<div class="featured-offer-photo">
-								<img src="images/featured-offer6.jpg" alt="" />
-								<div class="type-container">
-									<div class="estate-type">공동주택</div>
-									<div class="transaction-type">세일</div>
-								</div>
-							</div>
-							<div class="featured-offer-text">
-								<h4 class="featured-offer-title">KOREA</h4>
-								<p>콘텐츠 준비 중입니다.</p>
-							</div>
-							<div class="featured-offer-params">
-								<div class="featured-area">
-									<img src="images/area-icon.png" alt="" />54m<sup>2</sup>
-								</div>
-								<div class="featured-rooms">
-									<img src="images/rooms-icon.png" alt="" />3
-								</div>
-								<div class="featured-baths">
-									<img src="images/bathrooms-icon.png" alt="" />1
-								</div>
-							</div>
-							<div class="featured-price">
-								320,000원
-							</div>
-						</div>
-						<div class="featured-offer-back">
-							<div id="featured-map6" class="featured-offer-map"></div>
-							<div class="button">
-								<a href="estate-details-right-sidebar.html" class="button-primary">
-									<span>read more</span>
-									<div class="button-triangle"></div>
-									<div class="button-triangle2"></div>
-									<div class="button-icon"><i class="fa fa-search"></i></div>
-								</a>
-							</div>
-						</div>
-
-					</div>
-					<div class="featured-offer-col">
-						<div class="featured-offer-front">
-							<div class="featured-offer-photo">
-								<img src="images/featured-offer7.jpg" alt="" />
-								<div class="type-container">
-									<div class="estate-type">공동주택</div>
-									<div class="transaction-type">세일</div>
-								</div>
-							</div>
-							<div class="featured-offer-text">
-								<h4 class="featured-offer-title">KOREA</h4>
-								<p>콘텐츠 준비 중입니다.</p>
-							</div>
-							<div class="featured-offer-params">
-								<div class="featured-area">
-									<img src="images/area-icon.png" alt="" />54m<sup>2</sup>
-								</div>
-								<div class="featured-rooms">
-									<img src="images/rooms-icon.png" alt="" />3
-								</div>
-								<div class="featured-baths">
-									<img src="images/bathrooms-icon.png" alt="" />1
-								</div>
-							</div>
-							<div class="featured-price">
-								320,000원
-							</div>
-						</div>
-						<div class="featured-offer-back">
-							<div id="featured-map7" class="featured-offer-map"></div>
-							<div class="button">
-								<a href="estate-details-right-sidebar.html" class="button-primary">
-									<span>read more</span>
-									<div class="button-triangle"></div>
-									<div class="button-triangle2"></div>
-									<div class="button-icon"><i class="fa fa-search"></i></div>
-								</a>
-							</div>
-						</div>
-
-					</div>
 				</div>
 			</div>
 		</section>

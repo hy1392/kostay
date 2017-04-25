@@ -116,8 +116,9 @@
 							<div class="col-xs-12">
 								<div class="row register_house_info">
 									<blockquote>
-								    <p>운영자 회원 혜택. 판매하고자하는 하우스를 등록하세요.(추가 설명 작성) </p>
-								    <footer>내가 등록한 집에 대한 정보를 확인할 수 있습니다.</footer>
+										<p>운영자님!</p>
+										<p>운영하시는 셰어하우스에 대한 정보를 입력해 주세요.</p>
+										<p>2단계(객실)에서 보유하고 계신 방을 모두 입력합니다.</p>	 
 								  </blockquote>
 								</div>
 
@@ -148,6 +149,16 @@
 									$vacantQuery = "select min(vacant) from house_beds where (".$roomCondition.") and `condition`=2;";
 									$vacantResult = mysqli_query($conn, $vacantQuery);
 									$vacantRow = mysqli_fetch_array($vacantResult);
+									
+									$return = array();
+                                    for($i=1;$i<9;$i++){
+                                      $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                      $imageresult = mysqli_query($conn, $imagequery);
+                                      if(mysqli_num_rows($imageresult)===1){
+                                        $imagerow = mysqli_fetch_array($imageresult);
+                                        array_push($return, $imagerow['img']);
+                                      }
+                                    }
 								?>
 								<div class="clo-lg-6 col-md-6 col-sm-6 col-xs-12">
 									<div class="list-offer">
@@ -161,17 +172,19 @@
 													<div class="list-offer-h4 col-sm-12 col-md-12" style="padding-left:0px;">
 														<div class="register-cr-checkbox">
 										          <label>
-										            <input id="<?='house-check'.$cnt?>" type="checkbox" value="">
+										            <input id="<?='house-check'.$cnt?>" type="checkbox" value="<?=$row['house_id']?>">
 										            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
 										          </label>
 										        </div>
 													</div>
 												</div>
+
+
 												<!-- .체크박스 -->
 
 												<!-- Item 사진 -->
 												<div class="list-offer-photo height-100">
-													<img src="images/tmpgrid-offer1.jpg" alt="" class="height-100" />
+													<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'images/tmpgrid-offer1.jpg';}?>" alt="" style="height:250px" />
 												</div>
 												<!-- .Item 사진 -->
 
@@ -187,9 +200,9 @@
 												<div class="row text-right search-price-div margin-top-10">
 													<div class="col-sm-12 col-md-12">
 														<span class="search-price">렌트비 : </span>
-														<span class="mini-price"><?=$row2[2]?>원</span>
+														<span class="mini-price"><?=$row2[2]?>$</span>
 														&nbsp;&nbsp;~&nbsp;&nbsp;
-														<span class="max-price"><?=$row2[1]?>원</span>
+														<span class="max-price"><?=$row2[1]?>$</span>
 													</div>
 												</div>
 
@@ -217,20 +230,26 @@
 									$cnt+=1;
 									}
 								?>
+								<script>
+									$("input[type=checkbox]").on("click",function(){
+										if($(this).attr("checked")=="checked") $(this).removeAttr("checked");
+										else $(this).attr("checked","checked");
+									});
+								</script>
 
 								<div class="col-xs-12 register_house_btn">
                   <div class="col-sm-3">
-                    <button onclick="return false;" class="btn btn-default btn-lg register_house_btn" style="width:100%; border-radius:0px;">
+                    <button onclick="return false;" class="btn btn-default btn-lg register_house_btn remove_house_btn" style="width:100%; border-radius:0px;">
                       <span>삭제</span>
                     </button>
                   </div>
                   <div class="col-sm-3">
-										<button onclick="return false;" class="btn btn-default btn-lg register_house_btn" style="width:100%; border-radius:0px;">
+										<button onclick="return false;" class="btn btn-default btn-lg register_house_btn modify_house_btn" style="width:100%; border-radius:0px;">
                       <span>수정</span>
                     </button>
                   </div>
                   <div class="col-sm-3">
-										<button onclick="return false;" class="btn btn-default btn-lg register_house_btn" style="width:100%; border-radius:0px;">
+										<button onclick="javascript:stopAD();" class="btn btn-default btn-lg" style="width:100%; border-radius:0px;">
                       <span>광고중단</span>
                     </button>
                   </div>
@@ -240,6 +259,85 @@
                     </button>
                   </div>
 									<script>
+										$(".modify_house_btn").on("click",function(){
+											var target=$("input[checked=checked]");
+											if(target.length==1){
+												var tmp_target = target[0];
+												location.href= "modify_house_detail.html?house="+$(tmp_target).val();
+											}
+											else{
+												swal("에러!","수정하고자 하는 하우스를 1개만 선택하여 주세요.","warning");
+											}
+										});
+                                        
+                                        function stopAD(){
+//                                            var target=$("input[checked=checked]");
+//                                            var result = "";
+//												for(var i=0; i<target.length; i++){
+//													var tmp_target = target[i];
+//                                                    
+//													result += $(tmp_target).val();
+//												}
+//                                            if(result!="") swal("광고중단 성공!","하우스 아이디 "+result+"의 광고가 중단되었습니다.", "success");
+                                            
+                                            swal({
+											  title: "하우스 광고 중단하기",
+											  text: "정말로 선택한 하우스들의 광고를 중단하시겠습니까?",
+											  type: "warning",
+											  showCancelButton: true,
+											  confirmButtonColor: "#DD6B55",
+												cancelButtonText: "취소하기",
+											  confirmButtonText: "광고중단",
+											  closeOnConfirm: false
+											},
+											function(){
+												var target=$("input[checked=checked]");
+												for(var i=0; i<target.length; i++){
+													var tmp_target = target[i];
+													$.ajax({
+														url: "server/registerHouse.php",
+														type: "POST",
+														data: {
+															condition: "ad",
+															target: $(tmp_target).val()
+														},
+														success: function(data) {},
+														error: function() {}
+													});
+												}
+											  location.reload();
+											});
+                                        }
+
+										$(".remove_house_btn").on("click",function(){
+											swal({
+											  title: "하우스 삭제하기",
+											  text: "한 번 삭제된 항목은 다시 복구되지 않습니다. 정말로 선택한 하우스들을 삭제하시겠습니까?",
+											  type: "warning",
+											  showCancelButton: true,
+											  confirmButtonColor: "#DD6B55",
+												cancelButtonText: "취소하기",
+											  confirmButtonText: "삭제하기",
+											  closeOnConfirm: false
+											},
+											function(){
+												var target=$("input[checked=checked]");
+												for(var i=0; i<target.length; i++){
+													var tmp_target = target[i];
+													$.ajax({
+														url: "server/registerHouse.php",
+														type: "POST",
+														data: {
+															condition: "delete",
+															target: $(tmp_target).val()
+														},
+														success: function(data) {},
+														error: function() {}
+													});
+												}
+											  location.reload();
+											});
+										});
 										function addShareHouse(){
 											location.href= "register_house_detail.html";
 										}

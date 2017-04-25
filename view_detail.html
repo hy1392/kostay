@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	include 'server/dbconnect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +28,7 @@
   <link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
   <link rel="stylesheet" type="text/css" href="css/view_detail.css">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" type="text/css" href="css/public.css">
   <link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
 
   <!--[if lt IE 9]>
@@ -37,6 +39,25 @@
 		.col-xs-12{
 			padding-top: 2px;
 			padding-bottom: 2px;
+		}
+		.background-black{
+			text-align: center;
+			color: white;
+			background-color: black;
+			border: 3px solid black;
+		}
+		.background-trans{
+			text-align: center;
+			color: black;
+			background-color: rgba(255, 255, 255, 0);
+			border: 3px solid black;
+			cursor: pointer;
+		}
+		.background-grey{
+			text-align: center;
+			color: black;
+			background-color: rgb(242,242,242);
+			padding: 15px 10px 15px 30px;
 		}
 		</style>
 </head>
@@ -110,21 +131,27 @@
     </header>
 
 		<!-- 이미지슬라이드 -->
+		<?
+		    $return = array();
+            for($i=1;$i<9;$i++){
+              $imagequery = "select * from house_main_image where email='".$_GET['house']."_".$i."'";
+              $imageresult = mysqli_query($conn, $imagequery);
+              if(mysqli_num_rows($imageresult)===1){
+                $imagerow = mysqli_fetch_array($imageresult);
+                array_push($return, "server/".$imagerow['img']);
+              }
+            }
+            if(sizeof($return)==0) array_push($return, "server/houses/noimg.jpg");
+		?>
 		<div class="tab-image-container view-detail-slider">
 			<div id="swiper2" class="swiper-container view-detail-swiper-container">
 				<div class="swiper-wrapper view-detail-wrapper">
+				<?for($i=0;$i<sizeof($return);++$i){?>
 					<div class="swiper-slide">
-						<div class="slide-bg swiper-lazy" data-background="images/testimonials-bg.jpg"></div>
+						<div class="slide-bg swiper-lazy" data-background="<?=$return[$i]?>"></div>
 						<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
 					</div>
-					<div class="swiper-slide">
-						<div class="slide-bg swiper-lazy" data-background="images/testimonials-bg.jpg"></div>
-						<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-					</div>
-					<div class="swiper-slide">
-						<div class="slide-bg swiper-lazy" data-background="images/testimonials-bg.jpg"></div>
-						<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-					</div>
+				<?}?>
 				</div>
 			</div>
 		</div>
@@ -132,7 +159,7 @@
 		<?
 		$target=$_GET['house'];
 		if(!isset($_GET['house'])) echo "<script>location.href='index.html'</script>";
-		 include 'server/dbconnect.php';
+		 
 		 $query = "select * from house_main where house_id='".$target."'";
 		 $result = mysqli_query($conn, $query);
 		 $row = mysqli_fetch_array($result);
@@ -210,16 +237,22 @@
 			width: 90%;
 		}
 
-	  #section1 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; margin-bottom: 30px;}
-	  #section2 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; #8e8e8e; margin-bottom: 30px;}
-	  #section3 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; border-bottom: 1px solid #8e8e8e; margin-bottom: 30px;}
-	  #section4 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; margin-bottom: 30px;}
-	  #section5 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; margin-bottom: 30px;}
+		.nanum-13-bol {
+	    font-family: "NanumGothic";
+	    font-size: 13px;
+	    font-weight: bold;
+	    letter-spacing: 2px
+		}
+
+	  #section1 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; margin-bottom: 5px;}
+	  #section2 {padding:70px 0px 50px 0px; height:auto; background-color: #fff;  margin-bottom: 5px;}
+	  #section3 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; border-bottom: 1px solid #8e8e8e; margin-bottom: 5px;}
+	  #section4 {padding:70px 0px 50px 0px; height:auto; background-color: #fff; margin-bottom: 5px;}
+	  #section5 {padding:0px 0px 50px 0px; height:auto; background-color: #fff; margin-bottom: 5px;}
 		</style>
 
-
 		<nav class="navbar navbar-default view-detail-navbar" data-spy="affix" data-offset-top="200">
-  		<div class="container-fluid">
+  		<div class="">
     		<div>
       		<div class="collapse navbar-collapse" id="myNavbar">
         		<ul class="nav navbar-nav">
@@ -234,8 +267,13 @@
   		</div>
 		</nav>
 
+		<div class="container">
+
+
+
+
 		<!-- 일반사항 -->
-		<div id="section1" class="container-fluid">
+		<div id="section1" class="container-fluid" style="padding-top:25px;">
 
 			<!-- -->
 			<style>
@@ -324,127 +362,109 @@
 					font-size: 18px;
 					color: #565656;
 				}
+				.desc-title{
+					font-size: 2vh;
+					font-weight: bold;
+					color : rgb(0,176,240);
+					font-family: "나눔고딕";
+					text-align: left;
+				}
+				.desc-detail{
+					font-size: 2vh;
+					color : black;
+					font-family: "나눔고딕";
+				}
+				.desc-grid{
+					padding-top: 20px;
+					padding-bottom: 30px;
+					border-bottom: 3px solid rgba(219, 221, 218, 0.76);
+				}
+				.desc-map{
+					height: 30vh;
+				}
+				.desc-img{
+					width: 50px;
+					height: 50px;
+					margin-left: 20px;
+				}
+				figcaption{
+					font-size: 1.8vh;
+					text-align: center;
+					margin-top: 20px;
+					font-weight: bold;
+				}
+				.desc-icon{
+					padding: 0px 35px;
+					margin-bottom: 20px;
+				}
 			</style>
-			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"></div>
-			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="card">
-          <a class="img-card">
-						<div id="estate-map" class="details-map">
-							<iframe class="gmap" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&q=KOREATECH" allowfullscreen></iframe>
-						</div>
-          	<!--하우스 대표 사진 -->
-          </a>
-          <div class="card-content">
-            <h4 class="card-title">
-							주택 설명
-            </h4>
-          	<p>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
-								<p>주택유형&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-home"></i></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
-								<p><strong><?if($row['house_type']==1){echo "공동주택";} else{echo "단독주택";}?></strong></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
-								<p>방&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-bed"></i></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
-								<p><strong><?echo $row['number_of_rooms']?></strong></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
-								<p>화장실&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-child"></i></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
-								<p><strong><?echo $row['number_of_toilet'];?></strong></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
-								<p>운영자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-child"></i></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
-								<p><strong><?if($row['live_master']==1){echo "거주";} else{echo "미거주";}?></strong></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
-								<p>주차공간&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-car"></i></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
-								<p><strong><?if($row['parking']==1){echo "제공";} else{echo "미제공";}?></strong></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
-								<p>애완동물&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-ban"></i></p>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-center font-bold">
-								<p><strong><?if($row['pet']==1){echo "가능";} else{echo "불가능";}?></strong></p>
-							</div>
-            </p>
-						<div class="clearfix"></div>
+			<div class="col-xs-12">
+				<div class="col-xs-12 desc-grid" style="padding-bottom:10px;">
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 desc-icon">
+						<img class="img-responsive desc-img" src="images/icons/house.png" alt="">
+						<figcaption><?if($row['house_type']==1){echo "공동주택";} else{echo "단독주택";}?></figcaption>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 desc-icon">
+						<img class="img-responsive desc-img" src="images/icons/door.png" alt="">
+						<figcaption>방 <?=$row['number_of_rooms']?></figcaption>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 desc-icon">
+						<img class="img-responsive desc-img" src="images/icons/toilet.png" alt="">
+						<figcaption>화장실 <?=$row['number_of_toilet']?></figcaption>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 desc-icon">
+						<img class="img-responsive desc-img" src="images/icons/master.png" alt="" <?if($row['live_master']!=1){echo "style='opacity:0.1'";}?> >
+						<figcaption><?if($row['live_master']==1){echo "주인 거주";} else{echo "주인 미거주";}?></figcaption>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 desc-icon">
+						<img class="img-responsive desc-img" src="images/icons/park.png" alt="" <?if($row['parking']!=1){echo "style='opacity:0.1'";}?> >
+						<figcaption><?if($row['parking']==1){echo "주차 가능";} else{echo "주차 불가능";}?></figcaption>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 desc-icon">
+						<img class="img-responsive desc-img" src="images/icons/pet.png" alt="" <?if($row['pet']!=1){echo "style='opacity:0.1'";}?> >
+						<figcaption><?if($row['pet']==1){echo "PET 가능";} else{echo "PET 불가능";}?></figcaption>
+					</div>
+				</div>
+				<div class="col-xs-12  desc-grid">
+					<span class="desc-title col-xs-5 col-sm-3 title-default">상세설명</span>
+					<span class="desc-detail col-xs-7 col-sm-9 desc-default"><?=$row['facilities']?></span>
+				</div>
+				<div class="col-xs-12 desc-grid">
+					<span class="desc-title col-xs-5 col-sm-3 title-default">계약조건</span>
+					<span class="desc-detail col-xs-7 col-sm-9 desc-default"><?=$row['condition']?></span>
+				</div>
+				<div class="col-xs-12 desc-grid">
+					<span class="desc-title col-xs-5 col-sm-3 title-default">주소/교통</span>
+					<span class="desc-detail col-xs-7 col-sm-9 desc-default"><?if($row['address_detail']!="없음") echo $row['address_detail'];?> <?=$row['address']?></span>
+					<span class="desc-detail col-xs-7 col-xs-offset-5 col-sm-offset-3 col-sm-9 desc-default"><?=$row['traffic']?></span>
+				</div>
+				<div id="estate-map" class="col-xs-12 desc-map" style="padding:0px; margin-top:20px;">
+					<iframe class="gmap" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCmOeOzyKWTkImd2mysYTVbzJaZYIlsGrI&q=<?= $row['address_detail']." ".$row['address'] ?>" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
 
-          </div>
 
-        </div>
-      </div>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-        <div class="card-content">
-          <h4 class="card-title">
-						주소
-          </h4>
-          <p>
-						<?if($row['address_detail_show']==1){echo $row['address'].$row['address_detail'];} else{echo $row['address'];}?>
-          </p>
-					<div class="clearfix"></div>
-        </div>
-
-				<div class="card-content">
-          <h4 class="card-title">
-						교통
-          </h4>
-          <p>
-						<?=$row['traffic']?>
-          </p>
-					<div class="clearfix"></div>
-        </div>
-
-				<div class="card-content">
-          <h4 class="card-title">
-						주변시설
-          </h4>
-          <p>
-						<?=$row['facilities']?>
-          </p>
-					<div class="clearfix"></div>
-        </div>
-
-				<div class="card-content">
-          <h4 class="card-title">
-						계약조건
-          </h4>
-          <p>
-						<?=$row['condition']?>
-          </p>
-					<div class="clearfix"></div>
-        </div>
-      </div>
-			<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
-
-    </div>
 		<!-- .일반사항 -->
 
 		<!-- 객실 -->
 		<div id="section2" class="container-fluid">
 
 			<style>
+
 			.media-body{
-				padding: 0px 0px 0px 20px;
+				/*padding: 0px 0px 0px 20px;*/
 			}
 			.media-heading{
 				font-family: "나눔고딕";
 				font-size: 18px;
 				font-weight: 600;
-				margin-bottom: 30px;
+				margin-bottom: 10px;
 			}
 			.media-heading-2{
 				font-family: "나눔고딕";
 				font-size: 16px;
-				margin-top: 20px;
+				margin-top: 0px;
 				margin-bottom: 15px;
 				line-height: 20px;
 			}
@@ -458,11 +478,14 @@
 			.offered-sub{
 				border: 1px solid #e5e5e5;
 				width: auto;
-				height: auto;
+				height: 150px;
 				padding: 5px;
 			}
 			.offered-sub img{
-				margin: 10px 15px 10px 50px;
+				margin: 0 auto;
+				width: 40px;
+				height: 40px;
+
 			}
 			</style>
 
@@ -470,15 +493,34 @@
 			<?
 				$query = "select * from house_rooms where house_id='".$target."' order by house_id ASC";
 				$result = mysqli_query($conn, $query);
+				$count = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 				while($row = mysqli_fetch_array($result)){
 			?>
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-2"></div>
-			  <div class="col-xs-12 col-sm-12 col-md-10 col-lg-9">
+			  <div class="col-xs-12">
 			    <table class="table table-hover">
 						<thead>
 	            <tr>
-	              <th class="room_info_title"><? echo $row['person']."인실"; ?></th>
+	              <th class="room_info_title title-default col-xs-4">
+									<?
+									
+									$count[$row['person']]+=1;
+									echo $row['person']."인실"."-".$count[$row['person']]."<br>";
+									$arr = explode(",", $row['master']);
+									$masterResult="( ";
+									if($row['gender']==1) $masterResult.="남성 ";
+									else if($row['gender']==2) $masterResult.="여성 ";
+									else if($row['gender']==3) $masterResult.="혼성 ";
+									else if($row['gender']==4) $masterResult.="커플룸 ";
+
+									if(in_array(2,$arr)) $masterResult.="마스터룸 ";
+									if(in_array(3,$arr)) $masterResult.="커플룸 ";
+									if(in_array(4,$arr)) $masterResult.="거실셰어 ";
+									if(in_array(5,$arr)) $masterResult.="granny flat ";
+									$masterResult.=")";
+									echo $masterResult;
+									?>
+								</th>
 	            </tr>
 	          </thead>
 						<?
@@ -488,32 +530,77 @@
 						?>
 	          <tbody>
 	            <tr>
-	              <td class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
-	              	<div class="media">
-										<img class="img-responsible media-object full-width" src="images/tmpfeatured-offer3.jpg" style="width:250px;">
+	              <td class="col-xs-12 col-sm-12 col-md-5 col-lg-3">
+	              	<div class="media col-xs-12">
+										<?
+                                            $return = array();
+                                            for($i=1;$i<5;$i++){
+                                              $roomimagequery = "select * from house_main_image where email='".$row['room_id']."_".$i."'";
+                                              $roomimageresult = mysqli_query($conn, $roomimagequery);
+                                              if(mysqli_num_rows($roomimageresult)===1){
+                                                $roomimagerow = mysqli_fetch_array($roomimageresult);
+                                                array_push($return, $roomimagerow['img']);
+                                              }
+                                            }
+										?>
+										<img class="img-responsive media-object full-width center-block" src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" style="height:260px;">
 									</div>
 								</td>
-								<td class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+								<td class="col-xs-12 col-sm-12 col-md-7 col-lg-9">
 	                <div class="media-body">
-	                  <h5 class="media-heading-2">
-											요금: <span class="text-success"><strong><?=$row['rent']?>원</strong></span>
-											&nbsp;&nbsp;&nbsp;보증금: <span class="text-success"><strong><?=$row['guarantee']?>원</strong></span>
-											&nbsp;&nbsp;&nbsp;관리비: <span class="text-success"><strong><?=$row['manage']?>원</strong></span>
+	                  <h5 class="media-heading-2 desc-default">
+											요금: <span class="text-success desc-default"><strong><?=$row['rent']?>$</strong></span>
+											&nbsp;&nbsp;&nbsp;보증금: <span class="text-success desc-default"><strong><?=$row['guarantee']?>$</strong></span>
+											&nbsp;&nbsp;&nbsp;관리비: <span class="text-success desc-default"><strong><?=$row['manage']?>$</strong></span>
 										</h5>
-										<h5 class="media-heading-2">
+										<?if($row['rule']==2) echo '<h5 class="media-heading-2 desc-default" style="color:red;"><b>2인 단위 모집</b></h5>'?>
+										<h5 class="media-heading-2 desc-default">
 											<strong>제공물품</strong>
 										</h5>
-										<div class="row offered-sub">
-											<img class="media-object pull-left full-width" src="images/icons/icon_chair.png" style="width: 30px; height: 30px;">
-											<img class="media-object pull-left full-width" src="images/icons/icon_table_1.png" style="width: 30px; height: 30px;">
-											<img class="media-object pull-left full-width" src="images/icons/icon_stand.png" style="width: 30px; height: 30px;">
-											<img class="media-object pull-left full-width" src="images/icons/icon_dressingtable.png" style="width: 30px; height: 30px;">
-											<img class="media-object pull-left full-width" src="images/icons/icon_closet.png" style="width: 30px; height: 30px;">
-											<img class="media-object pull-left full-width" src="images/icons/icon_booktable.png" style="width: 30px; height: 30px;">
-											<img class="media-object pull-left full-width" src="images/icons/icon_coton.png" style="width: 30px; height: 30px;">
-											<img class="media-object pull-left full-width" src="images/icons/icon_blanket.png" style="width: 30px; height: 30px;">
-											<img class="media-object pull-left full-width" src="images/icons/icon_bed.png" style="width: 30px; height: 30px;">
+										<div class="offered-sub">
+											<div class="row col-xs-12 no-padding">
+												<div class="col-xs-2">
+													<img class="media-object full-width" src="images/icons/icon_chair.png">
+													<figcaption style="margin-top:3px;">의자</figcaption>
+												</div>
+												<div class="col-xs-2">
+													<img class="media-object full-width" src="images/icons/icon_table_1.png">
+													<figcaption style="margin-top:3px;">책상</figcaption>
+												</div>
+												<div class="col-xs-2">
+													<img class="media-object full-width" src="images/icons/icon_stand.png">
+													<figcaption style="margin-top:3px;">스탠드</figcaption>
+												</div>
+												<div class="col-xs-2">
+													<img class="media-object full-width" src="images/icons/icon_dressingtable.png">
+													<figcaption style="margin-top:3px;">화장대</figcaption>
+												</div>
+												<div class="col-xs-2">
+													<img class="media-object full-width" src="images/icons/icon_closet.png">
+													<figcaption style="margin-top:3px;">옷장</figcaption>
+												</div>
+												<div class="col-xs-2">
+													<img class="media-object full-width" src="images/icons/icon_booktable.png">
+													<figcaption style="margin-top:3px;">책장</figcaption>
+												</div>
+											</div>
+
+											<div class="row col-xs-12 no-padding">
+												<div class="col-xs-2">
+													<img class="media-object full-width" src="images/icons/icon_coton.png">
+													<figcaption style="margin-top:3px;">커튼</figcaption>
+												</div>
+												<div class="col-xs-2">
+													<img class="media-object full-width" src="images/icons/icon_blanket.png">
+													<figcaption style="margin-top:3px;">이불</figcaption>
+												</div>
+												<div class="col-xs-2">
+													<img class="media-object full-width" src="images/icons/icon_bed.png">
+													<figcaption style="margin-top:3px;">침대</figcaption>
+												</div>
+											</div>
 										</div>
+
 	                </div>
 								</td>
 							</tr>
@@ -521,105 +608,91 @@
 
 						<tfoot>
 	            <tr>
-								<td></td>
-	              <td class="col-xs-6 col-sm-6 col-md-8 col-lg-10" style="padding: 20px 0px 0px 0px;">
+	              <td class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding: 20px 0px 0px 0px;" colspan="2">
 									<div class="media-body">
 									<?
 										$query2 = "select * from house_beds where room_id='".$row['room_id']."' order by bed_id ASC";
 										$result2 = mysqli_query($conn, $query2);
-										$row2 = mysqli_fetch_array($result2);
 									?>
 
 									<style>
 									.btn-request{
-										background-color: white;
+										/*background-color: white;
 										border-radius: 0px;
 										border: 1px solid #656567;
-										color: black;
+										color: black;*/
 									}
-									.nanum-16-bol{
+									.nanum-13-bol{
 										letter-spacing: 2px;
 									}
 
 									</style>
-										<?if($row2['condition']==2){?>
-										<!--  DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
-										<div class="row" style="margin-bottom:20px;">
-											<div class="pull-left">
-												<p class="nanum-16-bol margin-top-10" ><?if($row2['vacant']==null){echo "입주 상시 가능";} else {echo $row2['vacant']. "부터 입주 가능";}?></p>
-											</div>
-											<div class="pull-right">
-												<button class="btn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
-											</div>
-										</div>
 
-										<!--  .DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
-										<?} elseif($row2['condition']==1){?>
-										<!--  DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
-										<div class="row" style="margin-bottom:20px;">
-											<div class="pull-left">
-												<p class="nanum-16-bol" >만실</p>
-											</div>
-											<div class="pull-right">
-												<button class="btn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">대기</button>
-											</div>
-										</div>
-
-										<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
-										<?} elseif($row2['condition']==3){?>
-										<!--  DB 검색 결과를 기준으로 공실이면 공실, 신청버튼 출력 -->
-										<div class="row" style="margin-bottom:20px;">
-											<div class="pull-left">
-												<p class="nanum-16-bol" >공실</p>
-											</div>
-											<div class="pull-right">
-												<button class="btn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
-											</div>
-										</div>
-										<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
-										<?}?>
-
+									<?$i=1?>
 									<?while($row2 = mysqli_fetch_array($result2)){?>
 
 
 									<?if($row2['condition']==2){?>
 										<!--  DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
-										<div class="row" style="margin-bottom:20px;">
-											<div class="pull-left">
-												<p class="nanum-16-bol margin-top-10"><?if($row2['vacant']==null){echo "입주 상시 가능";} else {echo $row2['vacant']. "부터 입주 가능";}?></p>
+										<div class="row col-xs-12 col-lg-6" style="">
+											<div class="pull-left col-xs-12">
+												<p class="nanum-13-bol margin-top-10 desc-default">베드<?=$i?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?if($row2['vacant']==null){echo "입주 상시 가능";} else {echo $row2['vacant']."부터";}?></p>
 											</div>
-											<div class="pull-right">
-												<button class="btn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
+											<div class="pull-right col-xs-12">
+												<div class="col-xs-6 no-space background-black">
+													<p class="nanum-13-bol margin-top-10">공실예정</p>
+												</div>
+												<div class="col-xs-6 background-trans">
+													<p class="nanum-13-bol margin-top-10 btn-request" name="<?=$row2['bed_id']?>">입주신청</p>
+												</div>
+												<!-- <button class="btn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button> -->
 											</div>
 										</div>
 
 										<!--  .DB 검색 결과를 기준으로 입주가능하다면, 입주가능일, 신청버튼 출력 -->
 									<?} elseif($row2['condition']==1){?>
 										<!--  DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
-										<div class="row" style="margin-bottom:20px;">
-											<div class="pull-left">
-												<p class="nanum-16-bol" >만실</p>
+										<div class="row col-xs-12 col-lg-6" style="">
+											<div class="pull-left col-xs-12">
+												<p class="nanum-13-bol margin-top-10 desc-default">베드<?=$i?></p>
 											</div>
-											<div class="pull-right">
-												<button class="bbtn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">대기</button>
+											<div class="pull-right col-xs-12">
+												<div class="col-xs-6 no-space background-black">
+													<p class="nanum-13-bol margin-top-10">만실</p>
+												</div>
+												<div class="col-xs-6 background-trans">
+													<p class="nanum-13-bol margin-top-10 btn-request" name="<?=$row2['bed_id']?>">대기신청</p>
+												</div>
+												<!-- <span class="nanum-13-bol" >만실</span> -->
+												<!-- <button class="btn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">대기</button> -->
 											</div>
 										</div>
 
 										<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
 									<?} elseif($row2['condition']==3){?>
 										<!--  DB 검색 결과를 기준으로 공실이면 공실, 신청버튼 출력 -->
-										<div class="row" style="margin-bottom:20px;">
-											<div class="pull-left">
-												<p class="nanum-16-bol" >공실</p>
+										<div class="row col-xs-12 col-lg-6">
+											<div class="pull-left col-xs-12">
+												<p class="nanum-13-bol margin-top-10 desc-default">베드<?=$i?></p>
 											</div>
-											<div class="pull-right">
-												<button class="bbtn btn-default btn-sm btn-request pull-right" name="<?=$row2['bed_id']?>">신청</button>
+											<div class="pull-right col-xs-12">
+												<div class="col-xs-6 no-space background-black">
+													<p class="nanum-13-bol margin-top-10">공실</p>
+												</div>
+												<div class="col-xs-6 background-trans">
+													<p class="nanum-13-bol margin-top-10 btn-request" name="<?=$row2['bed_id']?>">입주신청</p>
+												</div>
+												<!-- <span class="nanum-13-bol" style="display:inline">공실</span>
+												<button class="btn btn-default btn-sm btn-request" name="<?=$row2['bed_id']?>" style="display:inline">신청</button> -->
 											</div>
 										</div>
 										<!--  .DB 검색 결과를 기준으로 만실이면 만실, 대기버튼 출력 -->
 									<?}?>
 
-									<?}?>
+									<?
+										$i+=1;
+										}
+									?>
 									</div>
 
 								</td>
@@ -627,7 +700,6 @@
 	          </tfoot>
 	        </table>
 	      </div>
-				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 			</div>
 			<?
 				}
@@ -639,39 +711,51 @@
 		<!-- 공용공간 -->
 		<div id="section3" class="container-fluid">
 
-			<div class="col-xs-12 col-sm-12 col-md-1 col-lg-2"></div>
-			<div class="col-xs-12 col-sm-12 col-md-10 col-lg-9">
+			<div class="col-xs-12"></div>
+			<div class="col-xs-12">
 				<table class="table">
 					<thead>
-            <tr>
-              <th class="room_info_title">공용공간</th>
-            </tr>
-          </thead>
+						<tr>
+							<th class="room_info_title title-default col-xs-4">
+								공용공간
+							</th>
+						</tr>
+					</thead>
 
+					<?
+						$query = "select * from house_public where house_id='".$target."'";
+						$result = mysqli_query($conn, $query);
+						$row = mysqli_fetch_array($result);
+
+						$public_img_query = "select * from house_main_image where email='".$row['house_id']."_public'";
+						$public_img_result = mysqli_query($conn, $public_img_query);
+						$public_img_row = mysqli_fetch_array($public_img_result);
+						if(mysqli_num_rows($public_img_result)!=0)
+						    $public_img = "server/".$public_img_row['img'];
+				        else
+				            $public_img = 'server/houses/noimg.jpg';
+
+					?>
 					<tbody>
             <tr>
-              <td class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
-              	<div class="media">
-									<img class="media-object full-width" src="images/tmpfeatured-offer3.jpg" style="width: 300px; height: 300px;">
+              <td class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+								<div class="media col-xs-12">
+
+									<img class="img-responsive media-object full-width" src="<?=$public_img?>" style="height:287px;">
 								</div>
 							</td>
 
-							<?
-							 $query = "select * from house_public where house_id='".$target."'";
-							 $result = mysqli_query($conn, $query);
-							 $row = mysqli_fetch_array($result);
-							?>
-							<td class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+							<td class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                 <div class="media-body">
-									<h4 class="media-heading"><a href="#">소개</a></h4>
-                  <h5 class="media-heading-2">
+									<h4 class="media-heading desc-default"><a href="#">소개</a></h4>
+                  <h5 class="media-heading-2 desc-default desc-default-option-2">
 										<strong><?=$row['description']?></strong>
 									</h5>
-									<h5 class="media-heading-2">
-										<strong>제공서비스 : </strong> <span class="text-info"><strong><?=$row['services']?></strong></span>
+									<h5 class="media-heading-2 desc-default">
+										<strong>제공서비스 : </strong> <span class="text-info desc-default"><strong><?=$row['services']?></strong></span>
 									</h5>
 
-									<h5 class="media-heading-2">
+									<h5 class="media-heading-2 desc-default">
 										<strong>제공물품</strong>
 									</h5>
 									<!--
@@ -691,44 +775,90 @@
 										echo $goods;
 									?>
 									-->
-									<div class="row offered-sub">
-										<!-- 쇼파 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_sofa.png" style="width: 30px; height: 30px;">
-										<!-- 책상 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_table_1.png" style="width: 30px; height: 30px;">
-										<!-- 의자 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_chair.png" style="width: 30px; height: 30px;">
-										<!-- 테이블 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_table_2.png" style="width: 30px; height: 30px;">
-										<!-- 책장 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_booktable.png" style="width: 30px; height: 30px;">
-										<!-- 신발장 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_shoestable.png" style="width: 30px; height: 30px;">
-										<!-- 공유기 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_wifi.png" style="width: 30px; height: 30px;">
-										<!-- 스탠드 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_stand.png" style="width: 30px; height: 30px;">
-										<!-- 텔레비젼 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_tv.png" style="width: 30px; height: 30px;">
-										<!-- 전자렌지 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_microwave.png" style="width: 30px; height: 30px;">
-										<!-- 냉장고 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_refri.png" style="width: 30px; height: 30px;">
-										<!-- 압력밥솥 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_cooker.png" style="width: 30px; height: 30px;">
-										<!-- 청소기 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_vacuum.png" style="width: 30px; height: 30px;">
-										<!-- 세탁기 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_washer.png" style="width: 30px; height: 30px;">
-										<!-- 에어컨 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_aircon.png" style="width: 30px; height: 30px;">
-										<!-- 다리미 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_iron.png" style="width: 30px; height: 30px;">
-										<!-- 미니오븐 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_minioven.png" style="width: 30px; height: 30px;">
-										<!-- 커피머신 -->
-										<img class="media-object pull-left full-width" src="images/icons/icon_coffeemechine.png" style="width: 30px; height: 30px;">
-									</div>
+
+									<div class="offered-sub" style="height:230px;">
+
+										<div class="row col-xs-12 no-padding">
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_sofa.png">
+												<figcaption style="margin-top:3px;">쇼파</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_table_1.png">
+												<figcaption style="margin-top:3px;">책상</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_chair.png">
+												<figcaption style="margin-top:3px;">의자</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_table_2.png">
+												<figcaption style="margin-top:3px;">테이블</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_booktable.png">
+												<figcaption style="margin-top:3px;">책장</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_shoestable.png">
+												<figcaption style="margin-top:3px;">신발장</figcaption>
+											</div>
+										</div>
+
+										<div class="row col-xs-12 no-padding">
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_wifi.png">
+												<figcaption style="margin-top:3px;">공유기</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_stand.png">
+												<figcaption style="margin-top:3px;">스탠드</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_tv.png">
+												<figcaption style="margin-top:3px;">TV</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_microwave.png">
+												<figcaption style="margin-top:3px;">전자렌지</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_refri.png">
+												<figcaption style="margin-top:3px;">냉장고</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_cooker.png">
+												<figcaption style="margin-top:3px;">압력밥솥</figcaption>
+											</div>
+										</div>
+
+										<div class="row col-xs-12 no-padding">
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_vacuum.png">
+												<figcaption style="margin-top:3px;">청소기</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_washer.png">
+												<figcaption style="margin-top:3px;">세탁기</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_aircon.png">
+												<figcaption style="margin-top:3px;">에어컨</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_iron.png">
+												<figcaption style="margin-top:3px;">다리미</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_minioven.png">
+												<figcaption style="margin-top:3px;">미니오븐</figcaption>
+											</div>
+											<div class="col-xs-2">
+												<img class="media-object full-width" src="images/icons/icon_coffeemechine.png">
+												<figcaption style="margin-top:3px;">커피머신</figcaption>
+											</div>
+										</div>
+
                 </div>
 							</td>
 						</tr>
@@ -762,14 +892,14 @@
 
 		</style>
 		<!-- 평가글 -->
+<!--
 		<div id="section4" class="container-fluid">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
-				<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="margin-bottom:20px;">
+				<div class="col-xs-12" style="margin-bottom:20px;">
 					<table class="table">
 						<thead>
 							<tr>
-								<th class="room_info_title">평가글 총 개</th>
+								<th class="room_info_title desc-default">평가글 총 개</th>
 								<th></th><th></th><th></th><th></th><th></th>
 								<th></th><th></th><th></th><th></th><th></th>
 								<th></th><th></th><th></th><th></th><th></th>
@@ -778,14 +908,13 @@
 								<th></th><th></th><th></th><th></th><th></th>
 								<th></th><th></th><th></th><th></th><th></th>
 								<th></th><th></th><th></th><th></th><th></th>
-								<th class="room_info_title">
+								<th class="room_info_title desc-default">
 									<a href=""><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;더보기</a>
 								</th>
 							</tr>
 						</thead>
 					</table>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 			</div>
 
 			<?
@@ -793,14 +922,13 @@
 			?>
 
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 
-				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 					<div class="col-xs-12">
 
 						<div class="col-sm-12">
 							<div class="col-xs-12 col-sm-4">
-								<img src="images/agent3.jpg" alt="" class="img-responsive img-circle center-block" width="70%" height="80%"/>
+								<img src="images/agent3.jpg" alt="" class="img-responsive center-block" width="70%" height="80%"/>
 							</div>
 							<div class="col-xs-12 col-sm-8">
 								<p class="commect_name">이름</p>
@@ -821,12 +949,12 @@
 					</div>
 				</div>
 
-				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 					<div class="col-xs-12">
 
 						<div class="col-sm-12">
 							<div class="col-xs-12 col-sm-4">
-								<img src="images/agent3.jpg" alt="" class="img-responsive img-circle center-block" width="70%" height="80%"/>
+								<img src="images/agent3.jpg" alt="" class="img-responsive center-block" width="70%" height="80%"/>
 							</div>
 							<div class="col-xs-12 col-sm-8">
 								<p class="commect_name">이름</p>
@@ -847,7 +975,6 @@
 					</div>
 				</div>
 
-				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 			</div>
 			<?
 				}
@@ -857,36 +984,48 @@
 
 
 		</div>
+-->
 		<!-- .평가글 -->
 
 		<!-- 운영자 -->
 		<div id="section5" class="container-fluid">
 
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
-				<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="margin-bottom:20px;">
+				<div class="col-xs-12" style="margin-bottom:20px;">
 					<table class="table">
 						<thead>
 							<tr>
-								<th class="room_info_title">운영자 프로필</th>
+								<th class="room_info_title title-default">운영자 프로필</th>
 							</tr>
 						</thead>
 					</table>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 			</div>
 
-			<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
-			<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+			<div class="col-xs-12">
 
 				<div class="row margin-top-30 margin-bottom-30">
+					<?
+					$query = "select user_id from house_main where house_id='".$_GET['house']."'";
+					$result = mysqli_query($conn, $query);
+					$row=mysqli_fetch_row($result);
+						$query = "select * from user_profile where email='".$row[0]."'";
+						$result = mysqli_query($conn, $query);
+						$row=mysqli_fetch_array($result);
+					?>
 					<div class="col-xs-12 col-sm-3">
-						<img src="images/tmpblog-grid1e.jpg" class="img-responsive img-circle center-block" alt="운영자프로필" width="150" height="150"/>
+						<img src="<?if(mysqli_num_rows($result)==1) { echo $row['img']; } else { echo 'images/tmpblog-grid1e.jpg';} ?>" class="img-responsive center-block" alt="운영자프로필" width="150" height="150"/>
 					</div>
 					<?
 						$query = "select user_id from house_main where house_id='".$_GET['house']."'";
 						$result = mysqli_query($conn, $query);
 						$row=mysqli_fetch_row($result);
+						$query = "select * from user_profile where email='".$row[0]."'";
+						$nameQuery = "select username from users where email='".$row[0]."'";
+						$result = mysqli_query($conn, $query);
+						$nameresult = mysqli_query($conn, $nameQuery);
+						$row=mysqli_fetch_array($result);
+						$namerow=mysqli_fetch_array($nameresult);
 					?>
 					<style>
 					.host_name{
@@ -904,15 +1043,10 @@
 					}
 					</style>
 					<div class="col-xs-12 col-sm-9 margin-top-xs-30">
-						<p class="host_name">
-							<? echo $row[0]; ?>
+						<p class="host_name title-default">
+							<?=$namerow[0]?>
 						</p>
-					<?
-						$query = "select * from user_profile where email='".$row[0]."'";
-						$result = mysqli_query($conn, $query);
-						$row=mysqli_fetch_row($result);
-					?>
-						<p class="host_info">
+						<p class="host_info desc-default">
 							<?
 								if($row[3]!=null){
 									echo $row[3];
@@ -920,16 +1054,17 @@
 								else
 								{
 									echo "하우스 운영자가 아직 프로필을 등록하지 않았습니다. 잠시만 기다려 주세요.";
-									echo "샘플_호주에 10년째 살고 있는 자매가 운영합니다. 저희는 모두 간호사이고요, 서핑같은 액티비티가 취미입니다. 간호사로 일하고 싶은 분들은 적극 도와드리겠습니다~~";
 								}
 							?>
 						</p>
+						<p style="margin:0px;">전화번호: <?=$row['hp']?></p>
+						<p style="margin:0px;">이메일: <?=$row['contactemail']?></p>
+						<p style="margin:0px;">카톡ID: <?=$row['kakao']?></p>
 					</div>
 
 				</div>
 
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 
 		</div>
 		<!-- .운영자 -->
@@ -940,11 +1075,11 @@
 		$(".btn-request").on("click",function(){
 			var loc;
 			if($(".condition-checker").attr("value")==1){
-				if($(this).text()=="신청") loc="request_movein.html?";
+				if($(this).text()=="입주신청") loc="request_movein.html?";
 				else loc="request_wait.html?";
 				loc+= "bed="+$(this).attr("name")+"&house="+"<?=$target?>";
 				// $(location).attr("href",loc);
-				window.open(loc,"popupWindow",'height=900,width=1080');
+				window.open(loc,"popupWindow",'height=900,width=550');
 			}
 			else{
 				swal("에러!","로그인이 필요한 서비스입니다. 로그인 후 다시 시도해주세요.","warning");

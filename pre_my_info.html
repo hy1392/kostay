@@ -1,6 +1,8 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>"
+	include 'server/dbconnect.php';
+	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>";
+	
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -58,9 +60,11 @@
         }
       }
     </style>
+    
 	</head>
 
 	<body>
+	
 		<div class="loader-bg"></div>
 		<div id="wrapper">
 
@@ -127,27 +131,38 @@
 			</header>
 
 
-			<section class="section-light section-top-shadow">
+			<section class="section-light section-top-shadow" style="padding: 50px 0px 10px 0px; margin-bottom:180px;">
 				<div class="container">
 					<div class="row">
 
 						<div class="col-xs-12 col-md-12">
-
 							<form method="POST" action="my_info.html" id="infoForm">
 								<div class="col-xs-12">
-	                <div class="col-sm-12 margin-bottom-30-10">
-	                  <h4 class="title-negative-margin" style="display:inline"><i class="fa fa-exclamation"></i>&nbsp;&nbsp;&nbsp;가입자 확인을 위해 비밀번호를 다시 입력해 주세요
-										</h4>
-	                  <div class="title-separator-primary margin-top-15 margin-bottom-30"></div>
-	                  <input name="vpwd" type="password" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="비밀번호:">
-	                </div>
 	                <div class="col-xs-12">
-	                  <a href="#" onclick="document.getElementById('infoForm').submit()" class="button-secondary button-shadow xs-100 pull-right">
-	                    <span>확인</span>
-	                    <div class="button-triangle"></div>
-	                    <div class="button-triangle2"></div>
-	                    <div class="button-icon"><i class="fa fa-search"></i></div>
-	                  </a>
+
+										<div class="col-xs-12">
+											<img src="images/naro_a_basic.png" class="img-responsive center-block" width="200" height="250">
+										</div>
+
+										<div class="col-xs-12" style="text-align:center; margin-bottom:60px;">
+											<h4 class="title-negative-margin" style="display:inline; font-size:3.5vh;">
+												<strong>가입자 확인을 위해 비밀번호를 다시 입력해 주세요.</strong>
+											</h4>
+										</div>
+
+										<div class="col-xs-12" style="margin-bottom:60px;">
+	                  	<input name="vpwd" type="password" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="비밀번호:">
+										</div>
+
+										<div class="col-xs-12">
+		                  <a href="#" onclick="document.getElementById('infoForm').submit()" class="button-secondary button-shadow xs-100 pull-right">
+		                    <span>확인</span>
+		                    <div class="button-triangle"></div>
+		                    <div class="button-triangle2"></div>
+		                    <div class="button-icon"><i class="fa fa-search"></i></div>
+		                  </a>
+		                </div>
+
 	                </div>
 								</div>
 							</form>
@@ -156,11 +171,13 @@
 						</div>
 					</div>
 				</div>
+				
+				
 			</section>
 
 			<!--small footer-->
 			<?include("config/footer.html")?>
-			
+
 		</div>
 
 		<!-- Move to top button -->
@@ -192,7 +209,39 @@
 		<!-- template scripts -->
 		<script type="text/javascript" src="mail/validate.js"></script>
 		<script type="text/javascript" src="js/apartment.js"></script>
-
+		
+        <script>
+        var st = '<div class="container">\
+					<div class="row">\
+						<div class="col-xs-12 col-md-12">\
+							<form method="POST" action="my_info.html" id="infoForm">\
+								<div class="col-xs-12">\
+                                    <div class="col-xs-12">\
+                                        <div class="col-xs-12">\
+                                            <img src="images/naro_a_basic.png" class="img-responsive center-block" width="200" height="250">\
+                                        </div>\
+                                        <div class="col-xs-12" style="text-align:center; margin-bottom:60px;">\
+                                            <h4 class="title-negative-margin" style="display:inline; font-size:3.5vh;">\
+                                                <strong>소셜 로그인을 이용하는 회원님의 정보는 코스테이에 저장되지 않습니다.<br /> 비밀번호는 로그인에 이용하신 해당 사이트에서 변경해 주세요.</strong>\
+                                            </h4>\
+                                        </div>\
+                                    </div>\
+								</div>\
+							</form>\
+						<div class="row margin-top-60"></div>\
+						</div>\
+					</div>\
+				</div>\
+            ';
+		<?
+		    $query = "select * from users where email='".$_SESSION['id']."'";
+            $result = mysqli_query($conn, $query);
+            $row = mysqli_fetch_array($result);
+            if($row['pwd']=="facebookandgoogle"){
+                echo '$(".section-top-shadow").html(st);';
+            }
+		?>
+        </script>
 	</body>
 
 	</html>

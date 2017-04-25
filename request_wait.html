@@ -55,6 +55,12 @@
           margin-bottom: 30px;
         }
       }
+        label{
+                position: relative;
+                top: 12px;
+                left: 20px;
+            font-size: 16px;
+        }
     </style>
 </head>
 
@@ -91,8 +97,7 @@
                 <div class="row">
 									<!--성별-->
                   <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
-                    <h4  class="title-negative-margin" style="display:inline">성별</h4>
-                    <div class="title-separator-primary"></div>
+
                     <select id="gender" name="country1" class="no-margin bootstrap-select" title="성별:">
     									<option value="여자" <?if($row['gender']=="여자") echo "selected='selected'"?>>여자</option>
     									<option value="남자" <?if($row['gender']=="남자") echo "selected='selected'"?>>남자</option>
@@ -101,8 +106,7 @@
 
 									<!--국적-->
                   <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
-                    <h4 class="title-negative-margin" style="display:inline">국적</h4>
-                    <div class="title-separator-primary"></div>
+
                     <select id="nationality" name="country1" class="no-margin bootstrap-select" title="국적:">
     									<option value="한국" <?if($row['nationality']=="한국") echo "selected='selected'"?>>한국</option>
     									<option value="중국" <?if($row['nationality']=="중국") echo "selected='selected'"?>>중국</option>
@@ -115,49 +119,55 @@
                   </div>
 
 									<!--나이-->
-                  <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
-                    <h4 class="title-negative-margin" style="display:inline">나이</h4>
-                    <div class="title-separator-primary"></div>
-                    <input name="name" id="age" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="나이:" value="<?=$row['age']?>">
+                  <div class="col-xs-12 col-sm-6 margin-bottom-30-10" style="display:none">
+                    <input name="name" id="age" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="나이:" value="<?=$row['age']?>">123
                   </div>
 
                   <div class="col-xs-12"></div>
 
 									<!--전화번호-->
-                  <div class="col-xs-12 col-sm-5 margin-bottom-30-10">
-                    <h4 class="title-negative-margin" style="display:inline">전화번호</h4>
-                    <div class="title-separator-primary"></div>
-                    <input name="name" id="hp" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="전화번호:" value="<?=$row['hp']?>">
+                 <div class="col-xs-3 margin-bottom-30-10" style="padding-right:0px">
+                    <select id="country" name="country1" class="no-margin bootstrap-select" title="국가코드">
+                       <?
+                        $tmp = explode(" ",$row['hp']);
+                       ?>
+                        <option value="+82" <? if($tmp[0]=="+82") echo "selected='selected'";?> >한국(+82)</option>
+                        <option value="+61" <? if($tmp[0]=="+61") echo "selected='selected'";?>>호주(+61)</option>
+                    </select>
                   </div>
+                  <div class="col-xs-9 margin-bottom-30-10">
 
+                    <input name="name" id="hp" type="text" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="전화번호:" value="<?if($row['hp']!="") echo $tmp[1];?>">
+                  </div>
+        
+        
 									<!--이메일-->
                   <div class="col-xs-12 col-sm-5 margin-bottom-30-10">
-                    <h4 class="title-negative-margin" style="display:inline">이메일</h4>
-                    <div class="title-separator-primary"></div>
                     <input name="name" type="text" id="contact_email" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="이메일:" value="<?=$_SESSION['id']?>">
                   </div>
 
 									<!--연락처 공개여부-->
+<!--
                   <div class="col-xs-2 margin-bottom-30-10">
                     <h4 class="title-negative-margin" style="display:inline;">연락처 공개</h4>
                     <div class="title-separator-primary"></div>
                     <select id="notify" name="country1" class="no-margin bootstrap-select" title="연락처 공개:">
                       <option value="공개" <?if($row['notify']=="공개") echo "selected='selected'"?>>공개</option>
-                      <option value="공개하지 않음" <?if($row['notify']=="공개하지 않음") echo "selected='selected'"?>>공개하지 않음</option>
+                      <option value="비공개" <?if($row['notify']=="비공개") echo "selected='selected'"?>>비공개</option>
                     </select>
                   </div>
+-->
 
 									<!--입주희망일-->
-                  <div class="col-xs-12 col-sm-6 margin-bottom-30-10">
-                    <h4 class="title-negative-margin" style="display:inline;">입주 희망일</h4>
-                    <div class="title-separator-primary"></div>
+                 <div class="col-xs-3" style="padding-right:0px">
+                     <label for="movein_date">입주희망일</label>
+                 </div>
+                  <div class="col-xs-9 margin-bottom-30-10">
                     <input name="name" id="movein_date" type="date" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="입주 희망일:" value="<?=$row['movein_date']?>">
                   </div>
 
 									<!--인사말-->
                   <div class="col-xs-12 margin-bottom-30-10">
-                    <h4 class="title-negative-margin" style="display:inline">인사말</h4>
-                    <div class="title-separator-primary"></div>
                     <textarea name="name" id="description" type="text" rows="3" class="no-margin bootstrap-select input-short2 main-input required,all" placeholder="인사말:"> <?=$row['description']?></textarea>
                   </div>
 
@@ -169,7 +179,7 @@
                     <a style="cursor:pointer" onclick="window.location.reload(true);" class="btn btn-default xs-100">
       								<span>다시작성</span>
       							</a>
-                    <a style="cursor:pointer" onclick="history.go(-1);" class="btn btn-default xs-100">
+                    <a style="cursor:pointer" onclick="window.close();" class="btn btn-default xs-100">
       								<span>취소</span>
       							</a>
                   </div>
@@ -187,9 +197,73 @@
 			$house_id = $_GET['house'];
 			$bed_id = $_GET['bed'];
 		?>
+		
+		<!-- request modal -->
+        <div class="modal fade apartment-modal" id="request-modal" style="top:10%;" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog" style="width :300px; height:450px;">
+                <div class="modal-content" style="width :300px; height:450px;">
+                    <div class="modal-body" style="width :300px; height:450px; padding:0px; border:4px solid black">
+                        <div style="height:40px;background-color:black"><img src="images/logo/bottom_logo_webpage.png" alt="" style="height:23px; margin:8px; width:auto;"></div>
+                        <div style="margin-top: 50px;">
+                            <p style="font-size:25px;text-align:center;color:black">대기신청 성공</p>
+                            <p style="font-size:55px;text-align:center;color:black;font-weight:bold;margin-top: 35px;">대기번호</p>
+                            <p class="wait-num" style="font-size:55px;text-align:center;color:black;font-weight:bold;margin-top: 55px;"></p>
+                            <p style="font-size:20px;text-align:center;color:black;margin-top: 40px; padding: 0px 30px;">감사합니다.<br/>공실이 생기면 순서대로 연락드리겠습니다.</p>
+                            <input type="button" style="font-size:25px;width:200px;  color:white; background:rgb(55, 151, 221); height:40px; margin:10px 47px; border:none; " value="확인" onclick="window.close();">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        
+        <!-- fail modal -->
+        <div class="modal fade apartment-modal" id="fail-modal" style="top:10%;" data-keyboard="false">
+            <div class="modal-dialog" style="width :300px; height:450px;">
+                <div class="modal-content" style="width :300px; height:450px;">
+                    <div class="modal-body" style="width :300px; height:450px; padding:0px; border:4px solid black">
+                        <div style="height:40px;background-color:black"><img src="images/logo/bottom_logo_webpage.png" alt="" style="height:23px; margin:8px; width:auto;"></div>
+                        <div style="margin-top: 20px;text-align: center;">
+                            <img src="images/naro_b_basic.png" alt="" style="height:150px; width:auto;">
+                            <p style="font-size:55px;text-align:center;color:black;font-weight:bold;margin-top: 35px;">저장실패</p>
+                            <p style="font-size:20px;text-align:center;color:black;margin-top: 40px; padding: 0px 30px;">입력하지 않은 값이 있습니다.</p>
+                            <input type="button" style="font-size:25px;width:200px;  color:white; background:rgb(55, 151, 221); height:40px; margin:10px 47px; border:none; " value="확인" onclick="$('#fail-modal').modal('toggle');">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        
+        <!-- fail modal -->
+        <div class="modal fade apartment-modal" id="fill-modal" style="top:10%;" data-keyboard="false">
+            <div class="modal-dialog" style="width :300px; height:450px;">
+                <div class="modal-content" style="width :300px; height:450px;">
+                    <div class="modal-body" style="width :300px; height:450px; padding:0px; border:4px solid black">
+                        <div style="height:40px;background-color:black"><img src="images/logo/bottom_logo_webpage.png" alt="" style="height:23px; margin:8px; width:auto;"></div>
+                        <div style="margin-top: 20px;text-align: center;">
+                            <img src="images/naro_b_basic.png" alt="" style="height:150px; width:auto;">
+                            <p style="font-size:55px;text-align:center;color:black;font-weight:bold;margin-top: 35px;">요청실패</p>
+                            <p style="font-size:20px;text-align:center;color:black;margin-top: 40px; padding: 0px 30px;">이미 대기신청을 완료한 하우스 입니다.</p>
+                            <input type="button" style="font-size:25px;width:200px;  color:white; background:rgb(55, 151, 221); height:40px; margin:10px 47px; border:none; " value="확인" onclick="$('#fill-modal').modal('toggle');">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+		
 		<script>
 		function save(){
-			if($("#gender").val()==""||$("#nationality").val()==""||$("#age").val()==""||$("#hp").val()==""||$("#contact_email").val()==""||$("#notify").val()==""||$("#skip_visit").val()==""||$("#description").val()=="" ||$("#visit_date").val()=="" ||$("#visit_time").val()=="" ||$("#movein_date").val()=="")swal("에러 발생!","양식의 빈 칸을 모두 채운 후 다시 시도해주세요.","error");
+			if($("#gender").val()==""||$("#nationality").val()==""||$("#hp").val()==""||$("#contact_email").val()==""||$("#description").val()=="" ||$("#movein_date").val()==""){
+                $("#fail-modal").modal("show");
+            }
 			else{
 				$.ajax({
 					url:"server/wait_list.php",
@@ -199,23 +273,20 @@
 						gender : $("#gender").val(),
 						nationality : $("#nationality").val(),
 						age : $("#age").val(),
-						hp : $("#hp").val(),
+						hp : $("#country").val()+" "+$("#hp").val(),
 						contact_email : $("#contact_email").val(),
-						notify : $("#notify").val(),
-						visit_date : $("#visit_date").val(),
-						visit_time : $("#visit_time").val(),
-						skip_visit : $("#skip_visit").val(),
+						notify : "1",
 						movein_date : $("#movein_date").val(),
 						description : $("#description").val(),
 						house_id :  $("#house").attr("name"),
 						bed_id : $("#bed").attr("name")
 					},
 					success: function(data){
-						if(data!="처리도중 에러가 발생하였습니다. 잠시후 다시 시도해주세요."){
-							var loc = "view_detail.html?house=" + $("#house").attr("name");
-								swal({title:"대기신청 성공!",text:data,type:"success"},function(){window.close();});
+						if(data!="이미 대기신청을 완료한 하우스 입니다."){
+                            $(".wait-num").text(data);
+							$("#request-modal").modal("show");
 						 }
-						else swal("에러!",data,"warning");
+						else $("#fill-modal").modal("show");
 
 					},
 					error: function(){
@@ -268,6 +339,7 @@
 	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 	<script src="js/sweetalert.min.js"></script>
 
+
   <!-- google maps initialization -->
   <script type="text/javascript">
     google.maps.event.addDomListener(window, 'load', init);
@@ -304,6 +376,8 @@
       location.href="view_detail.html";
     });
   </script>
+    
+  
 
 </body>
 

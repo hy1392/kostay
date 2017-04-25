@@ -48,6 +48,11 @@
         font-size: 1em;
         vertical-align: middle !important;
       }
+    .td-title{
+        background-color: rgb(55, 151, 221);
+      color: white;
+        text-align: center;
+        }
       .margin-bottom-30{
         margin-bottom: 30px
       }
@@ -57,22 +62,54 @@
       .no-margin{
         margin: 0px !important;
       }
-			.message-btn{
-					width:100px;
-					height:30px;
-					margin: 2px;
-					background-color: #3797dd;
-					color: white;
-					border: none;
-					border-radius: 5%;
-			}
-			.message-btn:hover{
-				opacity: 0.9;
-			}
+        .message-btn, .delete-btn, .movein-btn {
+                width: 100px;
+                height: 30px;
+                margin: 2px;
+                background-color: #3797dd;
+                color: white;
+                border: none;
+                border-radius: 5%;
+            }
+            
+            .message-btn:hover, .delete-btn:hover, .movein-btn:hover {
+                opacity: 0.8;
+            }
     </style>
 	</head>
 
 	<body>
+	      <!-- requset modal -->
+        <div class="modal fade apartment-modal" id="requset-modal" style="top:10%;" data-keyboard="false">
+            <div class="modal-dialog" style="width :300px; height:450px;">
+                <div class="modal-content" style="width :400px; height:450px;">
+                    <div class="modal-body" style="width :400px; height:450px; padding:0px; border:4px solid black">
+                       <div style="height:40px;background-color:black"><img src="images/logo/bottom_logo_webpage.png" alt="" style="height:23px; margin:8px; width:auto;"></div>
+                        <div style="margin-top: 20px;text-align: center;">
+                            <img src="images/naro_b_basic.png" alt="" style="height:190px; width:auto;">
+                        </div>
+                        <div class="col-xs-4" style="padding:0px"><p style="font-size:18px; font-weight:bold;margin-top:10px;margin-left:10px">입주가능 날짜</p></div>
+                        <div class="col-xs-8">
+                            <input name="search_region" id="requset-date" type="date" class="bootstrap-select main-input required,all requset-date"  style="display:inline;" value="">
+                        </div>
+                        <div class="col-xs-4" style="padding:0px"><p style="font-size:18px; font-weight:bold;margin-top:10px;margin-left:10px">입주가능 객실</p></div>
+                        <div class="col-xs-8">
+                           <div class="col-xs-6" style="padding:0px;margin-top:10px">
+                               <input type="radio" class="" id="radio1" name="room"><label for="radio1">대기한 객실</label>
+                           </div>
+                            <div class="col-xs-6" style="padding:0px;margin-top:10px">
+                               <input type="radio" class="" id="radio2" name="room"><label for="radio2">다른 객실</label>
+                           </div>
+                        </div>
+                        <input type="button" class="confirm-requset" name="" style="font-size:25px;width:200px;  color:white; background:rgb(55, 151, 221); height:40px; margin:10px 92px; border:none; " value="입주제안" onclick="">
+                        
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
 		<div class="loader-bg"></div>
 		<div id="wrapper">
 
@@ -168,7 +205,6 @@
                     <th class="">순서</th>
                     <th class="">이름</th>
                     <th class="">성별</th>
-                    <th class="">나이</th>
                     <th class="">국적</th>
                     <th class="">방문희망일</th>
                     <th class="">입주희망일</th>
@@ -184,32 +220,66 @@
 											$query_user = "select * from users where email='".$row['email']."'";
 											$result_user = mysqli_query($conn, $query_user);
 											$row_user = mysqli_fetch_row($result_user);
+											$ridQuery = "select room_id from house_beds where bed_id='".$row['bed_id']."'";
+											$ridResult = mysqli_query($conn, $ridQuery);
+											$ridRow = mysqli_fetch_row($ridResult);
+											$hidQuery = "select person from house_rooms where room_id='".$ridRow[0]."'";
+											$hidResult = mysqli_query($conn, $hidQuery);
+											$hidRow = mysqli_fetch_row($hidResult);
+											$lidQuery = "select * from house_rooms where person='".$hidRow[0]."' and house_id='".$row['house_id']."'";
+											$lidResult = mysqli_query($conn, $lidQuery);
+											$count=0;
+											while($lidRow = mysqli_fetch_row($lidResult)){
+											    $count+=1;
+											    if($lidRow[0]==$ridRow[0]) break;
+											}
 									?>
-	                  <tr class="" onclick="message(this)" value="<?=$row_user[2]?>">
+	                  <tr class="" onclick="message(this, <?=$row['idx']?>)" name="<?=$i?>" value="<?=$row_user[2]?>">
 	                    <td class=""><?=$i?></td>
 	                    <td class=""><?=$row_user[1]?></td>
 	                    <td class=""><?=$row['gender']?></td>
-	                    <td class=""><?=$row['age']?></td>
 	                    <td class=""><?=$row['nationality']?></td>
 	                    <td class=""><?=$row['visit_date']?></td>
 	                    <td class=""><?=$row['movein_date']?></td>
 	                    <td class=""><?=$row['time']?></td>
+	                  </tr>
+
+                     
+                      <tr class="info-<?=$i?> tr-info">
+                          <td colspan="1" class="td-title">호실</td>
+	                      <td colspan="4" class="td-title">자기소개</td>
+	                      <td colspan="2" class="td-title">연락처</td>
+	                  </tr>
+	                  <tr class="info-<?=$i?> info-<?=$i?>-bottom tr-info">
+                          <td style="text-align:center"><?=$hidRow[0]."인실"."-".$count?></td>
+	                      <td colspan="4" style="text-align:left"><?=$row['description']?></td>
+                          <td colspan="2" style="text-align:left"><?=$row['hp']?><br><?=$row['contact_email']?></td>
 	                  </tr>
 									<?$i+=1;}?>
 
 
                 </table>
               </div>
+              
+
+              
+              
 							<script>
-								function message(param){
+								 $(".tr-info").hide();
+								function message(param, idx){
+                                    $(".tr-info").hide();
 									$("#tmp").remove();
+                                    $(".tr-info").hide();
 									var tar = $(param).attr("value");
-									var reply = '<tr id="tmp"><td colspan="8"><div class="row list-offer-text" id="message-box" style="position:relative; border:1px solid rgb(224, 224, 224); padding:10px;x">\
-										<input name="title" id="title" type="text" class="bootstrap-select input-short2 main-input required,all" placeholder="제목:">\
-										<textarea id="content" name="content" class="input-full main-input" rows="5" placeholder="내용:"></textarea>\
-										<input type="button" class="pull-right send message-btn" name="" value="보내기" id="'+tar+'" onclick="javascript:send(this)">\
+                                    var tar2 = "info-"+$(param).attr("name");
+									var reply = '<tr id="tmp"><td colspan="7" style="border:none"><div class="row list-offer-text" id="message-box" style="position:relative; border:1px solid rgb(224, 224, 224); padding:10px;margin:0px;">\
+										<textarea id="content" name="content" class="input-full main-input" rows="5" placeholder="내용:" style="font-size:2vh"></textarea>\
+                                        <input type="button" class="pull-left send delete-btn" name="" value="삭제" id="'+tar+'" onclick="javascript:deletemsg('+idx+')">\
+                                        <input type="button" class="pull-right send message-btn" name="" value="보내기" id="'+tar+'" onclick="javascript:send(this)">\
+                                        <input type="button" class="pull-right send movein-btn" name="" value="입주제안" id="'+tar+'" onclick="javascript:request_movein('+idx+')">\
 									</div></td></tr>';
-									$(param).after(reply);
+									$("."+tar2+"-bottom").after(reply);
+                                    $("."+tar2+"").fadeIn(500);
 									$("#message-box").hide().fadeIn(500);
 								}
 								function send(param){
@@ -219,11 +289,11 @@
 										type:"POST",
 										data:{
 											target : tar,
-											title: $("#title").val(),
+											title: " ",
 											content: $("#content").val()
 										},
 										success: function(data){
-											swal("발송 성공!", "메시지를 성공적으로 전송하였습니다.", "success")
+											swal("발송 성공!", "메시지를 성공적으로 전송하였습니다.", "success");
 											$("#reply-box").remove();
 										},
 										error: function(){
@@ -231,7 +301,91 @@
 										}
 									});
 								}
-							</script>
+                                function deletemsg(idx){
+									$.ajax({
+										url:"server/sendMessage.php",
+										type:"POST",
+										data:{
+											target : idx,
+											condition: "mdelete"
+										},
+										success: function(data){
+											swal({
+                                              title: "삭제 완료!",
+                                              text: "성공적으로 입주 요청을 삭제하였습니다.",
+                                              type: "success",
+                                              confirmButtonColor: "#DD6B55",
+                                              confirmButtonText: "확인",
+                                              closeOnConfirm: false
+                                            },
+                                            function(){
+                                              location.reload();
+                                            });
+										},
+										error: function(){
+											swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+										}
+									});
+								}
+                                function request_movein(param){
+                                    $(".confirm-requset").attr("name",param);
+                                    $("#radio2").removeAttr("checked");
+                                    $("#radio1").removeAttr("checked");
+                                    room=0;
+                                    $("#requset-modal").modal("show");
+                                }
+                                
+                                
+                                var room = 0;
+                                
+                                $("#radio1").on("click",function(){
+                                    room=1;
+                                    $("#radio2").removeAttr("checked");
+                                    $("#radio1").attr("checked","checked");
+                                });
+                                $("#radio2").on("click",function(){
+                                    room=2;
+                                    $("#radio1").removeAttr("checked");
+                                    $("#radio2").attr("checked","checked");
+                                });
+                                
+                                $(".confirm-requset").on("click", function(){
+                                    if((room==1||room==2)&&$("#requset-date").val()!=""){
+                                        $.ajax({
+										url:"server/sendMessage.php",
+										type:"POST",
+										data:{
+											target : $(".confirm-requset").attr("name"),
+                                            date : $("#requset-date").val(),
+											condition: "requset"
+										},
+										success: function(data){
+                                            console.log(data);
+											if(data=="dup"){
+                                                swal("제안 실패!", "이미 입주제안을 보낸 사용자 입니다.", "warning");
+                                            }
+                                            else if(data=="done"){
+                                                swal({
+                                                  title: "제안 완료!",
+                                                  text: "성공적으로 입주제안을 보냈습니다.",
+                                                  type: "success",
+                                                  confirmButtonColor: "#DD6B55",
+                                                  confirmButtonText: "확인",
+                                                  closeOnConfirm: false
+                                                },
+                                                function(){
+                                                  location.reload();
+                                                });
+                                            }
+										},
+										error: function(){
+											swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+										}
+									});
+                                    }
+                                    else swal("제안 실패!", "아직 입력하지 않은 값이 존재합니다.", "warning");
+                                });
+                        </script>
               <div class="col-xs-12">
                 <div class="col-xs-12 col-sm-3 col-sm-offset-6">
                   <a onclick="return false;" class="btn btn-default btn-fit color-white">

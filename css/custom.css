@@ -1,4 +1,19 @@
 /**/
+.main-input{
+/*    font-size:2vh !important;*/
+}
+#navbar ul li a{
+  font-family: "NanumGothic", sans-serif;
+}
+
+.desc-default-option-2{
+  margin: 0px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
 
 .checkbox {
     padding-left: 20px;
@@ -639,17 +654,17 @@
   width: 20%;
 }
 
-#alarm-time, #alarm-km{
+#alarm-time, #alarm-km, #alarm-input{
   padding: 2px 12px;
   margin-top: 0px;
-  width: 80% !important;
+  width: 100% !important;
   height: 23px !important;
   font-size: 12px;
 }
 
-#alarm-state, #alarm-rent-min, #alarm-rent-max, #alarm-timeout, #alarm-regyear{
+#alarm-state, #alarm-rent-min, #alarm-rent-max, #alarm-timeout, #alarm-regyear, #alarm-cityrail-distance, #alarm-input{
   margin-top: 0px;
-  width: 80% !important;
+  width: 100% !important;
   height: 23px !important;
   font-size: 12px;
 }
@@ -666,7 +681,7 @@
   width: 20%;
 }
 
-#alarm-cityrail-name{
+#alarm-cityrail-name, #alarm-cityrail-distance{
   padding: 2px 12px;
   margin-top: 0px;
   width: 80% !important;
@@ -676,7 +691,6 @@
 
 .gender-input{
   float: left;
-  width: 80%;
   height: 23px;
 }
 

@@ -38,8 +38,39 @@
 	<body>
 		<div class="loader-bg"></div>
 		<div id="wrapper">
-
-			<!-- Page header -->
+       
+       <!-- accept modal -->
+        <div class="modal fade apartment-modal" id="accept-modal" style="top:10%;" data-keyboard="false">
+            <div class="modal-dialog" style="width :300px; height:278px;">
+                <div class="modal-content" style="width :300px; height:278px; border:none">
+                    <div class="modal-body" style="width :300px; height:278px; padding:0px;">
+                        <div style="width:100%;height:100px;background-color:rgb(0,176,240);text-align:center;color:white;padding:25px 20px">
+                            <span class="modal-date" style="font-size:18px;"></span>
+                            <span style="font-size:18px;">부터</span>
+                            <span class="modal-room" style="font-size:18px;"></span>
+                            <span style="font-size:18px;">인실</span>
+                            <span class="modal-add" style="font-size:18px;"></span>
+                            <span style="font-size:18px;">호 공실예정 입니다.</span>
+                        </div>
+                        <div style="width:100%;height:64px;;text-align:center;color:black;font-size:18px; font-weight:bold">
+                            <p style="margin:0px;padding-top:20px">입주하실래요?</p>
+                        </div>
+                        <div style="width:100%;height:64px;;text-align:center;color:black;font-size:18px; font-weight:bold">
+                            <div class="col-xs-6 accept-yes" style="padding-top:20px; height:64px; border:1px solid rgb(0,176,240); cursor:pointer">예</div>
+                            <div class="col-xs-6 accept-no" style="padding-top:20px; height:64px;border:1px solid rgb(0,176,240);cursor:pointer">아니오</div>
+                        </div>
+                        <div style="width:100%;height:50px;;text-align:center;color:black;text-align:left;font-size:12px;">
+                            <p style="margin:0px; padding:8px 5px;line-height:1.3em">해당주택의 임대료, 입주조건 등은 다시 한 번 확인해 주세요.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+       
+        <!-- Page header -->
 			<header>
 				<div class="top-bar-wrapper">
 					<div class="container top-bar">
@@ -143,9 +174,19 @@
 									$query8 = "select * from house_beds where bed_id='".$row['bed_id']."'";
 									$result8 = mysqli_query($conn, $query8);
 									$row8 = mysqli_fetch_array($result8);
+									
+									$return = array();
+                                    for($i=1;$i<9;$i++){
+                                      $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                      $imageresult = mysqli_query($conn, $imagequery);
+                                      if(mysqli_num_rows($imageresult)===1){
+                                        $imagerow = mysqli_fetch_array($imageresult);
+                                        array_push($return, $imagerow['img']);
+                                      }
+                                    }
 								?>
-								<div class="col-xs-12 col-sm-6 col-lg-4 grid-offer-col" onclick="location.href='view_detail.html?house=<?=$row3[1]?>';">
-									<div class="grid-offer">
+								<div class="col-xs-12 col-sm-6 col-lg-4 grid-offer-col" >
+									<div class="grid-offer" onclick="location.href='view_detail.html?house=<?=$row3[1]?>';">
 										<div>
 
 											<?if($row8['condition']=="1"){?>
@@ -157,7 +198,7 @@
 											<?}?>
 
 											<div class="grid-offer-photo">
-												<img src="images/grid-offer1.jpg" alt="" />
+												<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" alt="" style="height:140px"/>
 												<div class="type-container">
 													<div class="transaction-type"><?=$position+1?>번째</div>
 												</div>
@@ -176,7 +217,7 @@
 												</div>
 												<div class="clearfix"></div>
 											</div>
-											<div class="grid-offer-params">
+											<div class="grid-offer-params" style="display:block">
 												<div class="grid-rooms" style="font-size:14px; width:100%; text-align:center; padding:2px 0px 2px 0px;">
 													<?if($row5[0]!=null){?>
 													<!-- 방이 입주가능이면... -->
@@ -191,11 +232,93 @@
 											</div>
 										</div>
 									</div>
+									<?
+									    $newQuery = "select * from request_movein_list where email='".$_SESSION['id']."' and bed_id='".$row['bed_id']."'";
+									    $newResult = mysqli_query($conn, $newQuery);
+									    if(mysqli_num_rows($newResult)===1){
+									    $newRow = mysqli_fetch_array($newResult);
+									    $roomidQuery = "select * from house_beds where bed_id='".$row['bed_id']."'";
+                                        $roomidResult = mysqli_query($conn, $roomidQuery);
+                                        $roomidRow = mysqli_fetch_array($roomidResult);
+                                        $personQuery = "select * from house_rooms where room_id='".$roomidRow['room_id']."'";
+                                        $personResult = mysqli_query($conn, $personQuery);
+                                        $personRow = mysqli_fetch_array($personResult);
+                                        $add = explode($roomidRow['room_id']."_",$row['bed_id']);
+									?>
+                                            <div style="background-color:#3b5998; color:white;font-size:17px;font-weight:bold;text-align:center;display:block; clear:both;cursor:pointer; position:relative; top:-1px" onclick="javascript:accept(<?=$newRow['idx']?>,'<?=$newRow['date']?>',<?=$personRow['person']?>,<?=$add[1]?>)">
+                                                <p style="padding:9px 0px;margin:0px">입주제안 도착</p>
+                                            </div>
+                                    <?
+                                        }
+                                    ?>
 								</div>
 								<?}?>
 
 								</div>
 						</div>
+						
+                        
+                        <script>
+                            function accept(idx,param, param2, param3){
+                                $(".modal-date").text(param);
+                                $(".modal-room").text(param2);
+                                $(".modal-add").text(param3);
+                                $(".accept-yes").attr("value",idx);
+                                $("#accept-modal").modal("show");
+                            }
+                            $(".accept-yes").on("click",function(){
+                                $.ajax({
+										url:"server/sendMessage.php",
+										type:"POST",
+										data:{
+											target : $(".accept-yes").attr("value"),
+											condition: "accept"
+										},
+										success: function(data){
+											swal({
+                                              title: "전달 성공!",
+                                              text: "감사합니다! 운영자에게 입주의사를 전달하였습니다. 연락을 기다려주세요!",
+                                              type: "success",
+                                              confirmButtonColor: "#DD6B55",
+                                              confirmButtonText: "확인",
+                                              closeOnConfirm: false
+                                            },
+                                            function(){
+                                              location.reload();
+                                            });
+										},
+										error: function(){
+											swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+										}
+									});
+                            });
+                            $(".accept-no").on("click",function(){
+                                $.ajax({
+										url:"server/sendMessage.php",
+										type:"POST",
+										data:{
+											target : $(".accept-yes").attr("value"),
+											condition: "decline"
+										},
+										success: function(data){
+											swal({
+                                              title: "전달 성공!",
+                                              text: "감사합니다! 전달되었습니다.",
+                                              type: "success",
+                                              confirmButtonColor: "#DD6B55",
+                                              confirmButtonText: "확인",
+                                              closeOnConfirm: false
+                                            },
+                                            function(){
+                                              location.reload();
+                                            });
+										},
+										error: function(){
+											swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
+										}
+									});
+                            });
+                        </script>
 
 						<div class="col-xs-12 col-md-3 col-md-pull-9"  style="padding-left:5px;">
 							<div class="sidebar-left">
@@ -204,7 +327,15 @@
 
 								<div class="profile-info margin-top-30">
 									<div class="profile-info-title negative-margin pull-left">
-										<img src="images/comment-photo2.jpg" alt="" class="img-responsible img-circle pull-left" />
+										<?
+                                            $profileQuery = "select * from user_profile where email='".$_SESSION['id']."'";
+                                            $profileResult = mysqli_query($conn, $profileQuery);
+                                            if(mysqli_num_rows($profileResult)==1){
+                                                $profileRow = mysqli_fetch_array($profileResult);
+                                                echo '<img src="'.$profileRow['img'].'" alt="" class="img-responsible pull-left" style="height:83px"/>';
+                                            }
+                                            else echo '<img src="images/comment-photo2.jpg" alt="" class="img-responsible pull-left" style="height:83px"/>';
+                                        ?>
 									</div>
 									<div class="profile-info-text pull-left">
 										<p class="subtitle-margin">
@@ -219,44 +350,49 @@
 								</div>
 
 								<div class="profile-info margin-top-30" style="padding:0px;">
-									<div class="profile-info-title negative-margin">추천 하우스</div>
+									<div class="profile-info-title negative-margin">새로 등록된 하우스</div>
 								</div>
 
-								<div class="sidebar-featured-cont margin-top-0">
-									<div class="sidebar-featured">
-										<a class="sidebar-featured-image" href="#">
-											<img src="images/sidebar-featured1.jpg" alt="" />
-											<div class="sidebar-featured-type">
-												<div class="sidebar-featured-estate" style="width:30px;">단독</div><!-- 주택유형 -->
-											</div>
-										</a>
-										<div class="sidebar-featured-title"><a href="#">주소</a></div><!--주소 -->
-										<div class="sidebar-featured-price">가격</div><!-- 가격 -->
-										<div class="clearfix"></div>
-									</div>
-									<div class="sidebar-featured">
-										<a class="sidebar-featured-image" href="#">
-											<img src="images/sidebar-featured2.jpg" alt="" />
-											<div class="sidebar-featured-type">
-												<div class="sidebar-featured-estate" style="width:30px;">단독</div><!-- 주택유형 -->
-											</div>
-										</a>
-										<div class="sidebar-featured-title"><a href="#">주소</a></div><!--주소 -->
-										<div class="sidebar-featured-price">가격</div><!-- 가격 -->
-										<div class="clearfix"></div>
-									</div>
-									<div class="sidebar-featured">
-										<a class="sidebar-featured-image" href="#">
-											<img src="images/sidebar-featured3.jpg" alt="" />
-											<div class="sidebar-featured-type">
-												<div class="sidebar-featured-estate" style="width:30px;">단독</div><!-- 주택유형 -->
-											</div>
-										</a>
-										<div class="sidebar-featured-title"><a href="#">주소</a></div><!--주소 -->
-										<div class="sidebar-featured-price">가격</div><!-- 가격 -->
-										<div class="clearfix"></div>
-									</div>
-								</div>
+								<?
+									 include 'server/dbconnect.php';
+									 $query = "select * from house_main order by register_time desc limit 6,3";
+									 $result = mysqli_query($conn, $query);
+									 $cnt= 0 ;
+									 $index = 0;
+									 while($row = mysqli_fetch_array($result)){
+								?>
+									<div class="sidebar-featured-cont margin-top-0">
+										<div class="sidebar-featured">
+											<a class="sidebar-featured-image" href="#">
+												<?
+													$return = array();
+                                                        for($i=1;$i<9;$i++){
+                                                          $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                                          $imageresult = mysqli_query($conn, $imagequery);
+                                                          if(mysqli_num_rows($imageresult)===1){
+                                                            $imagerow = mysqli_fetch_array($imageresult);
+                                                            array_push($return, $imagerow['img']);
+                                                          }
+                                                        }
+												?>
+												<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" alt="" height="80"/>
+
+												<div class="sidebar-featured-type">
+													<div class="sidebar-featured-estate" style="width:30px;">NEW</div>
+													<!-- 주택유형 -->
+												</div>
+											</a>
+											<div class="sidebar-featured-title"><a href="view_detail.html?house=<?=$row['house_id']?>"><?= $row['address'] ?></a></div>
+											<!--주소 -->
+											<div class="clearfix"></div>
+										</div>
+								<?
+
+									}
+								?>
+
+
+								    </div>
 
 							</div>
 						</div>
@@ -267,7 +403,7 @@
 
 			<!--small footer-->
 			<?include("config/footer.html")?>
-			
+
 		</div>
 
 		<!-- Move to top button -->

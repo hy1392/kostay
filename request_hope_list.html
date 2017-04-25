@@ -133,12 +133,22 @@
 									$query = "select * from house_main where house_id='".$row['house_id']."'";
 									$result6 = mysqli_query($conn, $query);
 									$row6 = mysqli_fetch_array($result6);
+									
+									$return = array();
+                                    for($i=1;$i<9;$i++){
+                                      $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                      $imageresult = mysqli_query($conn, $imagequery);
+                                      if(mysqli_num_rows($imageresult)===1){
+                                        $imagerow = mysqli_fetch_array($imageresult);
+                                        array_push($return, $imagerow['img']);
+                                      }
+                                    }
 								?>
 								<div class="col-xs-12 col-sm-6 col-lg-4 grid-offer-col" onclick="location.href='view_detail.html?house=<?=$row3[1]?>';">
 									<div class="grid-offer">
 										<div>
 											<div class="grid-offer-photo">
-												<img src="images/grid-offer1.jpg" alt="" />
+												<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" alt="" />
 												<div class="type-container" style="left:0; top:0; border-radius:2px; height:30px; width:30px; background-color:#ff2929;">
 													<div class="transaction-type" style="padding:5px 8px; border-radius:2px; height:30px; width:30px; background-color:#ff2929;"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
 												</div>
@@ -187,7 +197,15 @@
 
 								<div class="profile-info margin-top-30">
 									<div class="profile-info-title negative-margin pull-left">
-										<img src="images/comment-photo2.jpg" alt="" class="img-responsible img-circle pull-left" />
+										<?
+                                            $profileQuery = "select * from user_profile where email='".$_SESSION['id']."'";
+                                            $profileResult = mysqli_query($conn, $profileQuery);
+                                            if(mysqli_num_rows($profileResult)==1){
+                                                $profileRow = mysqli_fetch_array($profileResult);
+                                                echo '<img src="'.$profileRow['img'].'" alt="" class="img-responsible pull-left" style="height:83px"/>';
+                                            } 
+                                            else echo '<img src="images/comment-photo2.jpg" alt="" class="img-responsible pull-left" style="height:83px"/>';
+                                        ?>
 									</div>
 									<div class="profile-info-text pull-left">
 										<p class="subtitle-margin">
@@ -202,44 +220,49 @@
 								</div>
 
 								<div class="profile-info margin-top-30" style="padding:0px;">
-									<div class="profile-info-title negative-margin">추천 하우스</div>
+									<div class="profile-info-title negative-margin">새로 등록된 하우스</div>
 								</div>
 
-								<div class="sidebar-featured-cont margin-top-0">
-									<div class="sidebar-featured">
-										<a class="sidebar-featured-image" href="#">
-											<img src="images/sidebar-featured1.jpg" alt="" />
-											<div class="sidebar-featured-type">
-												<div class="sidebar-featured-estate" style="width:30px;">단독</div><!-- 주택유형 -->
-											</div>
-										</a>
-										<div class="sidebar-featured-title"><a href="#">주소</a></div><!--주소 -->
-										<div class="sidebar-featured-price">가격</div><!-- 가격 -->
-										<div class="clearfix"></div>
-									</div>
-									<div class="sidebar-featured">
-										<a class="sidebar-featured-image" href="#">
-											<img src="images/sidebar-featured2.jpg" alt="" />
-											<div class="sidebar-featured-type">
-												<div class="sidebar-featured-estate" style="width:30px;">단독</div><!-- 주택유형 -->
-											</div>
-										</a>
-										<div class="sidebar-featured-title"><a href="#">주소</a></div><!--주소 -->
-										<div class="sidebar-featured-price">가격</div><!-- 가격 -->
-										<div class="clearfix"></div>
-									</div>
-									<div class="sidebar-featured">
-										<a class="sidebar-featured-image" href="#">
-											<img src="images/sidebar-featured3.jpg" alt="" />
-											<div class="sidebar-featured-type">
-												<div class="sidebar-featured-estate" style="width:30px;">단독</div><!-- 주택유형 -->
-											</div>
-										</a>
-										<div class="sidebar-featured-title"><a href="#">주소</a></div><!--주소 -->
-										<div class="sidebar-featured-price">가격</div><!-- 가격 -->
-										<div class="clearfix"></div>
-									</div>
-								</div>
+								<?
+									 include 'server/dbconnect.php';
+									 $query = "select * from house_main order by register_time desc limit 6,3";
+									 $result = mysqli_query($conn, $query);
+									 $cnt= 0 ;
+									 $index = 0;
+									 while($row = mysqli_fetch_array($result)){
+								?>
+									<div class="sidebar-featured-cont margin-top-0">
+										<div class="sidebar-featured">
+											<a class="sidebar-featured-image" href="#">
+												<?
+													$return = array();
+                                                        for($i=1;$i<9;$i++){
+                                                          $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                                          $imageresult = mysqli_query($conn, $imagequery);
+                                                          if(mysqli_num_rows($imageresult)===1){
+                                                            $imagerow = mysqli_fetch_array($imageresult);
+                                                            array_push($return, $imagerow['img']);
+                                                          }
+                                                        }
+												?>
+												<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" alt="" height="80"/>
+
+												<div class="sidebar-featured-type">
+													<div class="sidebar-featured-estate" style="width:30px;">NEW</div>
+													<!-- 주택유형 -->
+												</div>
+											</a>
+											<div class="sidebar-featured-title"><a href="view_detail.html?house=<?=$row['house_id']?>"><?= $row['address'] ?></a></div>
+											<!--주소 -->
+											<div class="clearfix"></div>
+										</div>
+								<?
+
+									}
+								?>
+
+
+								    </div>
 
 							</div>
 						</div>

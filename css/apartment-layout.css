@@ -868,7 +868,7 @@ html.ie9 #swiper2 .swiper2-static-cont .slide-buttons {
 }
 
 .adv-search-cont {
-	bottom: 45px;
+	bottom: 50px;
 	position: absolute;
 	z-index: 150;
 	-webkit-transition: all .5s ease-in-out;

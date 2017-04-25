@@ -197,7 +197,18 @@
 												name : $("#param4").val()
 											},
 											success: function(data){
-												swal("수정 완료!", "회원 정보를 성공적으로 갱신하였습니다.", "success")
+                                                swal({
+                                                  title: "수정 완료!",
+                                                  text: "회원 정보를 성공적으로 갱신하였습니다.",
+                                                  type: "success",
+                                                  confirmButtonColor: "#DD6B55",
+                                                  confirmButtonText: "확인",
+                                                  closeOnConfirm: false
+                                                },
+                                                function(){
+                                                  location.reload();
+                                                });
+
 											},
 											error: function(){
 												swal("에러 발생!","잠시후 다시 시도해 주세요.","error");
@@ -220,7 +231,15 @@
 
 								<div class="profile-info margin-top-30">
 									<div class="profile-info-title negative-margin"><?=$_SESSION['id']?></div>
-									<img src="images/comment-photo2.jpg" alt="" class="pull-left" />
+									<?
+                                        $profileQuery = "select * from user_profile where email='".$_SESSION['id']."'";
+                                        $profileResult = mysqli_query($conn, $profileQuery);
+                                        if(mysqli_num_rows($profileResult)==1){
+                                            $profileRow = mysqli_fetch_array($profileResult);
+                                            echo '<img src="'.$profileRow['img'].'" alt="" class="img-responsible pull-left" style="height:83px"/>';
+                                        }
+                                        else echo '<img src="images/comment-photo2.jpg" alt="" class="img-responsible pull-left" style="height:83px"/>';
+                                    ?>
 									<div class="profile-info-text pull-left">
 										<p class="subtitle-margin"><?=$_SESSION['name']?></p>
 										<p class="">42 Estates</p>
@@ -235,7 +254,7 @@
 										if($_SESSION['flag'] == "3"){
 									?>
 											<a href="alarm.html" class="button-alternative button-shadow button-full">
-												<span style="font-size:14px;">알림 바로가기</span>
+												<span style="font-size:14px;">알림</span>
 												<div class="button-triangle"></div>
 												<div class="button-triangle2"></div>
 												<div class="button-icon"><i class="fa fa-bell-o"></i></div>
@@ -245,7 +264,7 @@
 										else{
 									?>
 											<a href="pay-adv.html" class="button-alternative button-shadow button-full">
-												<span style="font-size:14px;">결제/광고 바로가기</span>
+												<span style="font-size:14px;">결제/광고</span>
 												<div class="button-triangle"></div>
 												<div class="button-triangle2"></div>
 												<div class="button-icon"><i class="fa fa-bell-o"></i></div>
@@ -256,60 +275,73 @@
 								</div>
 								<div class="center-button-cont margin-top-15">
 									<a href="my-profile.html" class="button-alternative button-shadow button-full">
-										<span>프로필 바로가기</span>
+										<span>프로필</span>
 										<div class="button-triangle"></div>
 										<div class="button-triangle2"></div>
 										<div class="button-icon"><i class="fa fa-user"></i></div>
 									</a>
 								</div>
 								<div class="center-button-cont margin-top-15">
-									<a href="pre_my_info.html" class="button-alternative button-shadow button-full">
-										<span>가입정보 바로가기</span>
-										<div class="button-triangle"></div>
-										<div class="button-triangle2"></div>
-										<div class="button-icon"><i class="fa fa-users"></i></div>
-									</a>
-								</div>
+										<a href="request_movein_list.html" class="button-alternative button-shadow button-full">
+											<span>입주신청</span>
+											<div class="button-triangle"></div>
+											<div class="button-triangle2"></div>
+											<div class="button-icon"><i class="fa fa-users"></i></div>
+										</a>
+									</div>
+									<div class="center-button-cont margin-top-15">
+										<a href="request_wait_list.html" class="button-alternative button-shadow button-full">
+											<span>대기신청</span>
+											<div class="button-triangle"></div>
+											<div class="button-triangle2"></div>
+											<div class="button-icon"><i class="fa fa-users"></i></div>
+										</a>
+									</div>
 
 								<div class="profile-info margin-top-30" style="padding:0px;">
-									<div class="profile-info-title negative-margin">추천 하우스</div>
+									<div class="profile-info-title negative-margin">새로 등록된 하우스</div>
 								</div>
 
-								<div class="sidebar-featured-cont margin-top-0">
-									<div class="sidebar-featured">
-										<a class="sidebar-featured-image" href="#">
-											<img src="images/sidebar-featured1.jpg" alt="" />
-											<div class="sidebar-featured-type">
-												<div class="sidebar-featured-estate" style="width:30px;">추천</div><!-- 주택유형 -->
-											</div>
-										</a>
-										<div class="sidebar-featured-title"><a href="#">주소</a></div><!--주소 -->
-										<div class="sidebar-featured-price">가격</div><!-- 가격 -->
-										<div class="clearfix"></div>
-									</div>
-									<div class="sidebar-featured">
-										<a class="sidebar-featured-image" href="#">
-											<img src="images/sidebar-featured2.jpg" alt="" />
-											<div class="sidebar-featured-type">
-												<div class="sidebar-featured-estate" style="width:30px;">추천</div><!-- 주택유형 -->
-											</div>
-										</a>
-										<div class="sidebar-featured-title"><a href="#">주소</a></div><!--주소 -->
-										<div class="sidebar-featured-price">가격</div><!-- 가격 -->
-										<div class="clearfix"></div>
-									</div>
-									<div class="sidebar-featured">
-										<a class="sidebar-featured-image" href="#">
-											<img src="images/sidebar-featured3.jpg" alt="" />
-											<div class="sidebar-featured-type">
-												<div class="sidebar-featured-estate" style="width:30px;">추천</div><!-- 주택유형 -->
-											</div>
-										</a>
-										<div class="sidebar-featured-title"><a href="#">주소</a></div><!--주소 -->
-										<div class="sidebar-featured-price">가격</div><!-- 가격 -->
-										<div class="clearfix"></div>
-									</div>
-								</div>
+								<?
+									 include 'server/dbconnect.php';
+									 $query = "select * from house_main order by register_time desc limit 6,8";
+									 $result = mysqli_query($conn, $query);
+									 $cnt= 0 ;
+									 $index = 0;
+									 while($row = mysqli_fetch_array($result)){
+								?>
+									<div class="sidebar-featured-cont margin-top-0">
+										<div class="sidebar-featured">
+											<a class="sidebar-featured-image" href="#">
+												<?
+													$return = array();
+                                                        for($i=1;$i<9;$i++){
+                                                          $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                                          $imageresult = mysqli_query($conn, $imagequery);
+                                                          if(mysqli_num_rows($imageresult)===1){
+                                                            $imagerow = mysqli_fetch_array($imageresult);
+                                                            array_push($return, $imagerow['img']);
+                                                          }
+                                                        }
+												?>
+												<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'server/houses/noimg.jpg';}?>" alt="" height="80"/>
+
+												<div class="sidebar-featured-type">
+													<div class="sidebar-featured-estate" style="width:30px;">NEW</div>
+													<!-- 주택유형 -->
+												</div>
+											</a>
+											<div class="sidebar-featured-title"><a href="view_detail.html?house=<?=$row['house_id']?>"><?= $row['address'] ?></a></div>
+											<!--주소 -->
+											<div class="clearfix"></div>
+										</div>
+								<?
+
+									}
+								?>
+
+
+								    </div>
 							</div>
 						</div>
 
@@ -319,7 +351,7 @@
 
 			<!--small footer-->
 			<?include("config/footer.html")?>
-			
+
 		</div>
 
 		<!-- Move to top button -->

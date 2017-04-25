@@ -13,7 +13,7 @@
     echo $tmp;
   }
   elseif($condition=="register_1"){
-    if($p1=="" ||$p2=="" ||$p3==""||$p4==""||$p5==""||$p6==""||$p7==""||$p8==""||$p9==""||$p10==""||$p11==""||$p12==""||$p13==""||$p14==""){
+    if($p1=="" ||$p2=="" ||$p3==""||$p4==""||$p5==""||$p6==""||$p7==""||$p8==""||$p10==""||$p11==""||$p12==""||$p13==""||$p14==""){
       echo "저장 실패! 아직 입력하지 않은 값이 있는지 확인하여 주세요";
       return;
     }
@@ -81,7 +81,7 @@
 
 
         //파일 업로드 부분
-            for($i=9;$i<13;$i++){
+            for($i=9;$i<10;$i++){
               if(isset($_FILES["upload".$i])){
                 $file=$_FILES["upload".$i];
                 if(0<$file['error']){
@@ -112,7 +112,7 @@
         $query = "select * from house_rooms where room_id='".$room_id."'";
         $result = mysqli_query($conn, $query);
         if(mysqli_num_rows($result)===1){
-          $query = "update `house_rooms` set `house_id`='".$target."', `room_id`='".$room_id."', `person`=".$r1.", `gender`=".$r2.", `master`=".$r3.", `rule`=".$r4.", `rent`=".$r5.", `guarantee`=".$r6.", `manage`=".$r7.", `goods`='".$goods."' where room_id='".$room_id."';";
+          $query = "update `house_rooms` set `house_id`='".$target."', `room_id`='".$room_id."', `person`=".$r1.", `gender`=".$r2.", `master`='".$r3."', `rule`=".$r4.", `rent`=".$r5.", `guarantee`=".$r6.", `manage`=".$r7.", `goods`='".$goods."' where room_id='".$room_id."';";
           $result = mysqli_query($conn, $query);
           $query = "delete from `house_beds` where room_id='".$room_id."';";
           $result = mysqli_query($conn, $query);
@@ -125,7 +125,7 @@
           }
         }
         else{
-          $query = "insert into `house_rooms` (`house_id`, `room_id`, `person`, `gender`, `master`, `rule`, `rent`, `guarantee`, `manage`, `goods`) values ('".$target."', '".$room_id."', ".$r1.", ".$r2.", ".$r3.", ".$r4.", ".$r5.", ".$r6.", ".$r7.", '".$goods."' );";
+          $query = "insert into `house_rooms` (`house_id`, `room_id`, `person`, `gender`, `master`, `rule`, `rent`, `guarantee`, `manage`, `goods`) values ('".$target."', '".$room_id."', ".$r1.", ".$r2.", '".$r3."', ".$r4.", ".$r5.", ".$r6.", ".$r7.", '".$goods."' );";
           $result = mysqli_query($conn, $query);
           $i=0;
           while($i<$r1){
@@ -228,6 +228,14 @@
     unlink($loc['img']);
     $deleteQuery = "delete from house_main_image where email='".$target."_public'";
     $deleteResult = mysqli_query($conn, $deleteQuery);
+
+    $searchQuery = "select * from search where house_id='".$target."'";
+    $searchResult = mysqli_query($conn, $searchQuery);
+    if(mysqli_num_rows($searchResult)==1){
+      $searchDeleteQuery = "delete from search where house_id='".$target."'";
+      $searchDeleteResult = mysqli_query($conn, $searchDeleteQuery);
+    }
+
   }
   elseif($condition=="check_trash"){
     $query = "select number_of_rooms from house_main where house_id='".$target."'";
@@ -266,8 +274,11 @@
     $result = mysqli_query($conn, $query);
     if(mysqli_num_rows($result)===0) $return = $return."3단계 ";
     if($return==""){
+        $initQuery = "select count(*) from house_rooms where house_id='".$target."'";
+        $initResult = mysqli_query($conn, $initQuery);
+        $initRow = mysqli_fetch_array($initResult);
       $current = $current + 1;
-      $query = "update house_main set `number_of_rooms`=".$current." where house_id='".$target."';";
+      $query = "update house_main set `number_of_rooms`=".$initRow[0]." where house_id='".$target."';";
       $result = mysqli_query($conn, $query);
       echo "done";
     }
@@ -320,4 +331,8 @@
       echo null;
     }
   }
+else if($condition == "ad"){
+    $adQuery = "update search set ad='0' where house_id='".$target."'";
+    $adResult = mysqli_query($conn, $adQuery);
+}
 ?>

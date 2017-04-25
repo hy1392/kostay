@@ -1,3 +1,35 @@
+<meta name="google-signin-client_id" content="94612744225-rs24gert4drfsnlld717vo71vtdpkt2g.apps.googleusercontent.com">
+<!--google-->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!--.google-->
+
+<!--facebook-->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '118315695373479',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();
+      
+      FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+<!--.facebook-->
+
+<link rel="stylesheet" type="text/css" href="css/public.css">
 <!-- jQeury -->
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <nav class="navbar main-menu-cont">
@@ -10,15 +42,15 @@
   <span class="icon-bar icon-bar3"></span>
 </button>
       <a href="index.html" title="" class="navbar-brand">
-        <img src="images/logo/kostay-f1.png" alt="Go Home" />
+        <img src="images/logo/logo_webpage.png" alt="Go Home"/><!--style="width:226px; height:40px"-->
       </a>
     </div>
-
+    
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <?if(!isset($_SESSION['id'])){?>
           <li>
-            <a href="search_detail.html?search_region=&search_gender=&search_type=">검색</a>
+            <a href="search_detail.html">검색</a>
           </li>
 
 
@@ -27,7 +59,7 @@
           ?>
 
           <li>
-            <a class="" href="#login-modal" data-toggle="modal">로그인</a>
+            <a href="#login-modal" data-toggle="modal" class="login">로그인</a>
           </li>
 
           <?php
@@ -77,14 +109,14 @@
           ?>
 
             <li>
-              <a href="change_permission.html">운영자</a>
+              <a  href="#login-modal" data-toggle="modal" class="manager">운영자</a>
             </li>
         <?}
          else{?>
 
           <?if($_SESSION['flag']==1 || $_SESSION['flag']==3){?>
           <li>
-            <a href="search_detail.html?search_region=&search_gender=&search_type=">검색</a>
+            <a href="search_detail.html">검색</a>
           </li>
 
           <li class="dropdown">
@@ -182,6 +214,15 @@
 
       </ul>
     </div>
-
+    <script>
+      var isManager = false;
+      $(".manager").on("click", function(){
+        isManager = true;
+      });
+      $(".login").on("click", function(){
+        isManager = false;
+      });
+    </script>
   </div>
 </nav>
+

@@ -8,6 +8,7 @@
     $bedCon  = array();
     $day  = array();
     $bedId = array();
+    $count = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     $query = "select * from house_rooms where house_id='".$house_id."' order by room_id ASC;";
     $result = mysqli_query($conn, $query);
 
@@ -15,9 +16,10 @@
       $query2 = "select * from house_beds where room_id='".$row['room_id']."' order by bed_id ASC;";
       $result2 = mysqli_query($conn, $query2);
       $i=1;
+      $count[$row['person']]+=1;
       while($row2=mysqli_fetch_array($result2)){
         array_push($bedId, $row2['bed_id']);
-        array_push($roomType, $row['person']);
+        array_push($roomType, $row['person']." 인실"."-".$count[$row['person']]);
         if($row['gender']==1) array_push($gender, "남자");
         elseif($row['gender']==2) array_push($gender, "여자");
         elseif($row['gender']==3) array_push($gender, "혼성");
