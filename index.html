@@ -50,55 +50,7 @@
 
 		<!-- Page header -->
 		<header>
-			<div class="top-bar-wrapper">
-				<div class="container top-bar">
-					<div class="row">
-						<div class="col-xs-5 col-sm-8">
-							<div class="top-mail pull-left hidden-xs">
-									<span class="top-icon-circle">
-                                        <i class="fa fa-envelope fa-sm"></i>
-                                    </span>
-									<span class="top-bar-text">info@kostay.net</span>
-								</div>
-								<div class="top-phone pull-left hidden-xxs">
-									<span class="top-icon-circle">
-                                        <i class="fa fa-phone"></i>
-                                    </span>
-									<span class="top-bar-text">(+82)070-8624-4800</span>
-								</div>
-						</div>
-						<div class="col-xs-7 col-sm-4">
-							<div class="top-social-last top-dark pull-right" data-toggle="tooltip" data-placement="bottom" title="Login/Register">
-								<a class="top-icon-circle" href="#login-modal" data-toggle="modal">
-									<i class="fa fa-lock"></i>
-								</a>
-							</div>
-
-							<div class="top-social pull-right">
-								<a class="top-icon-circle" href="https://www.facebook.com/kostayinau/">
-									<img src="images/FB.png" alt="" style="width:14px;height:14px;position:relative;top:-2px">
-								</a>
-							</div>
-							<div class="top-social pull-right">
-                                <a class="top-icon-circle" href="#">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </div>
-							<div class="top-social pull-right">
-								<a class="top-icon-circle" href="http://blog.naver.com/kostayinau">
-									<img src="images/NAVER.png" alt="" style="width:14px;height:14px;position:relative;top:-2px">
-								</a>
-							</div>
-							<div class="top-social pull-right">
-								<a class="top-icon-circle" href="#">
-									<i class="fa fa-skype"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /.top-bar -->
-			</div>
+			
 			<!-- /.Page top-bar-wrapper -->
 
 			<?include("config/mypage_navbar.html");?>
@@ -145,8 +97,8 @@
 											<select name="search_gender" id="search_gender" class="bootstrap-select" title="성별:">
 												<option value="1">남성</option>
 												<option value="2">여성</option>
-												<option value="3">혼성</option>
-												<option value="4">커플용</option>
+												<option value="3">무관</option>
+												<option value="4">커플</option>
 											</select>
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3">
@@ -358,11 +310,17 @@
 							</div>
 
 							<div class="featured-offer-text">
-								<h4 class="featured-offer-title" style="display: block;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?= $row2['house_title'] ?></h4>
-								<p><?= $row2['address'] ?></p>
+								<h4 class="featured-offer-title temp-a" style="display: block;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?= $row2['house_title'] ?></h4>
+								<p class="temp-a"><?= $row2['address'] ?></p>
 							</div>
 
 							<style>
+                            .temp-a{
+                                display: block;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
 							.list-img{
 								width: 40% !important;
 								height: auto;
@@ -390,7 +348,7 @@
 							</div>
 
 							<div class="featured-price">
-								<?=$house_info_row['min_rent']?>
+								<?=$house_info_row['min_rent']?>$
 							</div>
 
 						</div>

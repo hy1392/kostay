@@ -1,5 +1,35 @@
 <?php
   include 'dbconnect.php';
+  require '../PHPMailer/PHPMailerAutoload.php';
+
+//phpmailer
+$mail = new PHPMailer;
+$mail->isSMTP();                                      // Set mailer to use SMTP
+//$mail->Host = 'hp207.hostpapa.com';  // Specify main and backup SMTP servers
+$mail->Host = 'hp207.hostpapa.com';  // Specify main and backup SMTP servers
+$mail->SMTPAuth = true;                               // Enable SMTP authentication
+$mail->Username = 'mail01@kostay.net';                 // SMTP username
+$mail->Password = 'mail01';                           // SMTP password
+                            // Enable TLS encryption, `ssl` also accepted
+$mail->Port = 587;                                    // TCP port to connect to
+$mail->SMTPDebug = 2;
+$mail->addAddress('khgusaac@gmail.com');               // Name is optional
+
+$mail->isHTML(true);                                  // Set email format to HTML
+
+$mail->Subject = 'Here is the subject';
+$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+if(!$mail->send()) {
+    echo 'Message could not be sent.';
+    echo 'Mailer Error: ' . $mail->ErrorInfo;
+} else {
+    echo 'Message has been sent';
+}
+
+//!phpmailer
+
 //  include "../kostayEmail/Sendmail.php";
 //  include "../kostaySms/class.sms.php";
 //  $SMS = new SMS;

@@ -130,61 +130,7 @@
 			<!-- Page header -->
 
 			<header>
-				<div class="top-bar-wrapper">
-					<div class="container top-bar">
-						<div class="row">
-							<div class="col-xs-5 col-sm-8">
-								<div class="top-mail pull-left hidden-xs">
-									<span class="top-icon-circle">
-						<i class="fa fa-envelope fa-sm"></i>
-					</span>
-									<span class="top-bar-text">admin@koreatech.ac.kr</span>
-								</div>
-								<div class="top-phone pull-left hidden-xxs">
-									<span class="top-icon-circle">
-						<i class="fa fa-phone"></i>
-					</span>
-									<span class="top-bar-text">(0)-123-456-789</span>
-								</div>
-								<div class="top-localization pull-left hidden-sm hidden-md hidden-xs">
-									<span class="top-icon-circle pull-left">
-						<i class="fa fa-map-marker"></i>
-					</span>
-									<span class="top-bar-text">KOREA</span>
-								</div>
-							</div>
-							<div class="col-xs-7 col-sm-4">
-								<div class="top-social-last top-dark pull-right" data-toggle="tooltip" data-placement="bottom" title="Login/Register">
-									<a class="top-icon-circle" href="#login-modal" data-toggle="modal">
-										<i class="fa fa-lock"></i>
-									</a>
-								</div>
-
-								<div class="top-social pull-right">
-									<a class="top-icon-circle" href="#">
-										<i class="fa fa-facebook"></i>
-									</a>
-								</div>
-								<div class="top-social pull-right">
-									<a class="top-icon-circle" href="#">
-										<i class="fa fa-twitter"></i>
-									</a>
-								</div>
-								<div class="top-social pull-right">
-									<a class="top-icon-circle" href="#">
-										<i class="fa fa-google-plus"></i>
-									</a>
-								</div>
-								<div class="top-social pull-right">
-									<a class="top-icon-circle" href="#">
-										<i class="fa fa-skype"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /.top-bar -->
-				</div>
+				
 				<!-- /.Page top-bar-wrapper -->
 
 				<?include("config/mypage_navbar.html");?>
@@ -472,7 +418,7 @@
 								  }
 								}
 
-								$query = "select house_id from search ";
+								$query = "select * from search ";
 								$query_count = "select count(*) from search";
 								for($i=0; $i<count($query_house);++$i){
 								  if($i==0) {
@@ -486,10 +432,46 @@
 								  $query .= $query_house[$i];
 								  $query_count .= $query_house[$i];
 								}
-
-								$query .=  " order by register_time DESC";
-								$query_count .=  " order by register_time DESC";
+                                $sort=0;
+								if(isset($_GET['sort'])){
+                                    if($_GET['sort']!=''){
+                                        $sort=$_GET['sort'];
+                                    }
+								}
+                                if($sort==0){
+                                    $query .=  " order by register_time DESC";
+                                    $query_count .=  " order by register_time DESC";
+                                }
+                                else if($sort==1){
+                                    $query .=  " order by register_time DESC";
+                                    $query_count .=  " order by register_time DESC";
+                                }
+                                else if($sort==2){
+                                    $query .=  " order by min_rent ASC";
+                                    $query_count .=  " order by min_rent ASC";
+                                }
+                                else if($sort==3){
+                                    $query .=  " order by min_rent DESC";
+                                    $query_count .=  " order by min_rent DESC";
+                                }
+                                else if($sort==4){
+                                    $query .=  " order by date DESC";
+                                    $query_count .=  " order by date DESC";
+                                }
+								
                                 //echo $query;
+                                
+                                $end = 10;
+                               if(isset($_GET['page'])){
+                                  $start = ($_GET['page']-1)*10+1;
+                                  $now = $_GET['page'];
+                               }
+                               else{
+                                  $now = 1;
+                                   $start = 0;
+                               }
+                               $query.=" limit ".$start.",".$end;
+                                
 								$result = mysqli_query($conn, $query);
 								$index=0;
 								while($row=mysqli_fetch_array($result)){
@@ -606,11 +588,18 @@
 								</div>
 								<div class="col-xs-12 col-lg-6">
 									<div class="order-by-container">
-										<select name="sort" class="bootstrap-select" title="정렬 :">
-										<option>공실만 보기</option>
-										<option>만실 제외</option>
+										<select name="sort" id="sort" class="bootstrap-select" title="정렬 :">
+										<option value="1">최신등록순</option>
+										<option value="2">낮은 가격순</option>
+										<option value="3">높은 가격순</option>
+										<option value="4">빠른 입실일</option>
 									</select>
 									</div>
+									<script>
+                                        $("#sort").on("change", function(){
+                                            location.href='search_detail?sort='+$('#sort').val();
+                                        })
+                                    </script>
 								</div>
 								<div class="col-xs-12">
 									<div class="title-separator-primary"></div>
@@ -740,8 +729,8 @@
 												</tr>
 												<tr>
 													<td>
-														<div style="background-color:rgb(242,242,242); cursor:pointer; width:100%; height:50%;padding: 10px; <? if($vacantRow[0]!=null){echo 'border:1px solid black';}?>">
-															<p style="font-size:1.3em; color:black; width100%; text-align:center; margin-bottom:0px;"><? if(mysqli_num_rows($vacantResult2)>0){echo"&nbsp";}else if($vacantRow[0]!=null){echo $vacantRow[0]."~";}else{echo "&nbsp;";}?></p>
+														<div style="background-color:rgb(242,242,242); cursor:pointer; width:100%; height:100%;padding: 10px; <? if($vacantRow[0]!=null){echo 'border:1px solid black';}?>">
+															<p style="font-size:1.3em; color:black; width100%; text-align:center; margin-bottom:0px;"><?if($row['date']!=null){echo $row['date']."~";}else{echo "&nbsp;";}?></p>
 														</div>
 													</td>
 												</tr>
@@ -798,16 +787,22 @@
 									</script>
 							<div class="offer-pagination margin-top-30">
 								<?
-								$query = "select * from house_main";
+								$query = "select * from search";
 								$result = mysqli_query($conn, $query);
 								$count = mysqli_num_rows($result);
+								$sort=0;
+								if(isset($_GET['sort'])){
+                                    if($_GET['sort']!=''){
+                                        $sort=$_GET['sort'];
+                                    }
+								}
 								if($count>0){
 								?>
-								<a href="#" class="prev"><i class="jfont">&#xe800;</i></a>
-								<?for($i=1;$i<($count/8)+1;++$i){?>
-								<a><?=$i?></a>
+								<a href="<?if($now>1){echo 'search_detail.html?page='.($now-1).'&sort='.$sort;}?>" class="prev"><i class="jfont">&#xe800;</i></a>
+								<?for($i=1;$i<(($count-1)/10)+1;$i++){?>
+								<a href="search_detail.html?page=<?=$i?>&sort=<?=$sort?>"><?=$i?></a>
 								<?}?>
-								<a href="#" class="next"><i class="jfont">&#xe802;</i></a>
+								<a href="<?if($now<($count/10)-1){echo 'search_detail.html?page='.($now+1).'&sort='.$sort;}?>" class="next"><i class="jfont">&#xe802;</i></a>
 								<?}?>
 								<div class="clearfix"></div>
 							</div>
