@@ -191,8 +191,8 @@
 										</script>
 										<div class="col-xs-12 col-sm-6 col-lg-3 region-container">
 											<input name="search_region" id="name" type="text" class="bootstrap-select main-input required,all col-xs-10" placeholder="" style="display:inline">
-											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;" class="col-xs-2 con1">에서</span>
-											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;" class="col-xs-2 con2">까지</span>
+											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;left:10px" class="col-xs-2 con1">에서</span>
+											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;left:10px" class="col-xs-2 con2">까지</span>
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3 rail-selector"  style="margin-bottom:15px">
 											<select name="station" class="bootstrap-select sel-condition" title="노선명:">
@@ -222,7 +222,7 @@
                                         </style>
 										<div class="col-xs-12 col-sm-6 col-lg-3 min-selector"  style="margin-bottom:15px">
 										    <span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;" class="col-xs-5">대중교통으로</span>
-											<select name="min" class="bootstrap-select sel-condition padding-left-0 col-xs-7" title="분:">
+											<select name="min" class="bootstrap-select sel-condition padding-left-0 col-xs-7" title="분:" style="position:relative;left:10px">
 												<option value="1">10분</option>
 												<option value="2">20분</option>
 												<option value="3">30분</option>
@@ -566,12 +566,32 @@
 									<h3>총 0개의 결과가 검색되었습니다.</h3>
 								</div>
 								<div class="col-xs-12 col-lg-6">
-									<div class="order-by-container">
-										<select name="sort" class="bootstrap-select" title="정렬 :">
-										<option>공실만 보기</option>
-										<option>만실 제외</option>
+									<script>
+                                        var tar = "";
+                                        var temp = (location.href).split('?');
+                                        if(temp.length==1) tar=location.href+"?";
+                                        else{
+                                            tar=temp[0]+"?";
+                                            for(var i =1; i<temp.length; i++){
+                                                tar=tar+"&"+temp[i];
+                                            }
+                                        }
+                                    </script>
+                                    <input type="button" class="btn-a" value="공실만 보기" onclick="location.href=tar+'&c=1'" style="float:right;font-size:15px;"/>
+                                    <input type="button" class="btn-a" value="만실 제외"  onclick="location.href=tar+'&c=2'" style="float:right;font-size:15px;"/>
+                                    <div class="order-by-container">
+										<select name="sort" id="sort" class="bootstrap-select" title="정렬 :">
+										<option value="1">최신등록순</option>
+										<option value="2">낮은 가격순</option>
+										<option value="3">높은 가격순</option>
+										<option value="4">빠른 입실일</option>
 									</select>
 									</div>
+									<script>
+                                        $("#sort").on("change", function(){
+                                            location.href='search_detail?sort='+$('#sort').val();
+                                        })
+                                    </script>
 								</div>
 								<div class="col-xs-12">
 									<div class="title-separator-primary"></div>

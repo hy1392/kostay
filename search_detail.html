@@ -39,6 +39,13 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 		<style media="screen">
+		.btn-a{
+			width: 120px;
+			height: 50px;
+			background-color: white;
+			border:1px solid #eee;
+			font-size: 12px;
+		}
 			.adv-search-section {
 				height: 40vh;
 			}
@@ -130,7 +137,7 @@
 			<!-- Page header -->
 
 			<header>
-				
+
 				<!-- /.Page top-bar-wrapper -->
 
 				<?include("config/mypage_navbar.html");?>
@@ -191,8 +198,8 @@
 										</script>
 										<div class="col-xs-12 col-sm-6 col-lg-3 region-container">
 											<input name="search_region" id="name" type="text" class="bootstrap-select main-input required,all col-xs-10" placeholder="" style="display:inline">
-											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;" class="col-xs-2 con1">에서</span>
-											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;" class="col-xs-2 con2">까지</span>
+											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;left:10px" class="col-xs-2 con1">에서</span>
+											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;left:10px" class="col-xs-2 con2">까지</span>
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3 rail-selector"  style="margin-bottom:15px">
 											<select name="station" class="bootstrap-select sel-condition" title="노선명:">
@@ -202,7 +209,7 @@
 													while($railRow = mysqli_fetch_array($railResult)){
 														echo "<option>".$railRow['name']."</option>";
 													}
-												?> 
+												?>
 											</select>
 										</div>
 										<div class="col-xs-12 col-sm-6 col-lg-3 km-selector"  style="margin-bottom:15px">
@@ -217,12 +224,12 @@
 										</div>
 										<style>
                                             .padding-left-0{
-                                                 padding-left:0px;   
+                                                 padding-left:0px;
                                             }
                                         </style>
 										<div class="col-xs-12 col-sm-6 col-lg-3 min-selector"  style="margin-bottom:15px">
 										    <span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;" class="col-xs-5">대중교통으로</span>
-											<select name="min" class="bootstrap-select sel-condition padding-left-0 col-xs-7" title="분:">
+											<select name="min" class="bootstrap-select sel-condition padding-left-0 col-xs-7" title="분:" style="position:relative;left:10px">
 												<option value="1">10분</option>
 												<option value="2">20분</option>
 												<option value="3">30분</option>
@@ -458,9 +465,9 @@
                                     $query .=  " order by date DESC";
                                     $query_count .=  " order by date DESC";
                                 }
-								
+
                                 //echo $query;
-                                
+
                                 $end = 10;
                                if(isset($_GET['page'])){
                                   $start = ($_GET['page']-1)*10+1;
@@ -471,7 +478,7 @@
                                    $start = 0;
                                }
                                $query.=" limit ".$start.",".$end;
-                                
+
 								$result = mysqli_query($conn, $query);
 								$index=0;
 								while($row=mysqli_fetch_array($result)){
@@ -486,15 +493,15 @@
 								  var origin;
 								  var latlng;
                                     var search_id;
-                                    
 
-                                  
+
+
 
 								  geocoder =  new google.maps.Geocoder();
 								  geocoder.geocode({'address':'<?=$origin?>'}, function(results, status) {
 								          if (status == google.maps.GeocoderStatus.OK)
 								          {
-                                              
+
 								              origin = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
 								              var destination = "<?= $second_row['address'] ?>";
 								              var service = new google.maps.DistanceMatrixService();
@@ -509,7 +516,7 @@
 								              },
 								                  callback<?=$index?>
 								              );
-								        
+
 								          }
 								          else{
 								            //alert("Geocode was not successful for the following reason: " + status);
@@ -532,18 +539,18 @@
 								          */
 								          //dist.value = response.rows[0].elements[0].distance.text;
                                             try{
-                                                distance = response.rows[0].elements[0].distance.text.split(' ');            
+                                                distance = response.rows[0].elements[0].distance.text.split(' ');
                                             }catch(exception){
                                                 distance = new Array();
                                                 distance.push(1000);
                                             }
-                                          
-								          
+
+
 								          var origin_condition = parseInt("<?=$origin_condition?>");
                                           var cur_dist = parseInt(distance[0]);
-								          
+
 								          search_id = "<? if(isset($_SESSION['id'])) {echo $_SESSION['id'];} else {echo 'guest';}?>" ;
-                                            
+
 								          if(origin_condition >= cur_dist){
 								            //alert("<?=$second_row['address']?>");
 								            $.ajax({
@@ -557,7 +564,7 @@
 								              error: function(){
 								              }
 								            });
-                                              
+
 								          }
 								        } else {
 								          //alert("ERROR");
@@ -587,7 +594,20 @@
 									<h3>총 <?=$final_count_row[0]?>개의 결과가 검색되었습니다.</h3>
 								</div>
 								<div class="col-xs-12 col-lg-6">
-									<div class="order-by-container">
+									<script>
+                                        var tar = "";
+                                        var temp = (location.href).split('?');
+                                        if(temp.length==1) tar=location.href+"?";
+                                        else{
+                                            tar=temp[0]+"?";
+                                            for(var i =1; i<temp.length; i++){
+                                                tar=tar+"&"+temp[i];
+                                            }
+                                        }
+                                    </script>
+                                    <input type="button" class="btn-a" value="공실만 보기" onclick="location.href=tar+'&c=1'" style="float:right;font-size:15px;"/>
+                                    <input type="button" class="btn-a" value="만실 제외"  onclick="location.href=tar+'&c=2'" style="float:right;font-size:15px;"/>
+                                    <div class="order-by-container">
 										<select name="sort" id="sort" class="bootstrap-select" title="정렬 :">
 										<option value="1">최신등록순</option>
 										<option value="2">낮은 가격순</option>
@@ -601,6 +621,7 @@
                                         })
                                     </script>
 								</div>
+								
 								<div class="col-xs-12">
 									<div class="title-separator-primary"></div>
 								</div>
@@ -608,7 +629,7 @@
 							<div class="row list-offer-row">
 								<div class="col-xs-12">
                                     <div class="items">
-                                        
+
                                         <!-- Item -->
 									<?
 								   $result = mysqli_query($conn, $query);
@@ -645,17 +666,26 @@
 										$titleQuery="select house_title,number_of_rooms, facilities,number_of_toilet from house_main where house_id='".$row['house_id']."'";
 										$titleResult=mysqli_query($conn,$titleQuery);
 										$titleRow = mysqli_fetch_array($titleResult);
-										
 
-                                        $return = array();
-                                        for($i=1;$i<11;$i++){
-                                          $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
-                                          $imageresult = mysqli_query($conn, $imagequery);
-                                          if(mysqli_num_rows($imageresult)===1){
-                                            $imagerow = mysqli_fetch_array($imageresult);
-                                            array_push($return, $imagerow['img']);
-                                          }
-                                        }
+
+                      $return = array();
+                      for($i=1;$i<11;$i++){
+                        $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                        $imageresult = mysqli_query($conn, $imagequery);
+                        if(mysqli_num_rows($imageresult)===1){
+                          $imagerow = mysqli_fetch_array($imageresult);
+                          array_push($return, $imagerow['img']);
+                        }
+                      }
+											if(isset($_GET['c'])){
+												if($_GET['c']==1){
+													if(mysqli_num_rows($vacantResult2)<=0) continue;
+												}
+												else if($_GET['c']==2){
+													if($row4[0]==$row2[0]) continue;
+												}
+											}
+
 									?>
 
 									<div class="row item-row" name="<?=$row['house_id']?>">
@@ -683,7 +713,7 @@
 
 											</div>
 										</div>
-                                        
+
                                         <style>
                                             .desc-default-option-title{
                                                     margin: 0px;
@@ -696,14 +726,14 @@
                                             }
                                             .desc-default-option{
                                                     margin: 0px;
-                                                    display: -webkit-box; 
+                                                    display: -webkit-box;
                                                     -webkit-line-clamp: 3;
-                                                    text-overflow: ellipsis; 
+                                                    text-overflow: ellipsis;
                                                     overflow: hidden;
                                                     -webkit-box-orient: vertical;
                                             }
                                         </style>
-                                        
+
 										<div class="col-sm-12 col-md-5 col-lg-7" style="padding:0px;">
 											<div class="" style="padding-top:5px;">
 												<div class="clearfix"></div>
@@ -757,12 +787,12 @@
 									<!-- .Item -->
                                         <?}?>
                                     </div>
-									
-        
-        
+
+
+
 
 									<script>
-                                        
+
 									var canMove = true;
 										function wish(param){
 											$.ajax({
@@ -817,7 +847,7 @@
 			<?include("config/footer.html")?>
 
 		</div>
-		
+
 		<!-- hope modal -->
         <div class="modal fade apartment-modal" id="hope-modal" style="top:10%;z-index:9999" data-keyboard="false">
             <div class="modal-dialog" style="width :300px; height:450px;";z-index:9999>
@@ -837,7 +867,7 @@
             <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-                                    
+
         <!-- fail modal -->
         <div class="modal fade apartment-modal" id="fill-modal" style="top:10%;" data-keyboard="false">
             <div class="modal-dialog" style="width :300px; height:450px;">
@@ -890,7 +920,7 @@
 	<script type="text/javascript" src="js/apartment.js"></script>
 	<!-- google maps initialization -->
 	<script type="text/javascript">
-         
+
 		google.maps.event.addDomListener(window, 'load', init);
 
 		function init() {

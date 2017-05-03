@@ -68,7 +68,7 @@
                 border: none;
                 border-radius: 5%;
             }
-            
+
             .message-btn:hover, .delete-btn:hover, .movein-btn:hover {
                 opacity: 0.8;
             }
@@ -78,12 +78,12 @@
 	<body>
 		<div class="loader-bg"></div>
 		<div id="wrapper">
-            
+
             	      <!-- requset modal -->
         <div class="modal fade apartment-modal" id="requset-modal" style="top:10%;" data-keyboard="false">
-            <div class="modal-dialog" style="width :300px; height:450px;">
-                <div class="modal-content" style="width :400px; height:450px;">
-                    <div class="modal-body" style="width :400px; height:450px; padding:0px; border:4px solid black">
+            <div class="modal-dialog" style="width :300px; height:500px;">
+                <div class="modal-content" style="width :400px; height:500px;">
+                    <div class="modal-body" style="width :400px; height:500px; padding:0px; border:4px solid black">
                        <div style="height:40px;background-color:black"><img src="images/logo/bottom_logo_webpage.png" alt="" style="height:23px; margin:8px; width:auto;"></div>
                         <div style="margin-top: 20px;text-align: center;">
                             <img src="images/naro_b_basic.png" alt="" style="height:190px; width:auto;">
@@ -100,9 +100,24 @@
                             <div class="col-xs-6" style="padding:0px;margin-top:10px">
                                <input type="radio" class="" id="radio2" name="room"><label for="radio2">다른 객실</label>
                            </div>
+													 <select class="bootstrap-select" name="" style="float:right;margin-right:15px;">
+													 <?
+										 				$query = "select * from house_rooms where house_id='".$_GET['target']."' order by house_id ASC";
+										 				$result = mysqli_query($conn, $query);
+										 				$count = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+										 				while($row = mysqli_fetch_array($result)){
+														?>
+														<option value="">
+														  <?
+										 					$count[$row['person']]+=1;
+															echo $row['person']."인실"."-".$count[$row['person']]."<br>";
+														}
+															?>
+															</option>
+													 </select>
                         </div>
                         <input type="button" class="confirm-requset" name="" style="font-size:25px;width:200px;  color:white; background:rgb(55, 151, 221); height:40px; margin:10px 92px; border:none; " value="입주제안" onclick="">
-                        
+
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -113,7 +128,7 @@
 
 			<!-- Page header -->
 			<header>
-				
+
 				<!-- /.Page top-bar-wrapper -->
 
 				<?include("config/mypage_navbar.html");?>
@@ -175,7 +190,7 @@
                             if($lidRow[0]==$ridRow[0]) break;
                         }
                 ?>
-                      <tr class="" onclick="message(this)" name="<?=$i?>" value="<?=$row_user[2]?>">
+                      <tr class="" onclick="message(this,<?=$row['idx']?>)" name="<?=$i?>" value="<?=$row_user[2]?>">
 	                    <td class=""><?=$i?></td>
 	                    <td class=""><?=$row_user[1]?></td>
 	                    <td class=""><?=$row['gender']?></td>
@@ -184,7 +199,7 @@
 	                    <td class=""><?=$row['time']?></td>
 	                  </tr>
 
-                     
+
                       <tr class="info-<?=$i?> tr-info">
                           <td colspan="1" class="td-title">호실</td>
 	                      <td colspan="4" class="td-title">자기소개</td>
@@ -196,7 +211,7 @@
                           <td colspan="2" style="text-align:left"><?=$row['hp']?><br><?=$row['contact_email']?></td>
 	                  </tr>
 
-	                  
+
                 <?$i+=1;}?>
 
                 </table>
@@ -272,10 +287,10 @@
                                     room=0;
                                     $("#requset-modal").modal("show");
                                 }
-                                
-                                
+
+
                                 var room = 0;
-                                
+
                                 $("#radio1").on("click",function(){
                                     room=1;
                                     $("#radio2").removeAttr("checked");
@@ -286,7 +301,7 @@
                                     $("#radio1").removeAttr("checked");
                                     $("#radio2").attr("checked","checked");
                                 });
-                                
+
                                 $(".confirm-requset").on("click", function(){
                                     if((room==1||room==2)&&$("#requset-date").val()!=""){
                                         $.ajax({
@@ -324,6 +339,7 @@
                                 });
                         </script>
 
+<!--
 							<div class="col-xs-12">
                 <div class="col-xs-12 col-sm-3 col-sm-offset-6">
                   <a onclick="return false;" class="btn btn-default btn-fit color-white">
@@ -336,6 +352,7 @@
                   </a>
                 </div>
               </div>
+-->
 
 						</div>
 
@@ -345,7 +362,7 @@
 
 			<!--small footer-->
 			<?include("config/footer.html")?>
-			
+
 		</div>
 
 		<!-- Move to top button -->

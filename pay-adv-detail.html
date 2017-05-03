@@ -1,0 +1,297 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['flag'])) echo "<script>location.href='index.html'</script>"
+?>
+	<!DOCTYPE html>
+	<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Kostay</title>
+		<meta name="keywords" content="Download, Apartment, Premium, Real Estate, HMTL, Site Template, property, mortgage, CSS" />
+		<meta name="description" content="Download Apartment - Premium Real Estate HMTL Site Template" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+		<!-- Font awesome styles -->
+		<link rel="stylesheet" href="apartment-font/css/font-awesome.min.css">
+		<!-- Custom styles -->
+		<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,500,500italic,700,700italic&amp;subset=latin,latin-ext'>
+		<link rel="stylesheet" type="text/css" href="css/plugins.css">
+		<link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
+		<link rel="stylesheet" type="text/css" href="css/custom.css">
+		<link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
+
+		<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+
+		<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style media="screen">
+      .margin-top-30{
+        margin-top: 30px;
+      }
+      .margin-top-60{
+        margin-top: 60px;
+      }
+      .no-padding{
+        padding: 0px;
+      }
+      .no-padding-left{
+        padding-left : 0px;
+      }
+      .no-padding-right{
+        padding-right: 0px;
+      }
+      .no-margin{
+        margin: 0px;
+      }
+      .width-100{
+        width:100%
+      }
+      tr, td, th{
+        font-size: 1em;
+        text-align: center;
+        height:60px;
+      }
+    </style>
+	</head>
+
+	<body>
+		<div class="loader-bg"></div>
+		<div id="wrapper">
+
+			<!-- Page header -->
+			<header>
+
+				<!-- /.Page top-bar-wrapper -->
+
+				<?include("config/mypage_navbar.html");?>
+			</header>
+
+
+			<section class="section-light section-top-shadow">
+				<div class="container">
+				<div class="row">
+								<div class="col-xs-12">
+									<h1>연회비 결제</h1>
+									<div class="title-separator-primary margin-top-10"></div>
+								</div>
+							</div>
+					<div class="row">
+                        <p style="text-align:center;font-weight:bold;font-size:22px;margin:50px 0px;line-height:1.5em">
+                           유료 회원은 공실률 감소에 도움이 되는 입주대기자 서비스를 받으실 수 있습니다.</br>
+                           회원님의 쉐어하우스가 높은 수익을 얻도록 노력하겠습니다. 
+                        </p>
+						<div class="col-xs-12" style="height:30px; background-color:#3797dd;color:white;font-weight:bold;font-size:15px">
+							결제할 쉐어하우스를 선택해 주세요.
+						</div>
+						
+						<div class="col-xs-12" style="padding: 0px 60px;margin-top:20px">
+						    <div class="col-xs-3 col-xs-offset-6" style="height:30px; background-color:white;color:#3797dd;font-weight:bold;font-size:18px;text-align:center">
+							혜택기간
+                            </div>
+                            <div class="col-xs-3" style="height:30px; background-color:white;color:#3797dd;font-weight:bold;font-size:18px;text-align:center">
+                                새로 결제한 기간
+                            </div>
+						</div>
+						
+						<?
+						 include 'server/dbconnect.php';
+						 $query = "select * from house_main where user_id='".$_SESSION['id']."'";
+						 $result = mysqli_query($conn, $query);
+						 $cnt=0;
+						 while($row = mysqli_fetch_array($result)){
+							 $query = "select sum(person), max(rent), min(rent) from house_rooms where house_id='".$row['house_id']."'";
+							 $result2 = mysqli_query($conn, $query);
+							 $row2 = mysqli_fetch_array($result2);
+							 $roomIdQuery = "select room_id from house_rooms where house_id='".$row['house_id']."';";
+							 $roomIdResult = mysqli_query($conn, $roomIdQuery);
+							 $roomCondition="";
+							 $isFirst=true;
+							 while($roomIdRow = mysqli_fetch_array($roomIdResult)){
+								 if($isFirst){
+									 $isFirst=false;
+									 $toAdd="room_id = '".$roomIdRow[0]."'";
+									 $roomCondition.=$toAdd;
+								 }
+								 else{
+									 $toAdd="or room_id = '".$roomIdRow[0]."'";
+									 $roomCondition.=$toAdd;
+								 }
+							 }
+							$vacantQuery = "select min(vacant) from house_beds where (".$roomCondition.") and `condition`=2;";
+							$vacantResult = mysqli_query($conn, $vacantQuery);
+							$vacantRow = mysqli_fetch_array($vacantResult);
+
+							$return = array();
+                            for($i=1;$i<9;$i++){
+                                $imagequery = "select * from house_main_image where email='".$row['house_id']."_".$i."'";
+                                $imageresult = mysqli_query($conn, $imagequery);
+                                if(mysqli_num_rows($imageresult)===1){
+                                    $imagerow = mysqli_fetch_array($imageresult);
+                                    array_push($return, $imagerow['img']);
+                                }
+                            }
+						?>
+						<div class="col-xs-12">
+							<div class="list-offer">
+
+								<div class="" style="border-width:1px 1px 1px 1px;width:100% !important">
+									<div class="list-offer-text" style="padding-top:12px;">
+										<div class="clearfix"></div>
+
+
+										<div class="col-xs-12">
+											<!-- 체크박스 -->
+													<div class="register-cr-checkbox" style="position:relative;top:70px;left:-30px">
+														<label>
+															<input id="<?='house-check'.$cnt?>" type="checkbox" value="<?=$row['house_id']?>">
+															<span class="cr"><i class="cr-icon fa fa-check"></i></span>
+														</label>
+													</div>
+
+
+											<!-- .체크박스 -->
+											<!-- Item 사진 -->
+											<div class="list-offer-photo height-100 col-xs-2" style="border:none;padding:0px">
+												<img src="<?if(sizeof($return)>0){ echo 'server/'.$return[0]; } else{echo 'images/tmpgrid-offer1.jpg';}?>" alt="" style="height:100px;width:100%" />
+											</div>
+											<!-- .Item 사진 -->
+
+																							<style>
+																							.temp-a{
+																									display: block;
+																									white-space: nowrap;
+																									overflow: hidden;
+																									text-overflow: ellipsis;
+																							}
+																							</style>
+
+											<!-- Item 정보 -->
+											<div class="col-xs-3 margin-top-10" style="padding:0px">
+												<div class="list-offer-h4 col-sm-12 col-md-12">
+													<h4 class="list-offer-title temp-a"><?=$row['house_title']?>
+													</h4>
+												</div>
+											</div>
+                                            
+                                            <?
+                                                $pQuery = "select * from search where house_id='".$row['house_id']."'";
+                                                $pResult = mysqli_query($conn, $pQuery);
+                                                $pRow = mysqli_fetch_array($pResult);
+                                                if($pRow['pay']!=NULL){
+                                                   $today = date("Y-m-d");
+                                                    $tdiff = date_diff(strtotime($today),strtotime($pRow['pay']));
+                                                    echo $tdiff;
+                                                }
+                                            ?>
+											<div class="col-xs-1" style="padding:0px">
+													<input type="button" class="" style="border:1px solid black;height:50px;text-align:center;background-color:orange;color:black;vertical-align:middle;cursot:none;width:100%"
+													value="결재함"
+													/>
+											</div>
+
+											<div class="col-xs-3">
+													<input type="button" name="" value="2017-03-12" class="width-100 height-100" style="border:none; background-color:white; cursor:none">
+											</div>
+
+											<div class="col-xs-3">
+													<input type="button" name="" value="2017-03-12" class="width-100 height-100" style="border:none; background-color:white; cursor:none">
+											</div>
+
+
+
+											<div class="clearfix"></div>
+										</div>
+									</div>
+									<!-- .Item 정보 -->
+									<div class="clearfix"></div>
+										</div>
+
+
+							</div>
+							<!-- .Item -->
+						</div>
+						<?
+							$cnt+=1;
+							}
+						?>
+						<script>
+							$("input[type=checkbox]").on("click",function(){
+								if($(this).attr("checked")=="checked"){
+									$(".sum-price").text($(".sum-price").text()-150);
+									$(this).removeAttr("checked");
+								}
+								else {
+                                    var t = $(".sum-price").text();
+									$(".sum-price").text(Number(t)+150);
+									$(this).attr("checked","checked");
+								}
+							});
+						</script>
+
+						<div class="col-xs-12" style="height:100px; background-color:#3797dd;color:white;font-weight:bold;font-size:20px;padding:38px 0px 38px 180px">
+							결제요금 총액:&nbsp;&nbsp;&nbsp;<span class="sum-price" style="font-size:20px;font-weight:bold"></span>&nbsp;AUD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;결제는 페이팔만 가능합니다.
+						</div>
+					</div>
+					<div class="col-xs-12" style="text-align: center;">
+						<input type="button" name="" value="페이팔로 결제하기" style="width:260px; height:70px; background-color:#3797dd; border:none;color:white;font-size:22px; font-weight:bold;margin-top:100px; position: relative;
+	    top: 50%;">
+					</div>
+
+				</div>
+			</section>
+
+
+			<!--small footer-->
+			<?include("config/footer.html")?>
+
+		</div>
+
+		<!-- Move to top button -->
+
+		<div class="move-top">
+			<div class="big-triangle-second-color"></div>
+			<div class="big-icon-second-color"><i class="jfont fa-lg">&#xe803;</i></div>
+		</div>
+
+		<!-- detail alarm modal -->
+
+		<!-- /.modal -->
+
+		<!--로그인, 회원가입, 비밀번호 찾기-->
+		<?include("config/user.html")?>
+		<!--sweetalert2-->
+		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+		<script src="js/sweetalert.min.js"></script>
+
+		<!-- jQuery  -->
+		<script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jQuery/jquery-ui.min.js"></script>
+
+		<!-- Bootstrap-->
+		<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+
+		<!-- Google Maps -->
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDfDCV5hXiPamCIT8_vwGXuzimLQ9MF76g&amp;sensor=false&amp;libraries=places"></script>
+
+		<!-- plugins script -->
+		<script type="text/javascript" src="js/plugins.js"></script>
+
+		<!-- template scripts -->
+		<script type="text/javascript" src="mail/validate.js"></script>
+		<script type="text/javascript" src="js/apartment.js"></script>
+
+		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+	</body>
+
+	</html>

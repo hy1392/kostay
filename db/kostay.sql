@@ -254,6 +254,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `date` date  COMMENT '입주가능일',
   `register_time` datetime NOT NULL  COMMENT '등록일',
   `ad` varchar(500) NOT NULL DEFAULT '1' COMMENT '광고',
+  `pay` date NULL COMMENT '결제',
   PRIMARY KEY (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='검색용 디비' AUTO_INCREMENT=4 ;
 

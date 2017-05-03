@@ -1,15 +1,16 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 html, body{
-    font-family: "NanumGothic", sans-serif !important;
+    font-family: 'Noto Sans KR', sans-serif !important;
 }
+
 
 .title-default{
     font-size: 3.0vh !important;
-    font-family: "NanumGothic", sans-serif !important;
 }
 
 .desc-default{
     font-size: 2.5vh !important;
-    font-family: "NanumGothic", sans-serif !important;
     line-height: 4vh !important;
 }
 

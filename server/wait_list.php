@@ -2,31 +2,31 @@
   include 'dbconnect.php';
   require '../PHPMailer/PHPMailerAutoload.php';
 
-//phpmailer
-$mail = new PHPMailer;
-$mail->isSMTP();                                      // Set mailer to use SMTP
+////phpmailer
+//$mail = new PHPMailer;
+//$mail->isSMTP();                                      // Set mailer to use SMTP
+////$mail->Host = 'hp207.hostpapa.com';  // Specify main and backup SMTP servers
 //$mail->Host = 'hp207.hostpapa.com';  // Specify main and backup SMTP servers
-$mail->Host = 'hp207.hostpapa.com';  // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'mail01@kostay.net';                 // SMTP username
-$mail->Password = 'mail01';                           // SMTP password
-                            // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 587;                                    // TCP port to connect to
-$mail->SMTPDebug = 2;
-$mail->addAddress('khgusaac@gmail.com');               // Name is optional
-
-$mail->isHTML(true);                                  // Set email format to HTML
-
-$mail->Subject = 'Here is the subject';
-$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-if(!$mail->send()) {
-    echo 'Message could not be sent.';
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-} else {
-    echo 'Message has been sent';
-}
+//$mail->SMTPAuth = true;                               // Enable SMTP authentication
+//$mail->Username = 'mail01@kostay.net';                 // SMTP username
+//$mail->Password = 'mail01';                           // SMTP password
+//                            // Enable TLS encryption, `ssl` also accepted
+//$mail->Port = 587;                                    // TCP port to connect to
+//$mail->SMTPDebug = 2;
+//$mail->addAddress('khgusaac@gmail.com');               // Name is optional
+//
+//$mail->isHTML(true);                                  // Set email format to HTML
+//
+//$mail->Subject = 'Here is the subject';
+//$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+//
+//if(!$mail->send()) {
+//    echo 'Message could not be sent.';
+//    echo 'Mailer Error: ' . $mail->ErrorInfo;
+//} else {
+//    echo 'Message has been sent';
+//}
 
 //!phpmailer
 
@@ -53,7 +53,23 @@ if(!$mail->send()) {
   $smsRow = mysqli_fetch_array($smsResult);
 
   if($condition=="신청"){
-    $initQuery = "select * from user_movein_list where email='".$_SESSION['id']."' and `bed_id`='".$bed_id."'";
+    $roomQuery = "select * from house_beds where `bed_id`='".$bed_id."'";
+    $roomResult=mysqli_query($conn,$roomQuery);
+    $roomRow = mysqli_fetch_array($roomResult);
+    $roomQuery = "select * from house_beds where `room_id`='".$roomRow['room_id']."'";
+    $roomResult=mysqli_query($conn,$roomQuery);
+    $initQuery = "select * from user_movein_list where email='".$_SESSION['id']."' and (";
+      $isFirst=true;
+    while($roomRow = mysqli_fetch_array($roomResult)){
+        if($isFirst){
+            $initQuery.="`bed_id`='".$roomRow['bed_id']."'";
+            $isFirst=false;
+        }
+        else{
+            $initQuery.="or `bed_id`='".$roomRow['bed_id']."'";    
+        }
+    }
+    $initQuery.=")";
     $initResult = mysqli_query($conn, $initQuery);
     if(mysqli_num_rows($initResult)!=0){
         echo "이미 입주신청을 완료한 하우스 입니다.";
@@ -107,7 +123,23 @@ if(!$mail->send()) {
 
   }
   elseif($condition=="대기"){
-    $initQuery = "select * from user_wait_list where email='".$_SESSION['id']."' and `bed_id`='".$bed_id."'";
+      $roomQuery = "select * from house_beds where `bed_id`='".$bed_id."'";
+    $roomResult=mysqli_query($conn,$roomQuery);
+    $roomRow = mysqli_fetch_array($roomResult);
+    $roomQuery = "select * from house_beds where `room_id`='".$roomRow['room_id']."'";
+    $roomResult=mysqli_query($conn,$roomQuery);
+    $initQuery = "select * from user_wait_list where email='".$_SESSION['id']."' and (";
+      $isFirst=true;
+    while($roomRow = mysqli_fetch_array($roomResult)){
+        if($isFirst){
+            $initQuery.="`bed_id`='".$roomRow['bed_id']."'";
+            $isFirst=false;
+        }
+        else{
+            $initQuery.="or `bed_id`='".$roomRow['bed_id']."'";    
+        }
+    }
+    $initQuery.=")";
     $initResult = mysqli_query($conn, $initQuery);
     if(mysqli_num_rows($initResult)!=0){
         echo "이미 대기신청을 완료한 하우스 입니다.";

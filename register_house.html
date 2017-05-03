@@ -332,21 +332,6 @@
                 </div>
 								-->
 
-								<div class="col-xs-12 offer-pagination margin-top-30">
-									<?
-									$query = "select * from house_main where user_id='".$_SESSION['id']."'";
-									$result = mysqli_query($conn, $query);
-									$count = mysqli_num_rows($result);
-									if($count>0){
-									?>
-									<a href="#" class="prev"><i class="jfont">&#xe800;</i></a>
-									<?for($i=1;$i<($count/8)+1;++$i){?>
-									<a><?=$i?></a>
-									<?}?>
-									<a href="#" class="next"><i class="jfont">&#xe802;</i></a>
-									<?}?>
-									<div class="clearfix"></div>
-								</div>
 
 							</div>
 							<div class="row margin-top-60"></div>
