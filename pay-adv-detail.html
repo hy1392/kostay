@@ -26,8 +26,13 @@
 		<link rel="stylesheet" type="text/css" href="css/apartment-layout.css">
 		<link rel="stylesheet" type="text/css" href="css/custom.css">
 		<link id="skin" rel="stylesheet" type="text/css" href="css/apartment-colors-blue.css">
-
+        
 		<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+		
+		<!--iamport-->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+		
 
 
 		<!--[if lt IE 9]>
@@ -88,12 +93,12 @@
 					<div class="row">
                         <p style="text-align:center;font-weight:bold;font-size:22px;margin:50px 0px;line-height:1.5em">
                            유료 회원은 공실률 감소에 도움이 되는 입주대기자 서비스를 받으실 수 있습니다.</br>
-                           회원님의 쉐어하우스가 높은 수익을 얻도록 노력하겠습니다. 
+                           회원님의 쉐어하우스가 높은 수익을 얻도록 노력하겠습니다.
                         </p>
 						<div class="col-xs-12" style="height:30px; background-color:#3797dd;color:white;font-weight:bold;font-size:15px">
 							결제할 쉐어하우스를 선택해 주세요.
 						</div>
-						
+
 						<div class="col-xs-12" style="padding: 0px 60px;margin-top:20px">
 						    <div class="col-xs-3 col-xs-offset-6" style="height:30px; background-color:white;color:#3797dd;font-weight:bold;font-size:18px;text-align:center">
 							혜택기간
@@ -102,7 +107,7 @@
                                 새로 결제한 기간
                             </div>
 						</div>
-						
+
 						<?
 						 include 'server/dbconnect.php';
 						 $query = "select * from house_main where user_id='".$_SESSION['id']."'";
@@ -182,30 +187,55 @@
 													</h4>
 												</div>
 											</div>
-                                            
-                                            <?
-                                                $pQuery = "select * from search where house_id='".$row['house_id']."'";
-                                                $pResult = mysqli_query($conn, $pQuery);
-                                                $pRow = mysqli_fetch_array($pResult);
-                                                if($pRow['pay']!=NULL){
-                                                   $today = date("Y-m-d");
-                                                    $tdiff = date_diff(strtotime($today),strtotime($pRow['pay']));
-                                                    echo $tdiff;
-                                                }
-                                            ?>
-											<div class="col-xs-1" style="padding:0px">
-													<input type="button" class="" style="border:1px solid black;height:50px;text-align:center;background-color:orange;color:black;vertical-align:middle;cursot:none;width:100%"
-													value="결재함"
-													/>
-											</div>
 
-											<div class="col-xs-3">
-													<input type="button" name="" value="2017-03-12" class="width-100 height-100" style="border:none; background-color:white; cursor:none">
-											</div>
+                          <?
+                              $pQuery = "select * from search where house_id='".$row['house_id']."'";
+                              $pResult = mysqli_query($conn, $pQuery);
+                              $pRow = mysqli_fetch_array($pResult);
+                              $today = date("Y-m-d", time());
+                              $modify_day = date("Y-m-d", strtotime($pRow['pay']."+365days"));
+                              $double_modify_day = date("Y-m-d", strtotime($modify_day."+365days"));
+                              if($pRow['pay']!=NULL){
+                                 
+                                  $tdiff = strtotime($today)-strtotime($pRow['pay']);
+                                  $tdiff = $tdiff/86400;
+                                    
+                                    if($tdiff<=365){
+                                    ?>
+                                    <div class="col-xs-1" style="padding:0px">
+                                            <input type="button" class="" style="border:1px solid black;height:50px;text-align:center;background-color:orange;color:black;vertical-align:middle;cursot:none;width:100%"
+                                            value="결재함"
+                                            />
+                                    </div>
+                                    <div class="col-xs-3">
+                                            <input type="button" name="" value="<?=$pRow['pay']?>~<?=$modify_day?>" class="width-100 height-100" style="border:none; background-color:white; cursor:none">
+                                    </div>
 
-											<div class="col-xs-3">
-													<input type="button" name="" value="2017-03-12" class="width-100 height-100" style="border:none; background-color:white; cursor:none">
-											</div>
+                                    <div class="col-xs-3">
+                                            <input type="button" name="" value="<?=$modify_day?>~<?=$double_modify_day?>" class="width-100 height-100 <?='house-check'.$cnt?>" style="border:none; background-color:white; cursor:none;display:none">
+                                    </div>
+                                    <?
+                                }
+
+                                }
+                            else{
+                                ?>
+                                <div class="col-xs-1" style="padding:0px">
+                                        <input type="button" class="" style="border:1px solid black;height:50px;text-align:center;background-color:rgb(223, 204, 179);color:black;vertical-align:middle;cursot:none;width:100%"
+                                        value="결재안함"
+                                        />
+                                </div>
+                                <div class="col-xs-3">
+                                        <input type="button" name="" value="" class="width-100 height-100" style="border:none; background-color:white; cursor:none">
+                                </div>
+
+                                <div class="col-xs-3">
+                                        <input type="button" name="" value="<?=$today?>~<?=$modify_day?>" class="width-100 height-100 <?='house-check'.$cnt?>" style="border:none; background-color:white; cursor:none;display:none">
+                                </div>
+                                <?
+                            }
+                          ?>
+
 
 
 
@@ -226,30 +256,71 @@
 						?>
 						<script>
 							$("input[type=checkbox]").on("click",function(){
+                                var to = '.'+$(this).attr("id")+'';
 								if($(this).attr("checked")=="checked"){
 									$(".sum-price").text($(".sum-price").text()-150);
+                                    $(".amo").attr("value",$(".sum-price").text());
+                                    $(to).fadeOut();
 									$(this).removeAttr("checked");
 								}
 								else {
                                     var t = $(".sum-price").text();
 									$(".sum-price").text(Number(t)+150);
+                                    $(".amo").attr("value",$(".sum-price").text());
+                                    $(to).fadeIn();
 									$(this).attr("checked","checked");
 								}
 							});
 						</script>
-
+                        
 						<div class="col-xs-12" style="height:100px; background-color:#3797dd;color:white;font-weight:bold;font-size:20px;padding:38px 0px 38px 180px">
-							결제요금 총액:&nbsp;&nbsp;&nbsp;<span class="sum-price" style="font-size:20px;font-weight:bold"></span>&nbsp;AUD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;결제는 페이팔만 가능합니다.
+							결제요금 총액:&nbsp;&nbsp;&nbsp;<span class="sum-price" style="font-size:20px;font-weight:bold">0</span>&nbsp;AUD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;결제는 페이팔만 가능합니다.
 						</div>
 					</div>
 					<div class="col-xs-12" style="text-align: center;">
-						<input type="button" name="" value="페이팔로 결제하기" style="width:260px; height:70px; background-color:#3797dd; border:none;color:white;font-size:22px; font-weight:bold;margin-top:100px; position: relative;
+					<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
+						    <input type="hidden" name="item_name" value="kostay">
+						    <input type="hidden" name="quantity" class="qun" value="1">
+						    <input type="hidden" name="amount" class="amo" value="0">
+						    <input type="hidden" name="currency_code" value="AUD">
+						    <input type="hidden" name="shipping" value="0">
+						    <input type="hidden" name="tax" value="0">
+						    <input type="hidden" name="notify_url" value="http://kostay/pay/test.php">
+						    <input type="hidden" name="env" value="www.sandbox">
+						    <input type="hidden" name="cmd" value="_xclick">
+						    <input type="hidden" name="business" value="RG5XAXKV8Q6FN">
+						    <input type="hidden" name="bn" value="JavaScriptButton_buynow">
+						    <input type="submit" class="pay" value="페이팔로 결제하기" style="width:260px; height:70px; background-color:#3797dd; border:none;color:white;font-size:22px; font-weight:bold;margin-top:100px; position: relative;
 	    top: 50%;">
+						</form>
+<!--
+						<input class="pay" type="button" name="" value="페이팔로 결제하기" style="width:260px; height:70px; background-color:#3797dd; border:none;color:white;font-size:22px; font-weight:bold;margin-top:100px; position: relative;
+	    top: 50%;">
+-->
 					</div>
 
 				</div>
 			</section>
-
+				<script>
+						$(".pay").on("click",function(){
+                            var target=$("input[checked=checked]");
+                          for(var i=0; i<target.length; i++){
+								var tmp_target = target[i];
+								console.log();
+								$.ajax({
+									url: "server/pay.php",
+									type: "POST",
+									data: {
+										target: $(tmp_target).val()
+									},
+									success: function(data) {
+										$(tmp_target).val();
+									},
+									error: function() {}
+								});
+                                }							
+						});
+				</script>
 
 			<!--small footer-->
 			<?include("config/footer.html")?>

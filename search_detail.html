@@ -197,10 +197,21 @@
 											});
 										</script>
 										<div class="col-xs-12 col-sm-6 col-lg-3 region-container">
-											<input name="search_region" id="name" type="text" class="bootstrap-select main-input required,all col-xs-10" placeholder="" style="display:inline">
+											<input name="search_region" id="search" type="text" class="bootstrap-select main-input required,all col-xs-10" placeholder="" style="display:inline">
 											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;left:10px" class="col-xs-2 con1">에서</span>
 											<span style="padding:0px;display:inline;position: relative;top: 69px;font-weight: bold;font-size: 16px; color:black;left:10px" class="col-xs-2 con2">까지</span>
 										</div>
+										<script>
+                                            var autoComplete = new google.maps.places.Autocomplete(
+                                                document.getElementById(search));
+                                            google.maps.event.addListener(autoComplete, ‘place_changed’, function() {
+                                                var place = autocomplete.getPlace();
+                                                if (place.geometry) {
+                                                    map.panTo(place.geometry.location);
+                                                    map.setZoom(15);
+                                                }
+                                            });
+                                        </script>
 										<div class="col-xs-12 col-sm-6 col-lg-3 rail-selector"  style="margin-bottom:15px">
 											<select name="station" class="bootstrap-select sel-condition" title="노선명:">
 												 <?
@@ -470,7 +481,7 @@
 
                                 $end = 10;
                                if(isset($_GET['page'])){
-                                  $start = ($_GET['page']-1)*10+1;
+                                  $start = ($_GET['page']-1)*10;
                                   $now = $_GET['page'];
                                }
                                else{
@@ -601,7 +612,7 @@
                                         else{
                                             tar=temp[0]+"?";
                                             for(var i =1; i<temp.length; i++){
-                                                tar=tar+"&"+temp[i];
+                                                    tar=tar+"&"+temp[i];
                                             }
                                         }
                                     </script>
@@ -617,7 +628,7 @@
 									</div>
 									<script>
                                         $("#sort").on("change", function(){
-                                            location.href='search_detail?sort='+$('#sort').val();
+                                            location.href='search_detail.html?sort='+$('#sort').val();
                                         })
                                     </script>
 								</div>
