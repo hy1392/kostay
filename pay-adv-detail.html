@@ -32,7 +32,9 @@
 		<!--iamport-->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
-		
+		<script>
+            IMP.init('imp84216196'); 
+        </script>
 
 
 		<!--[if lt IE 9]>
@@ -194,13 +196,20 @@
                               $pRow = mysqli_fetch_array($pResult);
                               $today = date("Y-m-d", time());
                               $modify_day = date("Y-m-d", strtotime($pRow['pay']."+365days"));
+                              for($i=0; $i<$pRow['pay_count'];$i++)
+                                  $modify_day = date("Y-m-d", strtotime($modify_day."+365days"));
                               $double_modify_day = date("Y-m-d", strtotime($modify_day."+365days"));
                               if($pRow['pay']!=NULL){
                                  
                                   $tdiff = strtotime($today)-strtotime($pRow['pay']);
                                   $tdiff = $tdiff/86400;
-                                    
-                                    if($tdiff<=365){
+                                  if($tdiff<=365){
+                                  $tar_time = $modify_day."~".$double_modify_day;
+                                   }
+                                   else{
+                                   $tar_time = $today."~".$modify_day;
+                                   }
+                                    if($pRow['pay']!=NULL){
                                     ?>
                                     <div class="col-xs-1" style="padding:0px">
                                             <input type="button" class="" style="border:1px solid black;height:50px;text-align:center;background-color:orange;color:black;vertical-align:middle;cursot:none;width:100%"
@@ -212,7 +221,7 @@
                                     </div>
 
                                     <div class="col-xs-3">
-                                            <input type="button" name="" value="<?=$modify_day?>~<?=$double_modify_day?>" class="width-100 height-100 <?='house-check'.$cnt?>" style="border:none; background-color:white; cursor:none;display:none">
+                                            <input type="button" name="" value="<?=$tar_time?>" class="width-100 height-100 <?='house-check'.$cnt?>" style="border:none; background-color:white; cursor:none;display:none">
                                     </div>
                                     <?
                                 }
@@ -278,6 +287,7 @@
 						</div>
 					</div>
 					<div class="col-xs-12" style="text-align: center;">
+<!--
 					<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
 						    <input type="hidden" name="item_name" value="kostay">
 						    <input type="hidden" name="quantity" class="qun" value="1">
@@ -293,33 +303,64 @@
 						    <input type="submit" class="pay" value="페이팔로 결제하기" style="width:260px; height:70px; background-color:#3797dd; border:none;color:white;font-size:22px; font-weight:bold;margin-top:100px; position: relative;
 	    top: 50%;">
 						</form>
-<!--
+-->
 						<input class="pay" type="button" name="" value="페이팔로 결제하기" style="width:260px; height:70px; background-color:#3797dd; border:none;color:white;font-size:22px; font-weight:bold;margin-top:100px; position: relative;
 	    top: 50%;">
--->
 					</div>
 
 				</div>
 			</section>
 				<script>
-						$(".pay").on("click",function(){
-                            var target=$("input[checked=checked]");
-                          for(var i=0; i<target.length; i++){
-								var tmp_target = target[i];
-								console.log();
-								$.ajax({
-									url: "server/pay.php",
-									type: "POST",
-									data: {
-										target: $(tmp_target).val()
-									},
-									success: function(data) {
-										$(tmp_target).val();
-									},
-									error: function() {}
-								});
-                                }							
-						});
+                    $(".pay").on("click",function(){
+                        var target=$("input[checked=checked]");
+                        var tar_list = "";
+                        for(var i=0; i<target.length; i++){
+                           var tmp_target = target[i];
+                            tar_list+=","+$(tmp_target).val();
+                        }
+                        console.log(tar_list);
+                        IMP.request_pay({
+                            pg : 'paypal',
+                            pay_method : 'card',
+                            merchant_uid : 'merchant_' + new Date().getTime(),
+                            name : 'Kostay',
+                            amount : Number($(".sum-price").text()),
+                            buyer_email : '<?=$_SESSION["email"]?>',
+                            buyer_name : '<?=$_SESSION["name"]?>',
+                            buyer_tel : '010-1234-5678',
+                            custom_data : {tar : tar_list, amount:Number($(".sum-price").text())},
+                            m_redirect_url : 'http://www.kostay.net/payments/complete/pay_complete.php'
+                        }, function(rsp) {
+                            if ( rsp.success ) {
+                                jQuery.ajax({
+                                    url: "/payments/complete/pay_complete.php", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {
+                                        imp_uid : rsp.imp_uid,
+                                        tar : tar_list
+                                        //기타 필요한 데이터가 있으면 추가 전달
+                                    }
+                                }).done(function(data) {
+                                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                                    if ( everythings_fine ) {
+                                         console.log(data);
+                                    } else {
+                                        //[3] 아직 제대로 결제가 되지 않았습니다.
+                                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                                    }
+                                });
+                                
+                               
+                            } else {
+                                var msg = '결제에 실패하였습니다.';
+                                msg += '에러내용 : ' + rsp.error_msg;
+                            }
+                            console.log(msg);
+                            //alert(msg);
+                        });
+                      							
+                    });
 				</script>
 
 			<!--small footer-->

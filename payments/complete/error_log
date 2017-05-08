@@ -1,0 +1,42 @@
+[08-May-2017 22:15:43 Australia/Sydney] -1
+[08-May-2017 22:15:43 Australia/Sydney] 존재하지 않는 결제정보입니다.
+[08-May-2017 22:19:43 Australia/Sydney] -1
+[08-May-2017 22:19:43 Australia/Sydney] 존재하지 않는 결제정보입니다.
+[08-May-2017 22:32:05 Australia/Sydney] -1
+[08-May-2017 22:32:05 Australia/Sydney] 존재하지 않는 결제정보입니다.
+[08-May-2017 22:49:49 Australia/Sydney] PHP Parse error:  syntax error, unexpected ';' in /home/kosta680/public_html/payments/complete/pay_complete.php on line 37
+[08-May-2017 22:51:20 Australia/Sydney] PHP Warning:  require_once(dbconnect.php): failed to open stream: No such file or directory in /home/kosta680/public_html/payments/complete/pay_complete.php on line 4
+[08-May-2017 22:51:20 Australia/Sydney] PHP Fatal error:  require_once(): Failed opening required 'dbconnect.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/kosta680/public_html/payments/complete/pay_complete.php on line 4
+[08-May-2017 22:51:55 Australia/Sydney] -1
+[08-May-2017 22:51:55 Australia/Sydney] 존재하지 않는 결제정보입니다.
+[08-May-2017 22:52:47 Australia/Sydney] -1
+[08-May-2017 22:52:48 Australia/Sydney] 존재하지 않는 결제정보입니다.
+[08-May-2017 23:00:51 Australia/Sydney] -1
+[08-May-2017 23:00:51 Australia/Sydney] 존재하지 않는 결제정보입니다.
+[08-May-2017 23:17:16 Australia/Sydney] PHP Parse error:  syntax error, unexpected ';' in /home/kosta680/public_html/payments/complete/pay_complete.php on line 8
+[08-May-2017 23:18:22 Australia/Sydney] PHP Notice:  Undefined variable: file in /home/kosta680/public_html/payments/complete/pay_complete.php on line 8
+[08-May-2017 23:18:22 Australia/Sydney] PHP Warning:  fwrite() expects parameter 1 to be resource, null given in /home/kosta680/public_html/payments/complete/pay_complete.php on line 8
+[08-May-2017 23:18:22 Australia/Sydney] PHP Notice:  Undefined index: imp_uid in /home/kosta680/public_html/payments/complete/pay_complete.php on line 14
+[08-May-2017 23:18:24 Australia/Sydney] -1
+[08-May-2017 23:18:24 Australia/Sydney] 요청하신 url을 찾을 수 없습니다.
+[08-May-2017 23:18:35 Australia/Sydney] PHP Notice:  Undefined variable: file in /home/kosta680/public_html/payments/complete/pay_complete.php on line 8
+[08-May-2017 23:18:35 Australia/Sydney] PHP Warning:  fwrite() expects parameter 1 to be resource, null given in /home/kosta680/public_html/payments/complete/pay_complete.php on line 8
+[08-May-2017 23:18:35 Australia/Sydney] PHP Notice:  Undefined index: imp_uid in /home/kosta680/public_html/payments/complete/pay_complete.php on line 14
+[08-May-2017 23:18:37 Australia/Sydney] -1
+[08-May-2017 23:18:37 Australia/Sydney] 요청하신 url을 찾을 수 없습니다.
+[08-May-2017 23:18:50 Australia/Sydney] PHP Notice:  Undefined index: imp_uid in /home/kosta680/public_html/payments/complete/pay_complete.php on line 14
+[08-May-2017 23:18:51 Australia/Sydney] -1
+[08-May-2017 23:18:51 Australia/Sydney] 요청하신 url을 찾을 수 없습니다.
+[08-May-2017 23:19:36 Australia/Sydney] PHP Notice:  Undefined index: merchant_uid in /home/kosta680/public_html/payments/complete/pay_complete.php on line 14
+[08-May-2017 23:19:39 Australia/Sydney] -1
+[08-May-2017 23:19:39 Australia/Sydney] 요청하신 url을 찾을 수 없습니다.
+[08-May-2017 23:21:25 Australia/Sydney] -1
+[08-May-2017 23:21:25 Australia/Sydney] 존재하지 않는 결제정보입니다.
+[08-May-2017 23:22:26 Australia/Sydney] -1
+[08-May-2017 23:22:26 Australia/Sydney] 존재하지 않는 결제정보입니다.
+[08-May-2017 23:25:14 Australia/Sydney] -1
+[08-May-2017 23:25:14 Australia/Sydney] 존재하지 않는 결제정보입니다.
+[08-May-2017 23:27:34 Australia/Sydney] -1
+[08-May-2017 23:27:34 Australia/Sydney] 존재하지 않는 결제정보입니다.
+[08-May-2017 23:30:35 Australia/Sydney] -1
+[08-May-2017 23:30:35 Australia/Sydney] 존재하지 않는 결제정보입니다.
